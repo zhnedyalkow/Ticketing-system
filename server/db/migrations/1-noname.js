@@ -8,8 +8,8 @@ var Sequelize = require('sequelize');
  * createTable "Companies", deps: []
  * createTable "Labels", deps: []
  * createTable "Statuses", deps: []
- * createTable "Teams", deps: []
  * createTable "Users", deps: [Companies]
+ * createTable "Teams", deps: [Companies]
  * createTable "Tickets", deps: [Labels, Users, Teams, Statuses]
  * createTable "Notifications", deps: [Users]
  * createTable "Comments", deps: [Users, Tickets]
@@ -20,7 +20,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2018-04-14T16:27:44.268Z",
+    "created": "2018-04-16T20:39:26.766Z",
     "comment": ""
 };
 
@@ -105,32 +105,6 @@ var migrationCommands = [{
     {
         fn: "createTable",
         params: [
-            "Teams",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
-                "name": {
-                    "type": Sequelize.STRING
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
             "Users",
             {
                 "id": {
@@ -149,6 +123,42 @@ var migrationCommands = [{
                     "type": Sequelize.STRING
                 },
                 "role": {
+                    "type": Sequelize.STRING
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "CompanyId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Companies",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "Teams",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "name": {
                     "type": Sequelize.STRING
                 },
                 "createdAt": {

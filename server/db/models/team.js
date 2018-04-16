@@ -4,7 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {});
   Team.associate = function(models) {
-    // associations can be defined here
+
+    const {
+        Company,
+    } = models;
+
+    Team.belongsTo(Company);
   };
   return Team;
 };

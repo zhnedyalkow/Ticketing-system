@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Notification = sequelize.define('Notification', {
-    name: DataTypes.STRING
+  let Notification = sequelize.define('Notification', {
+    name: DataTypes.STRING,
   }, {});
   Notification.associate = function(models) {
     const {
