@@ -3,7 +3,7 @@ class Data {
         this.Model = Model;
         this.includes = this.includes;
     }
-    
+
     getAll() {
         return this.Model.findAll();
     }
@@ -11,8 +11,9 @@ class Data {
     getById(id) {
         return this.Model.findById(id, {
             includes: this.includes,
-        })
+        });
     }
+
     getOneByCriteria(findObj) {
         return this.Model.findOne({
             where: findObj,
