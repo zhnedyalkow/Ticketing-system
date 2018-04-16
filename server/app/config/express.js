@@ -6,14 +6,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-const init = (init) => {
+const init = (app) => {
     // defensive programming
-    if (typeof app.use !== 'function' || 
+    if (typeof app.use !== 'function' ||
         typeof app.set !== 'function') {
         throw new Error('Invalid app');
     }
 
-    // decorator 
+    // decorator
     app.use(bodyParser.urlencoded({
         extended: true,
     }));
@@ -27,4 +27,4 @@ const init = (init) => {
 
 module.exports = {
     init,
-  };
+};
