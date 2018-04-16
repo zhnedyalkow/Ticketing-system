@@ -3,7 +3,7 @@ const {
     Company,
     Label,
     Notification,
-    Statuse,
+    Status,
     Team,
     Ticket,
     User,

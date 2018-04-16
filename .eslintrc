@@ -38,8 +38,6 @@
         "no-obj-calls": 2, // disallow the use of object properties of the global object (Math and JSON) as functions
         "no-regex-spaces": 2, // disallow multiple spaces in a regular expression literal
         "quote-props": 0, // disallow reserved words being used as object literal keys (off by default)
-        "linebreak-style": 0, // disables line-break errors
-        "eol-last": 0, // disables required new line at the end of the file
         "no-sparse-arrays": 2, // disallow sparse arrays
         "no-unreachable": 2, // disallow unreachable statements after a return, throw, continue, or break statement
         "use-isnan": 2, // disallow comparisons with the value NaN
@@ -55,7 +53,6 @@
         "dot-notation": 2, // encourages use of dot notation whenever possible
         "eqeqeq": 2, // require the use of === and !==
         "guard-for-in": 2, // make sure for-in loops have an if statement (off by default)
-        "no-tabs": 0, //disables no tabs requirement
         "no-alert": 2, // disallow the use of alert, confirm, and prompt
         "no-caller": 2, // disallow use of arguments.caller or arguments.callee
         "no-div-regex": 2, // disallow division operators explicitly at beginning of regular expression (off by default)
