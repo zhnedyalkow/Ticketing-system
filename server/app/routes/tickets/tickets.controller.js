@@ -12,6 +12,61 @@ class TicketsController {
      */
 
     async createTicket(obj) {
+        // const obj = {
+        //     title: '',
+        //     description: '',
+        //     dueDate: '',
+        //     LabelId: '',
+        //     TeamId: '',
+        //     StatusId: '',
+        //     CreatorId: '',
+        //     AssignedUserId: '',
+        // };
+
+        try {
+            if (typeof obj === 'undefined') {
+                throw new Error('The body is missing!');
+            }
+
+            if (obj.title.length < 0) {
+                throw new Error('The title is missing!');
+            }
+
+            if (obj.description.length < 0) {
+                throw new Error('The description is missing!');
+            }
+
+            if (obj.LabelId.length < 0) {
+                throw new Error('The label is missing!');
+            }
+
+            if (obj.TeamId.length < 0) {
+                throw new Error('Something went wrong!!');
+            }
+
+            if (obj.StatusId.length < 0) {
+                throw new Error('Something went wrong!!');
+            }
+
+            if (obj.CreatorId.length < 0) {
+                throw new Error('Something went wrong!!');
+            }
+
+            if (obj.AssignedUserId.length < 0) {
+                throw new Error('You must to assign member to the ticket!');
+            }
+
+            const team = await this.data.teams.getById(obj.TeamId);
+            const user = await this.data.users.getById(obj.AssignedUserId);
+            const isExist = await team.hasUser(user);
+
+            if (!isExist) {
+                throw new Error('The user is not in the following team!');
+            }
+        } catch (error) {
+            throw error;
+        }
+
         return await this.data.tickets.create(obj);
     }
 
@@ -23,12 +78,6 @@ class TicketsController {
      * @return {Array} Array with all users in that Team
      */
 
-    async getAllMembersByTeamId(teamId) {
-        const team = await this.data.teams.getById(teamId);
-        const res = await team.getUsers();
-        return res;
-    }
-
      /**
      * @description Finds ticket info
      * @async
@@ -38,11 +87,6 @@ class TicketsController {
      */
 
     async getTicketInfoById(ticketId) {
-        const ticket = await this.data.tickets.getById(ticketId);
-        return ticket;
-    }
-
-    async getTicketsUserByTicketId(ticketId) {
         const ticket = await this.data.tickets.getFullInfoForTicket(ticketId);
         return ticket;
     }
@@ -52,9 +96,12 @@ class TicketsController {
         return tickets;
     }
 
-    async getUserByTicketId(ticketId) {
-        const user = await this.data.user.getById(ticketId);
-        return user;
+    async getAllTicketsByUserId(userId) {
+        const tickets = await this.data.tickets.getAllByCriteria({
+            AssignedUserId: userId,
+        });
+
+        return tickets;
     }
 }
 

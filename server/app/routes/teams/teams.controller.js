@@ -62,6 +62,12 @@ class TeamsController {
         return result;
     }
 
+    async getAllMembersByTeamId(teamId) {
+        const team = await this.data.teams.getById(teamId);
+        const res = await team.getUsers();
+        return res;
+    }
+
     /**
      * @description Finds Teams by Company name
      * @async

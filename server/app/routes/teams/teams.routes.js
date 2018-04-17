@@ -28,6 +28,13 @@ const init = (app, data) => {
 
             res.json(allTeams);
         })
+        .get('/getAllUsersByTeam', async (req, res) => {
+            const teamId = req.query.team;
+            const members = await controller
+                .getAllMembersByTeamId(teamId);
+
+            res.json(members);
+        })
         .post('/createTeam', async (req, res) => {
             const teamData = req.body;
             let result;
