@@ -27,6 +27,7 @@
     "babel-eslint": "^8.2.3"
   },
   "dependencies": {
+    "@types/cors": "^2.8.3",
     "@types/eslint": "^4.16.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
