@@ -22,6 +22,10 @@ class UserController {
 
     async register(registerInfo) {
         try {
+            if (!registerInfo.name) {
+                throw new Error('Fucking error!!!');
+            }
+
             if (registerInfo.name.length === 0) {
                 throw new Error('Please, fill yout names!');
             }

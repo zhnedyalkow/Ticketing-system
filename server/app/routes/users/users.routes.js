@@ -10,10 +10,9 @@ const init = (app, data) => {
 
     router
         .post('/register', async (req, res) => {
-            const registerInfo = req.body;
+            const registerInfo = req;
             const result = await controller.register(registerInfo);
-
-            res.json(result);
+            res.json(registerInfo);
         });
 
     app.use('/user', router);

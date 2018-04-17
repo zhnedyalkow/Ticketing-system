@@ -23,14 +23,15 @@
   },
   "homepage": "https://github.com/zhnedyalkow/Ticketing-system#readme",
   "devDependencies": {
-    "@types/lodash": "^4.14.106"
+    "@types/lodash": "^4.14.106",
+    "babel-eslint": "^8.2.3"
   },
   "dependencies": {
     "@types/eslint": "^4.16.0",
-    "babel-eslint": "^8.2.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",
     "express": "^4.16.3",
