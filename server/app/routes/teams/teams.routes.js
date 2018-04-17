@@ -13,12 +13,32 @@ const init = (app, data) => {
 
     router
         .get('/getMyTeams', async (req, res) => {
-            const userId= req.query.userId;
+            const userId = req.query.userId;
 
             const teamList = await controller
                 .getMyTeamsByUserId(userId);
 
             res.json(teamList);
+        })
+        .get('/getAllTeams', async (req, res) => {
+            const companyId = req.query.companyId;
+
+            const allTeams = await controller
+                .getAllTeamsByCompanyId(companyId);
+
+            res.json(allTeams);
+        })
+        .post('/createTeam', async (req, res) => {
+            const teamData = req.body;
+            let result;
+
+            try {
+                result = await controller.createTeam(teamData);
+            } catch (error) {
+                return res.json({ err: error.message });
+            }
+
+            return res.json(result);
         });
 };
 

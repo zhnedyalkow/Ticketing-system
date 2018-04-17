@@ -4,6 +4,19 @@ class TeamsController {
     }
 
     /**
+     * @description Find a team
+     * @async
+     * @param {String} id
+     * receives an string id of the Team
+     * @return {Object} object of the found Team
+     */
+
+    async getTeamByTeamId(teamId) {
+        const team = await this.data.teams.getById(teamId);
+        return team;
+    }
+
+    /**
      * @description Creates a new Team
      * @async
      * @param {Object} obj
@@ -12,8 +25,41 @@ class TeamsController {
      */
 
     async createTeam(obj) {
-        const createdTeam = this.data.teams.create(obj);
-        return createdTeam;
+        const result = {
+            message: '',
+        };
+
+        try {
+            if (obj.name.length < 1) {
+                throw new Error(`Length of field
+                must be more than one character`);
+            }
+        } catch (error) {
+            throw error;
+        }
+
+        const newTeam = await this.data.teams.create({
+            name: obj.name,
+            companyId: 1, // check here
+        });
+
+        const allUsers = await Promise.all(obj.users.map((user) => {
+            const res = this.data.users.getOneByCriteria({
+                email: user.email,
+            });
+
+            return res;
+        }));
+
+        await newTeam.addUsers(allUsers);
+
+        if (!newTeam) {
+            result.message = 'Something went wrong';
+            return result;
+        }
+
+        result.message = 'Success';
+        return result;
     }
 
     /**
@@ -24,9 +70,9 @@ class TeamsController {
      * @return {Object} objects with teams info
      */
 
-    async getAllTeamsByCompanyName(companyName) {
-        return this.data.teams.getAllByCriteria({
-            companyName,
+    async getAllTeamsByCompanyId(companyId) {
+        return await this.data.teams.getAllByCriteria({
+            CompanyId: companyId,
         });
     }
 
@@ -44,6 +90,12 @@ class TeamsController {
 
         return teams;
     }
+
+    // getMembersByTeamId(teamId) {
+        // return await this.data.teams.getAllByCriteria({
+        //     teamId: teamId,
+        // }
+    // }
 }
 
 module.exports = TeamsController;
