@@ -58,6 +58,12 @@ class UserController {
 
         return { info: true };
     }
+
+    async getUserByEmail(email) {
+        return await this.data.users.getOneByCriteria({
+            email: email,
+        });
+    }
 }
 
 module.exports = UserController;
