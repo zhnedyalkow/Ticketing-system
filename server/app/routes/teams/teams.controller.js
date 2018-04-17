@@ -91,11 +91,21 @@ class TeamsController {
         return teams;
     }
 
-    // getMembersByTeamId(teamId) {
-        // return await this.data.teams.getAllByCriteria({
-        //     teamId: teamId,
-        // }
-    // }
+    async getMembersByTeamId(teamId) {
+        const usersId = await this.data.members.getAllByCriteria({
+            teamId: teamId,
+        });
+
+        const users = await Promise.all(usersId.map((userId) => {
+            const res = this.data.users.getOneByCriteria({
+                id: userId.id,
+            });
+
+            return res;
+        }));
+
+        return users;
+    }
 }
 
 module.exports = TeamsController;

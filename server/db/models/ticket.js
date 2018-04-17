@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     dueDate: DataTypes.DATE,
-    creator: DataTypes.INTEGER,
+    AssignedUserId: DataTypes.INTEGER,
+    CreatorId: DataTypes.INTEGER,
   }, {});
   Ticket.associate = function(models) {
     const {
@@ -15,7 +16,14 @@ module.exports = (sequelize, DataTypes) => {
     } = models;
 
     Ticket.belongsTo(Label);
-    Ticket.belongsTo(User);
+    Ticket.belongsTo(User, {
+        as: 'AssignedUser',
+        foreignKey: 'AssignedUserId',
+    });
+    Ticket.belongsTo(User, {
+        as: 'Creator',
+        foreignKey: 'CreatorId',
+    });
     Ticket.belongsTo(Team);
     Ticket.belongsTo(Status);
   };

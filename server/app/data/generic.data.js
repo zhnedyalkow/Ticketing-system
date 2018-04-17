@@ -1,3 +1,9 @@
+const {
+    User,
+    Label,
+    Status,
+} = require('../../db/models');
+
 class Data {
     constructor(Model, includes = []) {
         this.Model = Model;
@@ -12,6 +18,30 @@ class Data {
         return this.Model.findById(id, {
             includes: this.includes,
         });
+    }
+
+    getFullInfoForTicket(id) {
+        const res = this.Model.findOne({
+            where: {
+                id: id,
+            },
+            include: [{
+                model: User,
+                as: 'Creator',
+            },
+            {
+                model: User,
+                as: 'AssignedUser',
+            },
+            {
+                model: Label,
+            },
+            {
+                model: Status,
+            }],
+        });
+
+        return res;
     }
 
     getOneByCriteria(findObj) {

@@ -37,7 +37,6 @@ const init = (app, data) => {
             } catch (error) {
                 return res.json({ err: error.message });
             }
-
             return res.json(result);
         });
 };
