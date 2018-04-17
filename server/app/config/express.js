@@ -3,6 +3,7 @@
 const path = require('path');
 
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
@@ -16,7 +17,7 @@ const init = (app) => {
     // decorator
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
-        extended: true,
+        extended: false,
     }));
 
     // decorator
