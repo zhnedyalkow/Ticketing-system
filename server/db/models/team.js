@@ -1,10 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Team = sequelize.define('Team', {
-    name: DataTypes.STRING
+  const Team = sequelize.define('Team', {
+    name: DataTypes.STRING,
   }, {});
   Team.associate = function(models) {
-    // associations can be defined here
+    const {
+        Company,
+    } = models;
+
+    Team.belongsTo(Company);
   };
   return Team;
 };

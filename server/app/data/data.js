@@ -4,12 +4,12 @@ const {
     Label,
     Notification,
     Status,
-    Team,
     Ticket,
     User,
 } = require('../../db/models/');
 
 const Data = require('./generic.data');
+const TeamData = require('./team.data');
 
 module.exports = {
     comments: new Data(Comments),
@@ -17,7 +17,7 @@ module.exports = {
     labels: new Data(Label),
     notifications: new Data(Notification),
     statuses: new Data(Status),
-    teams: new Data(Team),
+    teams: new TeamData(),
     tickets: new Data(Ticket),
     users: new Data(User),
 };
