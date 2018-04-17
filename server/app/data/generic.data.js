@@ -19,6 +19,7 @@ class Data {
             where: findObj,
         });
     }
+
     getAllByCriteria(findObj) {
         return this.Model.findAll({
             where: findObj,

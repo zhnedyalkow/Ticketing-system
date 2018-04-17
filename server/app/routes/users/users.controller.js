@@ -5,19 +5,20 @@
 // };
 
 // Check whether email is valid
-const validateEmail = (email) => {
-    const re = `/^(([^<>()[\]\\
-    .,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)
-    |(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.
-    [0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]
-    +\.)+[a-zA-Z]{2,}))$/`;
-
-    return re.test(email);
-};
 
 class UserController {
     constructor(data) {
         this.data = data;
+    }
+
+    validateEmail(email) {
+        const re = `/^(([^<>()[\]\\
+        .,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)
+        |(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.
+        [0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]
+        +\.)+[a-zA-Z]{2,}))$/`;
+
+        return re.test(email);
     }
 
     async register(registerInfo) {
@@ -34,8 +35,18 @@ class UserController {
                 throw new Error('The password must be more then 3 symbols');
             }
 
-            if (!validateEmail(registerInfo.email)) {
-                throw new Error('Invalid email address!');
+            // const a = this.validateEmail(registerInfo.email);
+
+            // if (!this.validateEmail(registerInfo.email)) {
+            //     throw new Error('Invalid email address!');
+            // }
+
+            const checkEmail = await this.data.users.getOneByCriteria({
+                email: registerInfo.email,
+            });
+
+            if (checkEmail) {
+                throw new Error('The email is alredy used');
             }
 
             registerInfo.role = 'User';
