@@ -30,7 +30,7 @@ class TicketsController {
     }
 
      /**
-     * @description Finds ticket info
+     * @description Finds ticket's info by provided id
      * @async
      * @param {integer} id
      * receives ticket id
@@ -42,7 +42,7 @@ class TicketsController {
         return ticket;
     }
 
-    async getTicketsUserByTicketId(ticketId) {
+    async getTicketUsers(ticketId) {
         const ticket = await this.data.tickets.getFullInfoForTicket(ticketId);
         return ticket;
     }

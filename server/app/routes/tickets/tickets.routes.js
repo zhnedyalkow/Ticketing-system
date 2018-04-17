@@ -20,7 +20,7 @@ const init = (app, data) => {
         .get('/getTicketInfoById', async (req, res) => {
             const ticketId = req.query.ticketId;
             const ticket = await controller
-                .getTicketsUserByTicketId(ticketId);
+                .getTicketUsers(ticketId);
 
             res.json(ticket);
         })
