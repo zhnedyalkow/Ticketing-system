@@ -10,6 +10,7 @@ const {
 
 const Data = require('./generic.data');
 const TeamData = require('./team.data');
+const TicketData = require('./ticket.data');
 
 module.exports = {
     comments: new Data(Comments),
@@ -18,6 +19,6 @@ module.exports = {
     notifications: new Data(Notification),
     statuses: new Data(Status),
     teams: new TeamData(),
-    tickets: new Data(Ticket),
+    tickets: new TicketData(),
     users: new Data(User),
 };
