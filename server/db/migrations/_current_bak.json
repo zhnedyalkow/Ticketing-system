@@ -89,6 +89,46 @@
             },
             "indexes": []
         },
+        "NewNotifications": {
+            "tableName": "NewNotifications",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "NotificationId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Notifications",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
         "Notifications": {
             "tableName": "Notifications",
             "schema": {
@@ -196,7 +236,24 @@
                 "dueDate": {
                     "seqType": "Sequelize.DATE"
                 },
-                "creator": {
+                "AssignedUserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "CreatorId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 },
                 "createdAt": {
@@ -211,16 +268,6 @@
                     "allowNull": true,
                     "references": {
                         "model": "Labels",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "UserId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "Users",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",

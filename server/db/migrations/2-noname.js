@@ -5,63 +5,27 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * removeColumn "UserId" from table "Tickets"
- * removeColumn "creator" from table "Tickets"
- * addColumn "CreatorId" to table "Tickets"
- * addColumn "AssignedUserId" to table "Tickets"
+ * addColumn "description" to table "Notifications"
  *
  **/
 
 var info = {
     "revision": 2,
     "name": "noname",
-    "created": "2018-04-17T13:15:36.887Z",
+    "created": "2018-04-18T09:12:25.088Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-        fn: "removeColumn",
-        params: ["Tickets", "UserId"]
-    },
-    {
-        fn: "removeColumn",
-        params: ["Tickets", "creator"]
-    },
-    {
-        fn: "addColumn",
-        params: [
-            "Tickets",
-            "CreatorId",
-            {
-                "type": Sequelize.INTEGER,
-                "onUpdate": "CASCADE",
-                "onDelete": "NO ACTION",
-                "references": {
-                    "model": "Users",
-                    "key": "id"
-                },
-                "allowNull": true
-            }
-        ]
-    },
-    {
-        fn: "addColumn",
-        params: [
-            "Tickets",
-            "AssignedUserId",
-            {
-                "type": Sequelize.INTEGER,
-                "onUpdate": "CASCADE",
-                "onDelete": "NO ACTION",
-                "references": {
-                    "model": "Users",
-                    "key": "id"
-                },
-                "allowNull": true
-            }
-        ]
-    }
-];
+    fn: "addColumn",
+    params: [
+        "Notifications",
+        "description",
+        {
+            "type": Sequelize.STRING
+        }
+    ]
+}];
 
 module.exports = {
     pos: 0,

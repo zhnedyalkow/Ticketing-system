@@ -4,7 +4,7 @@ class TicketsController {
     }
 
     /**
-     * @description Create a new ticket
+     * @description Create ticket
      * @async
      * @param {Object} obj
      * receives a Error message in case invalid object
@@ -12,6 +12,17 @@ class TicketsController {
      */
 
     async createTicket(obj) {
+        // const obj = {
+        //     title: '',
+        //     description: '',
+        //     dueDate: '',
+        //     LabelId: '',
+        //     TeamId: '',
+        //     StatusId: '',
+        //     CreatorId: '',
+        //     AssignedUserId: '',
+        // };
+
         try {
             if (typeof obj === 'undefined') {
                 throw new Error('The body is missing!');
@@ -45,6 +56,7 @@ class TicketsController {
                 throw new Error('You must to assign member to the ticket!');
             }
 
+            // Check weather the user is in the following team
             const team = await this.data.teams.getById(obj.TeamId);
             const user = await this.data.users.getById(obj.AssignedUserId);
             const isExist = await team.hasUser(user);
@@ -68,7 +80,7 @@ class TicketsController {
      */
 
      /**
-     * @description Finds ticket's info by provided id
+     * @description Finds ticket info
      * @async
      * @param {integer} id
      * receives ticket id
@@ -80,26 +92,10 @@ class TicketsController {
         return ticket;
     }
 
-        /**
-     * @description Finds Tickets by TeamId
-     * @async
-     * @param {string} teamId
-     * receives Team id
-     * @return {Object} objects with tickets info
-     */
-
     async getAllTicketsByTeamId(teamId) {
         const tickets = await this.data.tickets.getById(teamId);
         return tickets;
     }
-
-        /**
-     * @description Finds Tickets by UserId
-     * @async
-     * @param {string} userId
-     * receives User id
-     * @return {Object} objects with tickets info
-     */
 
     async getAllTicketsByUserId(userId) {
         const tickets = await this.data.tickets.getAllByCriteria({
