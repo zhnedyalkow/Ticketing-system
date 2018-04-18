@@ -19,7 +19,7 @@ class CommentsController {
     }
 
      /**
-     * @description Creates a new Comment
+     * @description Create a new Comment
      * @async
      * @param {Object} obj
      * receives an object of the Comment
@@ -33,9 +33,21 @@ class CommentsController {
         };
 
         try {
+            if (obj.id < 0) {
+                throw new Error('Invalid id!');
+            }
+
             if (obj.description.length < 1) {
                 throw new Error(`Length of field
-                must be more than one character`);
+                must be more than one character!`);
+            }
+
+            if (obj.TicketId.length < 0) {
+                throw new Error('The ticketId is missing!');
+            }
+
+            if (obj.UserId.length < 0) {
+                throw new Error('The userId is missing!');
             }
         } catch (error) {
             throw error;
@@ -48,11 +60,11 @@ class CommentsController {
         });
 
         if (!newComment) {
-            result.message = 'Something went wrong';
+            result.message = 'Something went wrong!';
             return result;
         }
 
-        result.message = 'Success';
+        result.message = 'Success!';
         return result;
     }
 }
