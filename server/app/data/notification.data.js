@@ -9,9 +9,6 @@ class NotificationData extends Data {
     constructor() {
         super(Notification, []);
     }
-    getTeamMember(obj) {
-        return obj.getTeams();
-    }
 
     getnewNotifications(userId) {
         const result = NewNotification.findAll({

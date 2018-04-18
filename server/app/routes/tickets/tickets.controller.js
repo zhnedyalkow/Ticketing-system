@@ -68,7 +68,23 @@ class TicketsController {
             throw error;
         }
 
-        return await this.data.tickets.create(obj);
+        // Create new ticket
+        await this.data.tickets.create(obj);
+
+        // Create new notification
+        const notification = await this.data.notifications.create({
+            name: 'New ticket',
+            UserId: obj.AssignedUserId,
+            description: 'You have been assigned to a ticket!',
+        });
+
+        // Add the new notification to the "newNotifications" tables
+        await this.data.newNotifications.create({
+            UserId: obj.AssignedUserId,
+            NotificationId: notification.id,
+        });
+
+        return { message: 'Success' };
     }
 
     /**

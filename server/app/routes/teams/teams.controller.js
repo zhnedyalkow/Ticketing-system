@@ -38,25 +38,43 @@ class TeamsController {
             throw error;
         }
 
-        const newTeam = await this.data.teams.create({
-            name: obj.name,
-            companyId: 1, // check here
-        });
-
-        const allUsers = await Promise.all(obj.users.map((user) => {
-            const res = this.data.users.getOneByCriteria({
+        // Get all user by following email
+        // *TODO => CHECK WEATHER EMAIL IS INVALID
+        const allUsers = await Promise.all(obj.users.map(async (user) => {
+            const res = await this.data.users.getOneByCriteria({
                 email: user.email,
             });
+
+            if (!res) {
+                throw new Error(`User with following
+                email => ${user.email}, doesn't exist!`);
+            }
 
             return res;
         }));
 
+        const newTeam = await this.data.teams.create({
+            name: obj.name,
+            CompanyId: 1, // check here TODO
+        });
+
+        // Add users to the teamMembers table
         await newTeam.addUsers(allUsers);
 
-        if (!newTeam) {
-            result.message = 'Something went wrong';
-            return result;
-        }
+        // Create new notification to all assigned users
+        await Promise.all(allUsers.map(async (user) => {
+            const notification = await this.data.notifications.create({
+                name: 'New Team',
+                UserId: user.id,
+                description: `You have been 
+                assigned to a new team "${obj.name}"!`,
+            });
+
+            return await this.data.newNotifications.create({
+                UserId: user.id,
+                NotificationId: notification.id,
+            });
+        }));
 
         result.message = 'Success';
         return result;
