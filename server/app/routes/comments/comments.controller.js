@@ -15,7 +15,6 @@ class CommentsController {
         const allComments = await this.data.comments.getAllByCriteria({
             TicketId: ticketId,
         });
-
         return allComments;
     }
 
@@ -44,6 +43,8 @@ class CommentsController {
 
         const newComment = await this.data.comments.create({
             description: obj.description,
+            UserId: obj.UserId,
+            TicketId: obj.TicketId,
         });
 
         if (!newComment) {

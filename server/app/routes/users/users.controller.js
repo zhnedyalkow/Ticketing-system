@@ -1,11 +1,3 @@
-// cost registerInfo = {
-//     name: "Yavor Stoychev",
-//     password: "123",
-//     email: "qs277@abv.bg",
-// };
-
-// Check whether email is valid
-
 class UserController {
     constructor(data) {
         this.data = data;

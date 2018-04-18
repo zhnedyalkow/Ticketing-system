@@ -37,20 +37,24 @@ const init = (app) => {
             const bearer = bearerHeader.split(' ');
             const bearerToken = bearer[1];
             req.token = bearerToken;
+        } else {
+            req.token = '';
         }
 
         next();
     };
 
     app.use(ensureToken, (req, res, next) => {
-        jwt.verify(req.token,
-            jwtOptions.secretOrKey, (err, userData) => {
-                if (err) {
-                    res.json({ err: 'Something went wrong. Try again later!' });
-                } else {
-                    req.userId = userData.id || '';
-                }
-            });
+        if (req.token !== '') {
+            jwt.verify(req.token,
+                jwtOptions.secretOrKey, (err, userData) => {
+                    if (err) {
+                        res.json({ err: 'Something went wrong. Try again later!' });
+                    } else {
+                        req.userId = userData.id || '';
+                    }
+                });
+        }
 
         next();
     });

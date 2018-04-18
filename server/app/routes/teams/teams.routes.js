@@ -2,8 +2,6 @@ const {
     Router,
 } = require('express');
 
-// required initially init function in order to run express server
-
 const TeamsController = require('./teams.controller');
 
 const init = (app, data) => {

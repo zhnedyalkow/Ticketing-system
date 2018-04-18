@@ -13,7 +13,7 @@ const init = (app, data) => {
         .get('/getAllComments', async (req, res) => {
             const ticketId = req.query.ticketId;
 
-            if (typeof req.ticketId === 'undefined') {
+            if (typeof ticketId === 'undefined') {
                 res.sendStatus(403);
             }
 
