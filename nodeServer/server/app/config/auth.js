@@ -39,12 +39,11 @@ const init = (app, data) => {
     };
 
     app.use(ensureToken, (req, res, next) => {
-        if (req.token !== '') {
+        if (req.token !== '' && req.token !== 'null') {
             jwt.verify(req.token,
                 jwtOptions.secretOrKey, (err, userData) => {
                     if (err) {
-                        res.json({ err: `Something went
-                        wrong. Try again later!` });
+                        res.json({ err: `Invalid token!` });
                     } else {
                         req.userId = userData.id || '';
                     }

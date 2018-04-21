@@ -34,7 +34,7 @@ const init = (app, data) => {
 
             return res.json(result);
         })
-        .post('/login', async (req, res) => {
+        .post('/login', async (req, res, next) => {
             let email;
             let password;
 
@@ -52,9 +52,12 @@ const init = (app, data) => {
             if (user.password === password) {
                 const payload = { id: user.id };
                 const token = jwt.sign(payload, jwtOptions.secretOrKey);
-                res.json({ message: 'ok', token: token });
+                res.status(200)
+                    .json({ message: 'ok', token: token });
+                next();
             } else {
-                res.json({ message: 'passwords did not match' });
+                res.status(200).json({ message: 'passwords did not match' });
+                next();
             }
         })
         .get('/test', async (req, res) => {
