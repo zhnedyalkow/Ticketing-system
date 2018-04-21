@@ -29,10 +29,12 @@ const init = (app, data) => {
             try {
                 result = await controller.register(registerInfo);
             } catch (error) {
-                return res.json({ err: error.message });
+                return res.status(302)
+                    .json({ err: error.message });
             }
 
-            return res.json(result);
+            return res.status(400)
+                .json(result);
         })
         .post('/login', async (req, res, next) => {
             let email;

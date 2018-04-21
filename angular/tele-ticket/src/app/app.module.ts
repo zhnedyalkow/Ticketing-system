@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -30,19 +30,18 @@ function tokenGetter() {
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         routing,
-
         HomeModule,
-
         CoreModule,
         HttpClientModule,
         JwtModule.forRoot({
             config: {
-              tokenGetter: tokenGetter,
-              whitelistedDomains: ['localhost:3001'],
-              blacklistedRoutes: []
+                tokenGetter: tokenGetter,
+                whitelistedDomains: ['localhost:3001'],
+                blacklistedRoutes: []
             }
-          })
+        })
     ],
     providers: [
 
