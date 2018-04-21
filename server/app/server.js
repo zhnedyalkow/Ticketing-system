@@ -7,6 +7,7 @@ const data = require('./data/data');
 const config = require('./config');
 
 require('./config/express').init(app);
+require('./config/auth').init(app, data);
 
 require('./routes').init(app, data);
 

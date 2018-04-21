@@ -3,7 +3,7 @@ const config = require('../config');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const passport = require('passport');
+// const passport = require('passport');
 const passportJWT = require('passport-jwt');
 const jwt = require('jsonwebtoken');
 
@@ -11,23 +11,50 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 
 const jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader();
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = 'tasmanianDevil';
 
 const init = (app, data) => {
-    passport.use(new JwtStrategy(jwtOptions, async (jwt_payload, next) => {
-        console.log('payload received', jwt_payload);
-        // usually this would be a database call:
-        // let user = users[_.findIndex(users, { id: jwt_payload.id })];
-        const user = await data.users.findById(jwt_payload.id);
-        if (user) {
-            next(null, user);
-        } else {
-            next(null, false);
-        }
-    }));
+    // passport.use(new JwtStrategy(jwtOptions, async (jwt_payload, next) => {
+    //     console.log('payload received', jwt_payload);
+    //     const user = await data.users.findById(jwt_payload.id);
+    //     if (user) {
+    //         next(null, user);
+    //     } else {
+    //         next(null, false);
+    //     }
+    // }));
 
-    app.use(passport.initialize());
+    const ensureToken = (req, res, next) => {
+        const bearerHeader = req.headers.authorization;
+        if (typeof bearerHeader !== 'undefined') {
+            const bearer = bearerHeader.split(' ');
+            const bearerToken = bearer[1];
+            req.token = bearerToken;
+        } else {
+            req.token = '';
+        }
+
+        next();
+    };
+
+    app.use(ensureToken, (req, res, next) => {
+        if (req.token !== '') {
+            jwt.verify(req.token,
+                jwtOptions.secretOrKey, (err, userData) => {
+                    if (err) {
+                        res.json({ err: `Something went
+                        wrong. Try again later!` });
+                    } else {
+                        req.userId = userData.id || '';
+                    }
+                });
+        }
+
+        next();
+    });
+
+    // app.use(passport.initialize());
 };
 
 module.exports = {
