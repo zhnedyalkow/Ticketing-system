@@ -36,7 +36,6 @@ export function tokenGetter() {
         HomeModule,
 
         CoreModule,
-        HttpClientModule,
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
