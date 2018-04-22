@@ -1,17 +1,17 @@
 const express = require('express');
 
 const app = express();
-
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    // res.header('Access-Control-Allow-Headers',
-    //     'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-    return;
-});
+const cors = require('cors');
+app.use(cors());
+// app.use(function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Headers',
+//         'Content-Type');
+//     next();
+//     return;
+// });
 
 const data = require('./data/data');
-
 
 const config = require('./config');
 

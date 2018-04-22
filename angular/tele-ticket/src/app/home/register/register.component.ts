@@ -29,8 +29,8 @@ export class RegisterComponent implements OnInit {
             'name': [null, Validators.compose([Validators.required, Validators.minLength(2)])],
             'email': [null, Validators.compose([Validators.required, Validators.email, Validators.pattern("[^ @]*@[^ @]*"), 
                             Validators.minLength(6), Validators.maxLength(50)])],
-            'password': [null, Validators.compose([Validators.required, Validators.minLength(8)])],
-            'verifyPass': [null, Validators.compose([Validators.required, Validators.minLength(8)])],
+            'password': [null, Validators.compose([Validators.required, Validators.minLength(2)])],
+            'verifyPass': [null, Validators.compose([Validators.required, Validators.minLength(3)])],
         })
     }
     ngOnInit() {
@@ -45,14 +45,14 @@ export class RegisterComponent implements OnInit {
         return !this.rForm.get(field).valid && this.rForm.get(field).touched;
     };
 
-    registerUser(rForm) {
+    registerUser(rForm) {        
         this.auth.register(rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
-            info: string,
+            info: any,
         }) => {
-            if (x.info == 'true') {
+            if (x.info == true) {
                 this.router.navigate(['./login']);
             } else {
-                alert('Something went wrong!');
+                alert(x.info);
             }
         }, (err: HttpErrorResponse) => {
             if (err.status === 302) {

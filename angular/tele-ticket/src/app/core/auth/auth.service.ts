@@ -11,9 +11,9 @@ export class AuthService {
   constructor(private appConfig: AppConfig, private jwtService: JwtHelperService) { }
 
   isAuthenticated(): boolean {
-    const token = this.jwtService.tokenGetter();
-    const decoded = this.jwtService.decodeToken(token);
-    return !!token && !this.jwtService.isTokenExpired(token) && decoded.iss === this.appConfig.jwt_issuer;
+    const token = localStorage.getItem('token');
+
+    return !this.jwtService.isTokenExpired(token);
   }
 
   logout(): void {

@@ -18,7 +18,7 @@ import { AppConfig } from './config/app.config';
 import { JwtModule } from '@auth0/angular-jwt';
 
 export function tokenGetter() {
-    return localStorage.getItem('access_token');
+    return localStorage.getItem('token');
 }
 
 @NgModule({
@@ -29,8 +29,6 @@ export function tokenGetter() {
     ],
     imports: [
         BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
         routing,
 
         HomeModule,

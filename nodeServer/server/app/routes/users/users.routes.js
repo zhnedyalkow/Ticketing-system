@@ -31,7 +31,7 @@ const init = (app, data) => {
                     .json({ err: error.message });
             }
 
-            return res.status(400)
+            return res.status(200)
                 .json(result);
         })
         .post('/login', async (req, res, next) => {
@@ -50,7 +50,10 @@ const init = (app, data) => {
             }
 
             if (user.password === password) {
-                const payload = { id: user.id };
+                const payload = {
+                    id: user.id,
+                    exp: 1680870617,
+                };
                 const token = jwt.sign(payload, jwtOptions.secretOrKey);
                 res.status(200)
                     .json({ message: 'ok', token: token });

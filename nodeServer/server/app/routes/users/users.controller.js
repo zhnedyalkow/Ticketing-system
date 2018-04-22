@@ -20,7 +20,7 @@ class UserController {
             }
 
             if (registerInfo.name.length === 0) {
-                throw new Error('Please, fill yout names!');
+                throw new Error('Please, fill your names!');
             }
 
             if (registerInfo.password.length < 3) {
