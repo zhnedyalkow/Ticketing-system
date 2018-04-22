@@ -20,17 +20,19 @@ export class RegisterComponent implements OnInit {
 
     errMsg: string = 'Name is required!';
     pwdErrMsg: string = 'The password does not seem right';
-    emailErrMsg: string = 'The email does not seem right';
+    emailErrMsg: string = 'Email is required!';
+
+    emailPattErr: string = 'The email address must contain at least @ character';
     confirmPwd: string = 'Please verify your password!';
     test: Date = new Date();
 
     constructor(private auth: AuthHomeService, private router: Router, private fb: FormBuilder) {
         this.rForm = this.fb.group({
-            'name': [null, Validators.compose([Validators.required, Validators.minLength(2)])],
-            'email': [null, Validators.compose([Validators.required, Validators.email, Validators.pattern("[^ @]*@[^ @]*"), 
+            'name': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+            'email': ['', Validators.compose([Validators.required, Validators.email, Validators.pattern("[^ @]*@[^ @]*"), 
                             Validators.minLength(6), Validators.maxLength(50)])],
-            'password': [null, Validators.compose([Validators.required, Validators.minLength(2)])],
-            'verifyPass': [null, Validators.compose([Validators.required, Validators.minLength(3)])],
+            'password': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+            'verifyPass': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
         })
     }
     ngOnInit() {
@@ -45,11 +47,11 @@ export class RegisterComponent implements OnInit {
         return !this.rForm.get(field).valid && this.rForm.get(field).touched;
     };
 
-    registerUser(rForm) {        
-        this.auth.register(rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
+    registerUser() {
+        this.auth.register(this.rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
             info: any,
         }) => {
-            if (x.info == true) {
+            if (x.info == true ) {
                 this.router.navigate(['./login']);
             } else {
                 alert(x.info);
