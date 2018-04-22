@@ -10,13 +10,13 @@ import { Injectable } from '@angular/core';
 export class AuthHomeService {
 
     constructor(private appConfig: AppConfig, private http: HttpClient,
-    private jwtService: JwtHelperService) {}
+        private jwtService: JwtHelperService) { }
 
-    register(user: User, options ?: HttpOptions): Observable < Object > {
-        return this.http.post(`${this.appConfig.apiUrl}/register`, user);
+    register(user: User, options?: HttpOptions): Observable<Object> {
+        return this.http.post(`${this.appConfig.apiUrl}/user/register`, user);
     }
 
-    login(user: User, options ?: HttpOptions): Observable < Object > {
+    login(user: User, options?: HttpOptions): Observable<Object> {
         return this.http.post(`${this.appConfig.apiUrl}/user/login`, user);
     }
 
