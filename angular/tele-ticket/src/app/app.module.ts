@@ -17,7 +17,7 @@ import { AuthHomeService } from './home/services/auth.home.service';
 import { AppConfig } from './config/app.config';
 import { JwtModule } from '@auth0/angular-jwt';
 
-function tokenGetter() {
+export function tokenGetter() {
     return localStorage.getItem('access_token');
 }
 
@@ -32,7 +32,9 @@ function tokenGetter() {
         FormsModule,
         ReactiveFormsModule,
         routing,
+
         HomeModule,
+
         CoreModule,
         HttpClientModule,
         JwtModule.forRoot({

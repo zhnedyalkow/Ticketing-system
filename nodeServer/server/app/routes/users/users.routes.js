@@ -33,7 +33,7 @@ const init = (app, data) => {
                     .json({ err: error.message });
             }
 
-            return res.status(400)
+            return res.status(200)
                 .json(result);
         })
         .post('/login', async (req, res, next) => {

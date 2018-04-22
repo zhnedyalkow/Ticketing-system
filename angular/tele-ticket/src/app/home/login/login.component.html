@@ -18,7 +18,7 @@
                             <button class="btn btn-danger btn-block btn-round" [disabled]="!rForm.valid">Login</button>
                         </form>
                         <div class="forgot">
-                            <a href="/register" class="btn btn-link btn-danger">You don't have an account?</a>
+                            <a [routerLink]="['/register']" class="btn btn-link btn-danger">You don't have an account?</a>
                         </div>
                     </div>
                 </div>
