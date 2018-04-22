@@ -1,9 +1,6 @@
 const config = require('../config');
 
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-
-// const passport = require('passport');
+const passport = require('passport');
 const passportJWT = require('passport-jwt');
 const jwt = require('jsonwebtoken');
 
