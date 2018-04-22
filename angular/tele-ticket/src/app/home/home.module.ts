@@ -13,6 +13,7 @@ import { AuthHomeService } from './services/auth.home.service';
 
 import { routing } from './home.route';
 import { RegisterComponent } from './register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { RegisterComponent } from './register/register.component';
         FormsModule,
         routing,
         ComponentsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule,
     ],
     declarations: [HomeComponent, LoginComponent, RegisterComponent],
     providers: [
