@@ -8,11 +8,13 @@ import { TeamListComponent } from './team/team-list/team-list.component';
 import { TeamPageComponent } from './team/team-page/team-page.component';
 import { CreateTicketComponent } from './ticket/create-ticket/create-ticket.component';
 import { TicketPageComponent } from './ticket/ticket-page/ticket-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    NgbModule.forRoot(),
   ],
   declarations: [ DashboardComponent, TeamComponent, TeamListComponent,
                   TeamPageComponent, CreateTicketComponent, TicketPageComponent ]
