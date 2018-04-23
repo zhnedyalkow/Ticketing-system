@@ -4,17 +4,6 @@ const {
 
 const UserController = require('./users.controller');
 
-// * TODO
-const passportJWT = require('passport-jwt');
-const jwt = require('jsonwebtoken');
-
-const ExtractJwt = passportJWT.ExtractJwt;
-
-const jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = 'tasmanianDevil';
-// * TODO END
-
 const init = (app, data) => {
     const router = new Router();
     const controller = new UserController(data);
@@ -35,6 +24,7 @@ const init = (app, data) => {
                 .json(result);
         })
         .post('/login', async (req, res, next) => {
+            let info;
             let email;
             let password;
 
@@ -43,33 +33,20 @@ const init = (app, data) => {
                 password = req.body.password;
             }
 
-            // Get the user from database
-            const user = await controller.getUserByEmail(email);
-            if (!user) {
-                res.json({ message: 'No such user found' });
+            try {
+                info = await controller.login({ email, password });
+            } catch (error) {
+                return res.status(302).json({ err: error.message });
             }
 
-            if (user.password === password) {
-                const payload = {
-                    id: user.id,
-                    exp: 1680870617,
-                };
-                const token = jwt.sign(payload, jwtOptions.secretOrKey);
-                res.status(200)
-                    .json({ message: 'ok', token: token });
-                next();
-            } else {
-                res.status(200).json({ message: 'passwords did not match' });
-                next();
-            }
+            return res.status(200).json(info);
         })
-        .get('/test', async (req, res) => {
-            if (typeof req.userId === 'undefined') {
+        .get('/getInfo', async (req, res) => {
+            if (typeof req.user === 'undefined') {
                 return res.sendStatus(403);
             }
 
-            const user = await data.users.getById(req.userId);
-            return res.json(user);
+            return res.json(req.user);
         });
 
     app.use('/user', router);

@@ -1,27 +1,15 @@
 const config = require('../config');
 
-const passport = require('passport');
 const passportJWT = require('passport-jwt');
 const jwt = require('jsonwebtoken');
 
 const ExtractJwt = passportJWT.ExtractJwt;
-const JwtStrategy = passportJWT.Strategy;
 
 const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = 'tasmanianDevil';
 
 const init = (app, data) => {
-    // passport.use(new JwtStrategy(jwtOptions, async (jwt_payload, next) => {
-    //     console.log('payload received', jwt_payload);
-    //     const user = await data.users.findById(jwt_payload.id);
-    //     if (user) {
-    //         next(null, user);
-    //     } else {
-    //         next(null, false);
-    //     }
-    // }));
-
     const ensureToken = (req, res, next) => {
         const bearerHeader = req.headers.authorization;
         if (typeof bearerHeader !== 'undefined') {
@@ -35,22 +23,21 @@ const init = (app, data) => {
         next();
     };
 
-    app.use(ensureToken, (req, res, next) => {
+    app.use(ensureToken, async (req, res, next) => {
         if (req.token !== '' && req.token !== 'null') {
-            jwt.verify(req.token,
-                jwtOptions.secretOrKey, (err, userData) => {
+            await jwt.verify(req.token,
+                jwtOptions.secretOrKey, async (err, userData) => {
                     if (err) {
                         res.json({ err: `Invalid token!` });
                     } else {
-                        req.userId = userData.id || '';
+                        const user = await data.users.getById(userData.id);
+                        req.user = user;
                     }
                 });
         }
 
         next();
     });
-
-    // app.use(passport.initialize());
 };
 
 module.exports = {

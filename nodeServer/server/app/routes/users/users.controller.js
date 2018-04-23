@@ -1,3 +1,12 @@
+const passportJWT = require('passport-jwt');
+const jwt = require('jsonwebtoken');
+
+const ExtractJwt = passportJWT.ExtractJwt;
+
+const jwtOptions = {};
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+jwtOptions.secretOrKey = 'tasmanianDevil';
+
 class UserController {
     constructor(data) {
         this.data = data;
@@ -51,6 +60,38 @@ class UserController {
         return { info: true };
     }
 
+    async login(obj) {
+        let result;
+        try {
+            // Get the user from database
+            const user = await this.data.users.getOneByCriteria({
+                email: obj.email,
+            });
+
+            if (!user) {
+                throw new Error('No such user found');
+            }
+
+            if (user.password === obj.password) {
+                const payload = {
+                    id: user.id,
+                    exp: 1624408615,
+                };
+                const token = jwt.sign(payload, jwtOptions.secretOrKey);
+
+                result = {
+                    message: 'ok',
+                    token: token,
+                };
+            } else {
+                throw new Error('passwords did not match');
+            }
+        } catch (error) {
+            throw error;
+        }
+
+        return result;
+    }
     async getUserByEmail(email) {
         return await this.data.users.getOneByCriteria({
             email: email,

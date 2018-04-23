@@ -11,7 +11,7 @@ const init = (app, data) => {
 
     router
         .get('/getMyTeams', async (req, res) => {
-            const userId = req.query.userId;
+            const userId = req.user.id;
 
             const teamList = await controller
                 .getMyTeamsByUserId(userId);
