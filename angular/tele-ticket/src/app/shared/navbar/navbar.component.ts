@@ -7,10 +7,11 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public location: Location, private element : ElementRef) {
+    constructor(public location: Location, private element: ElementRef) {
         this.sidebarVisible = false;
     }
 

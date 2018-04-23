@@ -1,21 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { FooterComponent } from './shared/footer/footer.component';
-
-import { HomeModule } from './home/home.module';
-
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TokenInterceptor } from '../app/core/auth/token.interceptor';
-import { CoreModule } from './core/core.module';
-import { AuthHomeService } from './home/services/auth.home.service';
-import { AppConfig } from './config/app.config';
+import { AppRoutingModule } from './app-routing.module';
 import { JwtModule } from '@auth0/angular-jwt';
+
+import { AuthModule } from './auth/auth.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
+import { FooterComponent } from './shared/footer/footer.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -24,15 +19,17 @@ export function tokenGetter() {
 @NgModule({
     declarations: [
         AppComponent,
-        NavbarComponent,
         FooterComponent,
+        NavbarComponent,
+
     ],
     imports: [
         BrowserModule,
-        routing,
 
-        HomeModule,
-
+        AuthModule,
+        DashboardModule,
+        
+        HttpClientModule,
         CoreModule,
         JwtModule.forRoot({
             config: {
@@ -40,11 +37,11 @@ export function tokenGetter() {
                 whitelistedDomains: ['localhost:3001'],
                 blacklistedRoutes: []
             }
-        })
+        }),
+    
+    AppRoutingModule,
     ],
-    providers: [
-
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
