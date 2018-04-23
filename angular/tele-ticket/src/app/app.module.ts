@@ -9,8 +9,6 @@ import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
-import { FooterComponent } from './shared/footer/footer.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
@@ -20,9 +18,6 @@ export function tokenGetter() {
 @NgModule({
     declarations: [
         AppComponent,
-        FooterComponent,
-        NavbarComponent,
-
     ],
     imports: [
         BrowserModule,

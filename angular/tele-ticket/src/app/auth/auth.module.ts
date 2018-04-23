@@ -7,16 +7,21 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthHomeService } from './services/auth.service';
+import { NavbarComponent } from '../shared/navbar/navbar.component';
 
 @NgModule({
+  declarations: [
+    AuthComponent,
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
     AuthRoutingModule
   ],
-  declarations: [AuthComponent, LoginComponent, RegisterComponent],
   providers: [
     { provide: AuthHomeService, useClass: AuthHomeService },
   ],

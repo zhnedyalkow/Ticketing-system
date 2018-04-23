@@ -1,0 +1,14 @@
+.navbar .nav-link {
+    color: #263238;
+}
+
+.content {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    &.has-menu {
+        width: calc(100% - 190px);
+        margin-left: 190px;
+        border-bottom: 1px solid black;
+    }
+}
