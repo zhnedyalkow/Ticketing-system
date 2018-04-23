@@ -1,0 +1,51 @@
+{
+  "name": "ticketing-system",
+  "version": "1.0.0",
+  "description": "The final team project in @ Telerik Alpha Academy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "../node_modules/.bin/sequelize model:generate",
+    "migrate": "cd db && ../node_modules/.bin/sequelize db:migrate && cd ..",
+    "add-migration": "cd db && read name && node ../node_modules/sequelize-auto-migrations/bin/makemigration.js --name $name && cd ..",
+    "seed": "cd db && ../node_modules/.bin/sequelize db:seed:all && cd ..",
+    "start": "cd app && node server.js && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhnedyalkow/Ticketing-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhnedyalkow/Ticketing-system/issues"
+  },
+  "homepage": "https://github.com/zhnedyalkow/Ticketing-system#readme",
+  "devDependencies": {
+    "@types/lodash": "^4.14.106",
+    "babel-eslint": "^8.2.3"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.3",
+    "@types/eslint": "^4.16.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "init": "^0.1.2",
+    "jsonwebtoken": "^8.2.1",
+    "morgan": "^1.9.0",
+    "mysql2": "^1.5.3",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "sequelize": "^4.37.6",
+    "sequelize-auto-migrations": "^1.0.2",
+    "sequelize-cli": "^4.0.0"
+  }
+}
