@@ -94,8 +94,10 @@ class UserController {
     }
 
     async addUserToCompany(email, CompanyId) {
+        let user;
+
         try {
-            const user = await this.data.users.getOneByCriteria({
+            user = await this.data.users.getOneByCriteria({
                 email: email,
             });
 
@@ -121,9 +123,7 @@ class UserController {
             throw error;
         }
 
-        return {
-            info: true,
-        };
+        return user;
     }
 
     async getAllUsers(CompanyId) {
