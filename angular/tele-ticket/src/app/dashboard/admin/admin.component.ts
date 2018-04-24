@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UserInfo } from '../../models/users/user.info';
 import { AdminService } from '../shared/services/admin.service';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-admin',
@@ -10,12 +11,15 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
     styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
     adminForm: FormGroup;
     email: AbstractControl;
     addUserToCompany$: Observable<Object>;
 
-    constructor(private adminService: AdminService, private fb: FormBuilder) { }
+    @Input() allUsers: UserInfo[];
+
+    constructor(private adminService: AdminService, private fb: FormBuilder) {
+        this.allUsers = [];
+     }
 
     ngOnInit() {
         this.adminForm = this.fb.group({
@@ -25,11 +29,24 @@ export class AdminComponent implements OnInit {
         });
 
         this.email = this.adminForm.controls['email'];
+
+        this.getAllUsers();
     }
 
     AddUserToCompany() {
         this.adminService.addUserToCompany(this.email.value).subscribe((x) => {
             alert(x);
+        }, (err: HttpErrorResponse) => {
+            alert(err.error.err);
+        });
+    }
+
+    getAllUsers() {
+        this.adminService.getAllUsers().subscribe((x) => {
+            this.allUsers = x;
+            console.log(x);
+        }, (err: HttpErrorResponse) => {
+            alert(err.error.err);
         });
     }
 

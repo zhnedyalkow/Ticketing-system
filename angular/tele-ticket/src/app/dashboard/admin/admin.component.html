@@ -19,27 +19,15 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <th scope="col">CreatedAt</th>
+        <th scope="col">Joined at</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr *ngFor="let user of allUsers">
         <th scope="row">1</th>
-        <td>Zhitomir Oreshenski </td>
-        <td>zh.nedyalkow@gmail.com</td>
-        <td>20.10.1995</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob Thornton</td>
-        <td>zh.nedyalkow@gmail.com</td>
-        <td>20.10.1995</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Jacob Thornton</td>
-        <td>zh.nedyalkow@gmail.com</td>
-        <td>20.10.1995</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.createdAt}}</td>
       </tr>
     </tbody>
   </table>
