@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
         })
     }
 
-    loginUser(rForm) {
-        this.auth.login(rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
+    loginUser() {
+        this.auth.login(this.rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
             message: string,
             token: string,
         }) => {
@@ -47,9 +47,6 @@ export class LoginComponent implements OnInit {
                 alert(err.error.err);
             }
         });
-    }
-    onSubmit(value: any) {
         this.rForm.reset();
     }
-
 }

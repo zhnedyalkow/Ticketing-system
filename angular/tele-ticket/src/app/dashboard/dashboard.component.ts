@@ -14,10 +14,10 @@ import { DashboardService } from './shared/services/dashboard.service';
 export class DashboardComponent implements OnInit {
     userInfo$: Observable<Object>;
 
-    constructor(private dashServise: DashboardService) { }
+    constructor(private dashService: DashboardService) { }
     ngOnInit() {
         
-        this.userInfo$ = this.dashServise.getUserInfo();
+        this.userInfo$ = this.dashService.getUserInfo();
     }
 
 }

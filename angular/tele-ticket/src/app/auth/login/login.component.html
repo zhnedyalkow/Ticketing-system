@@ -6,7 +6,7 @@
                 <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
                     <div class="card card-register" *ngIf="!email; else forminfo">
                         <h3 class="title">Login</h3>
-                        <form [formGroup]="rForm" (ngSubmit)="loginUser(rForm); onSubmit(rForm)" class="register-form">
+                        <form [formGroup]="rForm" (ngSubmit)="loginUser()" class="register-form">
                             <label>
                                 <i class="fa fa-envelope"></i> Email</label>
                             <input formControlName="email" type="text" class="form-control" placeholder="Email" required>
