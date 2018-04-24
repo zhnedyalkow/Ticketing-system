@@ -23,8 +23,8 @@ export function tokenGetter() {
         BrowserModule,
         NgbModule.forRoot(),
 
-        AuthModule,
-        DashboardModule,
+        // AuthModule,
+        // DashboardModule,
         
         HttpClientModule,
         CoreModule,

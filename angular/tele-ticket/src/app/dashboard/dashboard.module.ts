@@ -30,7 +30,7 @@ import { DashboardService } from './shared/services/dashboard.service';
     CommonModule,
     TeamModule,
     DashboardRoutingModule,
-    NgbModule.forRoot(),
+    // NgbModule.forRoot(),
   ],
   providers: [
     DashboardService
