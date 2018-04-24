@@ -6,13 +6,12 @@ import { UserInfo } from '../../../models/users/user.info';
 
 @Injectable()
 export class AdminService {
-
     constructor(private appConfig: AppConfig, private http: HttpClient) { }
 
     addUserToCompany(userEmail: string): Observable<Object> {
         return this.http.post<Observable<Object>>(
             `${this.appConfig.apiUrl}/user/addUserToCompany`,
-            {useremail: userEmail});
+            {email: userEmail});
     }
 
     getAllUsers() : Observable<Array<UserInfo>> {

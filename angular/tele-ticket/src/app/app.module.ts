@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 export function tokenGetter() {
     return localStorage.getItem('token');
 }

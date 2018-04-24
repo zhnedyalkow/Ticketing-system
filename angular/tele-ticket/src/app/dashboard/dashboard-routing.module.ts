@@ -13,6 +13,7 @@ const routes: Routes = [
         path: '', component: DashboardComponent, children: [
             { path: 'team', loadChildren: './team/team.module#TeamModule'},
             { path: 'test', loadChildren: './test/test.module#TestModule'},
+            { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
         ]
     }
 ];

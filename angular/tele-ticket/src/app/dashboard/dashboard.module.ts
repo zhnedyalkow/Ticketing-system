@@ -13,7 +13,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AsyncPipe } from '@angular/common';
 import { TeamModule } from './team/team.module';
 import { TicketListComponent } from './ticket/ticket-list/ticket-list.component';
-import { AdminComponent } from './admin/admin.component';
 import { DashboardService } from './shared/services/dashboard.service';
 import { TestModule } from './test/test.module';
 
@@ -24,7 +23,6 @@ import { TestModule } from './test/test.module';
     TicketPageComponent,
     TicketListComponent,
     UserMenuComponent,
-    AdminComponent,
   ],
   imports: [
     CommonModule,
