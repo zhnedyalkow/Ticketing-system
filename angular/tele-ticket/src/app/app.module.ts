@@ -10,6 +10,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminPageComponent } from './dashboard/admin/admin-page/admin-page.component';
+
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -18,6 +20,7 @@ export function tokenGetter() {
 @NgModule({
     declarations: [
         AppComponent,
+        AdminPageComponent,
     ],
     imports: [
         BrowserModule,
