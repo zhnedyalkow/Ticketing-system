@@ -58,7 +58,7 @@ const init = (app, data) => {
                 }
 
                 result = await controller
-                    .addUserToCompany(req.body.userId, req.user.CompanyId);
+                    .addUserToCompany(req.body.email, req.user.CompanyId);
             } catch (error) {
                 return res.status(301).json({ err: error.message });
             }

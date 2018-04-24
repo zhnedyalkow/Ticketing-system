@@ -93,9 +93,11 @@ class UserController {
         return result;
     }
 
-    async addUserToCompany(userId, CompanyId) {
+    async addUserToCompany(email, CompanyId) {
         try {
-            const user = await this.data.users.getById(userId);
+            const user = await this.data.users.getOneByCriteria({
+                email: email,
+            });
 
             if (!user) {
                 throw new Error('The user doesn\'t exist!');
