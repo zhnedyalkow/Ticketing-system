@@ -130,6 +130,9 @@ class UserController {
         try {
             result = this.data.users.getAllByCriteria({
                 CompanyId: CompanyId,
+            }, {
+                exclude: ['password', 'createdAt',
+                'updatedAt', 'CompanyId', 'id'],
             });
         } catch (error) {
             throw error;
@@ -146,6 +149,7 @@ class UserController {
 
         return true;
     }
+
     async getUserByEmail(email) {
         return await this.data.users.getOneByCriteria({
             email: email,
