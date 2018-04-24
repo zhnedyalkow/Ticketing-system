@@ -20,6 +20,10 @@ class Data {
         });
     }
 
+    update(obj, options) {
+        return this.Model.update(obj, options);
+    }
+
     getAllByCriteria(findObj) {
         return this.Model.findAll({
             where: findObj,

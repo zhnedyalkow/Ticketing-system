@@ -92,6 +92,47 @@ class UserController {
 
         return result;
     }
+
+    async addUserToCompany(userId, CompanyId) {
+        try {
+            const user = await this.data.users.getById(userId);
+
+            if (!user) {
+                throw new Error('The user doesn\'t exist!');
+            }
+
+            if (user.CompanyId !== null) {
+                throw new Error('The user already has a company!');
+            }
+
+            const updatedData = await this
+                .data.users.update({ CompanyId: CompanyId }, {
+                where: {
+                    id: user.id,
+                },
+            });
+
+            if (updatedData[0] === 0) {
+                throw new Error('Something went wrong!');
+            }
+        } catch (error) {
+            throw error;
+        }
+
+        return {
+            info: true,
+        };
+    }
+
+    async amIAdmin(userId) {
+        const user = await this.data.users.getById(userId);
+
+        if (user.role !== 'admin') {
+            return false;
+        }
+
+        return true;
+    }
     async getUserByEmail(email) {
         return await this.data.users.getOneByCriteria({
             email: email,

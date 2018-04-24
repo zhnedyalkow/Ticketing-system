@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
   { path: '', loadChildren: './auth/auth.module#AuthModule'},
+  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'}
 ]
 
 @NgModule({
