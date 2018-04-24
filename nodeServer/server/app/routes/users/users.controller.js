@@ -133,8 +133,8 @@ class UserController {
             result = this.data.users.getAllByCriteria({
                 CompanyId: CompanyId,
             }, {
-                exclude: ['password', 'createdAt',
-                'updatedAt', 'CompanyId', 'id'],
+                exclude: ['password', 'updatedAt',
+                'CompanyId', 'id'],
             });
         } catch (error) {
             throw error;
