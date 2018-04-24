@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from './services/dashboard.service';
 import { UserInfo } from '../models/users/user.info';
+import { Team } from '../models/teams/team';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { DashboardService } from './shared/services/dashboard.service';
+
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  userInfo: UserInfo;
-  constructor(private dashServise: DashboardService) { }
-  ngOnInit() {
-    this.dashServise.getUserInfo().subscribe((x: UserInfo) => {
-      this.userInfo = x;
-    }, (error) => {
-      console.log(error);
-    });
-  }
+    userInfo$: Observable<Object>;
+
+    constructor(private dashServise: DashboardService) { }
+    ngOnInit() {
+        
+        this.userInfo$ = this.dashServise.getUserInfo();
+    }
 
 }

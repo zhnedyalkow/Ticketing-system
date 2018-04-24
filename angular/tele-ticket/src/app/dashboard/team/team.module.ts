@@ -5,11 +5,19 @@ import { TeamRoutingModule } from './team-routing.module';
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamPageComponent } from './team-page/team-page.component';
 
+import { TeamComponent } from './team.component';
+import { TeamboxComponent } from './team-list/teambox/teambox.component';
+
 @NgModule({
-  imports: [
-    CommonModule,
-    TeamRoutingModule
-  ],
-  declarations: [TeamListComponent, TeamPageComponent]
+    declarations: [
+        TeamListComponent,
+        TeamPageComponent,
+        TeamboxComponent,
+        TeamComponent
+    ],
+    imports: [
+        CommonModule,
+        TeamRoutingModule
+    ]
 })
 export class TeamModule { }

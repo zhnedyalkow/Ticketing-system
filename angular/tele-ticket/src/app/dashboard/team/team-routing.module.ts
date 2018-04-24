@@ -6,13 +6,12 @@ import { TeamPageComponent } from './team-page/team-page.component';
 
 const routes: Routes = [
     // {
-    //     path: '', component: TeamComponent, children: [
-    //         { path: 'team-list', component: TeamListComponent },
-    //         { path: 'team-page', component: TeamPageComponent }
+    //     path: 'team', component: TeamComponent, children: [
+    //         { path: 'teamlist', component: TeamListComponent},
+    //         { path: 'team-page', component: TeamPageComponent },
     //     ]
     // }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

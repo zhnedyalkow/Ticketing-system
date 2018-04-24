@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AppConfig } from '../../config/app.config';
 import { HttpClient } from '@angular/common/http';
-import { EmailValidator } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { Team } from '../../../models/teams/team';
+import { AppConfig } from '../../../config/app.config';
+
+
 
 @Injectable()
 export class DashboardService {
@@ -12,4 +14,7 @@ export class DashboardService {
     return this.http.get(`${this.appConfig.apiUrl}/user/getInfo`);
   }
 
+  getMyTeams() : Observable<Array<Team>>{
+      return this.http.get<Array<Team>>(`${this.appConfig.apiUrl}/Team/getMyTeams`);
+  }
 }

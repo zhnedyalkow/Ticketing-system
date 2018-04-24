@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Team } from '../../../models/teams/team';
+import { DashboardService } from '../../shared/services/dashboard.service';
 
 @Component({
-  selector: 'app-team-list',
-  templateUrl: './team-list.component.html',
-  styleUrls: ['./team-list.component.scss']
+    selector: 'app-team-list',
+    templateUrl: './team-list.component.html',
+    styleUrls: ['./team-list.component.scss']
 })
 export class TeamListComponent implements OnInit {
 
-  constructor() { }
+    myTeamInfo: Team[];
 
-  ngOnInit() {
-  }
+    constructor(public dashService: DashboardService) { }
+
+    ngOnInit() {
+        this.dashService.getMyTeams().subscribe((x) => {
+            this.myTeamInfo = x;
+            console.log(this.myTeamInfo);
+        }, (error) => {
+            console.log(error);
+        } );
+    }
 
 }
