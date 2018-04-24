@@ -124,6 +124,19 @@ class UserController {
         };
     }
 
+    async getAllUsers(CompanyId) {
+        let result;
+
+        try {
+            result = this.data.users.getAllByCriteria({
+                CompanyId: CompanyId,
+            });
+        } catch (error) {
+            throw error;
+        }
+
+        return result;
+    }
     async amIAdmin(userId) {
         const user = await this.data.users.getById(userId);
 

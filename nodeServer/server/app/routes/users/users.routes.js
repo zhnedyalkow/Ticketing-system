@@ -64,6 +64,22 @@ const init = (app, data) => {
             }
 
             return res.status(200).json(result);
+        })
+        .get('/getAllUsers', async (req, res) => {
+            let result;
+
+            try {
+                const amIAdmin = await controller.amIAdmin(req.user.id);
+                if (!amIAdmin) {
+                    throw new Error('Something went wrong');
+                }
+
+                result = await controller.getAllUsers(req.user.CompanyId);
+            } catch (error) {
+                return res.status(301).json({ err: error.message });
+            }
+
+            return res.status(200).json(result);
         });
 
     app.use('/user', router);
