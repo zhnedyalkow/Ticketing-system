@@ -15,7 +15,7 @@ import { TeamModule } from './team/team.module';
 import { TicketListComponent } from './ticket/ticket-list/ticket-list.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardService } from './shared/services/dashboard.service';
-
+import { TestModule } from './test/test.module';
 
 @NgModule({
   declarations: [
@@ -28,9 +28,9 @@ import { DashboardService } from './shared/services/dashboard.service';
   ],
   imports: [
     CommonModule,
-    TeamModule,
+
     DashboardRoutingModule,
-    // NgbModule.forRoot(),
+    NgbModule,
   ],
   providers: [
     DashboardService
