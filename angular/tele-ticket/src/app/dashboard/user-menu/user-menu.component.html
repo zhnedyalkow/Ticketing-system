@@ -1,16 +1,16 @@
 <div class="manu-user-left">
   <div class="user-info">
     <img src="../../assets/img/faces//ayo-ogunseinde-2.jpg" alt="" width="100" height="100" class="avatar">
-        <h5>{{(userInfo$ | async)?.name}}</h5>
+    <h5>{{(userInfo$ | async)?.name}}</h5>
     <p>User</p>
   </div>
   <div class="user-menu-nav">
     <ul>
       <li [routerLink]="['/dashboard']">
         <i class="fa fa-user" aria-hidden="true"></i> Home</li>
-      <li [routerLink]="['/dashboard/team-list']">
+      <li [routerLink]="['/dashboard/team/teamlist']">
         <i class="fa fa-paper-plane" aria-hidden="true"></i> My Teams</li>
-      <li [routerLink]="['/dashboard/ticket-list']">
+      <li [routerLink]="['/dashboard/ticket/ticketlist']">
         <i class="fa fa-ticket" aria-hidden="true"></i> My Tickets</li>
     </ul>
   </div>

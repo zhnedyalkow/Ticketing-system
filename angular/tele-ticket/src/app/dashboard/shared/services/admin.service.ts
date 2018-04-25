@@ -11,10 +11,10 @@ export class AdminService {
     addUserToCompany(userEmail: string): Observable<Object> {
         return this.http.post<Observable<Object>>(
             `${this.appConfig.apiUrl}/user/addUserToCompany`,
-            {email: userEmail});
+            { email: userEmail });
     }
 
-    getAllUsers() : Observable<Array<UserInfo>> {
+    getAllUsers(): Observable<Array<UserInfo>> {
         return this.http.get<Array<UserInfo>>(`${this.appConfig.apiUrl}/user/getAllUsers`);
     }
 }

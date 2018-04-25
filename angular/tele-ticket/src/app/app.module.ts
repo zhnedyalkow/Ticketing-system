@@ -1,15 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 
+
+import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { HttpClientModule } from '@angular/common/http';
-import { CoreModule } from './core/core.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { AppComponent } from './app.component';
+
+import { AppRoutingModule } from './app-routing.module';
+import { NotFoundComponent } from './auth/not-found/not-found.component';
 
 
 export function tokenGetter() {
@@ -19,13 +22,11 @@ export function tokenGetter() {
 @NgModule({
     declarations: [
         AppComponent,
+        NotFoundComponent,
     ],
     imports: [
         BrowserModule,
         NgbModule.forRoot(),
-
-        // AuthModule,
-        // DashboardModule,
         
         HttpClientModule,
         CoreModule,
