@@ -81,7 +81,7 @@ const init = (app, data) => {
 
             return res.status(200).json(result);
         })
-        .get('/getAllUserOfTeam', async (req, res) => {
+        .get('/getAllUsersOfTeam', async (req, res) => {
             const nameOftheTeam = req.query.team;
             let result;
 
