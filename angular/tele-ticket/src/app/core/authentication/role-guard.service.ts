@@ -20,7 +20,6 @@ export class RoleGuardService implements CanActivate {
 
         // decode the tocken to get its payload
         const tokenPayload = jwt_decode(token);
-        debugger;
 
         if (
             !this.auth.isAuthenticated() ||

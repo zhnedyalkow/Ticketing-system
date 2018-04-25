@@ -6,11 +6,15 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { 
+    AuthGuardServiceLogin as AuthGuard, 
+} from '../core/authentication/auth-guard.service';
+
 const routes: Routes = [
   {
     path: '', component: AuthComponent, children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent }
+      { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+      { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] }
     ]
   },
 ]

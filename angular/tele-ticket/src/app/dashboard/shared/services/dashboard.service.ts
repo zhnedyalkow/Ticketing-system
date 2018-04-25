@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Team } from '../../../models/teams/team';
 import { AppConfig } from '../../../config/app.config';
+import { Ticket } from '../../../models/tickets/ticket';
+import { User } from '../../../models/users/user';
 
 @Injectable()
 export class DashboardService {
@@ -14,5 +16,13 @@ export class DashboardService {
 
     getMyTeams(): Observable<Array<Team>> {
         return this.http.get<Array<Team>>(`${this.appConfig.apiUrl}/Team/getMyTeams`);
+    }
+
+    getAllTicketsByTeam(): Observable<Array<Ticket>> {
+        return this.http.get<Array<Ticket>>(`${this.appConfig.apiUrl}/Team/getAllTickets`);
+    }
+
+    getAllUsersOfTeam(teamName: string): Observable<Array<User>> {
+        return this.http.get<Array<User>>(`${this.appConfig.apiUrl}/user/getAllTickets`);
     }
 }
