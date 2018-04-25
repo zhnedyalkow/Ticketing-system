@@ -75,6 +75,7 @@ class UserController {
             if (user.password === obj.password) {
                 const payload = {
                     id: user.id,
+                    role: user.role,
                     exp: 1624408615,
                 };
                 const token = jwt.sign(payload, jwtOptions.secretOrKey);
