@@ -17,11 +17,18 @@ const init = (app, data) => {
 
             res.json(ticket);
         })
-        .get('/getAllTicketsByTeam', async (req, res) => {
-            const teamId = req.query.teamId;
-            const tickets = await controller.getAllTicketsByTeamId(teamId);
+        .get('/getAllTicketsOfTeam', async (req, res) => {
+            const teamName = req.query.team;
+            let result;
 
-            res.json(tickets);
+            try {
+                result = await controller
+                    .getAllTicketsByTeam(teamName, req.user);
+            } catch (error) {
+                return res.status(302).json({ err: error.message });
+            }
+
+            return res.status(200).json(result);
         })
         .get('/getAllTicketsByUserId', async (req, res) => {
             const userId = req.userId;
