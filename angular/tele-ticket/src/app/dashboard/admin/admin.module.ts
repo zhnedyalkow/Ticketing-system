@@ -11,13 +11,13 @@ import { AsyncPipe } from '@angular/common';
     declarations: [
         AdminComponent,
     ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    ReactiveFormsModule,
-  ],
-  providers: [
-    AdminService,
-  ]
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        ReactiveFormsModule,
+    ],
+    providers: [
+        AdminService,
+    ]
 })
 export class AdminModule { }

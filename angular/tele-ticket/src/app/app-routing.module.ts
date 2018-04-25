@@ -1,16 +1,29 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+
 import { AppComponent } from './app.component';
+import { AuthGuardService as Authguard } from './core/authentication/auth-guard.service';
+import { NotFoundComponent } from './auth/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', loadChildren: './auth/auth.module#AuthModule'},
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'}
+    {
+        path: '',
+        loadChildren: './auth/auth.module#AuthModule'
+    },
+    {
+        path: 'dashboard',
+        loadChildren: './dashboard/dashboard.module#DashboardModule',
+        canActivate: [Authguard]
+    },
+    {
+        path: '**', component: NotFoundComponent
+    }
 ]
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot(routes)
+    ],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

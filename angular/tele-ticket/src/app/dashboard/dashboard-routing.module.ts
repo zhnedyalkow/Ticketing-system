@@ -1,19 +1,35 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { DashboardComponent } from './dashboard.component';
-import { TeamComponent } from './team/team.component';
-import { TeamListComponent } from './team/team-list/team-list.component';
-import { TeamPageComponent } from './team/team-page/team-page.component';
-import { CreateTicketComponent } from './ticket/create-ticket/create-ticket.component';
-import { TicketPageComponent } from './ticket/ticket-page/ticket-page.component';
-import { TicketListComponent } from './ticket/ticket-list/ticket-list.component';
+
+import { AuthGuardService as AuthGuard } from '../core/authentication/auth-guard.service';
+import { RoleGuardService as RoleGuard} from '../core/authentication/role-guard.service';
 
 const routes: Routes = [
     {
         path: '', component: DashboardComponent, children: [
-            { path: 'team', loadChildren: './team/team.module#TeamModule'},
-            { path: 'test', loadChildren: './test/test.module#TestModule'},
-            { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
+            { 
+                path: 'team', 
+                loadChildren: './team/team.module#TeamModule',
+                canActivate: [AuthGuard]
+            },
+            { 
+                path: 'ticket', 
+                loadChildren: './ticket/ticket.module#TicketModule',
+                canActivate: [AuthGuard]
+            },
+            { 
+                path: 'admin', 
+                loadChildren: './admin/admin.module#AdminModule', 
+                canActivate: [RoleGuard], 
+                data: { expectedRole: 'admin'} 
+            },
+            { 
+                path: 'test', 
+                loadChildren: './test/test.module#TestModule',
+                canActivate: [RoleGuard]
+            }
         ]
     }
 ];

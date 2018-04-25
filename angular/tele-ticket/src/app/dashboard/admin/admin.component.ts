@@ -34,8 +34,8 @@ export class AdminComponent implements OnInit {
     }
 
     AddUserToCompany() {
-        this.adminService.addUserToCompany(this.email.value).subscribe((x) => {
-            alert(x);
+        this.adminService.addUserToCompany(this.email.value).subscribe((x: UserInfo) => {
+            this.allUsers.push(x);
         }, (err: HttpErrorResponse) => {
             alert(err.error.err);
         });
