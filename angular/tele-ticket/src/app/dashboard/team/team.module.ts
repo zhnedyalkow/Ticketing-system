@@ -18,6 +18,9 @@ import { TeamboxComponent } from './team-list/teambox/teambox.component';
     imports: [
         CommonModule,
         TeamRoutingModule
-    ]
+    ],
+    providers: [
+
+    ],
 })
 export class TeamModule { }

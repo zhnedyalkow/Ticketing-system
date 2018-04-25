@@ -3,8 +3,7 @@ import { DashboardService } from '../../shared/services/dashboard.service';
 import { Ticket } from '../../../models/tickets/ticket';
 import { HttpErrorResponse } from '@angular/common/http';
 import { User } from '../../../models/users/user';
-// import { ActivatedRoute } from '@angular/router';
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-team-page',
@@ -13,16 +12,20 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 })
 export class TeamPageComponent implements OnInit {
 
-    @Input() myTickets: Ticket[];
-    @Input() usersOfTeam: User[];
+    myTickets: Ticket[];
+    usersOfTeam: User[];
+    snapshot: ActivatedRouteSnapshot;
 
-    constructor(public dashService: DashboardService, public route: ActivatedRouteSnapshot) { }
+    constructor(public dashService: DashboardService, private activatedRoute: ActivatedRoute) {
+        this.snapshot = this.activatedRoute.snapshot;
+    }
 
     ngOnInit() {
+        this.getAllUsersOfTeam();
     }
 
     getAllTicketsByTeam() {
-        this.dashService.getAllTicketsByTeam().subscribe((x) => {
+        this.dashService.getAllTicketsOfTeam().subscribe((x) => {
             this.myTickets = x;
             console.log(x);
         }, (err: HttpErrorResponse) => {
@@ -31,7 +34,9 @@ export class TeamPageComponent implements OnInit {
     }
 
     getAllUsersOfTeam() {
-        this.dashService.getAllUsersOfTeam(this.route.params['TeamName']).subscribe((x) => {
+        const teamName = this.snapshot.params.teamName;
+
+        this.dashService.getAllUsersOfTeam(teamName).subscribe((x) => {
             this.usersOfTeam = x;
             console.log(x);
         }, (err: HttpErrorResponse) => {

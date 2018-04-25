@@ -1,43 +1,45 @@
 <div class="header-page">
-    <h3>Team header</h3>
+  <h3>Team header</h3>
 </div>
 
 <ul>
-    <li *ngFor="let ticket of myTickets">
-        {{ ticket }}
-    </li>
+  <li *ngFor="let user of usersOfTeam">
+    <p>{{ user.name }}</p>
+  </li>
 </ul>
 
-
-<!-- <div class="container">
+<div class="container">
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-6">
       <div class="panel panel-default">
-
         <div class="panel-heading">All tickets</div>
         <div class="panel-body">
-        </div>
-
-        <div class="panel-container list-group">
-          <p>Title of the task</p>
-          <p>Attached Member: </p>
-          <p>State: </p>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="panel-container">
+                <p class="task-header">Title of the task</p>
+                <p class="task-content">Attached Member: </p>
+                <p class="task-content">State: </p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-lg-6">
       <div class="panel panel-default">
-
         <div class="panel-heading">Members</div>
         <div class="panel-body">
-        </div>
-
-        <div class="panel-container list-group">
-          <p>Yavor Stoychev <span>Creator</span></p>
-          <p>Zhitomir Oreshenski <span>Creator</span></p>
+          <ul class="list-group members-content">
+            <li *ngFor="let user of usersOfTeam" class="list-group-item">
+              <div class="panel-container">
+                <p>{{ user.name }}</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
-</div> -->
+</div>

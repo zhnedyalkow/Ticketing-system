@@ -10,21 +10,22 @@ import { AuthGuardService as AuthGuard } from '../../core/authentication/auth-gu
 const routes: Routes = [
     {
         path: '', component: TeamComponent, children: [
-            { 
-                path: 'teamlist', 
-                component: TeamListComponent, 
-                canActivate: [AuthGuard]},
-            { 
-                path: 'teampage', 
-                component: TeamPageComponent, 
-                canActivate: [AuthGuard] 
+            {
+                path: ':teamName',
+                component: TeamPageComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'teamlist',
+                component: TeamListComponent,
+                canActivate: [AuthGuard]
             },
         ]
     }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class TeamRoutingModule { }
