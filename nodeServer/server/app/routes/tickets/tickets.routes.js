@@ -17,7 +17,7 @@ const init = (app, data) => {
 
             res.json(ticket);
         })
-        .get('/getAllTicketsByTeamId', async (req, res) => {
+        .get('/getAllTicketsByTeam', async (req, res) => {
             const teamId = req.query.teamId;
             const tickets = await controller.getAllTicketsByTeamId(teamId);
 

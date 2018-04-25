@@ -80,6 +80,25 @@ const init = (app, data) => {
             }
 
             return res.status(200).json(result);
+        })
+        .get('/getAllUserOfTeam', async (req, res) => {
+            const nameOftheTeam = req.query.team;
+            let result;
+
+            if (!nameOftheTeam) {
+                return res.status(302)
+                    .json({ err: 'Please, add a team!' });
+            }
+
+            try {
+                result = await controller
+                    .getAllUserOfTeam(nameOftheTeam, req.user.id);
+            } catch (error) {
+                return res.status(302)
+                    .json({ err: error.message });
+            }
+
+            return res.status(200).json(result);
         });
 
     app.use('/user', router);
