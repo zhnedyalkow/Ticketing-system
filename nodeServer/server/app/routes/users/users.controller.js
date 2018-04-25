@@ -158,6 +158,38 @@ class UserController {
             email: email,
         });
     }
+
+    async getAllUserOfTeam(teamName, userId) {
+        let result;
+
+        try {
+            const user = await this.data.users.getById(userId);
+
+            if (!user) {
+                throw new Error('There is no such user!');
+            }
+
+            const team = await this.data.teams.getOneByCriteria({
+                name: teamName,
+            });
+
+            const hasUser = await team.hasUser(user);
+
+            if (!hasUser) {
+                throw new Error('Something went wrong!');
+            }
+
+            result = await team.getUsers({
+                attributes: ['name', 'email'],
+            });
+
+            const a = 5;
+        } catch (error) {
+            throw error;
+        }
+
+        return result;
+    }
 }
 
 module.exports = UserController;
