@@ -85,11 +85,6 @@ const init = (app, data) => {
             const nameOftheTeam = req.query.team;
             let result;
 
-            if (!nameOftheTeam) {
-                return res.status(302)
-                    .json({ err: 'Please, add a team!' });
-            }
-
             try {
                 result = await controller
                     .getAllUserOfTeam(nameOftheTeam, req.user.id);

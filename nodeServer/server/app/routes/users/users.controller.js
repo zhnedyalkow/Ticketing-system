@@ -165,6 +165,10 @@ class UserController {
         try {
             const user = await this.data.users.getById(userId);
 
+            if (!teamName) {
+                throw new Error('Please, add a team!');
+            }
+
             if (!user) {
                 throw new Error('There is no such user!');
             }
@@ -182,8 +186,6 @@ class UserController {
             result = await team.getUsers({
                 attributes: ['name', 'email'],
             });
-
-            const a = 5;
         } catch (error) {
             throw error;
         }
