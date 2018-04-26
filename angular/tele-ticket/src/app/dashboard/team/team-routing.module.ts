@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuardService as AuthGuard } from '../../core/authentication/auth-guard.service';
+
 import { TeamComponent } from './team.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamPageComponent } from './team-page/team-page.component';
 
-import { AuthGuardService as AuthGuard } from '../../core/authentication/auth-guard.service';
 
 const routes: Routes = [
     {

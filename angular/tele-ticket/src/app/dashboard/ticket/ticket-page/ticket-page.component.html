@@ -1,3 +1,25 @@
-<p>
-  ticket-page works!
-</p>
+
+<div class="container">
+  <div *ngIf="ticketInfo">
+      
+    <p>ticketId: {{ ticketInfo.id }}</p>
+    <p>ticket title: {{ ticketInfo.title }}</p>
+    <p>ticket description: {{ ticketInfo.description }}</p>
+    <p>ticket dueDate: {{ ticketInfo.dueDate }}</p>
+
+    <p>Creator.id: {{ ticketInfo.Creator.id }}</p>
+    <p>Creator name: {{ ticketInfo.Creator.name }}</p>
+    <p>Creator email: {{ ticketInfo.Creator.email }}</p>
+    
+    <p>AssignedUser.id: {{ ticketInfo.AssignedUser.id }}</p>
+    <p>AssignedUser name: {{ ticketInfo.AssignedUser.name }}</p>
+    <p>AssignedUser email: {{ ticketInfo.AssignedUser.email }}</p>
+
+    <p>Label.id: {{ ticketInfo.Label.id }}</p>
+    <p>Label title: {{ ticketInfo.Label.title }}</p>
+
+    <p>Status.id: {{ ticketInfo.Status.id }}</p>
+    <p>Status name: {{ ticketInfo.Status.name }}</p>
+
+  </div>
+</div>
