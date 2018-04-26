@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { TicketRoutingModule } from './ticket-routing.module';
 
-import { CreateTicketComponent } from './create-ticket/create-ticket.component';
+
 import { TicketPageComponent } from './ticket-page/ticket-page.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketComponent } from './ticket.component';
+import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 
 
 @NgModule({

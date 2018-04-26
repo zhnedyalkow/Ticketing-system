@@ -12,3 +12,13 @@
         border-bottom: 1px solid black;
     }
 }
+
+.create-ticket {
+    .ticket-title, .ticket-description, .datetimepicker, .users-email {
+        margin: 10px 0px;
+    }
+
+    .ticket-label {
+        margin: 10px 0px;
+    }
+}
