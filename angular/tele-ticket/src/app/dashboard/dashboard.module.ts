@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 
 import { DashboardService } from './shared/services/dashboard.service';
+import { TicketService } from './shared/services/ticket.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DashboardService } from './shared/services/dashboard.service';
     NgbModule,
   ],
   providers: [
-    DashboardService
+    DashboardService,
+    TicketService
   ],
 })
 export class DashboardModule { }
