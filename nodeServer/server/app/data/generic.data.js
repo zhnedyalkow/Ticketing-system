@@ -24,10 +24,10 @@ class Data {
         return this.Model.update(obj, options);
     }
 
-    getAllByCriteria(findObj, options = {}) {
+    getAllByCriteria(findObj, attributes = {}) {
         return this.Model.findAll({
             where: findObj,
-            attributes: options,
+            attributes: attributes,
         });
     }
 
