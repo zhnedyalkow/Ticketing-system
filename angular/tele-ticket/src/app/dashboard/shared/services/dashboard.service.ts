@@ -18,11 +18,11 @@ export class DashboardService {
         return this.http.get<Array<Team>>(`${this.appConfig.apiUrl}/Team/getMyTeams`);
     }
 
-    getAllTicketsOfTeam(): Observable<Array<Ticket>> {
-        return this.http.get<Array<Ticket>>(`${this.appConfig.apiUrl}/Team/getAllTicketsOfTeam`);
-    }
+    // getAllTicketsOfTeam(): Observable<Array<Ticket>> {
+    //     return this.http.get<Array<Ticket>>(`${this.appConfig.apiUrl}/Team/getAllTicketsOfTeam`);
+    // }
 
-    getAllUsersOfTeam(teamName: string): Observable<Array<User>> {
-        return this.http.get<Array<User>>(`${this.appConfig.apiUrl}/user/getAllUsersOfTeam?team=${teamName}`);
-    }
+    // getAllUsersOfTeam(teamName: string): Observable<Array<User>> {
+    //     return this.http.get<Array<User>>(`${this.appConfig.apiUrl}/user/getAllUsersOfTeam?team=${teamName}`);
+    // }
 }
