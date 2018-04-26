@@ -15,30 +15,29 @@ export class TeamPageComponent implements OnInit {
     myTickets: Ticket[];
     usersOfTeam: User[];
     snapshot: ActivatedRouteSnapshot;
+    teamName: string;
 
     constructor(public dashService: DashboardService, private activatedRoute: ActivatedRoute) {
         this.snapshot = this.activatedRoute.snapshot;
     }
 
     ngOnInit() {
+        this.teamName = this.snapshot.params.teamName;
         this.getAllUsersOfTeam();
+        this.getAllTicketsByTeam();
     }
 
     getAllTicketsByTeam() {
-        this.dashService.getAllTicketsOfTeam().subscribe((x) => {
+        this.dashService.getAllTicketsOfTeam(this.teamName).subscribe((x) => {
             this.myTickets = x;
-            console.log(x);
         }, (err: HttpErrorResponse) => {
             console.log(err.error.err);
         });
     }
 
     getAllUsersOfTeam() {
-        const teamName = this.snapshot.params.teamName;
-
-        this.dashService.getAllUsersOfTeam(teamName).subscribe((x) => {
+        this.dashService.getAllUsersOfTeam(this.teamName).subscribe((x) => {
             this.usersOfTeam = x;
-            console.log(x);
         }, (err: HttpErrorResponse) => {
             console.log(err.error.err);
         });

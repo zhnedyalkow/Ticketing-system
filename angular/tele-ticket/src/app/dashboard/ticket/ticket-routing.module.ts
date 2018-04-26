@@ -12,14 +12,14 @@ const routes: Routes = [
     {
         path: '', component: TicketComponent, children: [
             { 
-                path: 'teamlist', 
-                component: TicketListComponent, 
-                canActivate: [AuthGuard]
-            },
-            { 
-                path: ':teamName', 
+                path: ':ticketId', 
                 component: TicketPageComponent, 
                 canActivate: [AuthGuard] 
+            },
+            { 
+                path: 'ticketlist', 
+                component: TicketListComponent, 
+                canActivate: [AuthGuard]
             },
         ]
     }

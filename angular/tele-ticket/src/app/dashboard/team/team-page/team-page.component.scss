@@ -9,3 +9,34 @@
     max-height: 50px;
     overflow: auto;
 }
+
+.ticket-content {
+    max-height: 50px;
+    overflow: auto;
+}
+
+.task-header {
+    text-align: center;
+    font-weight: bold;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.team-header {
+    text-align: center;
+}
+
+.ticket-container {
+    max-height: 550px;
+    overflow: auto;
+
+    .panel {
+        margin-top: 16px;
+
+        &:first-child{
+            margin-top: 0px;
+        }
+    }
+}
