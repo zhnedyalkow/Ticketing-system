@@ -10,4 +10,6 @@ export class TicketService {
     getTicketInfoById(ticketId: number): Observable<Object> {
         return this.http.get(`${this.appConfig.apiUrl}/Ticket/getTicketInfoById?ticketId=${ticketId}`);
     }
+
+    createTicket() {}
 }
