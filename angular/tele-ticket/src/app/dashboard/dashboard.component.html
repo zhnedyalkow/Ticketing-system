@@ -1,35 +1,131 @@
 <nav class="navbar navbar-expand-md bg-primary">
+
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     <span class="navbar-toggler-icon"></span>
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <a class="navbar-brand" href="#">Menu</a>
   <div class="collapse navbar-collapse" id="navbar-menu">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item ">
-        <div ngbDropdown class="d-inline-block dropdown">
-          <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>Dropdown</a>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-primary">
-            <a class="dropdown-item">Action - 1</a>
-            <a class="dropdown-item">Another Action</a>
-            <a class="dropdown-item">Something else is here</a>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#myModal1">
+          <i class="fa fa-users"></i> Create Team </a>
+        <!-- Team Modal -->
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">
+                  <i class="fa fa-users"></i> Create Team</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+            <!-- Create Team Form -->
+                <form class="create-team">
+                  <div class="teams-name">
+                    <input formControlName="title" type="text" class="form-control" placeholder="Teams's name..." required>
+                  </div>
+                  <div class="teams-icon">
+                    <input formControlName="label" type="text" class="form-control" placeholder="Icon..." required>
+                  </div>
+                  <div class="user-name">
+                    <p class="danger-color font-bold">*Assign user's email - * = required </p>
+                    <input type="text" class="form-control" placeholder="User's email..." required>
+                  </div>
+                </form>
+            <!-- End Team Form -->
+              </div>
+              <div class="modal-footer">
+                <div class="left-side">
+                  <button type="button" class="btn btn-default btn-link">Create Team</button>
+                </div>
+                <div class="divider"></div>
+                <div class="right-side">
+                  <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Never mind</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link" href="#pk">Link</a>
+        <a class="nav-link" data-toggle="modal" data-target="#myModal2">
+          <i class="fa fa-bug"></i> Create issue </a>
+        <!-- Ticket Modal -->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">
+                  <i class="fa fa-bug danger-color"></i> Create issue</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+            <!-- Create Ticket Form -->
+                <form class="create-ticket">
+                  <div class="ticket-title">
+                    <input formControlName="title" type="text" class="form-control" placeholder="Title..." required>
+                  </div>
+
+                  <div class="ticket-description">
+                    <textarea formControlName="description" class="form-control" rows="4" placeholder="Description..." required></textarea>
+                  </div>
+
+                  <div class="ticket-label">
+                    <input formControlName="label" type="text" class="form-control" placeholder="Label..." required>
+                  </div>
+
+                  <div class='datetimepicker input-group date' id='datetimepicker'>
+                    <input type='text' class="form-control datetimepicker" placeholder="05/08/2017" required/>
+                  </div>
+
+                  <div class="users-email">
+                    <p class="danger-color font-bold">*As`user's email - * = required </p>
+                    <input type="text" class="form-control" placeholder="User's email..." required>
+                  </div>
+                </form>
+            <!-- End Ticket Form -->
+              </div>
+              <div class="modal-footer">
+                <div class="left-side">
+                  <button type="button" class="btn btn-default btn-link">Create issue</button>
+                </div>
+                <div class="divider"></div>
+                <div class="right-side">
+                  <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Never mind</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#pk">Link</a>
+
+      <li class="nav-item ">
+        <div ngbDropdown class="d-inline-block dropdown">
+          <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
+            <i class="fa fa-check"></i> Welcome, Zhitomir</a>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-primary">
+            <a class="dropdown-item" (click)="logoutUser()">
+              <i class="fa fa-sign-out"></i> Log out</a>
+          </div>
+        </div>
       </li>
+
     </ul>
   </div>
 </nav>
-<p>
-  dashboard works!
-</p>
 
 <div class="container-box">
   <app-user-menu [userInfo$]='userInfo$'></app-user-menu>

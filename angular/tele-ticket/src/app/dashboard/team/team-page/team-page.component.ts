@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DashboardService } from '../../shared/services/dashboard.service';
-import { Ticket } from '../../../models/tickets/ticket';
 import { HttpErrorResponse } from '@angular/common/http';
-import { User } from '../../../models/users/user';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+
+import { User } from '../../../models/users/user';
+import { Ticket } from '../../../models/tickets/ticket';
+import { TeamService } from '../../shared/services/team.service';
 
 @Component({
     selector: 'app-team-page',
@@ -11,34 +12,32 @@ import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
     styleUrls: ['./team-page.component.scss']
 })
 export class TeamPageComponent implements OnInit {
-
+    
+    teamName: string;
     myTickets: Ticket[];
     usersOfTeam: User[];
     snapshot: ActivatedRouteSnapshot;
 
-    constructor(public dashService: DashboardService, private activatedRoute: ActivatedRoute) {
+    constructor(public teamService: TeamService, private activatedRoute: ActivatedRoute) {
         this.snapshot = this.activatedRoute.snapshot;
     }
-
     ngOnInit() {
+        this.teamName = this.snapshot.params.teamName;
         this.getAllUsersOfTeam();
+        this.getAllTicketsByTeam();
     }
 
     getAllTicketsByTeam() {
-        this.dashService.getAllTicketsOfTeam().subscribe((x) => {
+        this.teamService.getAllTicketsOfTeam(this.teamName).subscribe((x) => {
             this.myTickets = x;
-            console.log(x);
         }, (err: HttpErrorResponse) => {
             console.log(err.error.err);
         });
     }
 
     getAllUsersOfTeam() {
-        const teamName = this.snapshot.params.teamName;
-
-        this.dashService.getAllUsersOfTeam(teamName).subscribe((x) => {
+        this.teamService.getAllUsersOfTeam(this.teamName).subscribe((x) => {
             this.usersOfTeam = x;
-            console.log(x);
         }, (err: HttpErrorResponse) => {
             console.log(err.error.err);
         });

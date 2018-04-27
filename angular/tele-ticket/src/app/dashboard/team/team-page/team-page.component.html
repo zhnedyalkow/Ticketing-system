@@ -1,40 +1,53 @@
-<div class="header-page">
-  <h3>Team header</h3>
+<div class="page-header">
+  <h3>{{ teamName }}</h3>
 </div>
-
-<ul>
-  <li *ngFor="let user of usersOfTeam">
-    <p>{{ user.name }}</p>
-  </li>
-</ul>
-
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-6">
       <div class="panel panel-default">
-        <div class="panel-heading">All tickets</div>
+        <div class="panel-heading font-bold">Ticket</div>
         <div class="panel-body">
           <ul class="list-group">
-            <li class="list-group-item">
+            <li *ngFor="let ticket of myTickets" class="list-group-item">
               <div class="panel-container">
-                <p class="task-header">Title of the task</p>
-                <p class="task-content">Attached Member: </p>
-                <p class="task-content">State: </p>
+                <p class="ticket-header">{{ ticket.title}}</p>
+                <p>Attached Member: <span class="panel-font-bold">{{ ticket.AssignedUser.name}}</span></p>
+                <div class="ticket-info-box"><p>Status: <span class="ticket-content">{{ ticket.Status.name}}</span></p></div>
+                <div class="ticket-info-box"><p>Label: <span class="ticket-content">{{ ticket.Label.title}}</span></p></div>
               </div>
             </li>
           </ul>
         </div>
       </div>
     </div>
-
     <div class="col-sm-6 col-md-6 col-lg-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Members</div>
+        <div class="panel-heading font-bold">Members</div>
         <div class="panel-body">
           <ul class="list-group members-content">
             <li *ngFor="let user of usersOfTeam" class="list-group-item">
               <div class="panel-container">
-                <p>{{ user.name }}</p>
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th>Img</th>
+                      <th>Name</th>
+                      <th>*Role</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{ user.name }}</td>
+                      <td>Doe</td>
+                      <td>Assigned</td>
+                    </tr>
+                    <tr>
+                      <td>Img</td>
+                      <td>Zhitomir</td>
+                      <td>Creator</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </li>
           </ul>

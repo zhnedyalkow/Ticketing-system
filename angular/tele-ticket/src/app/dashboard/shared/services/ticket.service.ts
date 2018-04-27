@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { AppConfig } from "../../../config/app.config";
 import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+
+import { AppConfig } from "../../../config/app.config";
 
 @Injectable()
 export class TicketService {
