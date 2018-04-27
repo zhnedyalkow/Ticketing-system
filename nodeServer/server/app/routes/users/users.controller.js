@@ -173,6 +173,7 @@ class UserController {
 
             const team = await this.data.teams.getOneByCriteria({
                 name: teamName,
+                CompanyId: user.CompanyId,
             });
 
             if (!team) {
