@@ -13,8 +13,9 @@
     }
 }
 
-.create-ticket {
-    .ticket-title, .ticket-description, .datetimepicker, .users-email {
+.create-ticket, .create-team {
+    .ticket-title, .ticket-description, .datetimepicker,
+    .users-email, .teams-name, .teams-icon, .user-name {
         margin: 10px 0px;
     }
 
