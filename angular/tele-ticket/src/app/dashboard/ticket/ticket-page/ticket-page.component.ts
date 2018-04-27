@@ -10,29 +10,25 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class TicketPageComponent implements OnInit {
 
-    ticketInfo: object;
     ticketId: number;
+    ticketInfo: object;
     snapshot: ActivatedRouteSnapshot;
-    
-    constructor(
-        public ticketService: TicketService, 
-        private activatedRoute: ActivatedRoute
-    ) {
-        this.snapshot = this.activatedRoute.snapshot;
-     }
+
+  constructor(public ticketService: TicketService, private activatedRoute: ActivatedRoute) { 
+    this.snapshot = this.activatedRoute.snapshot;
+  }
 
   ngOnInit() {
-    this.ticketId = this.snapshot.params.ticketId;
     this.getTicketInfoById();
   }
 
   getTicketInfoById() {
-    this.ticketService.getTicketInfoById(this.ticketId).subscribe((data) => {
-        console.log(`Data: ${data}`);
-      this.ticketInfo = data;
-    }, (err: HttpErrorResponse) => {
+      const ticketId = this.snapshot.params.ticketId;
+
+      this.ticketService.getTicketInfoById(ticketId).subscribe((data) => {
+        this.ticketInfo = data;
+      }, (err: HttpErrorResponse) => {
         console.log(err.error.err);
     });
-}
-
+  }
 }

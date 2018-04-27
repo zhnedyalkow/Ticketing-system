@@ -1,28 +1,111 @@
-<p>
-  ticket-page works!
-</p>
+<div *ngIf="ticketInfo" class="ticket-header">
+  <h3 class="font-bold">{{ ticketInfo.title }}</h3>
+</div>
+<div *ngIf="ticketInfo" class="container">
+  <div class="row">
+    <div class="col-sm-8 col-md-8 col-lg-8">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Description</div>
+        <div class="panel-body">
+          <div class="description">
+            <p class="font-bold">"{{ ticketInfo.description }}"
+            </p>
+          </div>
+          <div class="btn-box">
+            <span class="btn-group pull-left">
+              <button type="button" class="btn btn-success btn-round">Completed</button>
+            </span>
+            <span class="btn-group pull-right">
+              <button type="button" class="btn btn-warning btn-round">Re-open</button>
+            </span>
+            <span class="btn-group pull-right">
+              <button type="button" class="btn btn-danger btn-round">Close</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading font-bold">Ticket information</div>
+        <div class="panel-body">
+          <div class="ticket-information">
+            <p><i class="fa fa-check"></i> Status: <span class="font-bold">{{ ticketInfo.Status.name }}</span></p>
+            <p><i class="fa fa-user"></i> Creator: <span class="font-bold">{{ ticketInfo.Creator.name }}</span></p>
+            <p><i class="fa fa-tasks"></i> Assigned user: <span class="font-bold">{{ ticketInfo.AssignedUser.name }}</span></p>
+             <p><i class="fa fa-tags"></i> Label: <span class="font-bold">{{ ticketInfo.Label.title }}</span></p>
+            <p><i class="fa fa-users"></i> Team: <span class="font-bold"></span></p>
+            <p><i class="fa fa-calendar"></i> Due Date: <span class="due-date font-bold">{{ ticketInfo.dueDate | date }}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="container">
-  <div *ngIf="ticketInfo">
-    <p>title: {{ ticketInfo.title }}</p>
-    <p>description: {{ ticketInfo.description }}</p>
-    <p>description: {{ ticketInfo.description }}</p>
-    <p>dueDate: {{ ticketInfo.dueDate }}</p>
+  <div class="row">
+    <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
+      <a href="">
+        <img class="mx-auto rounded-circle img-fluid" src="http://demos.themes.guide/bodeo/assets/images/users/m101.jpg" alt="avatar">
+      </a>
+    </div>
+    <div class="col-md-9">
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" rows="3" id="comment" placeholder="Type your comment here.."></textarea>
+      </div>
+      <span class="btn-group pull-right">
+        <button type="button" class="btn btn-primary btn-round">Add comment</button>
+      </span>
+    </div>
+  </div>
 
-    <p>Creator.id: {{ ticketInfo.Creator.id }}</p>
-    <p>Creator.name: {{ ticketInfo.Creator.name }}</p>
-    <p>Creator.email: {{ ticketInfo.Creator.email }}</p>
-
-    <p>AssignedUser.id: {{ ticketInfo.AssignedUser.id }}</p>
-    <p>AssignedUser.name: {{ ticketInfo.AssignedUser.name }}</p>
-    <p>AssignedUser.email: {{ ticketInfo.AssignedUser.email }}</p>
-
-    <p>Label.id: {{ ticketInfo.Label.id }}</p>
-    <p>Label.title: {{ ticketInfo.Label.title }}</p>
-
-    <p>Status.id: {{ ticketInfo.Status.id }}</p>
-    <p>Status.name: {{ ticketInfo.Status.name }}</p>
-
+  <div class="row">
+    <div class="comments col-md-9">
+      <h3 class="mb-2">Comments</h3>
+      <div class="comment mb-2 row">
+        <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
+          <a href="">
+            <img class="mx-auto rounded-circle img-fluid" src="http://demos.themes.guide/bodeo/assets/images/users/m103.jpg" alt="avatar">
+          </a>
+        </div>
+      </div>
+      <div class="comment-content col-md-11 col-sm-10">
+        <h6 class="small comment-meta">
+          <a href="#">admin</a> Today, 2:38</h6>
+        <div class="comment-body">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            <a href>http://wwwwww.com</a> tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+            <br>
+            <a href="" class="text-right small">
+              <i class="ion-reply"></i> Reply</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- reply is indented -->
+    <div class="comment-reply col-md-11 offset-md-1 col-sm-10 offset-sm-2">
+      <div class="row">
+        <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
+          <a href="">
+            <img class="mx-auto rounded-circle img-fluid" src="http://demos.themes.guide/bodeo/assets/images/users/m101.jpg" alt="avatar">
+          </a>
+        </div>
+        <div class="comment-content col-md-11 col-sm-10 col-12">
+          <h6 class="small comment-meta">
+            <a href="#">phildownney</a> Today, 12:31</h6>
+          <div class="comment-body">
+            <p>Really?? Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitat.
+              <br>
+              <a href="" class="text-right small">
+                <i class="ion-reply"></i> Reply</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-

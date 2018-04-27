@@ -1,30 +1,29 @@
+<div class="page-header">
+  <h3>{{ teamName }}</h3>
+</div>
 <div class="container">
   <h5 class="text-center">Team header</h5>
   <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-6 ticket-container">
       <div class="panel panel-default">
-        <div class="panel-heading">Ticket</div>
+        <div class="panel-heading font-bold">Ticket</div>
         <div class="panel-body">
           <ul class="list-group">
             <li *ngFor="let ticket of myTickets" class="list-group-item">
               <div class="panel-container">
-                <p class="task-header">{{ ticket.title }}</p>
-                <p>Attached Member:
-                  <span class="status">{{ ticket.CreatorId }}</span>
-                </p>
-                <p>State:
-                  <span class="status">{{ ticket.StatusId }}</span>
-                </p>
+                <p class="ticket-header">{{ ticket.title}}</p>
+                <p>Attached Member: <span class="panel-font-bold">{{ ticket.AssignedUser.name}}</span></p>
+                <div class="ticket-info-box"><p>Status: <span class="ticket-content">{{ ticket.Status.name}}</span></p></div>
+                <div class="ticket-info-box"><p>Label: <span class="ticket-content">{{ ticket.Label.title}}</span></p></div>
               </div>
             </li>
           </ul>
         </div>
       </div>
     </div>
-
     <div class="col-sm-6 col-md-6 col-lg-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Members</div>
+        <div class="panel-heading font-bold">Members</div>
         <div class="panel-body">
           <ul class="list-group members-content">
             <li *ngFor="let user of usersOfTeam" class="list-group-item">
@@ -32,21 +31,21 @@
                 <table class="table table-borderless">
                   <thead>
                     <tr>
-                      <th>Profile</th>
-                      <th>Full Name</th>
+                      <th>Img</th>
+                      <th>Name</th>
                       <th>*Role</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Img</td>
                       <td>{{ user.name }}</td>
-                      <td>Creator</td>
+                      <td>Doe</td>
+                      <td>Assigned</td>
                     </tr>
                     <tr>
                       <td>Img</td>
                       <td>Zhitomir</td>
-                      <td>Assignee</td>
+                      <td>Creator</td>
                     </tr>
                   </tbody>
                 </table>

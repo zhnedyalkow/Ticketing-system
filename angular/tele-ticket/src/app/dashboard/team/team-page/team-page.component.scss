@@ -1,42 +1,41 @@
-.panel-default > .panel-heading {
-    background-color: #51bcda;
-    border-radius: 5px 5px 0px 0px;
-    color: #fff;
-    text-align: center;
+.panel-default>.panel-heading {
+  background-color: #51bcda;
+  border-radius: 5px 5px 0px 0px;
+  color: #fff;
+  text-align: center;
+}
+
+.panel-font-bold {
+    font-weight: bold;
+}
+
+.ticket-info-box {
+  display: inline-block;
+  vertical-align: top;
+
+  p {
+    display: inline-block;
+  }
+
+  .ticket-content {
+    font-weight: bold;
+    margin: 20px 20px;
+  }
+}
+
+.ticket-header {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-page {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .members-content {
-    max-height: 50px;
-    overflow: auto;
-}
-
-.ticket-content {
-    max-height: 50px;
-    overflow: auto;
-}
-
-.task-header {
-    text-align: center;
-    font-weight: bold;
-}
-
-.status {
-    font-weight: bold;
-}
-
-.team-header {
-    text-align: center;
-}
-
-.ticket-container {
-    max-height: 550px;
-    overflow: auto;
-
-    .panel {
-        margin-top: 16px;
-
-        &:first-child{
-            margin-top: 0px;
-        }
-    }
+  max-height: 50px;
+  overflow: auto;
 }

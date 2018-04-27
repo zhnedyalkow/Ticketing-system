@@ -12,6 +12,7 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
 
 import { DashboardService } from './shared/services/dashboard.service';
 import { TicketService } from './shared/services/ticket.service';
+import { TeamService } from './shared/services/team.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TicketService } from './shared/services/ticket.service';
   ],
   providers: [
     DashboardService,
-    TicketService
+    TicketService,
+    TeamService
   ],
 })
 export class DashboardModule { }

@@ -6,6 +6,7 @@ import { AuthGuardService as AuthGuard } from '../../core/authentication/auth-gu
 import { TicketComponent } from './ticket.component';
 import { TicketPageComponent } from './ticket-page/ticket-page.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
+import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,16 @@ const routes: Routes = [
                 path: ':ticketId', 
                 component: TicketPageComponent, 
                 canActivate: [AuthGuard] 
+            },
+            {
+                path: 'teamlist', 
+                component: TicketListComponent, 
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'create-ticket', 
+                component: CreateTicketComponent, 
+                canActivate: [AuthGuard]
             },
             { 
                 path: 'ticketlist', 

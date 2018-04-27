@@ -17,31 +17,72 @@ class TeamData extends Data {
                 id: id,
             },
             include: [
-            {
-                attributes: {
-                    exclude: ['password', 'role',
-                    'createdAt', 'updatedAt', 'CompanyId'],
+                {
+                    attributes: {
+                        exclude: ['password', 'role',
+                            'createdAt', 'updatedAt', 'CompanyId'],
+                    },
+                    model: User,
+                    as: 'Creator',
                 },
-                model: User,
-                as: 'Creator',
-            },
-            {
-                attributes: {
-                    exclude: ['password', 'role',
-                    'createdAt', 'updatedAt', 'CompanyId'],
+                {
+                    attributes: {
+                        exclude: ['password', 'role',
+                            'createdAt', 'updatedAt', 'CompanyId'],
+                    },
+                    model: User,
+                    as: 'AssignedUser',
                 },
-                model: User,
-                as: 'AssignedUser',
-            },
-            {
-                model: Label,
-            },
-            {
-                model: Status,
-            }],
+                {
+                    model: Label,
+                },
+                {
+                    model: Status,
+                }],
         });
 
         return res;
+    }
+
+    getAllTicketsInfo(teamId) {
+        const result = this.Model.findAll({
+            attributes: ['title', 'description', 'dueDate'],
+            where: {
+                TeamId: teamId,
+            },
+            include: [
+                {
+                    model: Status,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'id'],
+                    },
+                },
+                {
+                    model: Label,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'id'],
+                    },
+                },
+                {
+                    attributes: {
+                        exclude: ['password', 'role',
+                            'createdAt', 'updatedAt', 'CompanyId'],
+                    },
+                    model: User,
+                    as: 'Creator',
+                },
+                {
+                    attributes: {
+                        exclude: ['password', 'role',
+                            'createdAt', 'updatedAt', 'CompanyId'],
+                    },
+                    model: User,
+                    as: 'AssignedUser',
+                },
+            ],
+        });
+
+        return result;
     }
 }
 

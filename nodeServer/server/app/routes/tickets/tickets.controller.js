@@ -1,3 +1,7 @@
+const {
+    Status,
+} = require('../../../db/models');
+
 class TicketsController {
     constructor(data) {
         this.data = data;
@@ -86,9 +90,7 @@ class TicketsController {
                 throw new Error('Something went wrong!');
             }
 
-            result = await this.data.tickets.getAllByCriteria({
-                TeamId: team.id,
-            });
+            result = await this.data.tickets.getAllTicketsInfo(team.id);
         } catch (error) {
             throw error;
         }
