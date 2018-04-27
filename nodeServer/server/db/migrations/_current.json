@@ -217,6 +217,16 @@
                     "onDelete": "SET NULL",
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
+                },
+                "TeamManagerId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -377,5 +387,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }

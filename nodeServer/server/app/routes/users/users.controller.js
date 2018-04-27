@@ -159,12 +159,10 @@ class UserController {
         });
     }
 
-    async getAllUserOfTeam(teamName, userId) {
+    async getAllUserOfTeam(teamName, user) {
         let result;
 
         try {
-            const user = await this.data.users.getById(userId);
-
             if (!teamName) {
                 throw new Error('Please, add a team!');
             }
@@ -176,6 +174,10 @@ class UserController {
             const team = await this.data.teams.getOneByCriteria({
                 name: teamName,
             });
+
+            if (!team) {
+                throw new Error('There is no such a team!');
+            }
 
             const hasUser = await team.hasUser(user);
 

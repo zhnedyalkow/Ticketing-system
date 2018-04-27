@@ -87,7 +87,7 @@ const init = (app, data) => {
 
             try {
                 result = await controller
-                    .getAllUserOfTeam(nameOftheTeam, req.user.id);
+                    .getAllUserOfTeam(nameOftheTeam, req.user);
             } catch (error) {
                 return res.status(302)
                     .json({ err: error.message });
