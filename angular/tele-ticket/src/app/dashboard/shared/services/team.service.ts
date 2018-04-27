@@ -18,4 +18,10 @@ export class TeamService {
     getAllUsersOfTeam(teamName: string): Observable<Array<User>> {
         return this.http.get<Array<User>>(`${this.appConfig.apiUrl}/user/getAllUsersOfTeam?team=${teamName}`);
     }
+
+    createTeam(formsValue: Object): Observable<Object> {
+        return this.http.post<Observable<Object>>(
+            `${this.appConfig.apiUrl}/team/createTeam`, formsValue
+        );
+    }
 }

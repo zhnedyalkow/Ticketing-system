@@ -12,13 +12,13 @@ const routes: Routes = [
     {
         path: '', component: TeamComponent, children: [
             {
-                path: ':teamName',
-                component: TeamPageComponent,
+                path: 'teamlist',
+                component: TeamListComponent,
                 canActivate: [AuthGuard]
             },
             {
-                path: 'teamlist',
-                component: TeamListComponent,
+                path: ':teamName',
+                component: TeamPageComponent,
                 canActivate: [AuthGuard]
             },
         ]
