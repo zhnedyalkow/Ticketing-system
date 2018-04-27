@@ -40,6 +40,13 @@ class Data {
             where: obj,
         });
     }
+
+    findCreateFind(obj) {
+        return this.Model.findCreateFind({
+            where: obj,
+            defaults: obj,
+        });
+    }
 }
 
 module.exports = Data;
