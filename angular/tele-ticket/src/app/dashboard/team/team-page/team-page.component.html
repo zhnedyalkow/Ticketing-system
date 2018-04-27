@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="header">
   <h3>{{ teamName }}</h3>
 </div>
 <div class="container">
@@ -12,9 +12,9 @@
             <li *ngFor="let ticket of myTickets" class="list-group-item">
               <div class="panel-container">
                 <p class="ticket-header">{{ ticket.title}}</p>
-                <p>Attached Member: <span class="panel-font-bold">{{ ticket.AssignedUser.name}}</span></p>
-                <div class="ticket-info-box"><p>Status: <span class="ticket-content">{{ ticket.Status.name}}</span></p></div>
-                <div class="ticket-info-box"><p>Label: <span class="ticket-content">{{ ticket.Label.title}}</span></p></div>
+                <p><i class="fa fa-user"></i> Attached Member: <span class="panel-font-bold">{{ ticket.AssignedUser.name}}</span></p>
+                <div class="ticket-info-box"><p><i class="fa fa-check"></i> Status:  <span class="ticket-content">{{ ticket.Status.name}}</span></p></div>
+                <div class="ticket-info-box"><p><i class="fa fa-tags"></i> Label: <span class="ticket-content">{{ ticket.Label.title}}</span></p></div>
               </div>
             </li>
           </ul>
@@ -23,7 +23,7 @@
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
       <div class="panel panel-default">
-        <div class="panel-heading font-bold">Members</div>
+        <div class="panel-heading font-bold"><i class="fa fa-users"></i> Members</div>
         <div class="panel-body">
           <ul class="list-group members-content">
             <li *ngFor="let user of usersOfTeam" class="list-group-item">
@@ -31,9 +31,9 @@
                 <table class="table table-borderless">
                   <thead>
                     <tr>
-                      <th>Img</th>
-                      <th>Name</th>
-                      <th>*Role</th>
+                      <th><i class="fa fa-image"></i> Img</th>
+                      <th><i class="fa fa-user"></i> Name</th>
+                      <th><i class="fa fa-user-md"></i> *Role</th>
                     </tr>
                   </thead>
                   <tbody>
