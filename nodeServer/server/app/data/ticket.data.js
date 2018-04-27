@@ -9,36 +9,45 @@ const {
 class TeamData extends Data {
     constructor() {
         super(Ticket, []);
+        this.fullTicketInfo = [
+            {
+                model: Status,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'id'],
+                },
+            },
+            {
+                model: Label,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'id'],
+                },
+            },
+            {
+                attributes: {
+                    exclude: ['password', 'role',
+                        'createdAt', 'updatedAt', 'CompanyId'],
+                },
+                model: User,
+                as: 'Creator',
+            },
+            {
+                attributes: {
+                    exclude: ['password', 'role',
+                        'createdAt', 'updatedAt', 'CompanyId'],
+                },
+                model: User,
+                as: 'AssignedUser',
+            },
+        ];
     }
 
     getFullInfoForTicket(id) {
         const res = this.Model.findOne({
+            attributes: ['title', 'description', 'dueDate'],
             where: {
                 id: id,
             },
-            include: [
-                {
-                    attributes: {
-                        exclude: ['password', 'role',
-                            'createdAt', 'updatedAt', 'CompanyId'],
-                    },
-                    model: User,
-                    as: 'Creator',
-                },
-                {
-                    attributes: {
-                        exclude: ['password', 'role',
-                            'createdAt', 'updatedAt', 'CompanyId'],
-                    },
-                    model: User,
-                    as: 'AssignedUser',
-                },
-                {
-                    model: Label,
-                },
-                {
-                    model: Status,
-                }],
+            include: this.fullTicketInfo,
         });
 
         return res;
@@ -50,36 +59,7 @@ class TeamData extends Data {
             where: {
                 TeamId: teamId,
             },
-            include: [
-                {
-                    model: Status,
-                    attributes: {
-                        exclude: ['createdAt', 'updatedAt', 'id'],
-                    },
-                },
-                {
-                    model: Label,
-                    attributes: {
-                        exclude: ['createdAt', 'updatedAt', 'id'],
-                    },
-                },
-                {
-                    attributes: {
-                        exclude: ['password', 'role',
-                            'createdAt', 'updatedAt', 'CompanyId'],
-                    },
-                    model: User,
-                    as: 'Creator',
-                },
-                {
-                    attributes: {
-                        exclude: ['password', 'role',
-                            'createdAt', 'updatedAt', 'CompanyId'],
-                    },
-                    model: User,
-                    as: 'AssignedUser',
-                },
-            ],
+            include: this.fullTicketInfo,
         });
 
         return result;

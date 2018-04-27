@@ -85,6 +85,10 @@ class TicketsController {
                 name: teamName,
             });
 
+            if (!team) {
+                throw new Error('There is no such a team!');
+            }
+
             const hasUser = await team.hasUser(user);
             if (!hasUser) {
                 throw new Error('Something went wrong!');

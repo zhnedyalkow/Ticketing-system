@@ -31,10 +31,12 @@ const init = (app, data) => {
             let result;
 
             try {
-                result = await controller.createTeam(teamData);
+                result = await controller
+                    .createTeam(teamData, req.user.CompanyId, req.user);
             } catch (error) {
                 return res.json({ err: error.message });
             }
+
             return res.json(result);
         });
 };

@@ -3,28 +3,12 @@ class TeamsController {
         this.data = data;
     }
 
-    /**
-     * @description Find a team
-     * @async
-     * @param {String} id
-     * receives an string id of the Team
-     * @return {Object} object of the found Team
-     */
-
     async getTeamByTeamId(teamId) {
         const team = await this.data.teams.getById(teamId);
         return team;
     }
 
-    /**
-     * @description Creates a new Team
-     * @async
-     * @param {Object} obj
-     * receives an object of the Team
-     * @return {Object} object of the created Team
-     */
-
-    async createTeam(obj) {
+    async createTeam(obj, companyId, creator) {
         const result = {
             message: '',
         };
@@ -38,24 +22,42 @@ class TeamsController {
             throw error;
         }
 
+        const isTeamExist = await this.data.teams.getOneByCriteria({
+            name: obj.name,
+            CompanyId: creator.CompanyId,
+        });
+
+        if (isTeamExist) {
+            throw new Error(`The team ${obj.name} already exist!`);
+        }
+
+        // Remove all useless mail
+        let allUsers = obj.users.map((x) => x.email);
+        allUsers = new Set(allUsers);
+        allUsers = [...allUsers];
+
         // Get all user by following email
         // *TODO => CHECK WEATHER EMAIL IS INVALID
-        const allUsers = await Promise.all(obj.users.map(async (user) => {
+        allUsers = await Promise.all(allUsers.map(async (user) => {
             const res = await this.data.users.getOneByCriteria({
-                email: user.email,
+                email: user,
             });
 
             if (!res) {
                 throw new Error(`User with following
-                email => ${user.email}, doesn't exist!`);
+                email => ${user}, doesn't exist!`);
             }
 
             return res;
         }));
 
+        // Add the creator to the team
+        allUsers.push(creator);
+
         const newTeam = await this.data.teams.create({
             name: obj.name,
-            CompanyId: 1, // check here TODO
+            CompanyId: companyId,
+            TeamManagerId: creator.id,
         });
 
         // Add users to the teamMembers table
@@ -86,27 +88,11 @@ class TeamsController {
         return res;
     }
 
-    /**
-     * @description Finds Teams by Company name
-     * @async
-     * @param {string} companyName
-     * receives Company name
-     * @return {Object} objects with teams info
-     */
-
     async getAllTeamsByCompanyId(companyId) {
         return await this.data.teams.getAllByCriteria({
             CompanyId: companyId,
         });
     }
-
-    /**
-     * @description Finds all teams with given user id
-     * @async
-     * @param {integer} id
-     * receives thread id
-     * @return {Array} Array with all posts in that Thread
-     */
 
     async getMyTeamsByUserId(userId) {
         const user = await this.data.users.getById(userId);
