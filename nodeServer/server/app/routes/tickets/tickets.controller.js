@@ -7,7 +7,7 @@ class TicketsController {
         this.data = data;
     }
 
-    async createTicket(obj) {
+    async createTicket(obj, creator) {
         try {
             if (typeof obj === 'undefined') {
                 throw new Error('The body is missing!');
@@ -21,40 +21,68 @@ class TicketsController {
                 throw new Error('The description is missing!');
             }
 
-            if (obj.LabelId.length < 0) {
+            if (obj.label.length < 0) {
                 throw new Error('The label is missing!');
             }
 
-            if (obj.TeamId.length < 0) {
+            if (obj.teamId.length < 0) {
                 throw new Error('Something went wrong!!');
             }
 
-            if (obj.StatusId.length < 0) {
-                throw new Error('Something went wrong!!');
-            }
-
-            if (obj.CreatorId.length < 0) {
-                throw new Error('Something went wrong!!');
-            }
-
-            if (obj.AssignedUserId.length < 0) {
+            if (obj.assignedUser.length < 0) {
                 throw new Error('You must to assign member to the ticket!');
             }
 
-            // Check weather the user is in the following team
-            const team = await this.data.teams.getById(obj.TeamId);
-            const user = await this.data.users.getById(obj.AssignedUserId);
-            const isExist = await team.hasUser(user);
-
-            if (!isExist) {
-                throw new Error('The user is not in the following team!');
+            if (new Date(obj.dueDate).toDateString() === 'Invalid Date') {
+                throw new Error('The following date is invalid!');
             }
+
+            // Check weather the user is in the following team
+            const team = await this.data.teams.getById(obj.teamId);
+
+            if (!team) {
+                throw new Error('There is now such a team!');
+            }
+
+            const user = await this.data.users.getOneByCriteria({
+                email: obj.assignedUser,
+            });
+
+            if (!user) {
+                throw new Error(`There is
+                now user with email ${obj.assignedUser}`);
+            }
+            const teamHasUser = await team.hasUser(user);
+
+            if (!teamHasUser) {
+                throw new Error('The user is not belong the following team!');
+            }
+
+            // Check weather the creator is in the following team
+            const teamHasCreator = await team.hasUser(creator);
+            if (!teamHasCreator) {
+                throw new Error('You cannnot create ticket for this team!');
+            }
+
+            // Find or create the label
+            const theLabel = await this.data.labels.findCreateFind({
+                title: obj.label,
+            });
+
+            // Create new ticket
+            await this.data.tickets.create({
+                title: obj.title,
+                description: obj.description,
+                dueDate: obj.dueDate,
+                AssignedUserId: user.id,
+                CreatorId: creator.id,
+                TeamId: obj.teamId,
+                LabelId: theLabel[0].id,
+                StatusId: 4,
+            });
         } catch (error) {
             throw error;
         }
-
-        // Create new ticket
-        await this.data.tickets.create(obj);
 
         // Create new notification
         const notification = await this.data.notifications.create({

@@ -37,7 +37,7 @@ const init = (app, data) => {
             res.json(tickets);
         })
         .post('/createTicket', async (req, res) => {
-            if (typeof req.userId === 'undefined') {
+            if (typeof req.user === 'undefined') {
                 return res.sendStatus(403);
             }
 
@@ -46,7 +46,7 @@ const init = (app, data) => {
             let ticketInfo;
 
             try {
-                ticketInfo = await controller.createTicket(reqData);
+                ticketInfo = await controller.createTicket(reqData, req.user);
             } catch (error) {
                 return res.json({ err: error.message });
             }
