@@ -1,27 +1,27 @@
-<div class="header">
-  <h3>{{ teamName }}</h3>
+<div class="header-page">
+  <h3 class="text-center">{{ teamName }}</h3>
 </div>
 <div class="container">
-  <h5 class="text-center">Team header</h5>
+  <h5 class="text-center">Information about the team</h5>
   <div class="row">
-    <div class="col-sm-6 col-md-6 col-lg-6 ticket-container">
-      <div class="panel panel-default">
+    <div class="col-sm-7 col-md-7 col-lg-7">
+      <div *ngFor="let ticket of myTickets" class="panel panel-default ticket-container">
         <div class="panel-heading font-bold">Ticket</div>
         <div class="panel-body">
           <ul class="list-group">
-            <li *ngFor="let ticket of myTickets" class="list-group-item">
+            <li class="list-group-item">
               <div class="panel-container">
-                <p class="ticket-header">{{ ticket.title}}</p>
+                <p [routerLink]="['/dashboard/ticket/', ticket.id]" class="ticket-header">{{ ticket.title}}</p>
                 <p><i class="fa fa-user"></i> Attached Member: <span class="panel-font-bold">{{ ticket.AssignedUser.name}}</span></p>
                 <div class="ticket-info-box"><p><i class="fa fa-check"></i> Status:  <span class="ticket-content">{{ ticket.Status.name}}</span></p></div>
-                <div class="ticket-info-box"><p><i class="fa fa-tags"></i> Label: <span class="ticket-content">{{ ticket.Label.title}}</span></p></div>
+                <div class="ticket-info-box"><p><i class="fa fa-tags"></i> Label: <span class="ticket-content">{{ ticket.Label?.title }}</span></p></div>
               </div>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="col-sm-6 col-md-6 col-lg-6">
+    <div class="col-sm-5 col-md-5 col-lg-5">
       <div class="panel panel-default">
         <div class="panel-heading font-bold"><i class="fa fa-users"></i> Members</div>
         <div class="panel-body">

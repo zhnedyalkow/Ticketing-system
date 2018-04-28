@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 
@@ -41,6 +41,10 @@ export class TeamPageComponent implements OnInit {
         }, (err: HttpErrorResponse) => {
             console.log(err.error.err);
         });
+    }
+
+    goToTicket(ticket : ElementRef) {
+        console.log(ticket);
     }
 
 }

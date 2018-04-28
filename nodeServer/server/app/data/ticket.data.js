@@ -55,7 +55,7 @@ class TeamData extends Data {
 
     getAllTicketsInfo(teamId) {
         const result = this.Model.findAll({
-            attributes: ['title', 'description', 'dueDate'],
+            attributes: ['id', 'title', 'description', 'dueDate'],
             where: {
                 TeamId: teamId,
             },
