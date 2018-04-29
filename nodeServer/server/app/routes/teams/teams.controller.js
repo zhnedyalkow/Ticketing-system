@@ -41,6 +41,7 @@ class TeamsController {
         allUsers = await Promise.all(allUsers.map(async (user) => {
             const res = await this.data.users.getOneByCriteria({
                 email: user,
+                CompanyId: creator.CompanyId,
             });
 
             if (!res) {

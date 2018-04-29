@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 import { AppConfig } from "../../../config/app.config";
+import { Comments } from "../../../models/comments/comments";
 
 @Injectable()
 export class TicketService {
@@ -16,6 +17,15 @@ export class TicketService {
         return this.http.post<Observable<Object>>(
             `${this.appConfig.apiUrl}/ticket/createTicket`, formsValue
         )
+    }
+
+    getComments(ticketId): Observable<Array<Comments>> {
+        return this.http.get<Array<Comments>>
+            (`${this.appConfig.apiUrl}/comments/getAllComments?ticketId=${ticketId}`);
+    }
+
+    addComment(formsValue: Object) {
+        return this.http.post<Comments>(`${this.appConfig.apiUrl}/comments/createComment`, formsValue);
     }
 }
 

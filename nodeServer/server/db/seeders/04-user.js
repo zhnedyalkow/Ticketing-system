@@ -18,7 +18,7 @@ module.exports = {
                 name: 'yavorss',
                 password: '12345678',
                 role: 'user',
-                CompanyId: 2,
+                CompanyId: 1,
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
             },
@@ -28,7 +28,7 @@ module.exports = {
                 name: 'Penka Dobreva',
                 password: '123',
                 role: 'user',
-                CompanyId: 3,
+                CompanyId: 1,
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
             }
