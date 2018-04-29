@@ -11,7 +11,7 @@
           <ul class="list-group">
             <li class="list-group-item">
               <div class="panel-container">
-                <p [routerLink]="['/dashboard/ticket/', ticket.id]" class="ticket-header">{{ ticket.title}}</p>
+                <p [routerLink]="['/ticket/', ticket.id]" class="ticket-header">{{ ticket.title}}</p>
                 <p><i class="fa fa-user"></i> Attached Member: <span class="panel-font-bold">{{ ticket.AssignedUser.name}}</span></p>
                 <div class="ticket-info-box"><p><i class="fa fa-check"></i> Status:  <span class="ticket-content">{{ ticket.Status.name}}</span></p></div>
                 <div class="ticket-info-box"><p><i class="fa fa-tags"></i> Label: <span class="ticket-content">{{ ticket.Label?.title }}</span></p></div>

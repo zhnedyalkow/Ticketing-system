@@ -44,7 +44,6 @@ export class AdminComponent implements OnInit {
     getAllUsers() {
         this.adminService.getAllUsers().subscribe((x) => {
             this.allUsers = x;
-            console.log(x);
         }, (err: HttpErrorResponse) => {
             alert(err.error.err);
         });

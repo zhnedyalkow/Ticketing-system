@@ -4,50 +4,42 @@ import { DashboardService } from '../../shared/services/dashboard.service';
 import { AuthService } from '../../../core/authentication/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { CreateTeamComponent } from './../create-team/create-team.component';
+import { CreateTicketComponent } from '../create-ticket/create-ticket.component';
 
 @Component({
-    selector: 'app-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.scss']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
 
-    public closeResult: string;
-    userInfo$: Observable<Object>;
+  public closeResult: string;
+  userInfo$: Observable<Object>;
 
-    constructor(
-        private router: Router,
-        private dashService: DashboardService,
-        private auth: AuthService,
+  constructor(
+    private router: Router,
+    private dashService: DashboardService,
+    private auth: AuthService,
 
-        private modalService: NgbModal
+    private modalService: NgbModal
 
-    ) { }
+  ) { }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
+  logoutUser() {
+    this.auth.logout();
+    this.router.navigate(['./']);
+  }
 
-    logoutUser() {
-        this.auth.logout();
-        this.router.navigate(['./']);
-    }
+  openCreateTeam() {
+    this.modalService.open(CreateTeamComponent);
+  }
 
-    open(content) {
-        this.modalService.open(content).result.then((result) => {
-          this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
-      }
+  openCreateIssue() {
+    this.modalService.open(CreateTicketComponent);
+  }
 
-      private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-          return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-          return 'by clicking on a backdrop';
-        } else {
-          return  `with: ${reason}`;
-        }
-      }
-    }
+}

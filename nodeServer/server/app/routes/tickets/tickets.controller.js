@@ -33,7 +33,10 @@ class TicketsController {
                 throw new Error('You must to assign member to the ticket!');
             }
 
-            if (new Date(obj.dueDate).toDateString() === 'Invalid Date') {
+            const fullDate = Object.keys(obj.dueDate)
+                .map((x) => obj.dueDate[x]).join('/');
+
+            if (new Date(fullDate).toDateString() === 'Invalid Date') {
                 throw new Error('The following date is invalid!');
             }
 
@@ -73,7 +76,7 @@ class TicketsController {
             await this.data.tickets.create({
                 title: obj.title,
                 description: obj.description,
-                dueDate: obj.dueDate,
+                dueDate: fullDate,
                 AssignedUserId: user.id,
                 CreatorId: creator.id,
                 TeamId: obj.teamId,

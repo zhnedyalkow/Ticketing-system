@@ -14,9 +14,9 @@ import { DashboardService } from './shared/services/dashboard.service';
 import { TicketService } from './shared/services/ticket.service';
 import { TeamService } from './shared/services/team.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateTeamComponent } from './create-team/create-team.component';
-import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { CreateTeamComponent } from './components/create-team/create-team.component';
+import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     DashboardService,
     TicketService,
     TeamService
+  ],
+  entryComponents: [
+    CreateTeamComponent,
+    CreateTicketComponent
   ],
 })
 export class DashboardModule { }

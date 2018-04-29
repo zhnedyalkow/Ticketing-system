@@ -12,12 +12,12 @@ import { NotFoundComponent } from './auth/not-found/not-found.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'home',
         loadChildren: './auth/auth.module#AuthModule',
         canActivate: [AuthGuardLogin],
     },
     {
-        path: 'dashboard',
+        path: '',
         loadChildren: './dashboard/dashboard.module#DashboardModule',
         canActivate: [Authguard]
     },

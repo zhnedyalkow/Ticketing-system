@@ -12,6 +12,9 @@ const routes: Routes = [
     {
         path: '', component: TeamComponent, children: [
             {
+                path: '', redirectTo: 'teamlist',
+            },
+            {
                 path: 'teamlist',
                 component: TeamListComponent,
                 canActivate: [AuthGuard]
