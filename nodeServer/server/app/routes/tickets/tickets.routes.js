@@ -13,14 +13,15 @@ const init = (app, data) => {
         .get('/getTicketInfoById', async (req, res) => {
             const ticketId = req.query.ticketId;
             let ticket;
-         try {
-             ticket = await controller
-            .getTicketInfoById(ticketId);
-         } catch (error) {
-            return res.status(302).json({ err: error.message });
-         }
 
-            res.status(200).json(ticket);
+            try {
+                ticket = await controller
+                    .getTicketInfoById(ticketId, req.user);
+            } catch (error) {
+                return res.status(302).json({ err: error.message });
+            }
+
+            return res.status(200).json(ticket);
         })
         .get('/getAllTicketsOfTeam', async (req, res) => {
             const teamName = req.query.team;

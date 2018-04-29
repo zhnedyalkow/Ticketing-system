@@ -4,6 +4,7 @@ const {
     User,
     Label,
     Status,
+    Team,
 } = require('../../db/models');
 
 class TeamData extends Data {
@@ -38,12 +39,16 @@ class TeamData extends Data {
                 model: User,
                 as: 'AssignedUser',
             },
+            {
+                attributes: ['name'],
+                model: Team,
+            },
         ];
     }
 
     getFullInfoForTicket(id) {
         const res = this.Model.findOne({
-            attributes: ['title', 'description', 'dueDate'],
+            attributes: ['title', 'description', 'dueDate', 'TeamId'],
             where: {
                 id: id,
             },
