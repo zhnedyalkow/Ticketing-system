@@ -48,10 +48,10 @@ const init = (app, data) => {
             try {
                 ticketInfo = await controller.createTicket(reqData, req.user);
             } catch (error) {
-                return res.json({ err: error.message });
+                return res.status(302).json({ err: error.message });
             }
 
-            return res.json(ticketInfo);
+            return res.status(200).json(ticketInfo);
         });
 };
 

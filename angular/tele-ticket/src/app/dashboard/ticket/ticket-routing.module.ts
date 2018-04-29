@@ -17,21 +17,22 @@ const routes: Routes = [
                 component: TicketPageComponent, 
                 canActivate: [AuthGuard] 
             },
-            {
-                path: 'teamlist', 
-                component: TicketListComponent, 
-                canActivate: [AuthGuard]
-            },
-            {
-                path: 'create-ticket', 
-                component: CreateTicketComponent, 
-                canActivate: [AuthGuard]
-            },
             { 
                 path: 'ticketlist', 
                 component: TicketListComponent, 
                 canActivate: [AuthGuard]
             },
+            // {
+            //     path: 'teamlist', 
+            //     component: TicketListComponent, 
+            //     canActivate: [AuthGuard]
+            // },
+            // {
+            //     path: 'create-ticket', 
+            //     component: CreateTicketComponent, 
+            //     canActivate: [AuthGuard]
+            // },
+        
         ]
     }
 ];

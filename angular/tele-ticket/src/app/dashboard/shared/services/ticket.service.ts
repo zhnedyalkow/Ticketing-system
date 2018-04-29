@@ -12,22 +12,10 @@ export class TicketService {
         return this.http.get(`${this.appConfig.apiUrl}/Ticket/getTicketInfoById?ticketId=${ticketId}`);
     }
 
-    creteTicket(
-                ticketTitle: string,
-                ticketDescription: string,
-                ticketLabel: string,
-                ticketDate: Date,
-                usersEmail: string
-    ): Observable<Object> {
+    createTicket(formsValue: Object): Observable<Object> {
         return this.http.post<Observable<Object>>(
-            `${this.appConfig.apiUrl}/ticket/createTicket`,
-            {
-                title: ticketTitle,
-                description: ticketDescription,
-                label: ticketLabel,
-                date: ticketDate,
-                email: usersEmail,
-            }
+            `${this.appConfig.apiUrl}/ticket/createTicket`, formsValue
         )
     }
 }
+
