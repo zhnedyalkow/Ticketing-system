@@ -15,7 +15,6 @@ export class TeamService {
     getAllTicketsOfTeam(teamName: string): Observable<Array<Ticket>> {
         return this.http.get<Array<Ticket>>(`${this.appConfig.apiUrl}/Ticket/getAllTicketsOfTeam?team=${teamName}`);
     }
-
     getAllUsersOfTeam(teamName: string): Observable<Array<User>> {
         return this.http.get<Array<User>>(`${this.appConfig.apiUrl}/user/getAllUsersOfTeam?team=${teamName}`);
     }
@@ -25,8 +24,4 @@ export class TeamService {
             `${this.appConfig.apiUrl}/team/createTeam`, formsValue
         );
     }
-
-    // getMyTeams(): Observable<Array<Team>> {
-    //     return this.http.get<Array<Team>>(`${this.appConfig.apiUrl}/team/getMyTeams`)
-    // }
 }

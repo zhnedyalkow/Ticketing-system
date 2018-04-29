@@ -6,7 +6,7 @@ import { AuthGuardService as AuthGuard } from '../../core/authentication/auth-gu
 import { TeamComponent } from './team.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamPageComponent } from './team-page/team-page.component';
-
+import { TeamNameResolver } from '../shared/resolvers/team-name.resolver';
 
 const routes: Routes = [
     {
@@ -22,7 +22,10 @@ const routes: Routes = [
             {
                 path: ':teamName',
                 component: TeamPageComponent,
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard],
+                resolve: {
+                    allTickets: TeamNameResolver
+                }
             },
         ]
     }

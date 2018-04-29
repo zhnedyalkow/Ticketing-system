@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Team } from '../../models/teams/team';
 import { DashboardService } from '../shared/services/dashboard.service';
 
-
 @Component({
     selector: 'app-team',
     templateUrl: './team.component.html',

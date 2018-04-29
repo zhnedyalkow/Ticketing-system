@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../shared/services/ticket.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ticket',
@@ -8,7 +9,7 @@ import { TicketService } from '../shared/services/ticket.service';
 })
 export class TicketComponent implements OnInit {
 
-constructor( public ticketService: TicketService,) {}
+constructor( public ticketService: TicketService, private route: ActivatedRoute) {}
   ngOnInit() {
   }
 }
