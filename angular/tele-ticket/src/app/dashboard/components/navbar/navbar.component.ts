@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardService } from '../../shared/services/dashboard.service';
 import { AuthService } from '../../../core/authentication/auth.service';
@@ -11,20 +11,21 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+    @Input() userInfo$: Observable<Object>
 
     public closeResult: string;
-    userInfo$: Observable<Object>;
 
     constructor(
         private router: Router,
         private dashService: DashboardService,
         private auth: AuthService,
 
-        private modalService: NgbModal
+        private modalService: NgbModal,
 
     ) { }
 
     ngOnInit() {
+
     }
 
 
