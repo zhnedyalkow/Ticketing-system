@@ -24,11 +24,6 @@ const routes: Routes = [
                 loadChildren: './admin/admin.module#AdminModule', 
                 canActivate: [RoleGuard], 
                 data: { expectedRole: 'admin'} 
-            },
-            { 
-                path: 'test', 
-                loadChildren: './test/test.module#TestModule',
-                canActivate: [RoleGuard]
             }
         ]
     }

@@ -16,7 +16,7 @@ const init = (app, data) => {
             const teamList = await controller
                 .getMyTeamsByUserId(userId);
 
-            res.json(teamList);
+            res.status(200).json(teamList);
         })
         .get('/getAllTeams', async (req, res) => {
             const companyId = req.query.companyId;

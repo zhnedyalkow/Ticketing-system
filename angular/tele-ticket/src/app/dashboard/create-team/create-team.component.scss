@@ -1,0 +1,29 @@
+.navbar .nav-link {
+    color: #263238;
+}
+
+.content {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    &.has-menu {
+        width: calc(100% - 190px);
+        margin-left: 190px;
+        border-bottom: 1px solid black;
+    }
+}
+
+.create-ticket, .create-team {
+    .ticket-title, .ticket-description, .datetimepicker,
+    .users-email, .teams-name, .teams-icon, .user-name {
+        margin: 10px 0px;
+    }
+
+    .ticket-label {
+        margin: 10px 0px;
+    }
+}
+
+.navigation {
+    cursor: pointer;
+}

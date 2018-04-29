@@ -17,4 +17,5 @@ export class DashboardService {
     getMyTeams(): Observable<Array<Team>> {
         return this.http.get<Array<Team>>(`${this.appConfig.apiUrl}/Team/getMyTeams`);
     }
+
 }

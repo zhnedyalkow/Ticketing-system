@@ -6,6 +6,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { Ticket } from "../../../models/tickets/ticket";
 import { User } from "../../../models/users/user";
+import { Team } from "../../../models/teams/team";
 
 @Injectable()
 export class TeamService {
@@ -24,4 +25,8 @@ export class TeamService {
             `${this.appConfig.apiUrl}/team/createTeam`, formsValue
         );
     }
+
+    // getMyTeams(): Observable<Array<Team>> {
+    //     return this.http.get<Array<Team>>(`${this.appConfig.apiUrl}/team/getMyTeams`)
+    // }
 }
