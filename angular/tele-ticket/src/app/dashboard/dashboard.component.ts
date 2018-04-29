@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
 
     @Input() allTeams: Team[];
 
-    @Output() closeModalEvent = new EventEmitter<boolean>();
+    // @Output() closeModalEvent = new EventEmitter<boolean>();
 
     constructor(
         private router: Router,

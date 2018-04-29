@@ -1,0 +1,25 @@
+.panel-default>.panel-heading {
+    background-color: #51bcda;
+    border-radius: 5px 5px 0px 0px;
+    color: #fff;
+    text-align: center;
+}
+
+.ticket-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.ticket-information {
+    .due-date {
+        color: red;
+    }
+}
+
+.panel-default {
+    background-color: #fff;
+}
+
+.panel-body {
+    margin-left: 10px;
+}

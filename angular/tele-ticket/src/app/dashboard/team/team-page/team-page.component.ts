@@ -42,9 +42,4 @@ export class TeamPageComponent implements OnInit {
             console.log(err.error.err);
         });
     }
-
-    goToTicket(ticket : ElementRef) {
-        console.log(ticket);
-    }
-
 }

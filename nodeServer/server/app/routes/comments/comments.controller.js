@@ -12,9 +12,8 @@ class CommentsController {
      */
 
     async getAllCommentsByTicketId(ticketId) {
-        const allComments = await this.data.comments.getAllByCriteria({
-            TicketId: ticketId,
-        });
+        const allComments = await this.data.comments.getComments(ticketId);
+
         return allComments;
     }
 
@@ -27,27 +26,33 @@ class CommentsController {
      */
 
 
-    async createComment(obj) {
-        const result = {
-            message: '',
-        };
-
+    async createComment(obj, creator) {
         try {
-            if (obj.id < 0) {
-                throw new Error('Invalid id!');
-            }
-
-            if (obj.description.length < 1) {
+            if (typeof obj.description === 'undefined' ||
+                obj.description.length < 1
+            ) {
                 throw new Error(`Length of field
                 must be more than one character!`);
             }
 
-            if (obj.TicketId.length < 0) {
+            if (typeof obj.ticketId === 'undefined' ||
+                obj.ticketId.length < 0
+            ) {
                 throw new Error('The ticketId is missing!');
             }
 
-            if (obj.UserId.length < 0) {
-                throw new Error('The userId is missing!');
+            // Check whater the cretor has permission
+            // to create comment for this ticket
+            const ticket = await this.data.tickets.getOneByCriteria({
+                id: obj.ticketId,
+            });
+
+            const team = await ticket.getTeam();
+            const teamHasUser = await team.hasUser(creator);
+
+            if (!teamHasUser) {
+                throw new Error(`You have not permission
+                    to add comments to this ticket!`);
             }
         } catch (error) {
             throw error;
@@ -55,17 +60,19 @@ class CommentsController {
 
         const newComment = await this.data.comments.create({
             description: obj.description,
-            UserId: obj.UserId,
-            TicketId: obj.TicketId,
+            UserId: creator.id,
+            TicketId: obj.ticketId,
+        });
+
+        newComment.dataValues.User = await newComment.getUser({
+            attributes: ['name', 'email', 'id'],
         });
 
         if (!newComment) {
-            result.message = 'Something went wrong!';
-            return result;
+            throw new Error('Something went wrong!');
         }
 
-        result.message = 'Success!';
-        return result;
+        return newComment;
     }
 }
 

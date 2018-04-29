@@ -2,7 +2,6 @@ const {
     Comments,
     Company,
     Label,
-    Notification,
     Status,
     User,
     NewNotification,
@@ -12,9 +11,10 @@ const Data = require('./generic.data');
 const TeamData = require('./team.data');
 const TicketData = require('./ticket.data');
 const NotificationData = require('./notification.data');
+const CommentsData = require('./comments.data');
 
 module.exports = {
-    comments: new Data(Comments),
+    comments: new CommentsData(),
     companies: new Data(Company),
     labels: new Data(Label),
     notifications: new NotificationData(),
