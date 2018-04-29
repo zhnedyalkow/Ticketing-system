@@ -17,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateTeamComponent } from './create-team/create-team.component';
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { TeamNameResolver } from './shared/resolvers/team-name.resolver';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   providers: [
     DashboardService,
     TicketService,
-    TeamService
+    TeamService,
+    TeamNameResolver
   ],
 })
 export class DashboardModule { }

@@ -12,10 +12,15 @@ const init = (app, data) => {
     router
         .get('/getTicketInfoById', async (req, res) => {
             const ticketId = req.query.ticketId;
-            const ticket = await controller
-                .getTicketInfoById(ticketId);
+            let ticket;
+         try {
+             ticket = await controller
+            .getTicketInfoById(ticketId);
+         } catch (error) {
+            return res.status(302).json({ err: error.message });
+         }
 
-            res.json(ticket);
+            res.status(200).json(ticket);
         })
         .get('/getAllTicketsOfTeam', async (req, res) => {
             const teamName = req.query.team;

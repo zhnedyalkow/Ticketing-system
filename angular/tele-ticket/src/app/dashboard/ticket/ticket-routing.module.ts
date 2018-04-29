@@ -7,6 +7,8 @@ import { TicketComponent } from './ticket.component';
 import { TicketPageComponent } from './ticket-page/ticket-page.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
+import { TicketIdResolver } from '../shared/resolvers/ticket-id.resolver';
+
 
 
 const routes: Routes = [
@@ -15,30 +17,23 @@ const routes: Routes = [
             { 
                 path: ':ticketId', 
                 component: TicketPageComponent, 
-                canActivate: [AuthGuard] 
+                canActivate: [AuthGuard],
+                resolve: {
+                    ticketId: TicketIdResolver
+                }
             },
             { 
                 path: 'ticketlist', 
                 component: TicketListComponent, 
                 canActivate: [AuthGuard]
             },
-            // {
-            //     path: 'teamlist', 
-            //     component: TicketListComponent, 
-            //     canActivate: [AuthGuard]
-            // },
-            // {
-            //     path: 'create-ticket', 
-            //     component: CreateTicketComponent, 
-            //     canActivate: [AuthGuard]
-            // },
-        
         ]
     }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [TicketIdResolver]
 })
 export class TicketRoutingModule { }

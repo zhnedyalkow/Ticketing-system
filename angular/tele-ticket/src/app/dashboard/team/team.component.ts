@@ -10,17 +10,9 @@ import { DashboardService } from '../shared/services/dashboard.service';
 })
 export class TeamComponent implements OnInit {
 
-    // myTeamsInfo: Team[];
-
     constructor(private dashServise: DashboardService) { }
 
     ngOnInit() {
-        // this.dashServise.getMyTeams().subscribe((x) => {
-        //     this.myTeamsInfo = x;
-        //     console.log(this.myTeamsInfo + 'myTeamInfo');
-        // }, (error) => {
-        //     console.log(error);
-        // });
     }
 
 }
