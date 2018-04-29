@@ -22,7 +22,7 @@
       <li class="nav-item ">
         <div ngbDropdown class="d-inline-block dropdown">
           <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
-            <i class="fa fa-check"></i> Welcome, Zhitomir</a>
+            <i class="fa fa-check"></i> Welcome, {{(userInfo$ | async)?.name}}</a>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-primary">
             <a class="dropdown-item">
               <i class="fa fa-list"></i> My panel</a>

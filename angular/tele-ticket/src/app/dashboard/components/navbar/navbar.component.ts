@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardService } from '../../shared/services/dashboard.service';
 import { AuthService } from '../../../core/authentication/auth.service';
@@ -13,9 +13,9 @@ import { CreateTicketComponent } from '../create-ticket/create-ticket.component'
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  @Input() userInfo$: Observable<Object>
 
   public closeResult: string;
-  userInfo$: Observable<Object>;
 
   constructor(
     private router: Router,
