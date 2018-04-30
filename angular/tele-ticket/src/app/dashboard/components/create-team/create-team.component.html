@@ -1,13 +1,13 @@
-<div class="">
+<div>
   <form [formGroup]="createTeamForm" (ngSubmit)="createTeam()" class="create-team">
     <div class="modal-body">
       <div class="teams-name">
         <label for="name">Name</label>
         <input formControlName="name" type="text" class="form-control" placeholder="Name..." required>
         <div class="alert" *ngIf="!createTeamForm.controls['name'].valid && createTeamForm.controls['name'].touched">
-          <span *ngIf="createTeamForm.controls['name'].hasError('required') ">{{ genericError }} </span>
-          <span *ngIf="createTeamForm.controls['name'].hasError('minlength') "> {{ minLenName }} </span>
-          <span *ngIf="createTeamForm.controls['name'].hasError('maxLength') "> {{ maxLength }} </span>
+          <span *ngIf="createTeamForm.controls['name'].hasError('required') ">{{ genericErrorMsg }} </span>
+          <span *ngIf="createTeamForm.controls['name'].hasError('minlength') "> {{ genMaxLengthMsg }} </span>
+          <span *ngIf="createTeamForm.controls['name'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
         </div>
       </div>
       <p class="danger-color font-bold">*Assign user's email - * = required </p>
@@ -19,7 +19,10 @@
               <label [attr.for]="'email'+i">Email</label>
               <input formControlName="email" [attr.id]="'email'+i" type="text" class="form-control" placeholder="User's email..." required>
               <div class="alert" *ngIf="!createTeamForm.get('users').at(i).get('email').valid && createTeamForm.get('users').at(i).get('email').touched">
-                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('required') "> {{ genericError }} </span>
+                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('required') "> {{ genericErrorMsg }} </span>
+                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('minlength') "> {{ genMinLengthMsg }} </span>
+                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('pattern') "> {{ emailErrMsg }} </span>
               </div>
             </div>
           </div>

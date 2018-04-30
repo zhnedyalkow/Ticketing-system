@@ -1,64 +1,78 @@
-<!-- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLabel">
-          <i class="fa fa-bug danger-color"></i> Create issue</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      
-    </div>
-  </div>
-</div> -->
 <div>
   <form [formGroup]="createTicketForm" (ngSubmit)="createTicket()">
     <div class="modal-body">
-  
+
       <div class="ticket-title">
         <label for="tittle">Title</label>
         <input formControlName="title" type="text" id="title" class="form-control" placeholder="Title...">
       </div>
-  
+      <div class="alert" *ngIf="!createTicketForm.controls['title'].valid && createTicketForm.controls['title'].touched">
+        <span *ngIf="createTicketForm.controls['title'].hasError('required') ">{{ genericErrorMsg }} </span>
+        <span *ngIf="createTicketForm.controls['title'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
+        <span *ngIf="createTicketForm.controls['title'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+      </div>
       <div class="ticket-description">
         <label for="description">Description</label>
         <textarea formControlName="description" id="description" class="form-control" rows="4" placeholder="Description..."></textarea>
       </div>
-  
+      <div class="alert" *ngIf="!createTicketForm.controls['description'].valid && createTicketForm.controls['description'].touched">
+        <span *ngIf="createTicketForm.controls['description'].hasError('required') ">{{ genericErrorMsg }} </span>
+        <span *ngIf="createTicketForm.controls['description'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
+        <span *ngIf="createTicketForm.controls['description'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+      </div>
       <div class="ticket-label">
         <label for="label">Label</label>
         <input formControlName="label" type="text" id="label" class="form-control" placeholder="Label...">
       </div>
+      <div class="alert" *ngIf="!createTicketForm.controls['label'].valid && createTicketForm.controls['label'].touched">
+        <span *ngIf="createTicketForm.controls['label'].hasError('required') ">{{ genericErrorMsg }} </span>
+        <span *ngIf="createTicketForm.controls['label'].hasError('minlength') "> {{ labelMinLenErrMsg }} </span>
+        <span *ngIf="createTicketForm.controls['label'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+      </div>
       <div class="form-group">
+        <label for="dueDate">Select date</label>
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" formControlName="dueDate" name="dp" ngbDatepicker #d="ngbDatepicker"
+          <input formControlName="dueDate" type="date" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker"
             #spy>
-            <button type="button" class="btn btn-info" (click)="d.toggle()"><i class="fa fa-calendar"></i></button>
+          <button type="button" class="btn btn-info" (click)="d.toggle()">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </div>
+        <div class="alert" *ngIf="!createTicketForm.controls['dueDate'].valid &&
+                 createTicketForm.controls['dueDate'].touched">
+          <span *ngIf="createTicketForm.controls['dueDate'].hasError('dateInvalid') ">{{ dateErrMsg }} </span>
         </div>
       </div>
-  
+
       <div class="form-group">
         <label for="teamId">Select team</label>
-        <select formControlName="teamId" class="form-control" id="teamId">
+        <select formControlName="teamId" class="form-control" id="teamId" required>
           <option selected>Select Team</option>
           <option *ngFor="let team of teams" [attr.value]="team.id">{{team.name}}</option>
         </select>
+        <div class="alert" *ngIf="!createTicketForm.controls['teamId'].valid && createTicketForm.controls['teamId'].touched">
+          <span *ngIf="createTicketForm.controls['teamId'].hasError('required') ">{{ genericErrorMsg }} </span>
+        </div>
       </div>
-  
+
       <div class="users-email">
         <label for="assignedUser">Email</label>
-        <p class="danger-color font-bold">*As`user's email - * = required </p>
+        <p class="danger-color font-bold">*Assign user's email - * = required </p>
         <input formControlName="assignedUser" type="text" id="email" class="form-control" placeholder="User's email...">
+        <div class="alert" *ngIf="!createTicketForm.controls['assignedUser'].valid && createTicketForm.controls['assignedUser'].touched">
+          <span *ngIf="createTicketForm.controls['assignedUser'].hasError('required') ">{{ genericErrorMsg }} </span>
+          <span *ngIf="createTicketForm.controls['assignedUser'].hasError('pattern') ">{{ emailErrMsg }} </span>
+          <span *ngIf="createTicketForm.controls['assignedUser'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
+          <span *ngIf="createTicketForm.controls['assignedUser'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+        </div>
       </div>
     </div>
-  
+
     <div class="modal-footer">
       <div class="left-side">
-        <button type="submit" class="btn btn-default btn-link">Create issue</button>
+        <button type="submit" [disabled]="!selected && !createTicketForm.valid" class="btn btn-default btn-link">Create issue</button>
       </div>
-  
+
       <div class="divider"></div>
       <div class="right-side">
         <button type="button" class="btn btn-default btn-link" (click)="activeModal.close()">Never mind</button>
