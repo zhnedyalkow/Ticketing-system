@@ -103,8 +103,29 @@ class TicketsController {
         return { message: 'Success' };
     }
 
-    async getTicketInfoById(ticketId) {
-        const ticket = await this.data.tickets.getFullInfoForTicket(ticketId);
+    async getTicketInfoById(ticketId, requester) {
+        let ticket;
+
+        try {
+            ticket = await this.data
+                .tickets.getFullInfoForTicket(ticketId);
+            if (!ticket) {
+                throw new Error('There is now such a ticket!');
+            }
+
+            const team = await ticket.getTeam();
+            if (team.CompanyId !== requester.CompanyId) {
+                throw new Error('Something went wrong!');
+            }
+
+            const hasUser = await team.hasUser(requester);
+            if (!hasUser) {
+                throw new Error('Something went wrong!');
+            }
+        } catch (error) {
+            throw error;
+        }
+
         return ticket;
     }
 
