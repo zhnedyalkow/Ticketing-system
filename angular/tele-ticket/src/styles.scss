@@ -23,3 +23,24 @@ body {
 .main-color {
     color: #6dd3d6;
 }
+
+.alert {
+    background: red;
+    padding: 7px;
+    font-size: .9em;
+    margin: 10px 0px 0px;
+    border-radius: 5px !important;
+    display: block;
+    animation: 2s alertAnim forwards;
+}
+
+@keyframes alertAnim {
+    from {
+        opacity:0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
+}

@@ -7,8 +7,6 @@ import { Team } from "../../../models/teams/team";
 import { Ticket } from "../../../models/tickets/ticket";
 import { TeamService } from "../services/team.service";
 
-
-
 @Injectable()
 export class TeamNameResolver implements Resolve<Ticket[]> {
     
