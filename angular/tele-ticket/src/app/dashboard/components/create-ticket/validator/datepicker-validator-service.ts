@@ -47,7 +47,7 @@ export class DatepickerValidationService {
             if (month < 1 || month > 12) {
                 return {
                     'dateInvalid': true
-                };
+                }; 
             }
 
             if (day < 1 || day > 31) {
