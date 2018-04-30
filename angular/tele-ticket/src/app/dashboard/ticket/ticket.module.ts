@@ -9,6 +9,7 @@ import { TicketComponent } from './ticket.component';
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 import { TicketInfoComponent } from './ticket-page/ticket-info/ticket-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TicketService } from '../shared/services/ticket.service';
 
 @NgModule({
   imports: [
@@ -22,6 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     TicketListComponent,
     TicketComponent,
     TicketInfoComponent,
+  ],
+  providers: [
+    TicketService,
   ],
 })
 export class TicketModule { }

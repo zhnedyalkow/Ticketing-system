@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Observable";
 
 import { AppConfig } from "../../../config/app.config";
 import { Comments } from "../../../models/comments/comments";
+import { Status } from "../../../models/tickets/status";
 
 @Injectable()
 export class TicketService {
@@ -27,5 +28,8 @@ export class TicketService {
     addComment(formsValue: Object) {
         return this.http.post<Comments>(`${this.appConfig.apiUrl}/comments/createComment`, formsValue);
     }
-}
 
+    changeStatus(statusData: Status) {
+        return this.http.post<Status>(`${this.appConfig.apiUrl}/ticket/changeTicketStatus`, statusData);
+    }
+}
