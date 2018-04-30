@@ -11,10 +11,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-    rForm: FormGroup;
-    email: string = '';
-    password: string = '';
-    test: Date = new Date();
+    public rForm: FormGroup;
+    publicemail: string = '';
+    publicpassword: string = '';
+    public test: Date = new Date();
 
     emailErrMsg: string = 'Email is required!';
     pwdErrMsg: string = 'Password is required!';
@@ -25,9 +25,18 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router, private fb: FormBuilder, private auth: AuthHomeService) { }
     ngOnInit() {
         this.rForm = this.fb.group({
-            'email': [null, Validators.compose([Validators.required, Validators.email, Validators.pattern("[^ @]*@[^ @]*"),
-            Validators.minLength(10), Validators.maxLength(50)])],
-            'password': [null, Validators.compose([Validators.required, Validators.minLength(8)])],
+            'email': [null, 
+                Validators.compose([
+                    Validators.required, 
+                    Validators.email, 
+                    Validators.pattern("[^ @]*@[^ @]*"),
+                    Validators.minLength(10), 
+                    Validators.maxLength(50)])],
+            'password': [null, 
+                Validators.compose([
+                    Validators.required, 
+                    Validators.minLength(8),
+                    Validators.maxLength(50)])],
         })
     }
 
