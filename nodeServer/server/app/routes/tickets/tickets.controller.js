@@ -141,6 +141,10 @@ class TicketsController {
                 throw new Error('There is no such a team!');
             }
 
+            if (team.CompanyId !== user.CompanyId) {
+                throw new Error('Something went wrong');
+            }
+
             const hasUser = await team.hasUser(user);
             if (!hasUser) {
                 throw new Error('Something went wrong!');
@@ -160,6 +164,68 @@ class TicketsController {
         });
 
         return tickets;
+    }
+
+    async changeTicketStatus(statusName, ticketId, requester) {
+        let ticket;
+        let status;
+
+        try {
+            // Chech weather status is valid
+            if (!(statusName === 'closed' || statusName === 'completed' ||
+                statusName === 'reopened')
+            ) {
+                throw new Error('Something went wrong!');
+            }
+
+            // Get the ticket
+            ticket = await this.data.tickets.getById(ticketId);
+            if (!ticket) {
+                throw new Error('Something went wrong!');
+            }
+
+            // Check weather the user is in the team
+            const team = await ticket.getTeam();
+            const hasUser = await team.hasUser(requester);
+            if (!hasUser) {
+                throw new Error('Something went wrong!');
+            }
+
+            // Check wather the task is already closed
+            if (ticket.StatusId === '2') {
+                throw new Error('The task is already closed!');
+            }
+
+            // Check weather you are TeamManager
+            if ((statusName === 'closed' || statusName === 'reopened')) {
+                if (team.TeamManagerId !== requester.id) {
+                    throw new Error('You have not permission to do that!');
+                }
+            }
+
+            // Check weather you are Assigned User
+            if (statusName === 'complated') {
+                if (ticket.AssignedUserId !== requester.id) {
+                    throw new Error('You have not permission to do that!');
+                }
+            }
+
+            // Get the status
+            status = await this.data.statuses.getOneByCriteria({
+                name: statusName,
+            });
+
+            if (!status) {
+                throw new Error('There is no such a status!');
+            }
+
+            ticket.StatusId = status.id;
+            await ticket.save();
+        } catch (error) {
+            throw error;
+        }
+
+        return status;
     }
 }
 

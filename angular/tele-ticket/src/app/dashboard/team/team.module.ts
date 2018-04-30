@@ -20,6 +20,7 @@ import { TeamboxComponent } from './team-list/teambox/teambox.component';
         TeamRoutingModule
     ],
     providers: [
+
     ],
 })
 export class TeamModule { }

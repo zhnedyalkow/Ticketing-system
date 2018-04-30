@@ -40,7 +40,7 @@ class TeamData extends Data {
                 as: 'AssignedUser',
             },
             {
-                attributes: ['name'],
+                attributes: ['name', 'TeamManagerId'],
                 model: Team,
             },
         ];

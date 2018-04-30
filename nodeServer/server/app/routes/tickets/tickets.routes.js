@@ -58,6 +58,18 @@ const init = (app, data) => {
             }
 
             return res.status(200).json(ticketInfo);
+        })
+        .post(('/changeTicketStatus'), async (req, res) => {
+            let status;
+            try {
+                status = await controller
+                    .changeTicketStatus(req.body.name,
+                        req.body.tickedId, req.user);
+            } catch (error) {
+                return res.status(302).json({ err: error.message });
+            }
+
+            return res.status(200).json(status);
         });
 };
 

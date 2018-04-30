@@ -12,14 +12,16 @@
             </p>
           </div>
           <div class="btn-box">
-            <span class="btn-group pull-left">
-              <button type="button" class="btn btn-success btn-round">Completed</button>
+            <span *ngIf="ticketInfo?.Status.name == 'in-progress' && amIAU ||
+              ticketInfo?.Status.name == 'reopened' && amIAU " class="btn-group pull-left">
+              <button type="button" class="btn btn-success btn-round" (click)="changeStatus('completed')">Completed</button>
             </span>
-            <span class="btn-group pull-right">
-              <button type="button" class="btn btn-warning btn-round">Re-open</button>
+            <span *ngIf="ticketInfo?.Status.name == 'completed' && amIGM" class="btn-group pull-right">
+              <button (click)="changeStatus('reopened')" type="button" class="btn btn-warning btn-round">Re-open</button>
             </span>
-            <span class="btn-group pull-right">
-              <button type="button" class="btn btn-danger btn-round">Close</button>
+            <span *ngIf="ticketInfo?.Status.name == 'completed' && amIGM || 
+              ticketInfo?.Status.name == 'in-progress' && amIGM" class="btn-group pull-right">
+              <button (click)="changeStatus('closed')" type="button" class="btn btn-danger btn-round">Close</button>
             </span>
           </div>
         </div>

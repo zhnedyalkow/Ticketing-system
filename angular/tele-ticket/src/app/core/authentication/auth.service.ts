@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppConfig } from "../../config/app.config";
 import { Router } from "@angular/router";
-
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +15,15 @@ export class AuthService {
     const token = localStorage.getItem('token');
 
     return !this.jwtService.isTokenExpired(token);
+  }
+
+  tokenData() : {id: number, role: string} {
+    const token = localStorage.getItem('token');
+
+    // decode the tocken to get its payload
+    const tokenPayload = jwt_decode(token);
+
+    return tokenPayload;
   }
 
   logout(): void {
