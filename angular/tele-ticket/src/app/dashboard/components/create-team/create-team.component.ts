@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ICreateTeam } from '../../shared/interfaces/create-team.interface';
 import { ValidateInputFormFields } from '../../shared/validators/create-team-validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-create-team',
@@ -23,7 +24,7 @@ import { ValidateInputFormFields } from '../../shared/validators/create-team-val
 export class CreateTeamComponent implements OnInit {
 
     public closeResult: string;
-    public email: AbstractControl;  
+    public email: AbstractControl;
     public name: AbstractControl;
     public createTeamForm: FormGroup;
     public genericErrorMsg: string = 'The field is required!';
@@ -38,10 +39,11 @@ export class CreateTeamComponent implements OnInit {
         private router: Router,
         private teamService: TeamService,
         public activeModal: NgbActiveModal,
+        private toastr: ToastrService
     ) {
 
     }
-    public ngOnInit() {
+    public ngOnInit(): void {
 
         this.createTeamForm = this.fb.group({
             'name': [null,
@@ -54,7 +56,7 @@ export class CreateTeamComponent implements OnInit {
             ]),
         });
     }
-    buildItem() {
+    public buildItem(): any {
         return new FormGroup({
             email: new FormControl(null,
                 Validators.compose([
@@ -68,13 +70,13 @@ export class CreateTeamComponent implements OnInit {
         })
     }
 
-    createTeam(): void {
-        console.log(this.createTeamForm);
+    public createTeam(): void {
         this.teamService.createTeam(this.createTeamForm.value).subscribe((data: Team) => {
+            this.toastr.success(`Team was successfully created!`);
             this.router.navigate(['./team/teamlist']);
             this.activeModal.close();
         }, (err: HttpErrorResponse) => {
-            alert(err.error.err);
+            this.toastr.error(err.error.err);
         });
     }
 }

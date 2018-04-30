@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ToastrModule } from 'ngx-toastr';
 
 
 import { CoreModule } from './core/core.module';
@@ -27,7 +28,8 @@ export function tokenGetter() {
     imports: [
         BrowserModule,
         NgbModule.forRoot(),
-        
+        ToastrModule.forRoot(),
+
         HttpClientModule,
         CoreModule,
         JwtModule.forRoot({
@@ -37,8 +39,8 @@ export function tokenGetter() {
                 blacklistedRoutes: []
             }
         }),
-    
-    AppRoutingModule,
+
+        AppRoutingModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

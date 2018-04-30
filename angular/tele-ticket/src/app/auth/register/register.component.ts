@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthHomeService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-register',
@@ -26,34 +27,60 @@ export class RegisterComponent implements OnInit {
     confirmPwd: string = 'Please verify your password!';
     test: Date = new Date();
 
-    constructor(private router: Router, private fb: FormBuilder, private auth: AuthHomeService,) { }
+    constructor(
+        private router: Router,
+        private fb: FormBuilder,
+        private auth: AuthHomeService,
+        private toastr: ToastrService,
+    ) { }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.rForm = this.fb.group({
-            'name': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-            'email': ['', Validators.compose([Validators.required, Validators.email, Validators.pattern("[^ @]*@[^ @]*"),
-            Validators.minLength(6), Validators.maxLength(50)])],
-            'password': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
-            'verifyPass': ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+            'name': ['',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(2)
+                ])],
+            'email': ['',
+                Validators.compose([
+                    Validators.required,
+                    Validators.email,
+                    Validators.pattern("[^ @]*@[^ @]*"),
+                    Validators.minLength(6),
+                    Validators.maxLength(50)
+                ])],
+            'password': ['',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(8)
+                ])],
+            'verifyPass': ['',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(8)
+                ])],
         })
     }
-    registerUser() {
+    public registerUser() {
         this.auth.register(this.rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
             info: any,
         }) => {
             if (x.info == true) {
-                this.router.navigate(['./login']);
+                this.toastr.success(`Registration was successfull! You can log in!`);
+                this.router.navigate(['./home/login']);
             } else {
                 alert(x.info);
+                this.toastr.error(`${x.info}`);
+
             }
         }, (err: HttpErrorResponse) => {
             if (err.status === 302) {
-                alert(err.error.err);
+                this.toastr.error(err.error.err);
             }
         });
     }
 
-    onSubmit(value: any) {
+    public onSubmit(value: any): void {
         this.rForm.reset();
     }
 

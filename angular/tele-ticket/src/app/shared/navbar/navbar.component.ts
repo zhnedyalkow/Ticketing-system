@@ -11,7 +11,9 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public location: Location, private element: ElementRef) {
+    constructor(
+        public location: Location, 
+        private element: ElementRef) {
         this.sidebarVisible = false;
     }
 
@@ -19,7 +21,7 @@ export class NavbarComponent implements OnInit {
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
     }
-    sidebarOpen() {
+    public sidebarOpen() {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];
 
@@ -30,20 +32,20 @@ export class NavbarComponent implements OnInit {
 
         this.sidebarVisible = true;
     };
-    sidebarClose() {
+    public sidebarClose() {
         const html = document.getElementsByTagName('html')[0];
         this.toggleButton.classList.remove('toggled');
         this.sidebarVisible = false;
         html.classList.remove('nav-open');
     };
-    sidebarToggle() {
+    public sidebarToggle() {
         if (this.sidebarVisible === false) {
             this.sidebarOpen();
         } else {
             this.sidebarClose();
         }
     };
-    isHome() {
+    public isHome() {
         var titlee = this.location.prepareExternalUrl(this.location.path());
 
         if( titlee === '/home' ) {
@@ -53,7 +55,7 @@ export class NavbarComponent implements OnInit {
             return false;
         }
     }
-    isDocumentation() {
+    public isDocumentation() {
         var titlee = this.location.prepareExternalUrl(this.location.path());
         if( titlee === '/documentation' ) {
             return true;

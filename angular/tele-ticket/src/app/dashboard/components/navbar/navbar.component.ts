@@ -22,23 +22,22 @@ export class NavbarComponent implements OnInit {
     private dashService: DashboardService,
     private auth: AuthService,
 
-    private modalService: NgbModal
+    private modalService: NgbModal,
 
   ) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
   }
 
-  logoutUser() {
+  public logoutUser(): void {
     this.auth.logout();
-    this.router.navigate(['./']);
+    this.router.navigate(['./home']);
   }
 
-  openCreateTeam() {
+  public openCreateTeam(): void {
     this.modalService.open(CreateTeamComponent);
   }
-
-  openCreateIssue() {
+  public openCreateIssue(): void {
     this.modalService.open(CreateTicketComponent);
   }
 

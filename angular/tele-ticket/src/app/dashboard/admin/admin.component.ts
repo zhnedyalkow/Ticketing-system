@@ -4,6 +4,7 @@ import { UserInfo } from '../../models/users/user.info';
 import { AdminService } from '../shared/services/admin.service';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-admin',
@@ -11,17 +12,21 @@ import { HttpErrorResponse } from '@angular/common/http';
     styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-    adminForm: FormGroup;
-    email: AbstractControl;
-    addUserToCompany$: Observable<Object>;
+    public adminForm: FormGroup;
+    public email: AbstractControl;
+    public addUserToCompany$: Observable<Object>;
 
     @Input() allUsers: UserInfo[];
 
-    constructor(private adminService: AdminService, private fb: FormBuilder) {
+    constructor(
+        private adminService: AdminService,
+        private fb: FormBuilder,
+        private toastr: ToastrService,
+    ) {
         this.allUsers = [];
-     }
+    }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.adminForm = this.fb.group({
             'email': [null, Validators.compose([Validators.required, Validators.email,
             Validators.pattern("[^ @]*@[^ @]*"),
@@ -29,27 +34,28 @@ export class AdminComponent implements OnInit {
         });
 
         this.email = this.adminForm.controls['email'];
-
         this.getAllUsers();
     }
 
-    AddUserToCompany() {
+    public AddUserToCompany(): void {
         this.adminService.addUserToCompany(this.email.value).subscribe((x: UserInfo) => {
             this.allUsers.push(x);
+            this.toastr.success(`User successfully added!`);
         }, (err: HttpErrorResponse) => {
-            alert(err.error.err);
+            this.toastr.error(err.error.err);
         });
     }
 
-    getAllUsers() {
+    public getAllUsers(): void {
         this.adminService.getAllUsers().subscribe((x) => {
             this.allUsers = x;
         }, (err: HttpErrorResponse) => {
-            alert(err.error.err);
+            this.toastr.error(err.error.err);
         });
     }
 
-    onSubmit(value: any) {
+    public onSubmit(value: any): void {
         this.adminForm.reset();
     }
 }
+

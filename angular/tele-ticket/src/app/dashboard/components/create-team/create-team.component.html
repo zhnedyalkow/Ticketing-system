@@ -2,7 +2,7 @@
   <form [formGroup]="createTeamForm" (ngSubmit)="createTeam()" class="create-team">
     <div class="modal-body">
       <div class="teams-name">
-        <label for="name">Name</label>
+        <label for="name" class="font-bold">Name</label>
         <input formControlName="name" type="text" class="form-control" placeholder="Name..." required>
         <div class="alert" *ngIf="!createTeamForm.controls['name'].valid && createTeamForm.controls['name'].touched">
           <span *ngIf="createTeamForm.controls['name'].hasError('required') ">{{ genericErrorMsg }} </span>
@@ -16,7 +16,7 @@
           <div class="form-group row" *ngFor="let user of createTeamForm.get('users').controls; let i = index;" [formGroup]="user"
             required>
             <div class="col-sm-10">
-              <label [attr.for]="'email'+i">Email</label>
+              <label [attr.for]="'email'+i" class="font-bold">Email</label>
               <input formControlName="email" [attr.id]="'email'+i" type="text" class="form-control" placeholder="User's email..." required>
               <div class="alert" *ngIf="!createTeamForm.get('users').at(i).get('email').valid && createTeamForm.get('users').at(i).get('email').touched">
                 <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('required') "> {{ genericErrorMsg }} </span>

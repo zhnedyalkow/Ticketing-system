@@ -3,7 +3,7 @@
     <div class="modal-body">
 
       <div class="ticket-title">
-        <label for="tittle">Title</label>
+        <label for="tittle" class="font-bold">Title</label>
         <input formControlName="title" type="text" id="title" class="form-control" placeholder="Title...">
       </div>
       <div class="alert" *ngIf="!createTicketForm.controls['title'].valid && createTicketForm.controls['title'].touched">
@@ -12,7 +12,7 @@
         <span *ngIf="createTicketForm.controls['title'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
       </div>
       <div class="ticket-description">
-        <label for="description">Description</label>
+        <label for="description" class="font-bold">Description</label>
         <textarea formControlName="description" id="description" class="form-control" rows="4" placeholder="Description..."></textarea>
       </div>
       <div class="alert" *ngIf="!createTicketForm.controls['description'].valid && createTicketForm.controls['description'].touched">
@@ -21,7 +21,7 @@
         <span *ngIf="createTicketForm.controls['description'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
       </div>
       <div class="ticket-label">
-        <label for="label">Label</label>
+        <label for="label" class="font-bold">Label</label>
         <input formControlName="label" type="text" id="label" class="form-control" placeholder="Label...">
       </div>
       <div class="alert" *ngIf="!createTicketForm.controls['label'].valid && createTicketForm.controls['label'].touched">
@@ -30,7 +30,7 @@
         <span *ngIf="createTicketForm.controls['label'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
       </div>
       <div class="form-group">
-        <label for="dueDate">Select date</label>
+        <label for="dueDate" class="font-bold">Select date</label>
         <div class="input-group">
           <input formControlName="dueDate" type="date" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker"
             #spy>
@@ -45,7 +45,7 @@
       </div>
 
       <div class="form-group">
-        <label for="teamId">Select team</label>
+        <label for="teamId" class="font-bold">Select team</label>
         <select formControlName="teamId" class="form-control" id="teamId" required>
           <option selected>Select Team</option>
           <option *ngFor="let team of teams" [attr.value]="team.id">{{team.name}}</option>
@@ -56,7 +56,7 @@
       </div>
 
       <div class="users-email">
-        <label for="assignedUser">Email</label>
+        <label for="assignedUser" class="font-bold">Email</label>
         <p class="danger-color font-bold">*Assign user's email - * = required </p>
         <input formControlName="assignedUser" type="text" id="email" class="form-control" placeholder="User's email...">
         <div class="alert" *ngIf="!createTicketForm.controls['assignedUser'].valid && createTicketForm.controls['assignedUser'].touched">

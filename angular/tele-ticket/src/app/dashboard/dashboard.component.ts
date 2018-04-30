@@ -15,7 +15,7 @@ import { Team } from '../models/teams/team';
 })
 export class DashboardComponent implements OnInit {
 
-    userInfo$: Observable<Object>;
+    public userInfo$: Observable<Object>;
 
     constructor(
         private router: Router,
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 
     ) {
     }
-    ngOnInit() {
+    public ngOnInit(): void {
         this.userInfo$ = this.dashService.getUserInfo();
     }
 }

@@ -5,24 +5,31 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppConfig } from "../../config/app.config";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 
 @Injectable()
 export class AuthService {
-  constructor(private router: Router, private appConfig: AppConfig, private jwtService: JwtHelperService) { }
+    constructor(
+        private router: Router,
+        private appConfig: AppConfig,
+        private jwtService: JwtHelperService,
+        private toastr: ToastrService,
+    ) { }
 
-  isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
+    public isAuthenticated(): boolean {
+        const token = localStorage.getItem('token');
 
-    return !this.jwtService.isTokenExpired(token);
-  }
+        return !this.jwtService.isTokenExpired(token);
+    }
 
-  logout(): void {
-    localStorage.removeItem('access_token');
-    localStorage.clear();
-  }
+    public logout(): void {
+        this.toastr.success(`You are logged out!`);
+        localStorage.removeItem('access_token');
+        localStorage.clear();
+    }
 
-  getToken(): string {
-    return localStorage.getItem('token');
-  }
+    public getToken(): string {
+        return localStorage.getItem('token');
+    }
 }

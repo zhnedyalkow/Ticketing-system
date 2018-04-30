@@ -14,6 +14,7 @@ import { Ticket } from '../../../models/tickets/ticket';
 import { Team } from '../../../models/teams/team';
 
 import { DatepickerValidationService } from './validator/datepicker-validator-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-create-ticket',
@@ -49,11 +50,12 @@ export class CreateTicketComponent implements OnInit {
         private ticketService: TicketService,
         private fb: FormBuilder,
         public activeModal: NgbActiveModal,
+        private toastr: ToastrService,
     ) {
    
      }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.userInfo$ = this.dashService.getUserInfo();
         debugger;
         this.createTicketForm = this.fb.group({
@@ -89,17 +91,17 @@ export class CreateTicketComponent implements OnInit {
         this.getMyTeam();
     }
 
-    public createTicket() {
+    public createTicket(): void{
         this.ticketService.createTicket(this.createTicketForm.value).subscribe((data: Ticket) => {
+            this.toastr.success(`Ticket was successfully created!`);
             this.activeModal.close();
             this.router.navigate(['./ticket/ticketlist']);
             this.createTicketForm.reset();
         }, (err: HttpErrorResponse) => {
-            alert(err.error.err);
+            this.toastr.error(err.error.err);
         })
     }
-
-    public getMyTeam() {
+    public getMyTeam(): void {
         this.dashService.getMyTeams().subscribe((data) => {
             this.teams = data;
         });

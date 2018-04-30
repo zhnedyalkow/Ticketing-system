@@ -12,7 +12,7 @@ export class UserMenuComponent implements OnInit {
   @Input() userInfo$: Observable<Object>;
   constructor() { }
   
-  ngOnInit() {
+  public ngOnInit(): void {
 
   }
 

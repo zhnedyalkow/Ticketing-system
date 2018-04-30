@@ -9,7 +9,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TicketComponent implements OnInit {
 
-constructor( public ticketService: TicketService, private route: ActivatedRoute) {}
+constructor( 
+    public ticketService: TicketService, 
+    private route: ActivatedRoute
+) {}
   ngOnInit() {
   }
 }

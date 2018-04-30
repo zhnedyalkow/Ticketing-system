@@ -5,6 +5,7 @@ import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { User } from '../../../models/users/user';
 import { Ticket } from '../../../models/tickets/ticket';
 import { TeamService } from '../../shared/services/team.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-team-page',
@@ -13,25 +14,29 @@ import { TeamService } from '../../shared/services/team.service';
 })
 export class TeamPageComponent implements OnInit {
     
-    teamName: string;
-    myTickets: Ticket[];
-    usersOfTeam: User[];
-    snapshot: ActivatedRouteSnapshot;
+    public teamName: string;
+    public myTickets: Ticket[];
+    public usersOfTeam: User[];
+    public snapshot: ActivatedRouteSnapshot;
 
-    constructor(public teamService: TeamService, private activatedRoute: ActivatedRoute) {
+    constructor(
+        public teamService: TeamService, 
+        private activatedRoute: ActivatedRoute,
+        private toastr: ToastrService
+    ) {
         this.snapshot = this.activatedRoute.snapshot;
     }
-    ngOnInit() {
+    public ngOnInit(): void {
         this.teamName = this.snapshot.params.teamName;
         this.getAllUsersOfTeam();
         this.getAllTicketsByTeam();
     }
 
-    getAllTicketsByTeam() {
+    public getAllTicketsByTeam(): void {
         this.teamService.getAllTicketsOfTeam(this.teamName).subscribe((x) => {
             this.myTickets = x;
         }, (err: HttpErrorResponse) => {
-            console.log(err.error.err);
+            this.toastr.error(err.error.err);
         });
     }
 
@@ -39,7 +44,7 @@ export class TeamPageComponent implements OnInit {
         this.teamService.getAllUsersOfTeam(this.teamName).subscribe((x) => {
             this.usersOfTeam = x;
         }, (err: HttpErrorResponse) => {
-            console.log(err.error.err);
+            this.toastr.error(err.error.err);
         });
     }
 }

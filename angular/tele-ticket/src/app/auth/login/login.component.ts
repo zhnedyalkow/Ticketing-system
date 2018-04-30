@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthHomeService } from '../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-login',
@@ -22,8 +23,13 @@ export class LoginComponent implements OnInit {
     maxEmailLen: string = 'Max Length should be less than 50 chars!';
     minPassLen: string = 'Min length should be more than 10 chars!';
 
-    constructor(private router: Router, private fb: FormBuilder, private auth: AuthHomeService) { }
-    ngOnInit() {
+    constructor(
+        private router: Router,
+        private fb: FormBuilder,
+        private auth: AuthHomeService,
+        private toastr: ToastrService,
+    ) { }
+    public ngOnInit() {
         this.rForm = this.fb.group({
             'email': [null, 
                 Validators.compose([
@@ -40,20 +46,21 @@ export class LoginComponent implements OnInit {
         })
     }
 
-    loginUser() {
+    public loginUser() {
         this.auth.login(this.rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
             message: string,
             token: string,
         }) => {
             if (x.message === 'ok') {
                 localStorage.setItem('token', x.token);
+                this.toastr.success(`Well done! You successfully logged in to this website!`);
                 this.router.navigate(['./']);
             } else {
-                alert(x.message);
+                this.toastr.success(x.message)
             }
         }, (err: HttpErrorResponse) => {
             if (err.status === 302) {
-                alert(err.error.err);
+                this.toastr.error(err.error.err)
             }
         });
         this.rForm.reset();

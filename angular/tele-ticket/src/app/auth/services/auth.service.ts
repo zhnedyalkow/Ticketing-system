@@ -10,14 +10,17 @@ import { AppConfig } from '../../config/app.config';
 @Injectable()
 export class AuthHomeService {
 
-    constructor(private appConfig: AppConfig, private http: HttpClient,
-        private jwtService: JwtHelperService) { }
+    constructor(
+        private appConfig: AppConfig,
+        private http: HttpClient,
+        private jwtService: JwtHelperService
+    ) { }
 
-    register(user: User, options?: HttpOptions): Observable<Object> {
+    public register(user: User, options?: HttpOptions): Observable<Object> {
         return this.http.post(`${this.appConfig.apiUrl}/user/register`, user);
     }
 
-    login(user: User, options?: HttpOptions): Observable<Object> {
+    public login(user: User, options?: HttpOptions): Observable<Object> {
         return this.http.post(`${this.appConfig.apiUrl}/user/login`, user);
     }
 
