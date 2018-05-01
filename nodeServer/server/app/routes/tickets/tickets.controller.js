@@ -161,12 +161,11 @@ class TicketsController {
     }
 
     async deleteTicket(ticketId, user) {
-
         try {
             const ticket = await this.data.tickets.getById(ticketId);
 
             if (!ticket) {
-                throw new Error('This ticket is deleted!');
+                throw new Error('This ticket is already deleted!');
             }
 
             const team = await ticket.getTeam();
@@ -186,14 +185,13 @@ class TicketsController {
             }
 
             await ticket.destroy();
-
         } catch (error) {
             throw error;
         }
 
         return {
             success: true,
-        }
+        };
     }
 
     async getAllTicketsByUserId(userId) {

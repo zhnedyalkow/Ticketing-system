@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
         }) => {
             if (x.message === 'ok') {
                 localStorage.setItem('token', x.token);
+                // this.toastr.success(`Welcome, ${this.rForm.get('email').value}!`);
                 this.toastr.success(`Well done! You successfully logged in to this website!`);
                 this.router.navigate(['./']);
             } else {

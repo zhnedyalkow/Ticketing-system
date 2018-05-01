@@ -1,3 +1,4 @@
+
 class TeamsController {
     constructor(data) {
         this.data = data;
@@ -81,6 +82,39 @@ class TeamsController {
 
         result.message = 'Success';
         return result;
+    }
+
+    async deleteTeam(teamId, user) {
+        try {
+            const team = await this.data.teams.getById(teamId);
+
+            if (!team) {
+                throw new Error('This team is already deleted!');
+            }
+
+            if (team.CompanyId !== user.CompanyId) {
+                throw new Error('Something went wrong! 1');
+            }
+
+            const hasUser = await team.hasUser(user);
+
+            if (team.TeamManagerId !== user.id && user.role !== 'admin') {
+                throw new Error('Something went wrong! 2');
+            }
+
+            if (!hasUser && user.role !== 'admin') {
+                throw new Error('Something went wrong! 3');
+            }
+
+            await team.destroy();
+
+        } catch (error) {
+            throw error;
+        }
+
+        return {
+            success: true,
+        };
     }
 
     async getAllMembersByTeamId(teamId) {

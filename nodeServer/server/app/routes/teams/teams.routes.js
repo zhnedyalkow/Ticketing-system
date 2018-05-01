@@ -26,6 +26,22 @@ const init = (app, data) => {
 
             res.json(allTeams);
         })
+        .post('/deleteTeam', async (req, res) => {
+            const teamId = req.body.teamId;
+            let deletedRec;
+
+            if (typeof req.user === 'undefined') {
+                return res.sendStatus(403);
+            }
+
+            try {
+                deletedRec = await controller.deleteTeam(teamId, req.user);
+            } catch (error) {
+                return res.status(302).json({ err: error.message });
+            }
+
+            return res.status(200).json(deletedRec);
+        })
         .post('/createTeam', async (req, res) => {
             const teamData = req.body;
             let result;
