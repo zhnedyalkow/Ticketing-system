@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { ActivatedRouteSnapshot, ActivatedRoute, Router } from '@angular/router';
 
 import { User } from '../../../models/users/user';
 import { Ticket } from '../../../models/tickets/ticket';
 import { TeamService } from '../../shared/services/team.service';
 import { ToastrService } from 'ngx-toastr';
+import { Team } from '../../../models/teams/team';
+import { AuthService } from '../../../core/authentication/auth.service';
 
 @Component({
     selector: 'app-team-page',
@@ -15,11 +17,18 @@ import { ToastrService } from 'ngx-toastr';
 export class TeamPageComponent implements OnInit {
     
     public teamName: string;
-    public myTickets: Ticket[];
     public usersOfTeam: User[];
+    public myTickets: Ticket[];
+    public amIGM: boolean = false;
+    public amIAU: boolean = false;
+    public teamInfo: Team;
+    public playLoad: { id: number, role: string };
     public snapshot: ActivatedRouteSnapshot;
 
     constructor(
+
+        private router: Router,
+        private auth: AuthService,
         public teamService: TeamService, 
         private activatedRoute: ActivatedRoute,
         private toastr: ToastrService
@@ -28,10 +37,15 @@ export class TeamPageComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        this.playLoad = this.auth.tokenData();
         this.teamName = this.snapshot.params.teamName;
 
         this.getAllUsersOfTeam();
         this.getAllTicketsByTeam();
+
+        if (this.playLoad.role == 'admin') {
+            this.amIGM = true;
+        }
     }
 
     public getAllTicketsByTeam(): void {
@@ -42,7 +56,26 @@ export class TeamPageComponent implements OnInit {
         });
     }
 
-    getAllUsersOfTeam() {
+    public deleteTeam(): void {
+        const teamForDelete = {
+            teamName: this.teamName,
+        };
+
+        this.teamService.deleteTicket(teamForDelete)
+            .subscribe((data: {
+                success: string,
+            }) => {
+                this.toastr.success(`Successfully deleted team!`);
+                this.router.navigate(['./team']);
+
+            }, (err: HttpErrorResponse) => {
+                if (err.status === 302) {
+                    this.toastr.error(err.error.err)
+                }
+            })
+    }
+
+    public getAllUsersOfTeam(): void {
         this.teamService.getAllUsersOfTeam(this.teamName).subscribe((x) => {
             this.usersOfTeam = x;
         }, (err: HttpErrorResponse) => {
