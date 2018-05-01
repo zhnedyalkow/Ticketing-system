@@ -57,7 +57,9 @@ class UserController {
             throw error;
         }
 
-        return { info: true };
+        return {
+            info: true,
+        };
     }
 
     async login(obj) {
@@ -111,11 +113,13 @@ class UserController {
             }
 
             const updatedData = await this
-                .data.users.update({ CompanyId: CompanyId }, {
-                where: {
-                    id: user.id,
-                },
-            });
+                .data.users.update({
+                    CompanyId: CompanyId,
+                }, {
+                    where: {
+                        id: user.id,
+                    },
+                });
 
             if (updatedData[0] === 0) {
                 throw new Error('Something went wrong!');
@@ -127,6 +131,48 @@ class UserController {
         return user;
     }
 
+    // async addUserToTeam(email, teamId) {
+    //     let user;
+    //     let team;
+
+    //     try {
+    //         team = await this.data.teams.getById(teamId);
+
+    //         user = await this.data.users.getOneByCriteria({
+    //             email: email,
+    //         });
+
+    //         if (!user) {
+    //             throw new Error('The user doesn\'t exist!');
+    //         }
+
+    //         if (user.id === team.TeamManagerId) {
+    //             // throw new Error('Something went wrong! 1');
+    //             throw new Error('The team has already this user!');
+    //         }
+
+    //         const hasUser = await team.hasUser(user);
+
+    //         if (hasUser && user.role === 'admin') {
+    //             throw new Error('Something went wrong! 2');
+    //         }
+
+    //         const newUser = await this.data.teammembers.create({
+    //             UserId: creator.id,
+    //             TeamId: obj.ticketId,
+    //         });
+
+    //         if (updatedData[0] === 0) {
+    //             throw new Error('Something went wrong 3!');
+    //         }
+    //     } catch (error) {
+    //         throw error;
+    //     }
+
+    //     return user;
+    // }
+
+
     async getAllUsers(CompanyId) {
         let result;
 
@@ -135,7 +181,8 @@ class UserController {
                 CompanyId: CompanyId,
             }, {
                 exclude: ['password', 'updatedAt',
-                'CompanyId', 'id'],
+                    'CompanyId', 'id',
+                ],
             });
         } catch (error) {
             throw error;

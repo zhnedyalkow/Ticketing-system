@@ -65,6 +65,24 @@ const init = (app, data) => {
 
             return res.status(200).json(result);
         })
+
+        .post('/addUserToTeam', async (req, res) => {
+            let result;
+
+            try {
+                // const amIAdmin = await controller.amIAdmin(req.user.id);
+                // if (!amIAdmin) {
+                //     throw new Error('Something went wrong 4');
+                // }
+
+                result = await controller
+                    .addUserToTeam(req.body.email, req.body.teamId);
+            } catch (error) {
+                return res.status(301).json({ err: error.message });
+            }
+
+            return res.status(200).json(result);
+        })
         .get('/getAllUsers', async (req, res) => {
             let result;
 

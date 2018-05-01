@@ -73,7 +73,7 @@ export class CreateTeamComponent implements OnInit {
     public createTeam(): void {
         this.teamService.createTeam(this.createTeamForm.value).subscribe((data: Team) => {
             this.toastr.success(`Team was successfully created!`);
-            this.router.navigate(['./team/teamlist']);
+            this.router.navigate(['./team']);
             this.activeModal.close();
         }, (err: HttpErrorResponse) => {
             this.toastr.error(err.error.err);
