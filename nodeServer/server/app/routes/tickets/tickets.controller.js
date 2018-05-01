@@ -146,7 +146,7 @@ class TicketsController {
             }
 
             const hasUser = await team.hasUser(user);
-            if (!hasUser) {
+            if (!hasUser && user.role !== 'admin') {
                 throw new Error('Something went wrong!');
             }
 
@@ -184,10 +184,16 @@ class TicketsController {
                 throw new Error('Something went wrong!');
             }
 
-            // Check weather the user is in the team
             const team = await ticket.getTeam();
+
+            // Check weather the user is in company
+            if (team.CompanyId !== requester.CompanyId) {
+                throw new Error('Something went wrong!');
+            }
+
+            // Check weather the user is in team
             const hasUser = await team.hasUser(requester);
-            if (!hasUser) {
+            if (!hasUser && requester.role !== 'admin') {
                 throw new Error('Something went wrong!');
             }
 
@@ -196,9 +202,11 @@ class TicketsController {
                 throw new Error('The task is already closed!');
             }
 
-            // Check weather you are TeamManager
+            // Check weather you are TeamManager or Admin
             if ((statusName === 'closed' || statusName === 'reopened')) {
-                if (team.TeamManagerId !== requester.id) {
+                if (team.TeamManagerId !== requester.id &&
+                    requester.role !== 'admin'
+                ) {
                     throw new Error('You have not permission to do that!');
                 }
             }
