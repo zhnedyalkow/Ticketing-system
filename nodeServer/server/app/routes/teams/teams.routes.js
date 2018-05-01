@@ -23,7 +23,7 @@ const init = (app, data) => {
             return res.status(200).json(teamList);
         })
         .post('/deleteTeam', async (req, res) => {
-            const teamId = req.body.teamId;
+            const teamName = req.body.teamName;
             let deletedRec;
 
             if (typeof req.user === 'undefined') {
@@ -31,7 +31,7 @@ const init = (app, data) => {
             }
 
             try {
-                deletedRec = await controller.deleteTeam(teamId, req.user);
+                deletedRec = await controller.deleteTeam(teamName, req.user);
             } catch (error) {
                 return res.status(302).json({ err: error.message });
             }

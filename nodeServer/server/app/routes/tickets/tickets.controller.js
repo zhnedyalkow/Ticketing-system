@@ -211,6 +211,7 @@ class TicketsController {
 
         return tickets;
     }
+
     async changeTicketStatus(statusName, ticketId, requester) {
         let status;
 

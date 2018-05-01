@@ -60,17 +60,13 @@ const init = (app, data) => {
 
             return res.status(200).json(result);
         })
-        .post('/addUserToTeam', async (req, res) => {
+        .post('/addUsersToTeam', async (req, res) => {
             let result;
 
             try {
-                // const amIAdmin = await controller.amIAdmin(req.user.id);
-                // if (!amIAdmin) {
-                //     throw new Error('Something went wrong 4');
-                // }
-
                 result = await controller
-                    .addUserToTeam(req.body.email, req.body.teamId);
+                    .addUsersToTeam(req.body.users,
+                        req.body.teamName, req.user);
             } catch (error) {
                 return res.status(301).json({ err: error.message });
             }
@@ -81,12 +77,7 @@ const init = (app, data) => {
             let result;
 
             try {
-                const amIAdmin = await controller.amIAdmin(req.user.id);
-                if (!amIAdmin) {
-                    throw new Error('Something went wrong');
-                }
-
-                result = await controller.getAllUsers(req.user.CompanyId);
+                result = await controller.getAllUsers(req.user);
             } catch (error) {
                 return res.status(301).json({ err: error.message });
             }

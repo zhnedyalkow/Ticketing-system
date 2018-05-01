@@ -1,6 +1,5 @@
 import { FormGroup, AbstractControl } from "@angular/forms";
 
-
 export interface ICreateTeam {
     createTeamForm: FormGroup;
     name: AbstractControl
@@ -9,5 +8,4 @@ export interface ICreateTeam {
     emailMaxLen: number;
     nameMaxLen: number;
     minLen: number;
-
 }

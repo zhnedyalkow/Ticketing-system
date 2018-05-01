@@ -104,10 +104,10 @@ class UserController {
                 .data.users.update({
                     CompanyId: requester.CompanyId,
                 }, {
-                    where: {
-                        id: user.id,
-                    },
-                });
+                        where: {
+                            id: user.id,
+                        },
+                    });
 
             if (updatedData[0] === 0) {
                 throw new Error('Something went wrong!');
@@ -119,58 +119,86 @@ class UserController {
         return user;
     }
 
-    // async addUserToTeam(email, teamId) {
-    //     let user;
-    //     let team;
+    async addUsersToTeam(users, teamName, requester) {
+        let theUsers;
 
-    //     try {
-    //         team = await this.data.teams.getById(teamId);
+        try {
+            const team = await this.data.teams.getOneByCriteria({
+                name: teamName,
+                CompanyId: requester.CompanyId,
+            });
 
-    //         user = await this.data.users.getOneByCriteria({
-    //             email: email,
-    //         });
+            if (!team) {
+                throw new Error('The team dosen\'t exist!');
+            }
 
-    //         if (!user) {
-    //             throw new Error('The user doesn\'t exist!');
-    //         }
+            if (team.TeamManagerId !== requester.id &&
+                requester.role !== 'admin'
+            ) {
+                throw new Error('You have not permission to do that!');
+            }
 
-    //         if (user.id === team.TeamManagerId) {
-    //             // throw new Error('Something went wrong! 1');
-    //             throw new Error('The team has already this user!');
-    //         }
+            // Remove all useless mail
+            theUsers = users.map((x) => x.email);
+            theUsers = new Set(theUsers);
+            theUsers = [...theUsers];
 
-    //         const hasUser = await team.hasUser(user);
+            theUsers = await Promise.all(theUsers.map(async (user) => {
+                const res = await this.data.users.getOneByCriteria({
+                    email: user,
+                    CompanyId: requester.CompanyId,
+                }, {
+                    exclude: ['password', 'updatedAt',
+                        'CompanyId',
+                    ],
+                });
 
-    //         if (hasUser && user.role === 'admin') {
-    //             throw new Error('Something went wrong! 2');
-    //         }
+                if (!res) {
+                    throw new Error(`User with following
+                    email => ${user}, doesn't exist!`);
+                }
 
-    //         const newUser = await this.data.teammembers.create({
-    //             UserId: creator.id,
-    //             TeamId: obj.ticketId,
-    //         });
+                return res;
+            }));
 
-    //         if (updatedData[0] === 0) {
-    //             throw new Error('Something went wrong 3!');
-    //         }
-    //     } catch (error) {
-    //         throw error;
-    //     }
+            await team.addUsers(theUsers);
 
-    //     return user;
-    // }
+            // Create new notification to all assigned users
+            await Promise.all(theUsers.map(async (user) => {
+                const notification = await this.data.notifications.create({
+                    name: 'New Team',
+                    UserId: user.id,
+                    description: `You have been 
+                assigned to a new team "${team.name}"!`,
+                });
 
-    async getAllUsers(CompanyId) {
+                return await this.data.newNotifications.create({
+                    UserId: user.id,
+                    NotificationId: notification.id,
+                });
+            }));
+        } catch (error) {
+            throw error;
+        }
+
+        return theUsers;
+    }
+
+    async getAllUsers(requester) {
         let result;
 
         try {
+            if (requester.role !== 'admin') {
+                throw new Error('Something went wrong!');
+            }
+
             result = this.data.users.getAllByCriteria({
-                CompanyId: CompanyId,
+                CompanyId: requester.CompanyId,
             }, {
-                exclude: ['password', 'updatedAt',
-                    'CompanyId', 'id',
-                ],
-            });
+                    exclude: ['password', 'updatedAt',
+                        'CompanyId', 'id',
+                    ],
+                });
         } catch (error) {
             throw error;
         }
@@ -178,18 +206,7 @@ class UserController {
         return result;
     }
 
-    async amIAdmin(userId) {
-        const user = await this.data.users.getById(userId);
-
-        if (user.role !== 'admin') {
-            return false;
-        }
-
-        return true;
-    }
-
-    /* TODO => need to add permission for admin */
-    async getAllUserOfTeam(teamName, user) {
+    async getAllUserOfTeam(teamName, requester) {
         let result;
 
         try {
@@ -197,22 +214,25 @@ class UserController {
                 throw new Error('Please, add a team!');
             }
 
-            if (!user) {
-                throw new Error('There is no such user!');
+            if (!requester) {
+                throw new Error('Something went wrong!');
             }
 
             const team = await this.data.teams.getOneByCriteria({
                 name: teamName,
-                CompanyId: user.CompanyId,
+                CompanyId: requester.CompanyId,
             });
 
             if (!team) {
                 throw new Error('There is no such a team!');
             }
 
-            const hasUser = await team.hasUser(user);
+            if (team.CompanyId !== requester.CompanyId) {
+                throw new Error('Something went wrong!');
+            }
 
-            if (!hasUser) {
+            const hasUser = await team.hasUser(requester);
+            if (!hasUser && requester.role !== 'admin') {
                 throw new Error('Something went wrong!');
             }
 

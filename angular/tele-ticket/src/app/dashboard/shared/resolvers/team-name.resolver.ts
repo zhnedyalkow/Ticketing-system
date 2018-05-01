@@ -9,17 +9,17 @@ import { TeamService } from "../services/team.service";
 
 @Injectable()
 export class TeamNameResolver implements Resolve<Ticket[]> {
-    
+
     constructor(
         private teamService: TeamService,
-        private router: Router) {
+        private router: Router
+    ) {}
 
-    }
     resolve(
-        route: ActivatedRouteSnapshot, 
+        route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): any {
-       
+
         return this.teamService.getAllTicketsOfTeam(route.params['teamName'])
             .catch((err) => {
                 this.router.navigate(['/not-found']);

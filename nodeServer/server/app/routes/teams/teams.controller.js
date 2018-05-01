@@ -79,12 +79,15 @@ class TeamsController {
         return result;
     }
 
-    async deleteTeam(teamId, user) {
+    async deleteTeam(teamName, user) {
         try {
-            const team = await this.data.teams.getById(teamId);
+            const team = await this.data.teams.getOneByCriteria({
+                name: teamName,
+                CompanyId: user.CompanyId,
+            });
 
             if (!team) {
-                throw new Error('This team is already deleted!');
+                throw new Error('There is no such a team!');
             }
 
             if (team.CompanyId !== user.CompanyId) {
@@ -111,7 +114,6 @@ class TeamsController {
             success: true,
         };
     }
-
     async getMyTeams(user) {
         let teamList;
 
