@@ -3,28 +3,11 @@ class CommentsController {
         this.data = data;
     }
 
-    /**
-     * @description Finds Comments by TicketId
-     * @async
-     * @param {string} ticketId
-     * receives Ticket id
-     * @return {Object} objects with comments info
-     */
-
     async getAllCommentsByTicketId(ticketId) {
         const allComments = await this.data.comments.getComments(ticketId);
 
         return allComments;
     }
-
-     /**
-     * @description Create a new Comment
-     * @async
-     * @param {Object} obj
-     * receives an object of the Comment
-     * @return {Object} object of the created Comment
-     */
-
 
     async createComment(obj, creator) {
         try {
@@ -48,9 +31,12 @@ class CommentsController {
             });
 
             const team = await ticket.getTeam();
-            const teamHasUser = await team.hasUser(creator);
+            if (team.CompanyId !== creator.CompanyId) {
+                throw new Error('Something went wrong!');
+            }
 
-            if (!teamHasUser) {
+            const teamHasUser = await team.hasUser(creator);
+            if (!teamHasUser && creator.role !== 'admin') {
                 throw new Error(`You have not permission
                     to add comments to this ticket!`);
             }
