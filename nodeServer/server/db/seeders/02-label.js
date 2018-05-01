@@ -7,18 +7,21 @@ module.exports = {
                 title: 'Label1',
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
             {
                 id: 2,
                 title: 'Label2',
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
             {
                 id: 3,
                 title: 'Label3',
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
         ], {});
     },

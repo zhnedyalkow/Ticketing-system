@@ -20,6 +20,9 @@
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
                 },
+                "deletedAt": {
+                    "seqType": "Sequelize.DATE"
+                },
                 "UserId": {
                     "allowNull": true,
                     "references": {
@@ -62,6 +65,9 @@
                 "updatedAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
+                },
+                "deletedAt": {
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
@@ -85,6 +91,9 @@
                 "updatedAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
+                },
+                "deletedAt": {
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
@@ -104,6 +113,9 @@
                 },
                 "updatedAt": {
                     "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "deletedAt": {
                     "seqType": "Sequelize.DATE"
                 },
                 "UserId": {
@@ -152,6 +164,9 @@
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
                 },
+                "deletedAt": {
+                    "seqType": "Sequelize.DATE"
+                },
                 "UserId": {
                     "allowNull": true,
                     "references": {
@@ -184,6 +199,9 @@
                 "updatedAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
+                },
+                "deletedAt": {
+                    "seqType": "Sequelize.DATE"
                 }
             },
             "indexes": []
@@ -206,6 +224,9 @@
                 },
                 "updatedAt": {
                     "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "deletedAt": {
                     "seqType": "Sequelize.DATE"
                 },
                 "CompanyId": {
@@ -277,6 +298,9 @@
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
                 },
+                "deletedAt": {
+                    "seqType": "Sequelize.DATE"
+                },
                 "LabelId": {
                     "allowNull": true,
                     "references": {
@@ -337,6 +361,9 @@
                 },
                 "updatedAt": {
                     "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "deletedAt": {
                     "seqType": "Sequelize.DATE"
                 },
                 "CompanyId": {

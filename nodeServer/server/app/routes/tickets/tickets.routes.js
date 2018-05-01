@@ -59,6 +59,22 @@ const init = (app, data) => {
 
             return res.status(200).json(ticketInfo);
         })
+        .post('/deleteTicket', async (req, res) => {
+            const ticketId = req.body.ticketId;
+            let deletedRec;
+
+            if (typeof req.user === 'undefined') {
+                return res.sendStatus(403);
+            }
+
+            try {
+                 deletedRec = await controller.deleteTicket(ticketId, req.user);
+            } catch (error) {
+                return res.status(302).json({ err: error.message });
+            }
+
+            return res.status(200).json(deletedRec);
+        })
         .post(('/changeTicketStatus'), async (req, res) => {
             let status;
             try {

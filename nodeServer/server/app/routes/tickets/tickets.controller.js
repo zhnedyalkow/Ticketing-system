@@ -100,7 +100,9 @@ class TicketsController {
             NotificationId: notification.id,
         });
 
-        return { message: 'Success' };
+        return {
+            message: 'Success',
+        };
     }
 
     async getTicketInfoById(ticketId, requester) {
@@ -158,6 +160,42 @@ class TicketsController {
         return result;
     }
 
+    async deleteTicket(ticketId, user) {
+
+        try {
+            const ticket = await this.data.tickets.getById(ticketId);
+
+            if (!ticket) {
+                throw new Error('This ticket is deleted!');
+            }
+
+            const team = await ticket.getTeam();
+
+            if (team.CompanyId !== user.CompanyId) {
+                throw new Error('Something went wrong!');
+            }
+
+            const hasUser = await team.hasUser(user);
+
+            if (team.TeamManagerId !== user.id && user.role !== 'admin') {
+                throw new Error('Something went wrong!');
+            }
+
+            if (!hasUser && user.role !== 'admin') {
+                throw new Error('Something went wrong!');
+            }
+
+            await ticket.destroy();
+
+        } catch (error) {
+            throw error;
+        }
+
+        return {
+            success: true,
+        }
+    }
+
     async getAllTicketsByUserId(userId) {
         const tickets = await this.data.tickets.getAllByCriteria({
             AssignedUserId: userId,
@@ -173,8 +211,7 @@ class TicketsController {
         try {
             // Chech weather status is valid
             if (!(statusName === 'closed' || statusName === 'completed' ||
-                statusName === 'reopened')
-            ) {
+                    statusName === 'reopened')) {
                 throw new Error('Something went wrong!');
             }
 

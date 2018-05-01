@@ -9,6 +9,7 @@ module.exports = {
                 TeamManagerId: 1,
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
             {
                 id: 2,
@@ -17,6 +18,7 @@ module.exports = {
                 TeamManagerId: 2,
                 createdAt: '2018-03-18 10:19:42',
                 updatedAt: '2018-03-18 11:20:50',
+                deletedAt: null,
             },
             {
                 id: 3,
@@ -25,6 +27,7 @@ module.exports = {
                 TeamManagerId: 3,
                 createdAt: '2018-03-20 09:19:42',
                 updatedAt: '2018-03-20 10:20:50',
+                deletedAt: null,
             },
         ], {});
     },

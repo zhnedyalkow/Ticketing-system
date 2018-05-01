@@ -1,8 +1,9 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const NewNotification = sequelize.define('NewNotification', {
-    }, {});
-    NewNotification.associate = function(models) {
+    const NewNotification = sequelize.define('NewNotification', {}, {
+        paranoid: true,
+    });
+    NewNotification.associate = function (models) {
         const {
             User,
             Notification,

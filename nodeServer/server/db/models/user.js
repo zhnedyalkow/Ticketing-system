@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
         password: DataTypes.STRING,
         email: DataTypes.STRING,
         role: DataTypes.STRING,
-    }, {});
+    }, {
+        paranoid: true
+    });
     User.associate = (models) => {
         const {
             Company,

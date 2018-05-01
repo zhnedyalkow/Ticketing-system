@@ -7,18 +7,21 @@ module.exports = {
                 name: 'Company1',
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
             {
                 id: 2,
                 name: 'Company2',
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
             {
                 id: 3,
                 name: 'Company3',
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
         ], {});
     },

@@ -21,7 +21,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2018-04-26T14:51:18.557Z",
+    "created": "2018-04-30T22:25:01.431Z",
     "comment": ""
 };
 
@@ -46,6 +46,9 @@ var migrationCommands = [{
                 "updatedAt": {
                     "type": Sequelize.DATE,
                     "allowNull": false
+                },
+                "deletedAt": {
+                    "type": Sequelize.DATE
                 }
             },
             {}
@@ -72,6 +75,9 @@ var migrationCommands = [{
                 "updatedAt": {
                     "type": Sequelize.DATE,
                     "allowNull": false
+                },
+                "deletedAt": {
+                    "type": Sequelize.DATE
                 }
             },
             {}
@@ -98,6 +104,9 @@ var migrationCommands = [{
                 "updatedAt": {
                     "type": Sequelize.DATE,
                     "allowNull": false
+                },
+                "deletedAt": {
+                    "type": Sequelize.DATE
                 }
             },
             {}
@@ -134,6 +143,9 @@ var migrationCommands = [{
                     "type": Sequelize.DATE,
                     "allowNull": false
                 },
+                "deletedAt": {
+                    "type": Sequelize.DATE
+                },
                 "CompanyId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
@@ -169,6 +181,9 @@ var migrationCommands = [{
                 "updatedAt": {
                     "type": Sequelize.DATE,
                     "allowNull": false
+                },
+                "deletedAt": {
+                    "type": Sequelize.DATE
                 },
                 "CompanyId": {
                     "type": Sequelize.INTEGER,
@@ -219,6 +234,9 @@ var migrationCommands = [{
                     "type": Sequelize.DATE,
                     "allowNull": false
                 },
+                "deletedAt": {
+                    "type": Sequelize.DATE
+                },
                 "UserId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
@@ -251,6 +269,9 @@ var migrationCommands = [{
                 "updatedAt": {
                     "type": Sequelize.DATE,
                     "allowNull": false
+                },
+                "deletedAt": {
+                    "type": Sequelize.DATE
                 },
                 "UserId": {
                     "type": Sequelize.INTEGER,
@@ -324,6 +345,9 @@ var migrationCommands = [{
                     "type": Sequelize.DATE,
                     "allowNull": false
                 },
+                "deletedAt": {
+                    "type": Sequelize.DATE
+                },
                 "LabelId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
@@ -379,6 +403,9 @@ var migrationCommands = [{
                 "updatedAt": {
                     "type": Sequelize.DATE,
                     "allowNull": false
+                },
+                "deletedAt": {
+                    "type": Sequelize.DATE
                 },
                 "UserId": {
                     "type": Sequelize.INTEGER,

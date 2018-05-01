@@ -14,6 +14,7 @@ module.exports = {
                 StatusId: 1,
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
             {
                 id: 2,
@@ -27,6 +28,7 @@ module.exports = {
                 StatusId: 2,
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
             {
                 id: 3,
@@ -40,6 +42,7 @@ module.exports = {
                 StatusId: 3,
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
             },
         ], {});
     },
