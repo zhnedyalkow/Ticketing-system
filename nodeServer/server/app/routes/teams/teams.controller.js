@@ -4,11 +4,6 @@ class TeamsController {
         this.data = data;
     }
 
-    async getTeamByTeamId(teamId) {
-        const team = await this.data.teams.getById(teamId);
-        return team;
-    }
-
     async createTeam(obj, companyId, creator) {
         const result = {
             message: '',
@@ -117,39 +112,24 @@ class TeamsController {
         };
     }
 
-    async getAllMembersByTeamId(teamId) {
-        const team = await this.data.teams.getById(teamId);
-        const res = await team.getUsers();
-        return res;
-    }
+    async getMyTeams(user) {
+        let teamList;
 
-    async getAllTeamsByCompanyId(companyId) {
-        return await this.data.teams.getAllByCriteria({
-            CompanyId: companyId,
-        });
-    }
+        try {
+            if (user.role === 'admin') {
+                teamList = await this.data.teams.getAllByCriteria({
+                    CompanyId: user.CompanyId,
+                });
+            }
 
-    async getMyTeamsByUserId(userId) {
-        const user = await this.data.users.getById(userId);
-        const teams = await this.data.teams.getTeamMember(user);
+            if (user.role === 'user') {
+                teamList = await user.getTeams();
+            }
+        } catch (error) {
+            throw error;
+        }
 
-        return teams;
-    }
-
-    async getMembersByTeamId(teamId) {
-        const usersId = await this.data.members.getAllByCriteria({
-            teamId: teamId,
-        });
-
-        const users = await Promise.all(usersId.map((userId) => {
-            const res = this.data.users.getOneByCriteria({
-                id: userId.id,
-            });
-
-            return res;
-        }));
-
-        return users;
+        return teamList;
     }
 }
 

@@ -12,16 +12,6 @@ class UserController {
         this.data = data;
     }
 
-    validateEmail(email) {
-        const re = `/^(([^<>()[\]\\
-        .,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)
-        |(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.
-        [0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]
-        +\.)+[a-zA-Z]{2,}))$/`;
-
-        return re.test(email);
-    }
-
     async register(registerInfo) {
         try {
             if (!registerInfo.name) {
@@ -35,12 +25,6 @@ class UserController {
             if (registerInfo.password.length < 3) {
                 throw new Error('The password must be more then 3 symbols');
             }
-
-            // const a = this.validateEmail(registerInfo.email);
-
-            // if (!this.validateEmail(registerInfo.email)) {
-            //     throw new Error('Invalid email address!');
-            // }
 
             const checkEmail = await this.data.users.getOneByCriteria({
                 email: registerInfo.email,
@@ -96,10 +80,14 @@ class UserController {
         return result;
     }
 
-    async addUserToCompany(email, CompanyId) {
+    async addUserToCompany(email, requester) {
         let user;
 
         try {
+            if (requester.role !== 'admin') {
+                throw new Error('Something went wrong!');
+            }
+
             user = await this.data.users.getOneByCriteria({
                 email: email,
             });
@@ -114,7 +102,7 @@ class UserController {
 
             const updatedData = await this
                 .data.users.update({
-                    CompanyId: CompanyId,
+                    CompanyId: requester.CompanyId,
                 }, {
                     where: {
                         id: user.id,
@@ -172,7 +160,6 @@ class UserController {
     //     return user;
     // }
 
-
     async getAllUsers(CompanyId) {
         let result;
 
@@ -190,6 +177,7 @@ class UserController {
 
         return result;
     }
+
     async amIAdmin(userId) {
         const user = await this.data.users.getById(userId);
 
@@ -200,12 +188,7 @@ class UserController {
         return true;
     }
 
-    async getUserByEmail(email) {
-        return await this.data.users.getOneByCriteria({
-            email: email,
-        });
-    }
-
+    /* TODO => need to add permission for admin */
     async getAllUserOfTeam(teamName, user) {
         let result;
 

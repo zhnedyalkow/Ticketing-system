@@ -121,7 +121,7 @@ class TicketsController {
             }
 
             const hasUser = await team.hasUser(requester);
-            if (!hasUser) {
+            if (!hasUser && requester.role !== 'admin') {
                 throw new Error('Something went wrong!');
             }
         } catch (error) {
@@ -194,16 +194,24 @@ class TicketsController {
         };
     }
 
-    async getAllTicketsByUserId(userId) {
-        const tickets = await this.data.tickets.getAllByCriteria({
-            AssignedUserId: userId,
-        });
+    async getAllTicketsByUserId(requester) {
+        let tickets;
+
+        try {
+            tickets = await this.data.tickets.getAllByCriteria({
+                AssignedUserId: requester.id,
+            });
+
+            if (!tickets) {
+                throw new Error('You have not tickets!');
+            }
+        } catch (error) {
+            throw error;
+        }
 
         return tickets;
     }
-
     async changeTicketStatus(statusName, ticketId, requester) {
-        let ticket;
         let status;
 
         try {
@@ -214,7 +222,7 @@ class TicketsController {
             }
 
             // Get the ticket
-            ticket = await this.data.tickets.getById(ticketId);
+            const ticket = await this.data.tickets.getById(ticketId);
             if (!ticket) {
                 throw new Error('Something went wrong!');
             }

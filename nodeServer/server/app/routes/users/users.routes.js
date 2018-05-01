@@ -52,20 +52,14 @@ const init = (app, data) => {
             let result;
 
             try {
-                const amIAdmin = await controller.amIAdmin(req.user.id);
-                if (!amIAdmin) {
-                    throw new Error('Something went wrong');
-                }
-
                 result = await controller
-                    .addUserToCompany(req.body.email, req.user.CompanyId);
+                    .addUserToCompany(req.body.email, req.user);
             } catch (error) {
                 return res.status(301).json({ err: error.message });
             }
 
             return res.status(200).json(result);
         })
-
         .post('/addUserToTeam', async (req, res) => {
             let result;
 

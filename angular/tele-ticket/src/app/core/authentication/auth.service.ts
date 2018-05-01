@@ -7,38 +7,37 @@ import { AppConfig } from "../../config/app.config";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 
-
 @Injectable()
 export class AuthService {
-    constructor(
-        private router: Router,
-        private appConfig: AppConfig,
-        private jwtService: JwtHelperService,
-        private toastr: ToastrService,
-    ) { }
+  constructor(
+    private router: Router,
+    private appConfig: AppConfig,
+    private jwtService: JwtHelperService,
+    private toastr: ToastrService,
+  ) { }
 
-    public isAuthenticated(): boolean {
-        const token = localStorage.getItem('token');
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
 
-        return !this.jwtService.isTokenExpired(token);
-    }
+    return !this.jwtService.isTokenExpired(token);
+  }
 
-    tokenData() : {id: number, role: string} {
-        const token = localStorage.getItem('token');
-    
-        // decode the tocken to get its payload
-        const tokenPayload = jwt_decode(token);
-    
-        return tokenPayload;
-      }
+  tokenData(): { id: number, role: string } {
+    const token = localStorage.getItem('token');
 
-    public logout(): void {
-        this.toastr.success(`You are logged out!`);
-        localStorage.removeItem('access_token');
-        localStorage.clear();
-    }
+    // decode the tocken to get its payload
+    const tokenPayload = jwt_decode(token);
 
-    public getToken(): string {
-        return localStorage.getItem('token');
-    }
+    return tokenPayload;
+  }
+
+  public logout(): void {
+    this.toastr.success(`You are logged out!`);
+    localStorage.removeItem('access_token');
+    localStorage.clear();
+  }
+
+  public getToken(): string {
+    return localStorage.getItem('token');
+  }
 }

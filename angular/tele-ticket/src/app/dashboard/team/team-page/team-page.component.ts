@@ -26,8 +26,10 @@ export class TeamPageComponent implements OnInit {
     ) {
         this.snapshot = this.activatedRoute.snapshot;
     }
+
     public ngOnInit(): void {
         this.teamName = this.snapshot.params.teamName;
+
         this.getAllUsersOfTeam();
         this.getAllTicketsByTeam();
     }
