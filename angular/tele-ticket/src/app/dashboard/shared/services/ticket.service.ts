@@ -15,9 +15,14 @@ export class TicketService {
     }
 
     createTicket(formsValue: Object): Observable<Object> {
-        return this.http.post<Observable<Object>>(
-            `${this.appConfig.apiUrl}/ticket/createTicket`, formsValue
+        return this.http.post<Observable<Object>>
+            (`${this.appConfig.apiUrl}/ticket/createTicket`, formsValue
         )
+    }
+
+    deleteTicket(ticketInfo: Object): Observable<Object> {
+        return this.http.post<Observable<Object>>
+            (`${this.appConfig.apiUrl}/ticket/deleteTicket`, ticketInfo);
     }
 
     getComments(ticketId): Observable<Array<Comments>> {
