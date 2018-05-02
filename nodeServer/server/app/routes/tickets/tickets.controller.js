@@ -194,7 +194,7 @@ class TicketsController {
         };
     }
 
-    async getAllTicketsByUserId(requester) {
+    async getAllMyTickets(requester) {
         let tickets;
 
         try {

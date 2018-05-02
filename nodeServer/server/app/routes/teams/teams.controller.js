@@ -119,14 +119,19 @@ class TeamsController {
 
         try {
             if (user.role === 'admin') {
-                teamList = await this.data.teams.getAllByCriteria({
-                    CompanyId: user.CompanyId,
-                });
+                teamList = await this.data.teams.getAllTeam(user.CompanyId);
             }
 
             if (user.role === 'user') {
-                teamList = await user.getTeams();
+                teamList = await this.data.teams.getMyTeams(user);
             }
+
+            // Get lenght of memebers array
+            teamList = await Promise.all(teamList.map(async (team) => {
+                team.dataValues.members = (await team.getUsers()).length;
+
+                return team;
+            }));
         } catch (error) {
             throw error;
         }

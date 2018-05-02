@@ -1,6 +1,7 @@
 <h3 class="text-center font-bold">My teams</h3>
-<ul class="my-teams-list">
-  <li class="my-teams-item" *ngFor="let team of myTeamInfo" [routerLink]="['/team/', team.name]">
+
+<div class="row">
+  <div class="col-md-4 my-teams-list" *ngFor="let team of myTeamInfo" [routerLink]="['/team/', team.name]">
     <app-teambox [team]="team"></app-teambox>
-  </li>
-</ul>
+  </div>
+</div>

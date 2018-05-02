@@ -149,7 +149,7 @@ class UserController {
                     CompanyId: requester.CompanyId,
                 }, {
                     exclude: ['password', 'updatedAt',
-                        'CompanyId',
+                        'CompanyId', 'deletedAt', 'role', 'createdAt',
                     ],
                 });
 

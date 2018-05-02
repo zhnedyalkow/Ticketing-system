@@ -36,12 +36,12 @@ const init = (app, data) => {
 
             return res.status(200).json(result);
         })
-        .get('/getAllTicketsByUserId', async (req, res) => {
+        .get('/getAllMyTickets', async (req, res) => {
             let tickets;
 
             try {
                 tickets = await controller
-                    .getAllTicketsByUserId(req.user);
+                    .getAllMyTickets(req.user);
             } catch (error) {
                 return res
                     .status(302).json({ err: error.message });
