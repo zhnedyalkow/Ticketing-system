@@ -8,6 +8,7 @@ import { TeamService } from '../../shared/services/team.service';
 import { ToastrService } from 'ngx-toastr';
 import { Team } from '../../../models/teams/team';
 import { AuthService } from '../../../core/authentication/auth.service';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
     selector: 'app-team-page',

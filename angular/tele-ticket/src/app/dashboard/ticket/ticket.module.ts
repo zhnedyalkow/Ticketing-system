@@ -8,6 +8,9 @@ import { TicketComponent } from './ticket.component';
 import { TicketInfoComponent } from './ticket-page/ticket-info/ticket-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TicketService } from '../shared/services/ticket.service';
+import { TicketDescComponent } from './ticket-page/ticket-desc/ticket-desc.component';
+import { TicketStatusBtnsComponent } from './ticket-page/ticket-status-btns/ticket-status-btns.component';
+import { TicketCommentsComponent } from './ticket-page/ticket-comments/ticket-comments.component';
 
 @NgModule({
   imports: [
@@ -19,6 +22,9 @@ import { TicketService } from '../shared/services/ticket.service';
     TicketPageComponent,
     TicketComponent,
     TicketInfoComponent,
+    TicketDescComponent,
+    TicketStatusBtnsComponent,
+    TicketCommentsComponent,
   ],
   providers: [
     TicketService,

@@ -3,7 +3,7 @@
     <div class="modal-body">
       <div class="teams-name">
         <label for="name" class="font-bold">Name</label>
-        <input formControlName="name" type="text" class="form-control" placeholder="Name..." required>
+		<input formControlName="name" type="text" class="form-control" placeholder="Name..." required>
         <div class="alert" *ngIf="!createTeamForm.controls['name'].valid && createTeamForm.controls['name'].touched">
           <span *ngIf="createTeamForm.controls['name'].hasError('required') ">{{ genericErrorMsg }} </span>
           <span *ngIf="createTeamForm.controls['name'].hasError('minlength') "> {{ minLenName }} </span>

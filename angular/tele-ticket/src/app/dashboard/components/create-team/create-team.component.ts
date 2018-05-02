@@ -45,6 +45,7 @@ export class CreateTeamComponent implements OnInit {
     }
     public ngOnInit(): void {
 
+
         this.createTeamForm = this.fb.group({
             'name': [null,
                 Validators.required,
@@ -55,6 +56,11 @@ export class CreateTeamComponent implements OnInit {
                 this.buildItem(),
             ]),
         });
+
+
+        this.name = this.createTeamForm.get('name');
+        this.email = this.createTeamForm.get('email');
+    
     }
     public buildItem(): any {
         return new FormGroup({
@@ -78,5 +84,21 @@ export class CreateTeamComponent implements OnInit {
         }, (err: HttpErrorResponse) => {
             this.toastr.error(err.error.err);
         });
+    }
+
+    private getErrorMsg(field: AbstractControl): string {
+        if (field.hasError('required')) {
+            return 'This field is required!'
+        } else if (field.hasError('email')) {
+            return `Please enter a valid e-mail!`
+        } else if (field.errors) {
+            if (field.errors.minLength) {
+                const reqLen = field.errors.minlength.reqLen;
+                return `This field must have at least ${reqLen} chars!`
+            } else if (field.errors.maxLength) {
+                const reqLen = field.errors.maxlength.reqLen;
+                return `This field must have less than ${reqLen} chars!`
+            } 
+        }
     }
 }
