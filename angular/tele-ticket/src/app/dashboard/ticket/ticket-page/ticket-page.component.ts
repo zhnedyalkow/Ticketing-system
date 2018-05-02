@@ -16,15 +16,12 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./ticket-page.component.scss']
 })
 export class TicketPageComponent implements OnInit {
-    public comments: Comments[];
     public ticketInfo: Ticket;
-    public tickets: Ticket[];
     public ticketId: number;
     public snapshot: ActivatedRouteSnapshot;
     public playLoad: { id: number, role: string };
     public amIGM: boolean = false;
     public amIAU: boolean = false;
-    public addCommentForm: FormGroup;
 
     constructor(
         private router: Router,
@@ -42,11 +39,6 @@ export class TicketPageComponent implements OnInit {
         this.playLoad = this.auth.tokenData();
 
         this.getTicketInfoById();
-        this.getComments();
-
-        this.addCommentForm = this.fb.group({
-            'description': [null],
-        });
 
         if (this.playLoad.role == 'admin') {
             this.amIGM = true;
@@ -66,57 +58,6 @@ export class TicketPageComponent implements OnInit {
                 this.amIAU = true;
             }
 
-        }, (err: HttpErrorResponse) => {
-            this.toastr.error(err.error.er);
-        });
-    }
-
-    public getComments(): void {
-        this.ticketService.getComments(this.ticketId).subscribe((data: Comments[]) => {
-            this.comments = data;
-        });
-    }
-
-    public deleteTicket(): void {
-        const ticketForDelete = {
-            ticketId: this.ticketId,
-        };
-
-        this.ticketService.deleteTicket(ticketForDelete)
-            .subscribe((data: {
-                success: string,
-            }) => {
-                this.toastr.success(`Successfully deleted ticket!`);
-                this.router.navigate(['./ticket']);
-            }, (err: HttpErrorResponse) => {
-                if (err.status === 302) {
-                    this.toastr.error(err.error.err)
-                }
-            })
-    }
-
-    public addComment(): void {
-        const newComment = {
-            description: this.addCommentForm.value.description,
-            ticketId: this.ticketId,
-        }
-
-        this.ticketService.addComment(newComment).subscribe((data: Comments) => {
-            this.comments.unshift(data);
-        }, (err: HttpErrorResponse) => {
-            this.toastr.error(err.error.er);
-        });
-    }
-
-    public changeStatus(status: string): void {
-        const statusData: Status = {
-            name: status,
-            tickedId: this.ticketId,
-        }
-
-        this.ticketService.changeStatus(statusData).subscribe((x: Status) => {
-            console.log(x);
-            this.ticketInfo.Status = x;
         }, (err: HttpErrorResponse) => {
             this.toastr.error(err.error.er);
         });

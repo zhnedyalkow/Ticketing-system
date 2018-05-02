@@ -1,0 +1,17 @@
+<div class="btn-box">
+  <span *ngIf="ticketInfo?.Status.name == 'in-progress' && amIAU ||
+        ticketInfo?.Status.name == 'reopened' && amIAU " class="btn-group pull-left">
+    <button type="button" class="btn btn-success btn-round" (click)="changeStatus('completed')">Completed</button>
+  </span>
+
+  <span *ngIf="amIGM == true" class="btn-group pull-left">
+    <button type="button" class="btn btn-danger btn-round" (click)="deleteTicket()">Del</button>
+  </span>
+
+  <span *ngIf="ticketInfo?.Status.name == 'completed' && amIGM" class="btn-group pull-right">
+    <button (click)="changeStatus('reopened')" type="button" class="btn btn-warning btn-round">Re-open</button>
+  </span>
+  <span *ngIf="ticketInfo?.Status.name !== 'closed' && amIGM" class="btn-group pull-right">
+    <button (click)="changeStatus('closed')" type="button" class="btn btn-danger btn-round">Close</button>
+  </span>
+</div>

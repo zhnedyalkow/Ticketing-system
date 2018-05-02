@@ -38,8 +38,8 @@ export class CreateTicketComponent implements OnInit {
     public genericErrorMsg: string = 'The field is required!';
     public dateErrMsg: string = 'Invalid Date!';
     public emailErrMsg: string = 'Invalid email! Eg. john.doe@gmail.com!';
-    public genMinLengthMsg: string = "Min length should be more than 8 chars!";
     public labelMinLenErrMsg: string = "Min length should be more than 3 chars!";
+    public genMinLengthMsg: string = "Min length should be more than 8 chars!";
     public genMaxLengthMsg: string = "Max length should be more than 50 chars!";
 
     constructor(

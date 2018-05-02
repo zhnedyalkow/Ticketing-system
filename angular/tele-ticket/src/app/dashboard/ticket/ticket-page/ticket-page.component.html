@@ -3,81 +3,15 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-sm-8 col-md-8 col-lg-8">
-      <div class="panel panel-default">
-        <div class="panel-heading font-bold">Description</div>
-        <div class="panel-body">
-          <div class="description">
-            <p class="font-bold">"{{ ticketInfo?.description }}"
-            </p>
-          </div>
-          <div class="btn-box">
-            <span *ngIf="ticketInfo?.Status.name == 'in-progress' && amIAU ||
-              ticketInfo?.Status.name == 'reopened' && amIAU " class="btn-group pull-left">
-              <button type="button" class="btn btn-success btn-round" (click)="changeStatus('completed')">Completed</button>
-            </span>
+	<div class="col-sm-8 col-md-8 col-lg-8">
+		<app-ticket-desc [ticketInfo]="ticketInfo"></app-ticket-desc>
+	</div>
 
-            <span *ngIf="amIGM == true" class="btn-group pull-left">
-              <button type="button" class="btn btn-danger btn-round" (click)="deleteTicket()">Del</button>
-            </span>
-
-            <span *ngIf="ticketInfo?.Status.name == 'completed' && amIGM" class="btn-group pull-right">
-              <button (click)="changeStatus('reopened')" type="button" class="btn btn-warning btn-round">Re-open</button>
-            </span>
-            <span *ngIf="ticketInfo?.Status.name !== 'closed' && amIGM" class="btn-group pull-right">
-              <button (click)="changeStatus('closed')" type="button" class="btn btn-danger btn-round">Close</button>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="col-sm-4 col-md-4 col-lg-4">
       <app-ticket-info [ticketInfo]="ticketInfo"></app-ticket-info>
-    </div>
+	</div>
   </div>
 
-  <div class="row">
-    <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
-      <a href="">
-        <img class="mx-auto rounded-circle img-fluid" src="http://demos.themes.guide/bodeo/assets/images/users/m101.jpg" alt="avatar">
-      </a>
-    </div>
-    <div class="col-md-9">
-      <form [formGroup]="addCommentForm" (ngSubmit)="addComment()">
-        <div class="form-group">
-          <label for="comment">Comment:</label>
-          <textarea formControlName="description" class="form-control" rows="3" id="comment" placeholder="Type your comment here.."
-            required></textarea>
-        </div>
-        <span class="btn-group pull-right">
-          <button type="submit" class="btn btn-primary btn-round">Add comment</button>
-        </span>
-      </form>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h3 class="mb-2">Comments</h3>
-    </div>
-    <div *ngFor="let comment of comments" class="comments-box col-md-9 row">
-      <div class="comment col-md-2">
-        <div class="comment-avatar col-md-1text-center pr-1">
-          <img class="mx-auto rounded-circle img-fluid" src="http://demos.themes.guide/bodeo/assets/images/users/m103.jpg" alt="avatar">
-        </div>
-      </div>
-
-      <div class="comment-content col-md-10">
-        <h6 class="small comment-meta">
-          <a href="#">
-            <b>{{comment?.User.name}}</b>
-          </a> {{comment?.createdAt | date}}</h6>
-        <div class="comment-body">
-          <p>
-            {{comment?.description}}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-ticket-comments></app-ticket-comments>
+  
 </div>

@@ -1,0 +1,54 @@
+.panel-default>.panel-heading {
+    background-color: #51bcda;
+    border-radius: 5px 5px 0px 0px;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .panel-default {
+    background-color: #fff;
+  }
+  
+  .btn-box {
+    margin-top: 10px;
+  }
+  
+  .form-group {
+    margin: 0px;
+  } 
+  
+  span button {
+      margin: 16px 8px;
+  }
+  
+  .ticket-header {
+    h3 {
+      margin: 0px 0px 32px;
+    }
+  }
+  
+  /* coments section */
+  .comments-box {
+    margin-top: 32px;
+    
+    .comment-content {
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      background-color: white;
+      border-radius: 6px;
+      padding: 12px;
+    }
+  
+    &:first-child {
+      margin-top: 0px;
+    }
+  
+    .comment-avatar {
+      img {
+        width: 80px;
+        height: auto  ;
+      }
+    }
+  
+    
+  }
+  
