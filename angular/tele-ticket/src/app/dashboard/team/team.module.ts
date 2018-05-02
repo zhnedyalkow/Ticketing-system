@@ -13,7 +13,7 @@ import { TeamboxComponent } from './team-list/teambox/teambox.component';
         TeamListComponent,
         TeamPageComponent,
         TeamboxComponent,
-        TeamComponent
+        TeamComponent,
     ],
     imports: [
         CommonModule,

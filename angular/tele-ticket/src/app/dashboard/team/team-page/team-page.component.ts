@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Team } from '../../../models/teams/team';
 import { AuthService } from '../../../core/authentication/auth.service';
 import { AbstractControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddTeammemberComponent } from '../../components/add-teammember/add-teammember.component';
 
 @Component({
     selector: 'app-team-page',
@@ -16,7 +18,6 @@ import { AbstractControl } from '@angular/forms';
     styleUrls: ['./team-page.component.scss']
 })
 export class TeamPageComponent implements OnInit {
-    
     public teamName: string;
     public usersOfTeam: User[];
     public myTickets: Ticket[];
@@ -32,7 +33,8 @@ export class TeamPageComponent implements OnInit {
         private auth: AuthService,
         public teamService: TeamService, 
         private activatedRoute: ActivatedRoute,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private modalService: NgbModal,
     ) {
         this.snapshot = this.activatedRoute.snapshot;
     }
@@ -47,6 +49,14 @@ export class TeamPageComponent implements OnInit {
             this.amIGM = true;
         }
     }
+
+    public openAddTeammember(): void {
+        const popup = this.modalService.open(AddTeammemberComponent);
+        popup.componentInstance.teamName = this.teamName;
+        popup.result.then((data) => {
+            console.log(data + " Hello1");
+        });
+	}
 
     public getAllTicketsByTeam(): void {
         this.teamService.getAllTicketsOfTeam(this.teamName).subscribe((x) => {

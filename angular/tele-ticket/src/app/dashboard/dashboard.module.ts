@@ -19,6 +19,7 @@ import { CreateTeamComponent } from './components/create-team/create-team.compon
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 import { TeamNameResolver } from './shared/resolvers/team-name.resolver';
 import { DatepickerValidationService } from './components/create-ticket/validator/datepicker-validator-service';
+import { AddTeammemberComponent } from './components/add-teammember/add-teammember.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DatepickerValidationService } from './components/create-ticket/validato
     UserMenuComponent,
     CreateTeamComponent,
     CreateTicketComponent,
+    AddTeammemberComponent,
     NavbarComponent,
   ],
   imports: [
@@ -45,7 +47,8 @@ import { DatepickerValidationService } from './components/create-ticket/validato
   ],
   entryComponents: [
     CreateTeamComponent,
-    CreateTicketComponent
+    CreateTicketComponent,
+    AddTeammemberComponent,
   ],
 })
 export class DashboardModule { }

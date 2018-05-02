@@ -27,4 +27,10 @@ export class TeamService {
             `${this.appConfig.apiUrl}/team/createTeam`, formsValue
         );
     }
+
+    addUsersToTeam(formsValue: Object): Observable<Object> {
+        return this.http.post<Observable<Object>>(
+            `${this.appConfig.apiUrl}/user/addUsersToTeam`, formsValue
+        );
+    }
 }
