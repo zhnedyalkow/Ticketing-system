@@ -4,11 +4,6 @@ class TeamsController {
         this.data = data;
     }
 
-    async getTeamByTeamId(teamId) {
-        const team = await this.data.teams.getById(teamId);
-        return team;
-    }
-
     async createTeam(obj, companyId, creator) {
         const result = {
             message: '',
@@ -84,12 +79,15 @@ class TeamsController {
         return result;
     }
 
-    async deleteTeam(teamId, user) {
+    async deleteTeam(teamName, user) {
         try {
-            const team = await this.data.teams.getById(teamId);
+            const team = await this.data.teams.getOneByCriteria({
+                name: teamName,
+                CompanyId: user.CompanyId,
+            });
 
             if (!team) {
-                throw new Error('This team is already deleted!');
+                throw new Error('There is no such a team!');
             }
 
             if (team.CompanyId !== user.CompanyId) {
@@ -116,40 +114,29 @@ class TeamsController {
             success: true,
         };
     }
+    async getMyTeams(user) {
+        let teamList;
 
-    async getAllMembersByTeamId(teamId) {
-        const team = await this.data.teams.getById(teamId);
-        const res = await team.getUsers();
-        return res;
-    }
+        try {
+            if (user.role === 'admin') {
+                teamList = await this.data.teams.getAllTeam(user.CompanyId);
+            }
 
-    async getAllTeamsByCompanyId(companyId) {
-        return await this.data.teams.getAllByCriteria({
-            CompanyId: companyId,
-        });
-    }
+            if (user.role === 'user') {
+                teamList = await this.data.teams.getMyTeams(user);
+            }
 
-    async getMyTeamsByUserId(userId) {
-        const user = await this.data.users.getById(userId);
-        const teams = await this.data.teams.getTeamMember(user);
+            // Get lenght of memebers array
+            teamList = await Promise.all(teamList.map(async (team) => {
+                team.dataValues.members = (await team.getUsers()).length;
 
-        return teams;
-    }
+                return team;
+            }));
+        } catch (error) {
+            throw error;
+        }
 
-    async getMembersByTeamId(teamId) {
-        const usersId = await this.data.members.getAllByCriteria({
-            teamId: teamId,
-        });
-
-        const users = await Promise.all(usersId.map((userId) => {
-            const res = this.data.users.getOneByCriteria({
-                id: userId.id,
-            });
-
-            return res;
-        }));
-
-        return users;
+        return teamList;
     }
 }
 

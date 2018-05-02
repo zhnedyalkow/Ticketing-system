@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 export class UserMenuComponent implements OnInit {
   @Input() userInfo$: Observable<Object>;
   constructor() { }
-  
+
   public ngOnInit(): void {
 
   }

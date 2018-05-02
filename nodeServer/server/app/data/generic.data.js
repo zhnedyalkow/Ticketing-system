@@ -14,9 +14,10 @@ class Data {
         });
     }
 
-    getOneByCriteria(findObj) {
+    getOneByCriteria(findObj, attributes = {}) {
         return this.Model.findOne({
             where: findObj,
+            attributes: attributes,
         });
     }
 

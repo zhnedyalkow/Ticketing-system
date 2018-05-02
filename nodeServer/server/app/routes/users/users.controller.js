@@ -12,16 +12,6 @@ class UserController {
         this.data = data;
     }
 
-    validateEmail(email) {
-        const re = `/^(([^<>()[\]\\
-        .,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)
-        |(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.
-        [0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]
-        +\.)+[a-zA-Z]{2,}))$/`;
-
-        return re.test(email);
-    }
-
     async register(registerInfo) {
         try {
             if (!registerInfo.name) {
@@ -35,12 +25,6 @@ class UserController {
             if (registerInfo.password.length < 3) {
                 throw new Error('The password must be more then 3 symbols');
             }
-
-            // const a = this.validateEmail(registerInfo.email);
-
-            // if (!this.validateEmail(registerInfo.email)) {
-            //     throw new Error('Invalid email address!');
-            // }
 
             const checkEmail = await this.data.users.getOneByCriteria({
                 email: registerInfo.email,
@@ -96,10 +80,14 @@ class UserController {
         return result;
     }
 
-    async addUserToCompany(email, CompanyId) {
+    async addUserToCompany(email, requester) {
         let user;
 
         try {
+            if (requester.role !== 'admin') {
+                throw new Error('Something went wrong!');
+            }
+
             user = await this.data.users.getOneByCriteria({
                 email: email,
             });
@@ -114,12 +102,12 @@ class UserController {
 
             const updatedData = await this
                 .data.users.update({
-                    CompanyId: CompanyId,
+                    CompanyId: requester.CompanyId,
                 }, {
-                    where: {
-                        id: user.id,
-                    },
-                });
+                        where: {
+                            id: user.id,
+                        },
+                    });
 
             if (updatedData[0] === 0) {
                 throw new Error('Something went wrong!');
@@ -131,82 +119,94 @@ class UserController {
         return user;
     }
 
-    // async addUserToTeam(email, teamId) {
-    //     let user;
-    //     let team;
+    async addUsersToTeam(users, teamName, requester) {
+        let theUsers;
 
-    //     try {
-    //         team = await this.data.teams.getById(teamId);
+        try {
+            const team = await this.data.teams.getOneByCriteria({
+                name: teamName,
+                CompanyId: requester.CompanyId,
+            });
 
-    //         user = await this.data.users.getOneByCriteria({
-    //             email: email,
-    //         });
+            if (!team) {
+                throw new Error('The team dosen\'t exist!');
+            }
 
-    //         if (!user) {
-    //             throw new Error('The user doesn\'t exist!');
-    //         }
+            if (team.TeamManagerId !== requester.id &&
+                requester.role !== 'admin'
+            ) {
+                throw new Error('You have not permission to do that!');
+            }
 
-    //         if (user.id === team.TeamManagerId) {
-    //             // throw new Error('Something went wrong! 1');
-    //             throw new Error('The team has already this user!');
-    //         }
+            // Remove all useless mail
+            theUsers = users.map((x) => x.email);
+            theUsers = new Set(theUsers);
+            theUsers = [...theUsers];
 
-    //         const hasUser = await team.hasUser(user);
+            theUsers = await Promise.all(theUsers.map(async (user) => {
+                const res = await this.data.users.getOneByCriteria({
+                    email: user,
+                    CompanyId: requester.CompanyId,
+                }, {
+                    exclude: ['password', 'updatedAt',
+                        'CompanyId', 'deletedAt', 'role', 'createdAt',
+                    ],
+                });
 
-    //         if (hasUser && user.role === 'admin') {
-    //             throw new Error('Something went wrong! 2');
-    //         }
+                if (!res) {
+                    throw new Error(`User with following
+                    email => ${user}, doesn't exist!`);
+                }
 
-    //         const newUser = await this.data.teammembers.create({
-    //             UserId: creator.id,
-    //             TeamId: obj.ticketId,
-    //         });
+                return res;
+            }));
 
-    //         if (updatedData[0] === 0) {
-    //             throw new Error('Something went wrong 3!');
-    //         }
-    //     } catch (error) {
-    //         throw error;
-    //     }
+            await team.addUsers(theUsers);
 
-    //     return user;
-    // }
+            // Create new notification to all assigned users
+            await Promise.all(theUsers.map(async (user) => {
+                const notification = await this.data.notifications.create({
+                    name: 'New Team',
+                    UserId: user.id,
+                    description: `You have been 
+                assigned to a new team "${team.name}"!`,
+                });
 
+                return await this.data.newNotifications.create({
+                    UserId: user.id,
+                    NotificationId: notification.id,
+                });
+            }));
+        } catch (error) {
+            throw error;
+        }
 
-    async getAllUsers(CompanyId) {
+        return theUsers;
+    }
+
+    async getAllUsers(requester) {
         let result;
 
         try {
+            if (requester.role !== 'admin') {
+                throw new Error('Something went wrong!');
+            }
+
             result = this.data.users.getAllByCriteria({
-                CompanyId: CompanyId,
+                CompanyId: requester.CompanyId,
             }, {
-                exclude: ['password', 'updatedAt',
-                    'CompanyId', 'id',
-                ],
-            });
+                    exclude: ['password', 'updatedAt',
+                        'CompanyId', 'id',
+                    ],
+                });
         } catch (error) {
             throw error;
         }
 
         return result;
     }
-    async amIAdmin(userId) {
-        const user = await this.data.users.getById(userId);
 
-        if (user.role !== 'admin') {
-            return false;
-        }
-
-        return true;
-    }
-
-    async getUserByEmail(email) {
-        return await this.data.users.getOneByCriteria({
-            email: email,
-        });
-    }
-
-    async getAllUserOfTeam(teamName, user) {
+    async getAllUserOfTeam(teamName, requester) {
         let result;
 
         try {
@@ -214,22 +214,25 @@ class UserController {
                 throw new Error('Please, add a team!');
             }
 
-            if (!user) {
-                throw new Error('There is no such user!');
+            if (!requester) {
+                throw new Error('Something went wrong!');
             }
 
             const team = await this.data.teams.getOneByCriteria({
                 name: teamName,
-                CompanyId: user.CompanyId,
+                CompanyId: requester.CompanyId,
             });
 
             if (!team) {
                 throw new Error('There is no such a team!');
             }
 
-            const hasUser = await team.hasUser(user);
+            if (team.CompanyId !== requester.CompanyId) {
+                throw new Error('Something went wrong!');
+            }
 
-            if (!hasUser) {
+            const hasUser = await team.hasUser(requester);
+            if (!hasUser && requester.role !== 'admin') {
                 throw new Error('Something went wrong!');
             }
 

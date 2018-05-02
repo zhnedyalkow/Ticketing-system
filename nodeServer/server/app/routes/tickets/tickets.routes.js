@@ -36,11 +36,18 @@ const init = (app, data) => {
 
             return res.status(200).json(result);
         })
-        .get('/getAllTicketsByUserId', async (req, res) => {
-            const userId = req.userId;
-            const tickets = await controller.getAllTicketsByUserId(userId);
+        .get('/getAllMyTickets', async (req, res) => {
+            let tickets;
 
-            res.json(tickets);
+            try {
+                tickets = await controller
+                    .getAllMyTickets(req.user);
+            } catch (error) {
+                return res
+                    .status(302).json({ err: error.message });
+            }
+
+            return res.status(200).json(tickets);
         })
         .post('/createTicket', async (req, res) => {
             if (typeof req.user === 'undefined') {
@@ -68,7 +75,7 @@ const init = (app, data) => {
             }
 
             try {
-                 deletedRec = await controller.deleteTicket(ticketId, req.user);
+                deletedRec = await controller.deleteTicket(ticketId, req.user);
             } catch (error) {
                 return res.status(302).json({ err: error.message });
             }

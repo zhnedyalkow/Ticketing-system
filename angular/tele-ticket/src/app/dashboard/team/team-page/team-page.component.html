@@ -52,29 +52,23 @@
           <i class="fa fa-users"></i> Members</div>
         <div class="panel-body">
           <ul class="list-group members-content">
-            <li *ngFor="let user of usersOfTeam" class="list-group-item">
+            <li class="list-group-item">
               <div class="panel-container">
                 <table class="table table-borderless">
                   <thead>
                     <tr>
                       <th>
-                        <i class="fa fa-image"></i> Img</th>
+                        <i class="fa fa-user"></i> Name
+                      </th>
                       <th>
-                        <i class="fa fa-user"></i> Name</th>
-                      <th>
-                        <i class="fa fa-user-md"></i> *Role</th>
+                        <i class="fa fa-user"></i> Email
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let user of usersOfTeam">
                       <td>{{ user.name }}</td>
-                      <td>Doe</td>
-                      <td>Assigned</td>
-                    </tr>
-                    <tr>
-                      <td>Img</td>
-                      <td>Zhitomir</td>
-                      <td>Creator</td>
+                      <td>{{ user.email }}</td>
                     </tr>
                   </tbody>
                 </table>

@@ -11,23 +11,19 @@ const init = (app, data) => {
 
     router
         .get('/getMyTeams', async (req, res) => {
-            const userId = req.user.id;
+            let teamList;
 
-            const teamList = await controller
-                .getMyTeamsByUserId(userId);
+            try {
+                teamList = await controller
+                    .getMyTeams(req.user);
+            } catch (error) {
+                return res.status(302).json({ err: error.message });
+            }
 
-            res.status(200).json(teamList);
-        })
-        .get('/getAllTeams', async (req, res) => {
-            const companyId = req.query.companyId;
-
-            const allTeams = await controller
-                .getAllTeamsByCompanyId(companyId);
-
-            res.json(allTeams);
+            return res.status(200).json(teamList);
         })
         .post('/deleteTeam', async (req, res) => {
-            const teamId = req.body.teamId;
+            const teamName = req.body.teamName;
             let deletedRec;
 
             if (typeof req.user === 'undefined') {
@@ -35,7 +31,7 @@ const init = (app, data) => {
             }
 
             try {
-                deletedRec = await controller.deleteTeam(teamId, req.user);
+                deletedRec = await controller.deleteTeam(teamName, req.user);
             } catch (error) {
                 return res.status(302).json({ err: error.message });
             }

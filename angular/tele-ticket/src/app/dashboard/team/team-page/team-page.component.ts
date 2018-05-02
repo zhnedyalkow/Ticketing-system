@@ -38,6 +38,7 @@ export class TeamPageComponent implements OnInit {
     ) {
         this.snapshot = this.activatedRoute.snapshot;
     }
+
     public ngOnInit(): void {
         this.playLoad = this.auth.tokenData();
         this.teamName = this.snapshot.params.teamName;

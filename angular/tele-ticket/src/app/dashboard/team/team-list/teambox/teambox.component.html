@@ -1,11 +1,22 @@
-<div class="my-teams-box">
-  <div class="avatar">
-    <img src="../../assets/img/faces/clem-onojeghuo-2.jpg" alt="" width="100" height="100" class="avatar">
-  </div>
-  <div class="my-teams-info">
-    <div *ngIf="team">
-      <h5 class="text-center">{{ team.name }}</h5>
+<div class="my-teams-box ">
+  <div class="row">
+    <div class="avatar text-center col-md-12 col-xl-4">
+      <img src="../../assets/img/faces/clem-onojeghuo-2.jpg" alt="" width="100" height="100" class="avatar">
+    </div>
+    <div class="my-teams-info col-md-12 col-xl-8">
+      <div *ngIf="team">
+        <h5 class="text-center">{{ team?.name }}</h5>
+        <ul>
+          <li>
+            <i class="fa fa-users"></i>
+            Members: {{team?.members}}
+          </li>
+          <li>
+            <i class="fa fa-user"></i>
+            Manager: {{team?.TeamManager.name}}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-
 </div>
