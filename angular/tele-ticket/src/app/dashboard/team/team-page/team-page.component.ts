@@ -55,7 +55,9 @@ export class TeamPageComponent implements OnInit {
         const popup = this.modalService.open(AddTeammemberComponent);
         popup.componentInstance.teamName = this.teamName;
         popup.result.then((data) => {
-            console.log(data + " Hello1");
+            data.forEach((newUser) => {
+                this.usersOfTeam.push(newUser);
+            });
         });
 	}
 
