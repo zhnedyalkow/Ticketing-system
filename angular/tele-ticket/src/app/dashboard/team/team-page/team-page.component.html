@@ -1,9 +1,9 @@
 <div class="btn-box">
-  <span *ngIf="amIGM == true" class="del-btn btn-group pull-right">
+  <span *ngIf="amIGM" class="del-btn btn-group pull-right">
     <button type="button" class="btn btn-danger btn-round" (click)="deleteTeam()">
       <i class="fa fa-trash"></i>Delete Team</button>
   </span>
-  <span *ngIf="amIGM == true" class="del-btn btn-group pull-right">
+  <span *ngIf="amIGM" class="del-btn btn-group pull-right">
     <button type="button" class="btn btn-success btn-round"  (click)="openAddTeammember()">
       <i class="fa fa-trash"></i>Add Member</button>
   </span>

@@ -28,7 +28,6 @@ export class TeamPageComponent implements OnInit {
     public snapshot: ActivatedRouteSnapshot;
 
     constructor(
-
         private router: Router,
         private auth: AuthService,
         public teamService: TeamService, 
@@ -44,7 +43,10 @@ export class TeamPageComponent implements OnInit {
         this.teamName = this.snapshot.params.teamName;
 
         this.getAllUsersOfTeam();
-        this.getAllTicketsByTeam();
+
+        this.activatedRoute.data.subscribe((data) => {
+            this.myTickets = data.allTickets;
+        });
 
         if (this.playLoad.role == 'admin') {
             this.amIGM = true;

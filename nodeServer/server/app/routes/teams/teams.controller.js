@@ -91,21 +91,14 @@ class TeamsController {
             }
 
             if (team.CompanyId !== user.CompanyId) {
-                throw new Error('Something went wrong! 1');
+                throw new Error('Something went wrong!');
             }
-
-            const hasUser = await team.hasUser(user);
 
             if (team.TeamManagerId !== user.id && user.role !== 'admin') {
-                throw new Error('Something went wrong! 2');
-            }
-
-            if (!hasUser && user.role !== 'admin') {
-                throw new Error('Something went wrong! 3');
+                throw new Error('Something went wrong!');
             }
 
             await team.destroy();
-
         } catch (error) {
             throw error;
         }
@@ -138,6 +131,33 @@ class TeamsController {
 
         return teamList;
     }
+
+    async getTeamManager(teamName, requester) {
+        let teamManager;
+
+        try {
+            const team = await this.data.teams.getOneByCriteria({
+                name: teamName,
+                CompanyId: requester.id,
+            });
+
+            if (!team) {
+                throw new Error('There is no such a team!');
+            }
+
+            const hasUser = await team.hasUser(requester);
+            if (!hasUser && requester.role !== 'admin') {
+                throw new Error('Something went wrong!');
+            }
+
+            teamManager = await team.getTeamManager();
+        } catch (error) {
+            throw error;
+        }
+
+        return teamManager;
+    }
 }
+
 
 module.exports = TeamsController;

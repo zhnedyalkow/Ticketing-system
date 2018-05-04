@@ -22,6 +22,19 @@ const init = (app, data) => {
 
             return res.status(200).json(teamList);
         })
+        .get('/getTeamManager', async (req, res) => {
+            const teamName = req.query.teamName;
+            let teamManager;
+
+            try {
+                teamManager = await controller
+                    .getTeamManager(teamName, req.user);
+            } catch (error) {
+                return res.status(302).json({ err: error.message });
+            }
+
+            return res.status(200).json(teamManager);
+        })
         .post('/deleteTeam', async (req, res) => {
             const teamName = req.body.teamName;
             let deletedRec;

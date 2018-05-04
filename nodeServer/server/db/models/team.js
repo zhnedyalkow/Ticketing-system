@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         const {
             Company,
             User,
+            Ticket,
         } = models;
 
         Team.belongsTo(Company);
@@ -16,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
             as: 'TeamManager',
             foreignKey: 'TeamManagerId',
         });
+        Team.hasMany(Ticket);
     };
     return Team;
 };
