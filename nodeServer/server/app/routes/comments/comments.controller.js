@@ -3,6 +3,7 @@ class CommentsController {
         this.data = data;
     }
 
+    /* TODO */
     async getAllCommentsByTicketId(ticketId) {
         const allComments = await this.data.comments.getComments(ticketId);
 
@@ -24,7 +25,7 @@ class CommentsController {
                 throw new Error('The ticketId is missing!');
             }
 
-            // Check whater the cretor has permission
+            // Check wheater the cretor has permission
             // to create comment for this ticket
             const ticket = await this.data.tickets.getOneByCriteria({
                 id: obj.ticketId,
@@ -51,7 +52,7 @@ class CommentsController {
         });
 
         newComment.dataValues.User = await newComment.getUser({
-            attributes: ['name', 'email', 'id'],
+            attributes: ['name', 'email', 'id', 'avatar'],
         });
 
         if (!newComment) {

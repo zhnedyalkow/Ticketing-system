@@ -16,16 +16,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class TicketStatusBtnsComponent implements OnInit {
 
 	@Input() ticketInfo: Ticket;
+	@Input() amIGM: boolean;
+	@Input() amIAU: boolean;
 	public ticketId: number;
-	public amIGM: boolean = false;
-	public amIAU: boolean = false;
 	public snapshot: ActivatedRouteSnapshot;
 	public playLoad: { id: number, role: string };
 
 	constructor(
 		private router: Router,
-		private fb: FormBuilder,
-		private auth: AuthService,
 		private toastr: ToastrService,
 		public ticketService: TicketService,
 		private activatedRoute: ActivatedRoute,
@@ -35,11 +33,6 @@ export class TicketStatusBtnsComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.ticketId = this.snapshot.params.ticketId;
-		this.playLoad = this.auth.tokenData();
-
-		if (this.playLoad.role == 'admin') {
-			this.amIGM = true;
-		}
 	}
 
 	public changeStatus(status: string): void {
@@ -50,7 +43,7 @@ export class TicketStatusBtnsComponent implements OnInit {
 
 		this.ticketService.changeStatus(statusData).subscribe((x: Status) => {
 			this.ticketInfo.Status = x;
-			this.toastr.success(`Changed status: ${x}!`);
+			this.toastr.success(`Changed status: ${x.name}!`);
 		}, (err: HttpErrorResponse) => {
 			this.toastr.error(err.error.er);
 		});
@@ -74,20 +67,4 @@ export class TicketStatusBtnsComponent implements OnInit {
 			})
 	}
 
-	public getTicketInfoById(): void {
-		this.ticketService.getTicketInfoById(this.ticketId).subscribe((data: Ticket) => {
-			this.ticketInfo = data;
-
-			if (this.ticketInfo.Team.TeamManagerId == this.playLoad.id) {
-				this.amIGM = true;
-			}
-
-			if (this.ticketInfo.AssignedUser.id == this.playLoad.id) {
-				this.amIAU = true;
-			}
-
-		}, (err: HttpErrorResponse) => {
-			this.toastr.error(err.error.er);
-		});
-	}
 }

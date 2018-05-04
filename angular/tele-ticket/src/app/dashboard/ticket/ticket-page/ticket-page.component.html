@@ -3,15 +3,14 @@
 </div>
 <div class="container">
   <div class="row">
-	<div class="col-sm-8 col-md-8 col-lg-8">
-		<app-ticket-desc [ticketInfo]="ticketInfo"></app-ticket-desc>
-	</div>
+    <div class="col-sm-8 col-md-8 col-lg-8">
+      <app-ticket-desc [ticketInfo]="ticketInfo" [amIGM]="amIGM" [amIAU]="amIAU"></app-ticket-desc>
+    </div>
 
     <div class="col-sm-4 col-md-4 col-lg-4">
       <app-ticket-info [ticketInfo]="ticketInfo"></app-ticket-info>
-	</div>
+    </div>
   </div>
 
   <app-ticket-comments></app-ticket-comments>
-  
 </div>

@@ -1,9 +1,11 @@
 <div class="panel panel-default">
-  <div class="panel-heading font-bold">Description</div>
+  <div class="panel-heading font-bold">
+    <i class="fa fa-file"></i> Description</div>
   <div class="panel-body">
     <div class="description">
       <p class="font-bold">"{{ ticketInfo?.description }}"
       </p>
     </div>
-    <app-ticket-status-btns [ticketInfo]="ticketInfo"> </app-ticket-status-btns>
+    <app-ticket-status-btns *ngIf="amIGM || amIAU" [ticketInfo]="ticketInfo" [amIGM]="amIGM" [amIAU]="amIAU"></app-ticket-status-btns>
   </div>
+</div>

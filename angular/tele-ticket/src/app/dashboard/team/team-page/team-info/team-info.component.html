@@ -1,0 +1,29 @@
+<div *ngFor="let ticket of myTickets" class="panel panel-default ticket-container">
+    <div class="panel-heading font-bold">
+        <i class="fa fa-ticket"></i> Ticket</div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="panel-container">
+                    <h6 [routerLink]="['/ticket/', ticket.id]" class="ticket-header">{{ ticket.title}}</h6>
+                    <p>
+                        <i class="fa fa-user"></i> Attached Member:
+                        <span class="panel-font-bold">{{ ticket.AssignedUser.name}}</span>
+                    </p>
+                    <div class="ticket-info-box">
+                        <p>
+                            <i class="fa fa-check"></i> Status:
+                            <span class="ticket-content">{{ ticket.Status.name}}</span>
+                        </p>
+                    </div>
+                    <div class="ticket-info-box">
+                        <p>
+                            <i class="fa fa-tags"></i> Label:
+                            <span class="ticket-content">{{ ticket.Label?.title }}</span>
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

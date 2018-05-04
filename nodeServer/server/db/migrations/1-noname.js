@@ -21,7 +21,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2018-04-30T22:25:01.431Z",
+    "created": "2018-05-04T09:19:36.131Z",
     "comment": ""
 };
 
@@ -122,6 +122,9 @@ var migrationCommands = [{
                     "autoIncrement": true,
                     "primaryKey": true,
                     "allowNull": false
+                },
+                "avatar": {
+                    "type": Sequelize.STRING
                 },
                 "name": {
                     "type": Sequelize.STRING

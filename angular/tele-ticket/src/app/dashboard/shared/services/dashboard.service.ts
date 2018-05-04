@@ -5,17 +5,21 @@ import { Team } from '../../../models/teams/team';
 import { AppConfig } from '../../../config/app.config';
 import { Ticket } from '../../../models/tickets/ticket';
 import { User } from '../../../models/users/user';
+import { UserInfo } from '../../../models/users/user.info';
 
 @Injectable()
 export class DashboardService {
-    constructor(private appConfig: AppConfig, private http: HttpClient) { }
+    userInfo: Observable<UserInfo>;
 
-    getUserInfo(): Observable<Object> {
-        return this.http.get(`${this.appConfig.apiUrl}/user/getInfo`);
+    constructor(private appConfig: AppConfig, private http: HttpClient) { 
+        this.userInfo = this.http.get<UserInfo>(`${this.appConfig.apiUrl}/user/getInfo`);
+    }
+
+    getUserInfo(): Observable<UserInfo> {
+        return this.userInfo;
     }
 
     getMyTeams(): Observable<Array<Team>> {
         return this.http.get<Array<Team>>(`${this.appConfig.apiUrl}/Team/getMyTeams`);
     }
-
 }

@@ -56,14 +56,15 @@ export class AddTeammemberComponent implements OnInit {
 				])
 			),
 		});
-	}
+    }
+    
 
 	public addUsersToTeam(): void {
 		const newMembers = {
 			teamName: this.teamName,
 			users: this.addTeamMemberForm.value.users,
 		}
-
+        debugger;
         this.teamService.addUsersToTeam(newMembers).subscribe((data: Team[]) => {
 		
 			this.toastr.success(`User was successfully added!`);
@@ -74,4 +75,22 @@ export class AddTeammemberComponent implements OnInit {
             this.toastr.error(err.error.err);
         });
     }
+
+	// public addUnit(): void {
+	// 	const newMembers = {
+	// 	  teamName: this.teamName,
+	// 	  users: this.addForm.value.users,
+	// 	}
+	
+	// 	this.teamService.addUnit(newMembers).subscribe((data: Team[]) => {
+	
+	// 	  this.toastr.success(`User was successfully added!`);
+	// 	  this.usersOfTeam = data;
+	// 	  this.activeModal.close(this.usersOfTeam);
+	// 	  this.toastr.success(`User successfully added!`);
+	// 	}, (err: HttpErrorResponse) => {
+	// 	  this.toastr.error(err.error.err);
+	// 	});
+	//   }
+
 }

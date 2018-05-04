@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-ticket-desc',
@@ -7,11 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TicketDescComponent implements OnInit {
 
-  @Input() ticketInfo : object;
-  
+  @Input() ticketInfo: object;
+  @Input() amIGM: boolean;
+  @Input() amIAU: boolean;
+
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
 }

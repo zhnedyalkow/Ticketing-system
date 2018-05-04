@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Comments } from '../../../models/comments/comments';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observer } from 'rxjs/Observer';
+import { Observable } from "rxjs/Rx";
 import { AuthService } from '../../../core/authentication/auth.service';
 import { Ticket } from '../../../models/tickets/ticket';
 import { Status } from '../../../models/tickets/status';
@@ -43,7 +44,6 @@ export class TicketPageComponent implements OnInit {
         if (this.playLoad.role == 'admin') {
             this.amIGM = true;
         }
-
     }
 
     public getTicketInfoById(): void {

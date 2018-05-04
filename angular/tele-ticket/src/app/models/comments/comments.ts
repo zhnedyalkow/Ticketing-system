@@ -5,6 +5,7 @@ export class Comments {
         {
             name: string,
             email: string,
+            avatar: string
         }
     ]
 }

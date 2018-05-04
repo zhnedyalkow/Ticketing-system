@@ -138,7 +138,7 @@ class TeamsController {
         try {
             const team = await this.data.teams.getOneByCriteria({
                 name: teamName,
-                CompanyId: requester.id,
+                CompanyId: requester.CompanyId,
             });
 
             if (!team) {
@@ -150,7 +150,9 @@ class TeamsController {
                 throw new Error('Something went wrong!');
             }
 
-            teamManager = await team.getTeamManager();
+            teamManager = await team.getTeamManager({
+                attributes: ['id', 'name', 'email'],
+            });
         } catch (error) {
             throw error;
         }
@@ -158,6 +160,5 @@ class TeamsController {
         return teamManager;
     }
 }
-
 
 module.exports = TeamsController;

@@ -1,11 +1,12 @@
 <nav class="navigation navbar navbar-expand-md bg-primary">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbarSupportedContent"
+  <button class="navbar-toggler navbar-toggler-right" type="button"
+	data-toggle="collapse" data-target="#navbar-menu" 
+	aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     <span class="navbar-toggler-icon"></span>
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <a class="navbar-brand" href="#">Menu</a>
   <div class="collapse navbar-collapse" id="navbar-menu">
     <ul class="navbar-nav ml-auto">
@@ -13,25 +14,22 @@
         <a class="nav-link" (click)="openCreateTeam()">
           <i class="fa fa-users"></i> Create Team </a>
       </li>
-
       <li class="create-ticket-btn nav-item">
         <a class="nav-link" (click)="openCreateIssue()">
           <i class="fa fa-bug"></i> Create issue </a>
       </li>
-
       <li class="nav-item ">
         <div ngbDropdown class="d-inline-block dropdown">
           <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
             <i class="fa fa-check"></i> Welcome, {{(userInfo$ | async)?.name}}</a>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-primary">
-            <a class="dropdown-item">
-              <i class="fa fa-list"></i> My panel</a>
+            <a [routerLink]="['/']" class="dropdown-item">
+              <i  class="fa fa-list"></i> My panel</a>
             <a class="dropdown-item" (click)="logoutUser()">
               <i class="fa fa-sign-out"></i> Log out</a>
           </div>
         </div>
       </li>
-
     </ul>
   </div>
 </nav>

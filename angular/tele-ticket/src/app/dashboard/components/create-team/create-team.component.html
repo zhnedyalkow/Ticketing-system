@@ -1,13 +1,13 @@
 <div>
   <form [formGroup]="createTeamForm" (ngSubmit)="createTeam()" class="create-team">
     <div class="modal-body">
-      <div class="teams-name">
+      <div class="teams">
         <label for="name" class="font-bold">Name</label>
 		<input formControlName="name" type="text" class="form-control" placeholder="Name..." required>
         <div class="alert" *ngIf="!createTeamForm.controls['name'].valid && createTeamForm.controls['name'].touched">
-          <span *ngIf="createTeamForm.controls['name'].hasError('required') ">{{ genericErrorMsg }} </span>
-          <span *ngIf="createTeamForm.controls['name'].hasError('minlength') "> {{ minLenName }} </span>
-          <span *ngIf="createTeamForm.controls['name'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+            <span *ngIf="createTeamForm.controls['name'].hasError('required') ">{{ genericErrorMsg }} </span>
+            <span *ngIf="createTeamForm.controls['name'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
+            <span *ngIf="createTeamForm.controls['name'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
         </div>
       </div>
       <p class="danger-color font-bold">*Assign user's email - * = required </p>

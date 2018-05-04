@@ -1,7 +1,9 @@
 export class UserInfo {
+
     email: string;
     name: string;
-    role: string;
-
-    createAt: Date;
+    role?: string;
+    avatar?: string;
+    createAt?: Date;
+    id?: number;
 }

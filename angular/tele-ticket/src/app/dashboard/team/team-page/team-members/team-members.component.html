@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+    <div class="panel-heading font-bold">
+        <i class="fa fa-users"></i> Members</div>
+    <div class="panel-body">
+        <ul class="list-group members-content">
+            <li class="list-group-item">
+                <div class="panel-container">
+                    <table class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <i class="fa fa-user"></i> Name
+                                </th>
+                                <th>
+                                    <i class="fa fa-envelope"></i> Email
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of usersOfTeam">
+                                <td class="font-bold">{{ user.name }}</td>
+                                <td class="font-bold">{{ user.email }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

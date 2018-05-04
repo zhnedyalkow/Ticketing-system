@@ -23,6 +23,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CreateTicketComponent implements OnInit {
 
+    public ticketId: number;
     public teams: Team[];
     public email: AbstractControl;
     public name: AbstractControl;
@@ -44,20 +45,18 @@ export class CreateTicketComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private dashService: DashboardService,
-
-        private dateValidatorService: DatepickerValidationService,
-        private ticketService: TicketService,
         private fb: FormBuilder,
         public activeModal: NgbActiveModal,
+        private dashService: DashboardService,
+        private ticketService: TicketService,
         private toastr: ToastrService,
+        private dateValidatorService: DatepickerValidationService,
     ) {
    
      }
 
     public ngOnInit(): void {
         this.userInfo$ = this.dashService.getUserInfo();
-        debugger;
         this.createTicketForm = this.fb.group({
             'title': [null,
                 Validators.compose([
@@ -87,7 +86,6 @@ export class CreateTicketComponent implements OnInit {
             'teamId': [null,
                 Validators.required]
         });
-
         this.getMyTeam();
     }
 
@@ -95,12 +93,13 @@ export class CreateTicketComponent implements OnInit {
         this.ticketService.createTicket(this.createTicketForm.value).subscribe((data: Ticket) => {
             this.toastr.success(`Ticket was successfully created!`);
             this.activeModal.close();
-            this.router.navigate(['./ticket/ticketlist']);
+            this.router.navigate([`./ticket/${data.id}`]);
             this.createTicketForm.reset();
         }, (err: HttpErrorResponse) => {
             this.toastr.error(err.error.err);
         })
     }
+
     public getMyTeam(): void {
         this.dashService.getMyTeams().subscribe((data) => {
             this.teams = data;

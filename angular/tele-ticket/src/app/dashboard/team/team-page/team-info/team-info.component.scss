@@ -1,0 +1,59 @@
+.panel-default>.panel-heading {
+    background-color: #51bcda;
+    border-radius: 5px 5px 0px 0px;
+    color: #fff;
+    text-align: center;
+}
+
+.panel-font-bold {
+    font-weight: bold;
+    margin: 0px 10px;
+}
+
+.ticket-info-box {
+    display: inline-block;
+    vertical-align: top;
+    p {
+        display: inline-block;
+    }
+    .ticket-content {
+        font-weight: bold;
+        margin: 20px 10px;
+    }
+}
+
+.ticket-header {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.ticket-container {
+  margin-top: 16px;
+
+  &:first-child {
+    margin-top: 0px;
+  }
+}
+
+.header-page {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    h3 {
+        text-transform: uppercase;
+    }
+}
+
+.members-content {
+    max-height: 400px;
+    overflow: auto;
+}
+
+.table {
+    cursor: pointer;
+}

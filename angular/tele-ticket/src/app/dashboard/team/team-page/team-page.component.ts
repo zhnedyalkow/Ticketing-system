@@ -11,6 +11,7 @@ import { AuthService } from '../../../core/authentication/auth.service';
 import { AbstractControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddTeammemberComponent } from '../../components/add-teammember/add-teammember.component';
+import { UserInfo } from '../../../models/users/user.info';
 
 @Component({
     selector: 'app-team-page',
@@ -22,18 +23,13 @@ export class TeamPageComponent implements OnInit {
     public usersOfTeam: User[];
     public myTickets: Ticket[];
     public amIGM: boolean = false;
-    public amIAU: boolean = false;
-    public teamInfo: Team;
     public playLoad: { id: number, role: string };
     public snapshot: ActivatedRouteSnapshot;
 
     constructor(
-        private router: Router,
         private auth: AuthService,
-        public teamService: TeamService, 
+        public teamService: TeamService,
         private activatedRoute: ActivatedRoute,
-        private toastr: ToastrService,
-        private modalService: NgbModal,
     ) {
         this.snapshot = this.activatedRoute.snapshot;
     }
@@ -42,7 +38,11 @@ export class TeamPageComponent implements OnInit {
         this.playLoad = this.auth.tokenData();
         this.teamName = this.snapshot.params.teamName;
 
-        this.getAllUsersOfTeam();
+        this.teamService.getTeamManager(this.teamName).subscribe((user: UserInfo) => {
+            if (this.playLoad.id == user.id) {
+                this.amIGM = true;
+            }
+        });
 
         this.activatedRoute.data.subscribe((data) => {
             this.myTickets = data.allTickets;
@@ -51,50 +51,5 @@ export class TeamPageComponent implements OnInit {
         if (this.playLoad.role == 'admin') {
             this.amIGM = true;
         }
-    }
-
-    public openAddTeammember(): void {
-        const popup = this.modalService.open(AddTeammemberComponent);
-        popup.componentInstance.teamName = this.teamName;
-        popup.result.then((data) => {
-            data.forEach((newUser) => {
-                this.usersOfTeam.push(newUser);
-            });
-        });
-	}
-
-    public getAllTicketsByTeam(): void {
-        this.teamService.getAllTicketsOfTeam(this.teamName).subscribe((x) => {
-            this.myTickets = x;
-        }, (err: HttpErrorResponse) => {
-            this.toastr.error(err.error.err);
-        });
-    }
-
-    public deleteTeam(): void {
-        const teamForDelete = {
-            teamName: this.teamName,
-        };
-
-        this.teamService.deleteTicket(teamForDelete)
-            .subscribe((data: {
-                success: string,
-            }) => {
-                this.toastr.success(`Successfully deleted team!`);
-                this.router.navigate(['./team']);
-
-            }, (err: HttpErrorResponse) => {
-                if (err.status === 302) {
-                    this.toastr.error(err.error.err)
-                }
-            })
-    }
-
-    public getAllUsersOfTeam(): void {
-        this.teamService.getAllUsersOfTeam(this.teamName).subscribe((x) => {
-            this.usersOfTeam = x;
-        }, (err: HttpErrorResponse) => {
-            this.toastr.error(err.error.err);
-        });
     }
 }
