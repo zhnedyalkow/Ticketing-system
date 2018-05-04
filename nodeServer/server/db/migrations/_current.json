@@ -343,6 +343,9 @@
                     "autoIncrement": true,
                     "seqType": "Sequelize.INTEGER"
                 },
+                "avatar": {
+                    "seqType": "Sequelize.STRING"
+                },
                 "name": {
                     "seqType": "Sequelize.STRING"
                 },
