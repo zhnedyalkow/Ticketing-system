@@ -11,8 +11,7 @@ import { TypographyComponent } from './typography/typography.component';
 import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
 import { ComponentsComponent } from './components.component';
 import { NotificationComponent } from './notification/notification.component';
-import { NgbdModalComponent } from './modal/modal.component';
-import { NgbdModalContent } from './modal/modal.component';
+import { ReusableModalComponent } from './reusable-modal/reusable-modal.component';
 
 @NgModule({
     imports: [
@@ -29,10 +28,9 @@ import { NgbdModalContent } from './modal/modal.component';
         TypographyComponent,
         NucleoiconsComponent,
         NotificationComponent,
-        NgbdModalComponent,
-        NgbdModalContent
+        ReusableModalComponent
     ],
-    entryComponents: [NgbdModalContent],
+    entryComponents: [],
     exports:[ ComponentsComponent ]
 })
 export class ComponentsModule { }

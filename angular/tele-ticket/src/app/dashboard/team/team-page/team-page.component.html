@@ -1,82 +1,20 @@
-<div class="btn-box">
-  <span *ngIf="amIGM == true" class="del-btn btn-group pull-right">
-    <button type="button" class="btn btn-danger btn-round" (click)="deleteTeam()">
-      <i class="fa fa-trash"></i>Delete Team</button>
-  </span>
-  <span *ngIf="amIGM == true" class="del-btn btn-group pull-right">
-    <button type="button" class="btn btn-success btn-round"  (click)="openAddTeammember()">
-      <i class="fa fa-trash"></i>Add Member</button>
-  </span>
+<app-btns [teamName]="teamName"></app-btns>
 
+<div class="header-page">
+    <h3 class="text-center font-bold">{{ teamName }}</h3>
 </div>
 
 <div class="container">
-  <div class="header-page">
-    <h3 class="text-center">{{ teamName }}</h3>
-  </div>
-  <h5 class="text-center">Information about the team</h5>
-  <div class="row">
-    <div class="col-sm-7 col-md-7 col-lg-7">
-      <div *ngFor="let ticket of myTickets" class="panel panel-default ticket-container">
-        <div class="panel-heading font-bold">Ticket</div>
-        <div class="panel-body">
-          <ul class="list-group">
-            <li class="list-group-item">
-              <div class="panel-container">
-                <p [routerLink]="['/ticket/', ticket.id]" class="ticket-header">{{ ticket.title}}</p>
-                <p>
-                  <i class="fa fa-user"></i> Attached Member:
-                  <span class="panel-font-bold">{{ ticket.AssignedUser.name}}</span>
-                </p>
-                <div class="ticket-info-box">
-                  <p>
-                    <i class="fa fa-check"></i> Status:
-                    <span class="ticket-content">{{ ticket.Status.name}}</span>
-                  </p>
-                </div>
-                <div class="ticket-info-box">
-                  <p>
-                    <i class="fa fa-tags"></i> Label:
-                    <span class="ticket-content">{{ ticket.Label?.title }}</span>
-                  </p>
-                </div>
-              </div>
-            </li>
-          </ul>
+    <h5 class="text-center font-bold">
+        <i class="fa fa-info-circle"></i> Information about the team</h5>
+    <div class="row">
+
+        <div class="col-sm-7 col-md-7 col-lg-7">
+            <app-team-info [teamName]="teamName"></app-team-info>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-5 col-md-5 col-lg-5">
-      <div class="panel panel-default">
-        <div class="panel-heading font-bold">
-          <i class="fa fa-users"></i> Members</div>
-        <div class="panel-body">
-          <ul class="list-group members-content">
-            <li class="list-group-item">
-              <div class="panel-container">
-                <table class="table table-borderless">
-                  <thead>
-                    <tr>
-                      <th>
-                        <i class="fa fa-user"></i> Name
-                      </th>
-                      <th>
-                        <i class="fa fa-user"></i> Email
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let user of usersOfTeam">
-                      <td>{{ user.name }}</td>
-                      <td>{{ user.email }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </li>
-          </ul>
+
+        <div class="col-sm-5 col-md-5 col-lg-5">
+            <app-team-members [teamName]="teamName"></app-team-members>
         </div>
-      </div>
     </div>
-  </div>
 </div>

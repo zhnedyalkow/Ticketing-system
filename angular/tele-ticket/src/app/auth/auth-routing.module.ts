@@ -9,10 +9,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { 
     AuthGuardServiceLogin as AuthGuard, 
 } from '../core/authentication/auth-guard.service';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '', component: AuthComponent, children: [
+      { path: '', component: HomeComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
       { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] }
     ]

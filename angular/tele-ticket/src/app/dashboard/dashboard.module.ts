@@ -20,6 +20,7 @@ import { CreateTicketComponent } from './components/create-ticket/create-ticket.
 import { TeamNameResolver } from './shared/resolvers/team-name.resolver';
 import { DatepickerValidationService } from './components/create-ticket/validator/datepicker-validator-service';
 import { AddTeammemberComponent } from './components/add-teammember/add-teammember.component';
+import { ReusableModalComponent } from '../components/reusable-modal/reusable-modal.component';
 
 @NgModule({
   declarations: [

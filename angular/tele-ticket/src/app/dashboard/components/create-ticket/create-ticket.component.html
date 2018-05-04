@@ -11,6 +11,7 @@
         <span *ngIf="createTicketForm.controls['title'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
         <span *ngIf="createTicketForm.controls['title'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
       </div>
+
       <div class="ticket-description">
         <label for="description" class="font-bold">Description</label>
         <textarea formControlName="description" id="description" class="form-control" rows="4" placeholder="Description..."></textarea>
@@ -20,6 +21,7 @@
         <span *ngIf="createTicketForm.controls['description'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
         <span *ngIf="createTicketForm.controls['description'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
       </div>
+
       <div class="ticket-label">
         <label for="label" class="font-bold">Label</label>
         <input formControlName="label" type="text" id="label" class="form-control" placeholder="Label...">
@@ -29,6 +31,7 @@
         <span *ngIf="createTicketForm.controls['label'].hasError('minlength') "> {{ labelMinLenErrMsg }} </span>
         <span *ngIf="createTicketForm.controls['label'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
       </div>
+
       <div class="form-group">
         <label for="dueDate" class="font-bold">Select date</label>
         <div class="input-group">
@@ -70,9 +73,9 @@
 
     <div class="modal-footer">
       <div class="left-side">
-        <button type="submit" [disabled]="!selected && !createTicketForm.valid" class="btn btn-default btn-link">Create issue</button>
+        <button type="submit" [disabled]="!selected && !createTicketForm.valid"
+                class="btn btn-default btn-link">Create issue</button>
       </div>
-
       <div class="divider"></div>
       <div class="right-side">
         <button type="button" class="btn btn-default btn-link" (click)="activeModal.close()">Never mind</button>

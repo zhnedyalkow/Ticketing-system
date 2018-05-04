@@ -1,3 +1,8 @@
-.right-side-button {
-    float:right !important;
+.navbar-default {
+    background-color: #263238;
+}  
+
+.navbar-default .navbar-nav .nav-item
+ .nav-link:not(.btn),.navbar-brand {
+    color: #FFF;
 }

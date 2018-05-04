@@ -18,7 +18,7 @@ class CommentsData extends Data {
             include: [
                 {
                     model: User,
-                    attributes: ['name', 'email'],
+                    attributes: ['name', 'email', 'avatar'],
                 },
             ],
         });

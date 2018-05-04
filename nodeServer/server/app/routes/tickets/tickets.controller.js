@@ -8,6 +8,7 @@ class TicketsController {
     }
 
     async createTicket(obj, creator) {
+        let ticket;
         try {
             if (typeof obj === 'undefined') {
                 throw new Error('The body is missing!');
@@ -73,7 +74,7 @@ class TicketsController {
             });
 
             // Create new ticket
-            await this.data.tickets.create({
+            ticket = await this.data.tickets.create({
                 title: obj.title,
                 description: obj.description,
                 dueDate: fullDate,
@@ -100,9 +101,10 @@ class TicketsController {
             NotificationId: notification.id,
         });
 
-        return {
-            message: 'Success',
-        };
+        // return {
+        //     message: 'Success',
+        // };
+        return ticket;
     }
 
     async getTicketInfoById(ticketId, requester) {

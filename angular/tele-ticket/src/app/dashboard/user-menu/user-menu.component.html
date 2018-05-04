@@ -1,6 +1,6 @@
 <div class="manu-user-left">
   <div class="user-info">
-    <img src="../../assets/img/faces//ayo-ogunseinde-2.jpg" alt="" width="100" height="100" class="avatar">
+    <img src="../../assets/img/{{(userInfo$ | async)?.avatar}}" alt="" width="100" height="100" class="avatar">
     <h5>{{(userInfo$ | async)?.name}}</h5>
     <p>User</p>
   </div>

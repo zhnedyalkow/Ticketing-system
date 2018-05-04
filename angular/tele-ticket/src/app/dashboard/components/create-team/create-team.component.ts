@@ -29,8 +29,7 @@ export class CreateTeamComponent implements OnInit {
     public createTeamForm: FormGroup;
     public genericErrorMsg: string = 'The field is required!';
     public emailErrMsg: string = 'Invalid email! Eg. john.doe@gmail.com!';
-    public minLenName: string = 'Min length should be more than 2 chars!';
-    public genMinLengthMsg: string = 'Min length should be more than 8 chars!';
+    public genMinLengthMsg: string = 'Min length should be more than 5 chars!';
     public genMaxLengthMsg: string = 'Max Length should be less than 50 chars!';
     public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
@@ -48,10 +47,11 @@ export class CreateTeamComponent implements OnInit {
 
         this.createTeamForm = this.fb.group({
             'name': [null,
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(50),
-            ],
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(5),
+                    Validators.maxLength(50),
+                ])],
             users: this.fb.array([
                 this.buildItem(),
             ]),
@@ -68,7 +68,7 @@ export class CreateTeamComponent implements OnInit {
                 Validators.compose([
                     Validators.required,
                     Validators.email,
-                    Validators.minLength(8),
+                    Validators.minLength(5),
                     Validators.maxLength(50),
                     Validators.pattern(this.emailPattern),
                 ])

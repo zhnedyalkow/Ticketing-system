@@ -7,6 +7,9 @@ import { TeamListComponent } from './team-list/team-list.component';
 import { TeamPageComponent } from './team-page/team-page.component';
 import { TeamComponent } from './team.component';
 import { TeamboxComponent } from './team-list/teambox/teambox.component';
+import { TeamInfoComponent } from './team-page/team-info/team-info.component';
+import { BtnsComponent } from './team-page/btns/btns.component';
+import { TeamMembersComponent } from './team-page/team-members/team-members.component';
 
 @NgModule({
     declarations: [
@@ -14,6 +17,9 @@ import { TeamboxComponent } from './team-list/teambox/teambox.component';
         TeamPageComponent,
         TeamboxComponent,
         TeamComponent,
+        TeamInfoComponent,
+        BtnsComponent,
+        TeamMembersComponent,
     ],
     imports: [
         CommonModule,

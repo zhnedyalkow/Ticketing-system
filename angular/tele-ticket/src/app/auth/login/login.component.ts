@@ -12,11 +12,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
+
     public rForm: FormGroup;
-    publicemail: string = '';
-    publicpassword: string = '';
     public test: Date = new Date();
 
+    publicemail: string = '';
+    publicpassword: string = '';
     emailErrMsg: string = 'Email is required!';
     pwdErrMsg: string = 'Password is required!';
     minEmailLen: string = 'Min length should be more than 8 chars!';
