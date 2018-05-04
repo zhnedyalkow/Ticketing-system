@@ -5,6 +5,7 @@ import { AdminService } from '../shared/services/admin.service';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
     selector: 'app-admin',
@@ -20,6 +21,7 @@ export class AdminComponent implements OnInit {
 
     constructor(
         private adminService: AdminService,
+        private userService: UserService,
         private fb: FormBuilder,
         private toastr: ToastrService,
     ) {
@@ -47,7 +49,7 @@ export class AdminComponent implements OnInit {
     }
 
     public getAllUsers(): void {
-        this.adminService.getAllUsers().subscribe((x) => {
+        this.userService.getAllUsers().subscribe((x) => {
             this.allUsers = x;
         }, (err: HttpErrorResponse) => {
             this.toastr.error(err.error.err);

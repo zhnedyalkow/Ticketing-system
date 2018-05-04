@@ -10,11 +10,13 @@ import { DashboardService } from '../../shared/services/dashboard.service';
 import { TicketService } from '../../shared/services/ticket.service';
 import { AuthService } from '../../../core/authentication/auth.service';
 
-import { Ticket } from '../../../models/tickets/ticket';
-import { Team } from '../../../models/teams/team';
-
 import { DatepickerValidationService } from './validator/datepicker-validator-service';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../shared/services/user.service';
+
+import { Ticket } from '../../../models/tickets/ticket';
+import { Team } from '../../../models/teams/team';
+import { UserInfo } from '../../../models/users/user.info';
 
 @Component({
     selector: 'app-create-ticket',
@@ -25,6 +27,7 @@ export class CreateTicketComponent implements OnInit {
 
     public ticketId: number;
     public teams: Team[];
+    public users: UserInfo[];
     public email: AbstractControl;
     public name: AbstractControl;
     public title: AbstractControl;
@@ -49,6 +52,7 @@ export class CreateTicketComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private dashService: DashboardService,
         private ticketService: TicketService,
+        private userService: UserService,
         private toastr: ToastrService,
         private dateValidatorService: DatepickerValidationService,
     ) {
@@ -87,6 +91,7 @@ export class CreateTicketComponent implements OnInit {
                 Validators.required]
         });
         this.getMyTeam();
+        this.getAllUsers();
     }
 
     public createTicket(): void{
@@ -104,5 +109,11 @@ export class CreateTicketComponent implements OnInit {
         this.dashService.getMyTeams().subscribe((data) => {
             this.teams = data;
         });
+    }
+
+    public getAllUsers(): void {
+        this.userService.getAllUsers().subscribe((data) => {
+            this.users = data;
+        })
     }
 }

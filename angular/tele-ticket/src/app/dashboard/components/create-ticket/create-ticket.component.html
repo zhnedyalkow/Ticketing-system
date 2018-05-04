@@ -58,10 +58,12 @@
         </div>
       </div>
 
-      <div class="users-email">
-        <label for="assignedUser" class="font-bold">Email</label>
-        <p class="danger-color font-bold">*Assign user's email - * = required </p>
-        <input formControlName="assignedUser" type="text" id="email" class="form-control" placeholder="User's email...">
+      <div class="form-group">
+        <label for="assignedUser" class="font-bold">Select User</label>
+        <select formControlName="assignedUser" class="form-control" id="assignedUser" required>
+          <option selected>Select User</option>
+          <option *ngFor="let user of users" [attr.value]="user.email">{{user.name}}</option>
+        </select>
         <div class="alert" *ngIf="!createTicketForm.controls['assignedUser'].valid && createTicketForm.controls['assignedUser'].touched">
           <span *ngIf="createTicketForm.controls['assignedUser'].hasError('required') ">{{ genericErrorMsg }} </span>
           <span *ngIf="createTicketForm.controls['assignedUser'].hasError('pattern') ">{{ emailErrMsg }} </span>

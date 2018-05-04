@@ -15,11 +15,11 @@ export class DashboardService {
         this.userInfo = this.http.get<UserInfo>(`${this.appConfig.apiUrl}/user/getInfo`);
     }
 
-    getUserInfo(): Observable<UserInfo> {
+    public getUserInfo(): Observable<UserInfo> {
         return this.userInfo;
     }
 
-    getMyTeams(): Observable<Array<Team>> {
+    public getMyTeams(): Observable<Array<Team>> {
         return this.http.get<Array<Team>>(`${this.appConfig.apiUrl}/Team/getMyTeams`);
     }
 }
