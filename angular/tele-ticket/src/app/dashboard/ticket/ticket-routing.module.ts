@@ -6,10 +6,19 @@ import { AuthGuardService as AuthGuard } from '../../core/authentication/auth-gu
 import { TicketComponent } from './ticket.component';
 import { TicketPageComponent } from './ticket-page/ticket-page.component';
 import { TicketIdResolver } from '../shared/resolvers/ticket-id.resolver';
+import { TicketListComponent } from './ticket-list/ticket-list.component';
 
 const routes: Routes = [
     {
         path: '', component: TicketComponent, children: [
+            {
+                path: '', redirectTo: 'ticketlist',
+            },
+            {
+                path: 'ticketlist',
+                component: TicketListComponent,
+                canActivate: [AuthGuard]
+            },
             { 
                 path: ':ticketId', 
                 component: TicketPageComponent, 

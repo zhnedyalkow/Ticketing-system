@@ -107,6 +107,24 @@ class TicketsController {
         return ticket;
     }
 
+    async getAllMyTickets(requester) {
+        let tickets;
+
+        try {
+            tickets = await this.data.tickets.getAllByCriteria({
+                AssignedUserId: requester.id,
+            });
+
+            if (!tickets) {
+                throw new Error('You have not tickets!');
+            }
+        } catch (error) {
+            throw error;
+        }
+
+        return tickets;
+    }
+
     async getTicketInfoById(ticketId, requester) {
         let ticket;
 
@@ -194,24 +212,6 @@ class TicketsController {
         return {
             success: true,
         };
-    }
-
-    async getAllMyTickets(requester) {
-        let tickets;
-
-        try {
-            tickets = await this.data.tickets.getAllByCriteria({
-                AssignedUserId: requester.id,
-            });
-
-            if (!tickets) {
-                throw new Error('You have not tickets!');
-            }
-        } catch (error) {
-            throw error;
-        }
-
-        return tickets;
     }
 
     async changeTicketStatus(statusName, ticketId, requester) {

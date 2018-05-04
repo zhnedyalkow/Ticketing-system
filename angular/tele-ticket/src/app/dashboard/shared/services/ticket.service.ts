@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Observable";
 import { AppConfig } from "../../../config/app.config";
 import { Comments } from "../../../models/comments/comments";
 import { Status } from "../../../models/tickets/status";
+import { Ticket } from "../../../models/tickets/ticket";
 
 @Injectable()
 export class TicketService {
@@ -23,6 +24,10 @@ export class TicketService {
     deleteTicket(ticketInfo: Object): Observable<Object> {
         return this.http.post<Observable<Object>>
             (`${this.appConfig.apiUrl}/ticket/deleteTicket`, ticketInfo);
+    }
+
+    getMyTickets(): Observable<Array<Ticket>>{
+        return this.http.get<Array<Ticket>>(`${this.appConfig.apiUrl}/ticket/getAllMyTickets`);
     }
 
     getComments(ticketId): Observable<Array<Comments>> {

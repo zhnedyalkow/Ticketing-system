@@ -14,8 +14,8 @@ export class TeamListComponent implements OnInit {
     constructor(public dashService: DashboardService) { }
 
     ngOnInit() {
-        this.dashService.getMyTeams().subscribe((x) => {
-            this.myTeamInfo = x;
+        this.dashService.getMyTeams().subscribe((data) => {
+            this.myTeamInfo = data;
         }, (error) => {
             console.log(error);
         } );

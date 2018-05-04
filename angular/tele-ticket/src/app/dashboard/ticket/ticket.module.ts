@@ -11,6 +11,8 @@ import { TicketService } from '../shared/services/ticket.service';
 import { TicketDescComponent } from './ticket-page/ticket-desc/ticket-desc.component';
 import { TicketStatusBtnsComponent } from './ticket-page/ticket-status-btns/ticket-status-btns.component';
 import { TicketCommentsComponent } from './ticket-page/ticket-comments/ticket-comments.component';
+import { TicketListComponent } from './ticket-list/ticket-list.component';
+import { TicketBoxComponent } from './ticket-list/ticket-box/ticket-box.component';
 
 @NgModule({
   imports: [
@@ -25,6 +27,8 @@ import { TicketCommentsComponent } from './ticket-page/ticket-comments/ticket-co
     TicketDescComponent,
     TicketStatusBtnsComponent,
     TicketCommentsComponent,
+    TicketListComponent,
+    TicketBoxComponent,
   ],
   providers: [
     TicketService,
