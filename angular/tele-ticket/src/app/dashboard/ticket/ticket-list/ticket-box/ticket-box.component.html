@@ -14,9 +14,6 @@
                                  {{ ticket?.Status.name }}
                         </span>
                     </li>
-
-                </ul>
-                <ul>
                     <li>
                         <i class="fa fa-plus"></i>Assignee: <span >
                              <span class="warning-color" > {{ ticket?.AssignedUser?.name }} </span>
@@ -25,24 +22,22 @@
                     <li>
                         <i class="fa fa-user"></i> Raised by: 
                         <span>
-                             <!-- Yavor Stoychev -->
                             {{ ticket?.Creator?.name }}
                         </span>
                     </li>
-                </ul>
-                <ul>
+
                     <li>
-                            <i class="fa fa-refresh"></i>  Updated: 
-                        <span>
-                           {{ ticket?.updatedAt | date: 'dd/MM/yyyy'}} {{ ticket?.updatedAt | date: 'HH:mm'}}
-                        </span>
-                    </li>
-                    <li>
-                        <i class="fa fa-calendar"></i> Due date:
-                        <span class="date">
-                            {{ ticket?.dueDate | date: 'dd/MM/yyyy'}} {{ ticket?.dueDate | date: 'HH:mm'}}
-                        </span>
-                    </li>
+                        <i class="fa fa-refresh"></i>  Updated: 
+                    <span>
+                       {{ ticket?.updatedAt | date: 'dd/MM/yyyy'}} {{ ticket?.updatedAt | date: 'HH:mm'}}
+                    </span>
+                </li>
+                <li>
+                    <i class="fa fa-calendar"></i> Due date:
+                    <span class="date">
+                        {{ ticket?.dueDate | date: 'dd/MM/yyyy'}} {{ ticket?.dueDate | date: 'HH:mm'}}
+                    </span>
+                </li>
                 </ul>
             </div>
         </div>

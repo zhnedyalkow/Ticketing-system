@@ -1,3 +1,5 @@
+@import "./assets/sass/mixins/_breaking.point.scss";
+
 .navbar .nav-link {
     color: #263238;
 }
@@ -8,22 +10,29 @@
 }
 
 .content {
-    width: 100%;
     height: auto;
     min-height: 300px;
     padding: 32px 16px;
-    &.has-menu {
-        width: calc(100% - 190px);
-        margin-left: 190px;
+    width: calc(100% - 190px);
+    margin-left: 190px;
+
+    @include tablet {
+        width: 100%;
+        margin-left: 0px;
     }
 }
 
-.create-ticket, .create-team {
-    .ticket-title, .ticket-description, .datetimepicker,
-    .users-email, .teams-name, .teams-icon, .user-name {
+.create-ticket,
+.create-team {
+    .ticket-title,
+    .ticket-description,
+    .datetimepicker,
+    .users-email,
+    .teams-name,
+    .teams-icon,
+    .user-name {
         margin: 10px 0px;
     }
-
     .ticket-label {
         margin: 10px 0px;
     }

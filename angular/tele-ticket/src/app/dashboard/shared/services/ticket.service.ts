@@ -27,7 +27,7 @@ export class TicketService {
     }
 
     getMyTickets(): Observable<Array<Ticket>>{
-        return this.http.get<Array<Ticket>>(`${this.appConfig.apiUrl}/ticket/getAllMyTickets`);
+        return this.http.get<Array<Ticket>>(`${this.appConfig.apiUrl}/ticket/getMyTickets`);
     }
 
     getComments(ticketId): Observable<Array<Comments>> {

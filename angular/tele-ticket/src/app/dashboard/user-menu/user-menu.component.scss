@@ -1,3 +1,5 @@
+@import "../../../assets/sass/mixins/_breaking.point.scss";
+
 .manu-user-left {
     width: 190px;
     position: absolute;
@@ -7,6 +9,12 @@
     background-color: #263238;
     text-align: center;
     padding: 40px 0px;
+
+    @include tablet {
+        position: static;
+        width: 100%;
+        padding: 16px 0px;
+    }
 
     img {
         display: inline-block;
@@ -27,6 +35,10 @@
         padding-bottom: 30px;
         border-bottom:1px solid rgba(255, 255, 255, 0.1);
 
+        @include tablet {
+            padding-bottom: 16px;
+        }
+
         p {
             color: white;
             font-weight: bold;
@@ -40,6 +52,10 @@
         padding: 0px;
         cursor: pointer;
 
+        @include tablet {
+            margin: 16px auto 0;
+        }
+
         li {
             text-align: center;
             padding: 10px;
@@ -51,6 +67,10 @@
             &:hover {
                 color: #6dd3d6;
                 background-color: rgba(0, 0, 0, 0.1);
+            }
+
+            @include tablet {
+                display: inline-block;
             }
         }
     }
