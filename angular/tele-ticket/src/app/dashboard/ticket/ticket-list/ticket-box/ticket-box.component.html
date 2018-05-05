@@ -10,8 +10,25 @@
                 <ul>
                     <li>
                         <i class="fa fa-calendar"></i>
-                        Due date:
-                        <span class="date"> {{ ticket?.dueDate | date }}</span>
+                        Due date: <span class="date">
+                            {{ ticket?.dueDate | date: 'dd/MM/yyyy'}}
+                        </span>
+                    </li>
+                    <!-- <li>
+                        <span>{{ ticket?.StatusId }}</span>
+                    </li> -->
+                    <li>
+                        <span>
+                            Created: {{ ticket?.createdAt | date: 'dd/MM/yyyy'}}
+                                     {{ ticket?.createdAt | date: 'HH:mm'}} 
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            <i class="fa fa-refresh"></i>
+                            Updated: {{ ticket?.updatedAt | date: 'dd/MM/yyyy'}}
+                                     {{ ticket?.updatedAt | date: 'HH:mm'}} 
+                        </span>
                     </li>
                 </ul>
             </div>
@@ -19,6 +36,14 @@
     </div>
 </div>
 
+
+<!-- id
+title
+description
+dueDate
+AssignedUserId
+CreatorId
+StatusId -->
 
 <!-- <div class="my-tickets-box">
     <div class="row">
