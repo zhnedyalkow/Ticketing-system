@@ -8,7 +8,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { TeamModule } from './team/team.module';
 
 import { DashboardComponent } from './dashboard.component';
-import { UserMenuComponent } from './user-menu/user-menu.component';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
 
 import { DashboardService } from './shared/services/dashboard.service';
 import { TicketService } from './shared/services/ticket.service';
@@ -24,6 +24,9 @@ import { AddTeammemberComponent } from './components/add-teammember/add-teammemb
 import { ReusableModalComponent } from '../components/reusable-modal/reusable-modal.component';
 import { UserService } from './shared/services/user.service';
 import { TeamMembersResolver } from './shared/resolvers/team-members.resolver';
+import { HomeComponent } from './components/home/home.component';
+import { HomeService } from './shared/services/home.service';
+import { NotificationBoxComponent } from './components/notification-box/notification-box.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +36,13 @@ import { TeamMembersResolver } from './shared/resolvers/team-members.resolver';
     CreateTicketComponent,
     AddTeammemberComponent,
     NavbarComponent,
+    HomeComponent,
+    NotificationBoxComponent,
   ],
   imports: [
     CommonModule,
-
-    DashboardRoutingModule,
     NgbModule,
+    DashboardRoutingModule,
     ReactiveFormsModule,
     FormsModule
   ],
@@ -47,6 +51,7 @@ import { TeamMembersResolver } from './shared/resolvers/team-members.resolver';
     TicketService,
     TeamService,
     UserService,
+    HomeService,
     DatepickerValidationService,
     TeamTicketsResolver,
     TeamMembersResolver

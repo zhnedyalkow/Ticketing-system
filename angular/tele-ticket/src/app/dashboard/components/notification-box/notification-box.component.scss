@@ -1,0 +1,21 @@
+.notifcation-box {
+    width: 100%;
+    min-height: 120px;
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+    margin: 16px auto;
+    padding: 16px;
+
+    .notification-info, img {
+        // display: inline-block;
+        // vertical-align: middle;
+    }
+
+    .notification-info {
+        margin-left: 16px;
+
+        p {
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+    }
+}

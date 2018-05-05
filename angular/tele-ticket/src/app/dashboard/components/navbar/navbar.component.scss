@@ -1,4 +1,265 @@
+@import "../../../../assets/sass/mixins/_breaking.point.scss";
 
-.navigation {
+body.top-bar {
+    display: block;
+    margin-top: 30px;
+}
+
+header {
+    padding: 10px 0px;
+    min-height: 62px;
+    margin-bottom: 0px;
+    padding: 20px 18px;
+    &.navbar {
+        margin-bottom: 0px;
+    }
+    a {
+        color: #FFFFFF;
+    }
+    .logo-a {
+        display: inline-block;
+        vertical-align: middle;
+
+        img,
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        span {
+            margin-left: 8px;
+        }
+    }
+    &.sticky {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1001;
+    }
+    &.bgcolor-white {
+        box-shadow: 0px 1px 100px 0 rgba(140, 140, 140, 0.21);
+    }
+    &.transition {
+        transition: all 300ms ease;
+    }
+    .mobile-menu-icon {
+        display: none;
+        @include tablet {
+            float: right;
+            display: inline-block;
+        }
+    }
+    .header-left-box {
+        display: inline-block;
+        transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+        @include tablet {
+            display: block;
+            &.mobile-menu-open {
+                transform: translate3d(-270px, 0, 0);
+            }
+        }
+    }
+    .header-right-box {
+        float: right;
+        ul {
+            @include tablet {
+                margin-top: 12px;
+            }
+            margin-bottom: 0px;
+        }
+        @include tablet {
+            position: fixed;
+            top: 0;
+            right: -270px;
+            width: 270px;
+            z-index: 1001;
+            height: 100%;
+            transform: translate3d(0px, 0, 0);
+            transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+            &.active {
+                right: 0px;
+            }
+            &:before {
+                $brand-primary: white;
+                background: $brand-primary;
+                background: linear-gradient(#263238 0%, #3b3b3b 290%);
+                opacity: 1;
+                display: block;
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            }
+        }
+    }
+    &.navbar-transparent {
+        background-color: transparent !important;
+        box-shadow: none;
+        color: #fff;
+        padding-top: 20px;
+    }
+    &.fixed-top {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+    &.fixed-top.top-bar {
+        position: absolute;
+        top: 30px;
+    }
+}
+
+header>.container,
+.header-right-box,
+.header-navbar,
+.header-navbar>.nav-item,
+.header-navbar>.nav-item>.nav-link {
+    height: 100%;
+}
+
+.header-navbar {
+    @include tablet {
+        margin-top: 53px;
+    }
+    li.nav-item {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+        @include tablet {
+            display: block;
+            height: auto;
+        }
+        &:last-of-type {
+            margin-right: 0px;
+        }
+        .btn {
+            margin: 0px;
+            display: inline-block;
+            @include tablet {
+                display: block;
+                margin: 6px 16px;
+            }
+        }
+        .nav-link {
+            display: inline-block;
+            vertical-align: middle;
+            text-transform: uppercase;
+            font-size: .8571em;
+            padding: .5em .7em;
+            line-height: 2em;
+            color: white;
+            font-weight: bold;
+            transition: all 300ms ease;
+            cursor: pointer;
+            @include tablet {
+                display: block;
+                margin: 6px 16px;
+                height: auto;
+            }
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+                border-radius: .1875rem;
+                text-decoration: none; // color: #FFFFFF;
+                opacity: 0.7;
+            }
+        }
+    }
+}
+
+.wrapper {
+    @include tablet {
+        &.transition {
+            transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+        }
+        &.mobile-menu-open {
+            transform: translate3d(-270px, 0, 0);
+        }
+    }
+}
+
+#mobile-menu-icon-div {
+    width: 30px;
+    height: 25px;
+    position: relative;
+    margin: 6px auto 0px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
     cursor: pointer;
+}
+
+#mobile-menu-icon-div span {
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: #fff;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+}
+
+#mobile-menu-icon-div span:nth-child(1) {
+    top: 0px;
+    -webkit-transform-origin: left center;
+    -moz-transform-origin: left center;
+    -o-transform-origin: left center;
+    transform-origin: left center;
+}
+
+#mobile-menu-icon-div span:nth-child(2) {
+    top: 10px;
+    -webkit-transform-origin: left center;
+    -moz-transform-origin: left center;
+    -o-transform-origin: left center;
+    transform-origin: left center;
+}
+
+#mobile-menu-icon-div span:nth-child(3) {
+    top: 20px;
+    -webkit-transform-origin: left center;
+    -moz-transform-origin: left center;
+    -o-transform-origin: left center;
+    transform-origin: left center;
+}
+
+#mobile-menu-icon-div.open span:nth-child(1) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    top: -3px;
+    left: 8px;
+}
+
+#mobile-menu-icon-div.open span:nth-child(2) {
+    width: 0%;
+    opacity: 0;
+}
+
+#mobile-menu-icon-div.open span:nth-child(3) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 19px;
+    left: 8px;
 }

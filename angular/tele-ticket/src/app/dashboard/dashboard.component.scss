@@ -1,4 +1,4 @@
-@import "./assets/sass/mixins/_breaking.point.scss";
+@import "../../assets/sass/mixins/_breaking.point.scss";
 
 .navbar .nav-link {
     color: #263238;
@@ -6,15 +6,16 @@
 
 .container-box {
     position: relative;
-    min-height: 100%;
+    height: calc(100% - 80px);
 }
 
 .content {
-    height: auto;
-    min-height: 300px;
+    min-height: 100%;
     padding: 32px 16px;
     width: calc(100% - 190px);
     margin-left: 190px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
 
     @include tablet {
         width: 100%;

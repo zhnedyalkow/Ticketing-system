@@ -79,7 +79,7 @@ class TicketsController {
 
             // Check weather the creator is in the following team
             const teamHasCreator = await team.hasUser(creator);
-            if (!teamHasCreator) {
+            if (!teamHasCreator && creator.role !== 'admin') {
                 throw new Error('You cannnot create ticket for this team!');
             }
 
