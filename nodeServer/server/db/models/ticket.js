@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         paranoid: true,
     });
-    Ticket.associate = function (models) {
+    Ticket.associate = (models) => {
         const {
             Status,
             User,

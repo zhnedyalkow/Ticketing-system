@@ -7,6 +7,22 @@ class TicketsController {
         this.data = data;
     }
 
+    async getMyTickets(user) {
+        let tickets;
+
+        try {
+            tickets = await user.getTickets({
+                where: {
+                    $or: [{ StatusId: 4 }, { StatusId: 5 }],
+                },
+            });
+        } catch (error) {
+            throw error;
+        }
+
+        return tickets;
+    }
+
     async createTicket(obj, creator) {
         let ticket;
         try {
@@ -26,7 +42,7 @@ class TicketsController {
                 throw new Error('The label is missing!');
             }
 
-            if (obj.teamId.length < 0) {
+            if (obj.teamName.length < 0) {
                 throw new Error('Something went wrong!!');
             }
 
@@ -42,7 +58,10 @@ class TicketsController {
             }
 
             // Check weather the user is in the following team
-            const team = await this.data.teams.getById(obj.teamId);
+            const team = await this.data.teams.getOneByCriteria({
+                name: obj.teamName,
+                CompanyId: creator.CompanyId,
+            });
 
             if (!team) {
                 throw new Error('There is now such a team!');
@@ -80,7 +99,7 @@ class TicketsController {
                 dueDate: fullDate,
                 AssignedUserId: user.id,
                 CreatorId: creator.id,
-                TeamId: obj.teamId,
+                TeamId: team.id,
                 LabelId: theLabel[0].id,
                 StatusId: 4,
             });

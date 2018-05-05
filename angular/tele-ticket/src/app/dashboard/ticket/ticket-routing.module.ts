@@ -24,7 +24,7 @@ const routes: Routes = [
                 component: TicketPageComponent, 
                 canActivate: [AuthGuard],
                 resolve: {
-                    ticketId: TicketIdResolver
+                    ticketInfo: TicketIdResolver
                 }
             },
         ]

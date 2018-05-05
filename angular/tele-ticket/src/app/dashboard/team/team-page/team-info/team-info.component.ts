@@ -14,26 +14,9 @@ import { User } from '../../../../models/users/user';
 	styleUrls: ['./team-info.component.scss']
 })
 export class TeamInfoComponent implements OnInit {
+	@Input() myTickets: Ticket[];
 
-	@Input() teamName: string;
+	constructor() { }
 
-	public usersOfTeam: User[]
-	public myTickets: Ticket[];
-
-	constructor(
-		public teamService: TeamService,
-		private toastr: ToastrService,
-	) { }
-
-	public ngOnInit(): void {
-		this.getAllTicketsByTeam();
-	}
-
-	public getAllTicketsByTeam(): void {
-		this.teamService.getAllTicketsOfTeam(this.teamName).subscribe((x) => {
-			this.myTickets = x;
-		}, (err: HttpErrorResponse) => {
-			this.toastr.error(err.error.err);
-		});
-	}
+	public ngOnInit(): void {}
 }

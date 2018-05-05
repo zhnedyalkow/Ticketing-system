@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../../../../models/users/user';
 import { Ticket } from '../../../../models/tickets/ticket';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserInfo } from '../../../../models/users/user.info';
 
 @Component({
   selector: 'app-team-members',
@@ -11,28 +12,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./team-members.component.scss']
 })
 export class TeamMembersComponent implements OnInit {
+	@Input() usersOfTeam: UserInfo[];
 
-
-	@Input() teamName: string;
-
-	public usersOfTeam: User[]
-
-	constructor(
-		public teamService: TeamService,
-		private toastr: ToastrService,
-	) { }
+	constructor() { }
 
 	public ngOnInit(): void {
-		this.getAllUsersOfTeam();
 	}
-
-	public getAllUsersOfTeam(): void {
-		this.teamService.getAllUsersOfTeam(this.teamName).subscribe((x) => {
-			this.usersOfTeam = x;
-		}, (err: HttpErrorResponse) => {
-			this.toastr.error(err.error.err);
-		});
-	}
-
-
 }

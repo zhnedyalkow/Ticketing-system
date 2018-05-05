@@ -19,7 +19,7 @@ const routes: Routes = [
                 loadChildren: './ticket/ticket.module#TicketModule',
                 canActivate: [AuthGuard]
             },
-            { 
+            {
                 path: 'admin', 
                 loadChildren: './admin/admin.module#AdminModule', 
                 canActivate: [RoleGuard], 

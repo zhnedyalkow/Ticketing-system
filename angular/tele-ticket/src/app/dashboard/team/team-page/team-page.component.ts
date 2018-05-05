@@ -44,12 +44,13 @@ export class TeamPageComponent implements OnInit {
             }
         });
 
-        this.activatedRoute.data.subscribe((data) => {
-            this.myTickets = data.allTickets;
-        });
-
         if (this.playLoad.role == 'admin') {
             this.amIGM = true;
         }
+
+        this.activatedRoute.data.subscribe((data) => {
+            this.myTickets = data.allTickets;
+            this.usersOfTeam = data.allMembers;
+        });
     }
 }

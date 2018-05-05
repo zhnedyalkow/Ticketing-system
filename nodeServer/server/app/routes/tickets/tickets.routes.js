@@ -49,6 +49,17 @@ const init = (app, data) => {
 
             return res.status(200).json(tickets);
         })
+        .get('/getMyTickets', async (req, res) => {
+            let tickets;
+
+            try {
+                tickets = await controller.getMyTickets(req.user);
+            } catch (error) {
+                return res.status(302).json({ err: error.message });
+            }
+
+            return res.status(200).json(tickets);
+        })
         .post('/createTicket', async (req, res) => {
             if (typeof req.user === 'undefined') {
                 return res.sendStatus(403);

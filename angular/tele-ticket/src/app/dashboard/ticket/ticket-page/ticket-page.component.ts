@@ -25,12 +25,8 @@ export class TicketPageComponent implements OnInit {
     public amIAU: boolean = false;
 
     constructor(
-        private router: Router,
-        public ticketService: TicketService,
         private activatedRoute: ActivatedRoute,
-        private fb: FormBuilder,
         private auth: AuthService,
-        private toastr: ToastrService,
     ) {
         this.snapshot = this.activatedRoute.snapshot;
     }
@@ -39,16 +35,12 @@ export class TicketPageComponent implements OnInit {
         this.ticketId = this.snapshot.params.ticketId;
         this.playLoad = this.auth.tokenData();
 
-        this.getTicketInfoById();
-
         if (this.playLoad.role == 'admin') {
             this.amIGM = true;
         }
-    }
 
-    public getTicketInfoById(): void {
-        this.ticketService.getTicketInfoById(this.ticketId).subscribe((data: Ticket) => {
-            this.ticketInfo = data;
+        this.activatedRoute.data.subscribe((data) => {
+            this.ticketInfo = data.ticketInfo;
 
             if (this.ticketInfo.Team.TeamManagerId == this.playLoad.id) {
                 this.amIGM = true;
@@ -57,9 +49,6 @@ export class TicketPageComponent implements OnInit {
             if (this.ticketInfo.AssignedUser.id == this.playLoad.id) {
                 this.amIAU = true;
             }
-
-        }, (err: HttpErrorResponse) => {
-            this.toastr.error(err.error.er);
         });
     }
 }

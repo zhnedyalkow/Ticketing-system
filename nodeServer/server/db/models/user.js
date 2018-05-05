@@ -14,9 +14,11 @@ module.exports = (sequelize, DataTypes) => {
             Company,
             Team,
             Notification,
+            Ticket,
         } = models;
 
         User.hasMany(Notification);
+        User.hasMany(Ticket, { foreignKey: 'AssignedUserId' });
         User.belongsTo(Company);
         User.belongsToMany(Team, {
             through: 'TeamMembers',

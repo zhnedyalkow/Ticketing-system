@@ -48,13 +48,13 @@
       </div>
 
       <div class="form-group">
-        <label for="teamId" class="font-bold">Select team</label>
-        <select formControlName="teamId" class="form-control" id="teamId" required>
+        <label for="teamName" class="font-bold">Select team</label>
+        <select (change)="getAllUsersOfTeam($event.target.value)" formControlName="teamName" class="form-control" id="teamName" required>
           <option selected>Select Team</option>
-          <option *ngFor="let team of teams" [attr.value]="team.id">{{team.name}}</option>
+          <option *ngFor="let team of teams" [attr.value]="team.name">{{team.name}}</option>
         </select>
-        <div class="alert" *ngIf="!createTicketForm.controls['teamId'].valid && createTicketForm.controls['teamId'].touched">
-          <span *ngIf="createTicketForm.controls['teamId'].hasError('required') ">{{ genericErrorMsg }} </span>
+        <div class="alert" *ngIf="!createTicketForm.controls['teamName'].valid && createTicketForm.controls['teamName'].touched">
+          <span *ngIf="createTicketForm.controls['teamName'].hasError('required') ">{{ genericErrorMsg }} </span>
         </div>
       </div>
 

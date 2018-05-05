@@ -11,5 +11,10 @@ export class UserService {
     public getAllUsers(): Observable<Array<UserInfo>> {
         return this.http.get<Array<UserInfo>>(`${this.appConfig.apiUrl}/user/getAllUsers`);
     }
-    
+
+    getAllUsersOfTeam(teamName: string): Observable<Array<Object>> {
+        return this.http
+            .get<Array<Object>>(`${this.appConfig
+                .apiUrl}/user/getAllUsersOfTeam?team=${teamName}`);
+    }
 }

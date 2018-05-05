@@ -28,16 +28,17 @@ export class CreateTicketComponent implements OnInit {
     public ticketId: number;
     public teams: Team[];
     public users: UserInfo[];
+    public userInfo$: Observable<Object>;
+
     public email: AbstractControl;
     public name: AbstractControl;
     public title: AbstractControl;
     public description: AbstractControl;
     public label: AbstractControl;
     public dueDate: AbstractControl;
-    public teamId: AbstractControl;
+    public teamName: AbstractControl;
     public assignedUser: AbstractControl;
     public createTicketForm: FormGroup;
-    public userInfo$: Observable<Object>;
     public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
     public genericErrorMsg: string = 'The field is required!';
     public dateErrMsg: string = 'Invalid Date!';
@@ -55,9 +56,7 @@ export class CreateTicketComponent implements OnInit {
         private userService: UserService,
         private toastr: ToastrService,
         private dateValidatorService: DatepickerValidationService,
-    ) {
-   
-     }
+    ) {}
 
     public ngOnInit(): void {
         this.userInfo$ = this.dashService.getUserInfo();
@@ -87,19 +86,17 @@ export class CreateTicketComponent implements OnInit {
                     Validators.pattern(this.emailPattern),
                     Validators.minLength(10),
                     Validators.maxLength(50)])],
-            'teamId': [null,
-                Validators.required]
+            'teamName': [null]
         });
+
         this.getMyTeam();
-        this.getAllUsers();
     }
 
-    public createTicket(): void{
+    public createTicket(): void {
         this.ticketService.createTicket(this.createTicketForm.value).subscribe((data: Ticket) => {
             this.toastr.success(`Ticket was successfully created!`);
             this.activeModal.close();
             this.router.navigate([`./ticket/${data.id}`]);
-            this.createTicketForm.reset();
         }, (err: HttpErrorResponse) => {
             this.toastr.error(err.error.err);
         })
@@ -111,9 +108,9 @@ export class CreateTicketComponent implements OnInit {
         });
     }
 
-    public getAllUsers(): void {
-        this.userService.getAllUsers().subscribe((data) => {
+    public getAllUsersOfTeam(teamName) {
+        this.userService.getAllUsersOfTeam(teamName).subscribe((data: UserInfo[]) => {
             this.users = data;
-        })
+        });
     }
 }

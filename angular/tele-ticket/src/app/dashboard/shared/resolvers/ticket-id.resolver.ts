@@ -11,15 +11,14 @@ import { catchError } from 'rxjs/operators/catchError';
 import { Ticket } from "../../../models/tickets/ticket";
 import { TicketService } from "../services/ticket.service";
 
-
 @Injectable()
 export class TicketIdResolver implements Resolve<Object> {
+
     constructor(
         private ticketService: TicketService,
         private router: Router
-    ) {
+    ) {}
 
-    }
     resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
