@@ -1,7 +1,7 @@
 <h3 class="text-center font-bold"><i class="fa fa-ticket"></i>  My tickets</h3>
 
 <div class="row">
-  <div class="col-md-6 my-ticket-list" *ngFor="let ticket of myTicketInfo" 
+  <div class="col-md-10 my-ticket-list" *ngFor="let ticket of myTicketInfo" 
        [routerLink]="['/ticket/', ticket.id]">
     <app-ticket-box [ticket]="ticket"></app-ticket-box>
   </div>

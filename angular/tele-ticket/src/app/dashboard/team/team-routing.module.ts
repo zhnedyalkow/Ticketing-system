@@ -9,7 +9,7 @@ import { TeamPageComponent } from './team-page/team-page.component';
 import { TeamTicketsResolver } from '../shared/resolvers/team-tickets.resolver';
 import { TeamMembersResolver } from '../shared/resolvers/team-members.resolver';
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: '', component: TeamComponent, children: [
             {

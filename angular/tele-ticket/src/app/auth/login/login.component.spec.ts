@@ -1,18 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrService } from 'ngx-toastr';
 import { AuthHomeService } from '../services/auth.service';
 import { User } from '../../models/users/user';
 import { Observable } from 'rxjs/Observable';
+import { DebugElement } from '@angular/core';
 
 
 describe('LoginComponent', () => {
 
     let component: LoginComponent;
     let fixture: ComponentFixture<LoginComponent>;
+    let submitEl: DebugElement;
+    let loginEl: DebugElement;
+    let passwordEl: DebugElement;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -49,6 +53,11 @@ describe('LoginComponent', () => {
 
     it('Form invalid when empty', () => {
         expect(component.rForm.valid).toBeFalsy();
+    })
+
+    it(`should create a 'FormGroup' comprised of FormControls`, () => {
+        component.ngOnInit();
+        expect(component.rForm instanceof FormGroup).toBe(true);
     })
 
     it('Email field validity', () => {
