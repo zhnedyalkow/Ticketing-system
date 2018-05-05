@@ -8,7 +8,6 @@ import { AuthHomeService } from '../services/auth.service';
 import { User } from '../../models/users/user';
 import { Observable } from 'rxjs/Observable';
 
-
 describe('LoginComponent', () => {
 
     let component: LoginComponent;
