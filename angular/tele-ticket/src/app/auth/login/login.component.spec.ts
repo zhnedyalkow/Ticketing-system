@@ -36,7 +36,7 @@ describe('LoginComponent', () => {
 
         // get test component from the fixture
         component = fixture.componentInstance;
-        
+
         // Manually trigger the ngOnInit lifecycle function on our component
         // Angular won't do this for us
         component.ngOnInit();

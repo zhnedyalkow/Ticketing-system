@@ -11,11 +11,7 @@ class TicketsController {
         let tickets;
 
         try {
-            tickets = await user.getTickets({
-                where: {
-                    $or: [{ StatusId: 4 }, { StatusId: 5 }],
-                },
-            });
+            tickets = await this.data.tickets.getMyTickets(user);
         } catch (error) {
             throw error;
         }
