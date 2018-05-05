@@ -46,6 +46,17 @@ class TeamData extends Data {
         ];
     }
 
+    async getMyTickets(user) {
+        const result = user.getTickets({
+            where: {
+                $or: [{ StatusId: 4 }, { StatusId: 5 }],
+            },
+            include: this.fullTicketInfo,
+        });
+
+        return result;
+    }
+
     getFullInfoForTicket(id) {
         const res = this.Model.findOne({
             attributes: ['title', 'description', 'dueDate', 'TeamId'],
