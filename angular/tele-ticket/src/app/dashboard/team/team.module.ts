@@ -10,7 +10,6 @@ import { TeamboxComponent } from './team-list/teambox/teambox.component';
 import { TeamInfoComponent } from './team-page/team-info/team-info.component';
 import { BtnsComponent } from './team-page/btns/btns.component';
 import { TeamMembersComponent } from './team-page/team-members/team-members.component';
-import { TeamService } from '../shared/services/team.service';
 
 @NgModule({
     declarations: [
@@ -27,7 +26,7 @@ import { TeamService } from '../shared/services/team.service';
         TeamRoutingModule
     ],
     providers: [
-        
+
     ],
 })
 export class TeamModule { }

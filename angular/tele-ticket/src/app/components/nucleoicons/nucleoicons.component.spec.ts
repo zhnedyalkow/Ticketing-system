@@ -1,25 +1,25 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { TeamboxComponent } from './teambox.component';
+// import { NucleoiconsComponent } from './nucleoicons.component';
 
-// describe('TeamboxComponent', () => {
-//   let component: TeamboxComponent;
-//   let fixture: ComponentFixture<TeamboxComponent>;
+// describe('NucleoiconsComponent', () => {
+//   let component: NucleoiconsComponent;
+//   let fixture: ComponentFixture<NucleoiconsComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ TeamboxComponent ]
+//       declarations: [ NucleoiconsComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(TeamboxComponent);
+//     fixture = TestBed.createComponent(NucleoiconsComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });
 
-//   it('should create', () => {
+//   it('should be created', () => {
 //     expect(component).toBeTruthy();
 //   });
 // });

@@ -1,20 +1,20 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { TeamboxComponent } from './teambox.component';
+// import { UserMenuComponent } from './user-menu.component';
 
-// describe('TeamboxComponent', () => {
-//   let component: TeamboxComponent;
-//   let fixture: ComponentFixture<TeamboxComponent>;
+// describe('UserMenuComponent', () => {
+//   let component: UserMenuComponent;
+//   let fixture: ComponentFixture<UserMenuComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ TeamboxComponent ]
+//       declarations: [ UserMenuComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(TeamboxComponent);
+//     fixture = TestBed.createComponent(UserMenuComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

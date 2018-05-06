@@ -1,20 +1,20 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { TeamboxComponent } from './teambox.component';
+// import { AuthComponent } from './auth.component';
 
-// describe('TeamboxComponent', () => {
-//   let component: TeamboxComponent;
-//   let fixture: ComponentFixture<TeamboxComponent>;
+// describe('AuthComponent', () => {
+//   let component: AuthComponent;
+//   let fixture: ComponentFixture<AuthComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ TeamboxComponent ]
+//       declarations: [ AuthComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(TeamboxComponent);
+//     fixture = TestBed.createComponent(AuthComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

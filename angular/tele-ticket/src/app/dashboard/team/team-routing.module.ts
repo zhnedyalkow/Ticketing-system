@@ -13,7 +13,7 @@ export const routes: Routes = [
     {
         path: '', component: TeamComponent, children: [
             {
-                path: '', redirectTo: 'teamlist', pathMatch: 'full'
+                path: '', redirectTo: 'teamlist',
             },
             {
                 path: 'teamlist',
@@ -21,7 +21,7 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'clear',
+                path: ':teamName',
                 component: TeamPageComponent,
                 canActivate: [AuthGuard],
                 resolve: {

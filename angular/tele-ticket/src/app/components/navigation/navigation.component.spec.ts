@@ -1,25 +1,25 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { TeamboxComponent } from './teambox.component';
+// import { NavigationComponent } from './navigation.component';
 
-// describe('TeamboxComponent', () => {
-//   let component: TeamboxComponent;
-//   let fixture: ComponentFixture<TeamboxComponent>;
+// describe('NavigationComponent', () => {
+//   let component: NavigationComponent;
+//   let fixture: ComponentFixture<NavigationComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ TeamboxComponent ]
+//       declarations: [ NavigationComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(TeamboxComponent);
+//     fixture = TestBed.createComponent(NavigationComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });
 
-//   it('should create', () => {
+//   it('should be created', () => {
 //     expect(component).toBeTruthy();
 //   });
 // });

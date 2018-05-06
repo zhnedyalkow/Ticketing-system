@@ -1,25 +1,25 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { TeamboxComponent } from './teambox.component';
+// import { TypographyComponent } from './typography.component';
 
-// describe('TeamboxComponent', () => {
-//   let component: TeamboxComponent;
-//   let fixture: ComponentFixture<TeamboxComponent>;
+// describe('TypographyComponent', () => {
+//   let component: TypographyComponent;
+//   let fixture: ComponentFixture<TypographyComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ TeamboxComponent ]
+//       declarations: [ TypographyComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(TeamboxComponent);
+//     fixture = TestBed.createComponent(TypographyComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });
 
-//   it('should create', () => {
+//   it('should be created', () => {
 //     expect(component).toBeTruthy();
 //   });
 // });
