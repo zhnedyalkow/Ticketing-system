@@ -110,15 +110,12 @@ class TicketsController {
             description: 'You have been assigned to a ticket!',
         });
 
-        // Add the new notification to the "newNotifications" tables
+        // Add the new notification to the "newNotifications" table
         await this.data.newNotifications.create({
             UserId: obj.AssignedUserId,
             NotificationId: notification.id,
         });
 
-        // return {
-        //     message: 'Success',
-        // };
         return ticket;
     }
 
@@ -172,14 +169,11 @@ class TicketsController {
         try {
             const team = await this.data.teams.getOneByCriteria({
                 name: teamName,
+                CompanyId: user.CompanyId,
             });
 
             if (!team) {
                 throw new Error('There is no such a team!');
-            }
-
-            if (team.CompanyId !== user.CompanyId) {
-                throw new Error('Something went wrong');
             }
 
             const hasUser = await team.hasUser(user);

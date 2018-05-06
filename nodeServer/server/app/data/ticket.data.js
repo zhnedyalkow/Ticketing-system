@@ -77,6 +77,7 @@ class TeamData extends Data {
                 TeamId: teamId,
             },
             include: this.fullTicketInfo,
+            order: [['id', 'DESC']],
         });
 
         return result;
