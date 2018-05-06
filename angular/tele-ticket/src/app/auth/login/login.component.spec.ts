@@ -9,10 +9,19 @@ import { User } from '../../models/users/user';
 import { Observable } from 'rxjs/Observable';
 import { DebugElement } from '@angular/core';
 
+class MockAuthService {
+    authenticated = false;
+
+    isAuthenticated () {
+        return this.authenticated;
+    }
+}
+
 
 describe('LoginComponent', () => {
 
     let component: LoginComponent;
+    let authService: AuthHomeService;
     let fixture: ComponentFixture<LoginComponent>;
     let submitEl: DebugElement;
     let loginEl: DebugElement;
@@ -40,12 +49,18 @@ describe('LoginComponent', () => {
 
         // get test component from the fixture
         component = fixture.componentInstance;
+        authService = TestBed.get(AuthHomeService)
 
         // Manually trigger the ngOnInit lifecycle function on our component
         // Angular won't do this for us
         component.ngOnInit();
         fixture.detectChanges();
     });
+
+    // afterEach(() => {
+    //     service = null;
+    //     component = null;
+    // })
 
     it('Should create', () => {
         expect(component).toBeTruthy();
@@ -59,6 +74,18 @@ describe('LoginComponent', () => {
         component.ngOnInit();
         expect(component.rForm instanceof FormGroup).toBe(true);
     })
+
+    // it('login returns false when the user is not authenticated', () => {
+    //     spyOn(authService, 'login').and.returnValue(false);
+    //     // expect(component.needsLogin()).toBeTruthy();
+    //     expect(authService.login).toHaveBeenCalled();
+    //   });
+      
+
+    // it('loginUser() returns false when the user is not authenticated', () => {
+    //     service.authenticated = false;
+    //     expect(component.loginUser()).toBeTruthy();
+    // })
 
     it('Email field validity', () => {
         let errors = {};
