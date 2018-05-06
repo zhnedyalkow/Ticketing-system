@@ -8,12 +8,14 @@ import { UserInfo } from '../../../models/users/user.info';
 export class AdminService {
     constructor(private appConfig: AppConfig, private http: HttpClient) { }
 
-    addUserToCompany(userEmail: string): Observable<Object> {
-        return this.http.post<Observable<Object>>(
-            `${this.appConfig.apiUrl}/user/addUserToCompany`,
-            { email: userEmail });
+    addUserToCompany(userEmail: string): Observable<UserInfo> {
+        const email = {
+            email: userEmail,
+        }
+        return this.http.post<UserInfo>
+            (`${this.appConfig.apiUrl}/user/addUserToCompany`, email);
     }
-
+    
     getAllUsers(): Observable<Array<UserInfo>> {
         return this.http.get<Array<UserInfo>>(`${this.appConfig.apiUrl}/user/getAllUsers`);
     }

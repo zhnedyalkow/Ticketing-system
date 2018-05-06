@@ -26,14 +26,14 @@ export class TeamService {
             (`${this.appConfig.apiUrl}/team/deleteTeam`, teamInfo);
     }
 
-    createTeam(formsValue: Object): Observable<Object> {
-        return this.http.post<Observable<Object>>(
+    createTeam(formsValue: Object): Observable<Team> {
+        return this.http.post<Team>(
             `${this.appConfig.apiUrl}/team/createTeam`, formsValue
         );
     }
 
-    addUsersToTeam(formsValue: Object): Observable<Object> {
-        return this.http.post<Observable<Object>>(
+    addUsersToTeam(formsValue: Object): Observable<Array<UserInfo>> {
+        return this.http.post<Array<UserInfo>>(
             `${this.appConfig.apiUrl}/user/addUsersToTeam`, formsValue
         );
     }

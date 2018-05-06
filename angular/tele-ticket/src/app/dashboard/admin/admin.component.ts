@@ -39,7 +39,9 @@ export class AdminComponent implements OnInit {
     }
 
     public addUserToCompany(): void {
-        this.adminService.addUserToCompany(this.email.value).subscribe((data: UserInfo) => {
+        const userEmail = this.adminForm.value.email;
+
+        this.adminService.addUserToCompany(userEmail).subscribe((data: UserInfo) => {
             this.allUsers.push(data);
             this.toastr.success(`User successfully added!`);
             this.adminForm.reset();

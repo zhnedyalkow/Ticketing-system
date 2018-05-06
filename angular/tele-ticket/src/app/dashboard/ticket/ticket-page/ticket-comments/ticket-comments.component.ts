@@ -29,7 +29,7 @@ export class TicketCommentsComponent implements OnInit {
     public addCommentForm: FormGroup;
     public snapshot: ActivatedRouteSnapshot;
     public genMinLengthMsg: string = "Min length should be more than 2 chars!";
-    public genErr: string = "This field is required";
+    public genErr: string = "Please fill the form if you want to leave a comment";
 
     constructor(
         private fb: FormBuilder,
@@ -60,7 +60,7 @@ export class TicketCommentsComponent implements OnInit {
         this.addCommentForm = this.fb.group({
             'description': [null,
                 Validators.compose([
-                    Validators.minLength(8),
+                    Validators.minLength(2),
                     Validators.maxLength(100),
                 ])],
         });

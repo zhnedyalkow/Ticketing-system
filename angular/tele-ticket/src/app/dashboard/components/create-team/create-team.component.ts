@@ -23,14 +23,14 @@ import { ToastrService } from 'ngx-toastr';
 
 export class CreateTeamComponent implements OnInit {
 
-    public closeResult: string;
     public email: AbstractControl;
     public name: AbstractControl;
     public createTeamForm: FormGroup;
+
     public genericErrorMsg: string = 'The field is required!';
     public emailErrMsg: string = 'Invalid email! Eg. john.doe@gmail.com!';
     public genMinLengthMsg: string = 'Min length should be more than 5 chars!';
-    public genMaxLengthMsg: string = 'Max Length should be less than 50 chars!';
+    public genMaxLengthMsg: string = 'Max length should be less than 50 chars!';
     public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
     constructor(
@@ -39,12 +39,18 @@ export class CreateTeamComponent implements OnInit {
         private teamService: TeamService,
         public activeModal: NgbActiveModal,
         private toastr: ToastrService
-    ) {
+    ) {}
 
-    }
     public ngOnInit(): void {
 
+        this.buildTeamForm();
 
+        this.name = this.createTeamForm.get('name');
+        this.email = this.createTeamForm.get('email');
+
+    }
+
+    public buildTeamForm(): void {
         this.createTeamForm = this.fb.group({
             'name': [null,
                 Validators.compose([
@@ -56,12 +62,8 @@ export class CreateTeamComponent implements OnInit {
                 this.buildItem(),
             ]),
         });
-
-
-        this.name = this.createTeamForm.get('name');
-        this.email = this.createTeamForm.get('email');
-    
     }
+
     public buildItem(): any {
         return new FormGroup({
             email: new FormControl(null,
@@ -98,7 +100,7 @@ export class CreateTeamComponent implements OnInit {
             } else if (field.errors.maxLength) {
                 const reqLen = field.errors.maxlength.reqLen;
                 return `This field must have less than ${reqLen} chars!`
-            } 
+            }
         }
     }
 }

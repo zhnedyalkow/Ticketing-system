@@ -29,21 +29,9 @@
     <div class="col-md-12">
         <h3 class="mb-2">Comments</h3>
     </div>
+
     <div *ngFor="let comment of comments" class="comments-box col-md-9 row">
-        <div class="comment col-md-2">
-            <div class="comment-avatar col-md-1text-center pr-1">
-                <img class="mx-auto rounded-circle img-fluid" src="../../assets/img/{{comment?.User.avatar}}" alt="avatar">
-            </div>
-        </div>
-        <p>{{ comment?.User.role }}</p>
-        <div class="comment-content col-md-10">
-            <h6 class="small comment-meta">
-                <a href="#">
-                    <b>{{comment?.User.name}}</b>
-                </a> {{comment?.createdAt | date}}</h6>
-            <div class="comment-body">
-                <p> {{comment?.description}} </p>
-            </div>
-        </div>
+        <app-ticket-comments-info [comment]="comment"></app-ticket-comments-info>
     </div>
+    
 </div>

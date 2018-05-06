@@ -11,12 +11,12 @@ import { Ticket } from "../../../models/tickets/ticket";
 export class TicketService {
     constructor(private appConfig: AppConfig, private http: HttpClient) { }
 
-    getTicketInfoById(ticketId: number): Observable<Object> {
-        return this.http.get(`${this.appConfig.apiUrl}/Ticket/getTicketInfoById?ticketId=${ticketId}`);
+    getTicketInfoById(ticketId: number): Observable<Ticket> {
+        return this.http.get<Ticket>(`${this.appConfig.apiUrl}/Ticket/getTicketInfoById?ticketId=${ticketId}`);
     }
 
-    createTicket(formsValue: Object): Observable<Object> {
-        return this.http.post<Observable<Object>>
+    createTicket(formsValue: Object): Observable<Ticket> {
+        return this.http.post<Ticket>
             (`${this.appConfig.apiUrl}/ticket/createTicket`, formsValue
         )
     }

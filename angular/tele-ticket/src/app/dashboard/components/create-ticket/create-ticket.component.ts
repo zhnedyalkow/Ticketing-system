@@ -39,18 +39,20 @@ export class CreateTicketComponent implements OnInit {
     public teamName: AbstractControl;
     public assignedUser: AbstractControl;
     public createTicketForm: FormGroup;
-    public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+
     public genericErrorMsg: string = 'The field is required!';
     public dateErrMsg: string = 'Invalid Date!';
     public emailErrMsg: string = 'Invalid email! Eg. john.doe@gmail.com!';
     public labelMinLenErrMsg: string = "Min length should be more than 3 chars!";
     public genMinLengthMsg: string = "Min length should be more than 8 chars!";
     public genMaxLengthMsg: string = "Max length should be more than 50 chars!";
+    public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
     constructor(
+        public activeModal: NgbActiveModal,
+
         private router: Router,
         private fb: FormBuilder,
-        public activeModal: NgbActiveModal,
         private dashService: DashboardService,
         private ticketService: TicketService,
         private userService: UserService,
@@ -60,6 +62,12 @@ export class CreateTicketComponent implements OnInit {
 
     public ngOnInit(): void {
         this.userInfo$ = this.dashService.getUserInfo();
+       
+        this.buildTicketForm();
+        this.getMyTeam();
+    }
+
+    public buildTicketForm(): void {
         this.createTicketForm = this.fb.group({
             'title': [null,
                 Validators.compose([
@@ -89,7 +97,6 @@ export class CreateTicketComponent implements OnInit {
             'teamName': [null]
         });
 
-        this.getMyTeam();
     }
 
     public createTicket(): void {

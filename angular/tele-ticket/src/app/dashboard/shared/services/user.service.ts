@@ -8,13 +8,13 @@ import { UserInfo } from "../../../models/users/user.info";
 export class UserService {
     constructor(private appConfig: AppConfig, private http: HttpClient) { }
 
-    public getAllUsers(): Observable<Array<UserInfo>> {
+    getAllUsers(): Observable<Array<UserInfo>> {
         return this.http.get<Array<UserInfo>>(`${this.appConfig.apiUrl}/user/getAllUsers`);
     }
 
-    getAllUsersOfTeam(teamName: string): Observable<Array<Object>> {
+    getAllUsersOfTeam(teamName: string): Observable<Array<UserInfo>> {
         return this.http
-            .get<Array<Object>>(`${this.appConfig
+            .get<Array<UserInfo>>(`${this.appConfig
                 .apiUrl}/user/getAllUsersOfTeam?team=${teamName}`);
     }
 }

@@ -13,6 +13,7 @@ import { TicketStatusBtnsComponent } from './ticket-page/ticket-status-btns/tick
 import { TicketCommentsComponent } from './ticket-page/ticket-comments/ticket-comments.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketBoxComponent } from './ticket-list/ticket-box/ticket-box.component';
+import { TicketCommentsInfoComponent } from './ticket-page/ticket-comments-info/ticket-comments-info.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { TicketBoxComponent } from './ticket-list/ticket-box/ticket-box.componen
     TicketCommentsComponent,
     TicketListComponent,
     TicketBoxComponent,
+    TicketCommentsInfoComponent,
   ],
   providers: [],
 })

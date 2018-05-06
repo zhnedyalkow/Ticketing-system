@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthHomeService } from '../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -11,16 +11,18 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    public rForm: FormGroup;
+    
     public date: Date = new Date();
 
-    public email: string = '';
-    public password: string = '';
-    public emailErrMsg: string = 'Email is required!';
-    public pwdErrMsg: string = 'Password is required!';
-    public minEmailLen: string = 'Min length should be more than 8 chars!';
-    public maxEmailLen: string = 'Max Length should be less than 50 chars!';
-    public minPassLen: string = 'Min length should be more than 10 chars!';
+    public rForm: FormGroup;
+    public email: AbstractControl;
+    public password: AbstractControl;
+
+    public genericErrorMsg: string = 'The field is required!';
+    public genMinLengthMsg: string = 'Min length should be more than 8 chars!';
+    public emailErrMsg: string = 'Invalid email! Eg. john.doe@gmail.com!';
+    public genMaxLengthMsg: string = 'Max length should be less than 50 chars!';
+    public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
     constructor(
         private router: Router,
@@ -38,19 +40,26 @@ export class LoginComponent implements OnInit {
                 Validators.compose([
                     Validators.required,
                     Validators.email,
-                    Validators.pattern("[^ @]*@[^ @]*"),
                     Validators.minLength(10),
-                    Validators.maxLength(50)])],
+                    Validators.maxLength(50),
+                    Validators.pattern(this.emailPattern),
+                ]
+                )],
             'password': [null,
                 Validators.compose([
                     Validators.required,
                     Validators.minLength(8),
-                    Validators.maxLength(50)])],
+                    Validators.maxLength(50)]
+                ) ],
         })
     }
 
     public loginUser(): void {
-        this.auth.login(this.rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
+        const user = {
+            email: this.rForm.value.email,
+            password: this.rForm.value.password,
+        };
+        this.auth.login(user, { observe: 'response', responseType: 'json' }).subscribe((x: {
             message: string,
             token: string,
         }) => {
@@ -60,7 +69,6 @@ export class LoginComponent implements OnInit {
         }, (err: HttpErrorResponse) => {
             this.toastr.error(err.error.err);
         });
-
         this.rForm.reset();
     }
 }

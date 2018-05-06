@@ -8,8 +8,7 @@ import { Notification } from "../../../models/notifications/notification";
 export class HomeService {
     constructor(private appConfig: AppConfig, private http: HttpClient) {}
 
-    public getMyNotifications(): Observable<Notification[]>{
+    getMyNotifications(): Observable<Array<Notification>>{
         return this.http.get<Array<Notification>>(`${this.appConfig.apiUrl}/Notifications/getAllMyNotifications`);
     }
 }
-
