@@ -11,18 +11,16 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-
     public rForm: FormGroup;
-    public test: Date = new Date();
+    public date: Date = new Date();
 
-    publicemail: string = '';
-    publicpassword: string = '';
-    emailErrMsg: string = 'Email is required!';
-    pwdErrMsg: string = 'Password is required!';
-    minEmailLen: string = 'Min length should be more than 8 chars!';
-    maxEmailLen: string = 'Max Length should be less than 50 chars!';
-    minPassLen: string = 'Min length should be more than 10 chars!';
+    public email: string = '';
+    public password: string = '';
+    public emailErrMsg: string = 'Email is required!';
+    public pwdErrMsg: string = 'Password is required!';
+    public minEmailLen: string = 'Min length should be more than 8 chars!';
+    public maxEmailLen: string = 'Max Length should be less than 50 chars!';
+    public minPassLen: string = 'Min length should be more than 10 chars!';
 
     constructor(
         private router: Router,
@@ -30,41 +28,39 @@ export class LoginComponent implements OnInit {
         private auth: AuthHomeService,
         private toastr: ToastrService,
     ) { }
-    public ngOnInit() {
+    ngOnInit() {
+        this.buildLoginForm();
+    }
+
+    public buildLoginForm(): void {
         this.rForm = this.fb.group({
-            'email': [null, 
+            'email': [null,
                 Validators.compose([
-                    Validators.required, 
-                    Validators.email, 
+                    Validators.required,
+                    Validators.email,
                     Validators.pattern("[^ @]*@[^ @]*"),
-                    Validators.minLength(10), 
+                    Validators.minLength(10),
                     Validators.maxLength(50)])],
-            'password': [null, 
+            'password': [null,
                 Validators.compose([
-                    Validators.required, 
+                    Validators.required,
                     Validators.minLength(8),
                     Validators.maxLength(50)])],
         })
     }
 
-    public loginUser() {
+    public loginUser(): void {
         this.auth.login(this.rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
             message: string,
             token: string,
         }) => {
-            if (x.message === 'ok') {
-                localStorage.setItem('token', x.token);
-                // this.toastr.success(`Welcome, ${this.rForm.get('email').value}!`);
-                this.toastr.success(`Well done! You successfully logged in to this website!`);
-                this.router.navigate(['./']);
-            } else {
-                this.toastr.success(x.message)
-            }
+            localStorage.setItem('token', x.token);
+            this.toastr.success(`Well done! You successfully logged in to this website!`);
+            this.router.navigate(['./']);
         }, (err: HttpErrorResponse) => {
-            if (err.status === 302) {
-                this.toastr.error(err.error.err)
-            }
+            this.toastr.error(err.error.err);
         });
+
         this.rForm.reset();
     }
 }

@@ -12,20 +12,20 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
 
-    rForm: FormGroup;
-    name: string = '';
-    email: string = '';
-    password: string = '';
-    verifyPass: string = '';
-    field: string = '';
+    public rForm: FormGroup;
+    public name: string = '';
+    public email: string = '';
+    public password: string = '';
+    public verifyPass: string = '';
+    public field: string = '';
 
-    errMsg: string = 'Name is required!';
-    pwdErrMsg: string = 'The password does not seem right';
-    emailErrMsg: string = 'Email is required!';
+    public errMsg: string = 'Name is required!';
+    public pwdErrMsg: string = 'The password does not seem right';
+    public emailErrMsg: string = 'Email is required!';
 
-    emailPattErr: string = 'The email address must contain at least @ character';
-    confirmPwd: string = 'Please verify your password!';
-    test: Date = new Date();
+    public emailPattErr: string = 'The email address must contain at least @ character';
+    public confirmPwd: string = 'Please verify your password!';
+    public date: Date = new Date();
 
     constructor(
         private router: Router,
@@ -34,7 +34,11 @@ export class RegisterComponent implements OnInit {
         private toastr: ToastrService,
     ) { }
 
-    public ngOnInit(): void {
+    ngOnInit(): void {
+        this.buildRegisterForm();
+    }
+
+    public buildRegisterForm(): void {
         this.rForm = this.fb.group({
             'name': ['',
                 Validators.compose([
@@ -61,27 +65,14 @@ export class RegisterComponent implements OnInit {
                 ])],
         })
     }
-    public registerUser() {
-        this.auth.register(this.rForm.value, { observe: 'response', responseType: 'json' }).subscribe((x: {
-            info: any,
-        }) => {
-            if (x.info == true) {
+
+    public registerUser(): void {
+        this.auth.register(this.rForm.value, { observe: 'response', responseType: 'json' })
+            .subscribe((data: { info: boolean }) => {
                 this.toastr.success(`Registration was successfull! You can log in!`);
                 this.router.navigate(['./home/login']);
-            } else {
-                alert(x.info);
-                this.toastr.error(`${x.info}`);
-
-            }
-        }, (err: HttpErrorResponse) => {
-            if (err.status === 302) {
+            }, (err: HttpErrorResponse) => {
                 this.toastr.error(err.error.err);
-            }
-        });
+            });
     }
-
-    public onSubmit(value: any): void {
-        this.rForm.reset();
-    }
-
 }

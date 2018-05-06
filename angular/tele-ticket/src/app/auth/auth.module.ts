@@ -18,17 +18,16 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    // FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
     NgbModule,
   ],
   providers: [
-    { provide: AuthHomeService, useClass: AuthHomeService },
+    AuthHomeService,
   ],
 })
 export class AuthModule { }

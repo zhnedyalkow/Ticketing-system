@@ -13,11 +13,11 @@ import { RoleGuardService } from "./authentication/role-guard.service";
 
 @NgModule({
     providers: [
-      { provide: AppConfig, useClass: AppConfig },
-      { provide: AuthService, useClass: AuthService },
-      { provide: AuthGuardService , useClass: AuthGuardService },
-      { provide: AuthGuardServiceLogin , useClass: AuthGuardServiceLogin },
-      { provide: RoleGuardService, useClass: RoleGuardService},
+      AppConfig,
+      AuthService,
+      AuthGuardService,
+      AuthGuardServiceLogin,
+      RoleGuardService,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: TokenInterceptor,

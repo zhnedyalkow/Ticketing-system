@@ -25,8 +25,6 @@ import { TeamMembersComponent } from './team-page/team-members/team-members.comp
         CommonModule,
         TeamRoutingModule
     ],
-    providers: [
-
-    ],
+    providers: [],
 })
 export class TeamModule { }

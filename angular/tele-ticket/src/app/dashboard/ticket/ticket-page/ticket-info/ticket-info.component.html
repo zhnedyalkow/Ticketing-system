@@ -5,27 +5,27 @@
     <div class="ticket-information">
       <p>
         <i class="fa fa-check"></i> Status:
-        <span class="font-bold">{{ ticketInfo?.Status.name }}</span>
+        <span class="font-bold">{{ ticketInfo.Status.name }}</span>
       </p>
       <p>
         <i class="fa fa-user"></i> Creator:
-        <span class="font-bold">{{ ticketInfo?.Creator.name }}</span>
+        <span class="font-bold">{{ ticketInfo.Creator.name }}</span>
       </p>
       <p>
         <i class="fa fa-tasks"></i> Assigned user:
-        <span class="font-bold warning-color">{{ ticketInfo?.AssignedUser.name }}</span>
+        <span class="font-bold warning-color">{{ ticketInfo.AssignedUser.name }}</span>
       </p>
       <p>
         <i class="fa fa-tags"></i> Label:
-        <span class="font-bold">{{ ticketInfo?.Label?.title }}</span>
+        <span class="font-bold">{{ ticketInfo.Label.title }}</span>
       </p>
       <p>
         <i class="fa fa-users"></i> Team:
-        <span class="font-bold">{{ ticketInfo?.Team?.name}}</span>
+        <span class="font-bold">{{ ticketInfo.Team.name}}</span>
       </p>
       <p>
         <i class="fa fa-calendar"></i> Due Date:
-        <span class="due-date font-bold">{{ ticketInfo?.dueDate | date }}</span>
+        <span class="due-date font-bold">{{ ticketInfo.dueDate | date }}</span>
       </p>
     </div>
   </div>

@@ -15,11 +15,9 @@ import { CreateTicketComponent } from "../create-ticket/create-ticket.component"
 export class NavbarComponent implements OnInit {
   @Input() userInfo$: Observable<Object>
   public isMenuOpen: boolean = false;
-  public closeResult: string;
 
   constructor(
     private router: Router,
-    private dashService: DashboardService,
     private auth: AuthService,
 
     private modalService: NgbModal,
@@ -44,5 +42,4 @@ export class NavbarComponent implements OnInit {
   public openCreateIssue(): void {
     this.modalService.open(CreateTicketComponent);
   }
-
 }

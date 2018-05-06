@@ -5,7 +5,7 @@ const ExtractJwt = passportJWT.ExtractJwt;
 
 const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = 'tasmanianDevil';
+jwtOptions.secretOrKey = 'teleTicket';
 
 class UserController {
     constructor(data) {

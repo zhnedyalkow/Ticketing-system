@@ -14,9 +14,12 @@ export class HomeComponent implements OnInit {
   constructor(private homeService: HomeService) { }
 
   ngOnInit() {
-    this.homeService.getMyNotifications().subscribe((notifications: Notification[]) => {
-      this.notifications = notifications;
-    });
+    this.getMyNotifications();
   }
 
+  public getMyNotifications():void {
+    this.homeService.getMyNotifications().subscribe((notifications: Notification[]) => {
+        this.notifications = notifications;
+      });
+  }
 }

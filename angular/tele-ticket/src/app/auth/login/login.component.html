@@ -1,14 +1,14 @@
 <div class="wrapper">
   <div class="page-header">
-    <div class="filter"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
-          <div class="card card-register" *ngIf="!email; else forminfo">
+          <div class="card card-register">
             <h3 class="title">Login</h3>
             <form [formGroup]="rForm" (ngSubmit)="loginUser()" class="register-form">
               <label>
-                <i class="fa fa-envelope"></i> Email</label>
+                <i class="fa fa-envelope"></i> Email
+              </label>
               <input formControlName="email" type="text" class="form-control" placeholder="Email" required>
               <div class="alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].touched">
                 <span *ngIf="rForm.controls['email'].hasError('required') ">
@@ -32,13 +32,13 @@
               <button class="btn btn-danger btn-block btn-round" [disabled]="!rForm.valid">Login</button>
             </form>
             <div class="forgot">
-              <a href="/register" class="btn btn-link btn-danger">You don't have an account?</a>
+              <a [routerLink]="['/register']" class="btn btn-link btn-danger">You don't have an account?</a>
             </div>
           </div>
         </div>
       </div>
       <div class="footer register-footer text-center">
-        <h6>&copy;{{test | date: 'yyyy'}}, made with
+        <h6>&copy;{{date | date: 'yyyy'}}, made with
           <i class="fa fa-heart heart"></i> by Tele-Ticket Team</h6>
       </div>
     </div>

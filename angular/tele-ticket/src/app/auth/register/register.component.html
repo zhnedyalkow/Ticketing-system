@@ -1,12 +1,11 @@
 <div class="wrapper">
     <div class="page-header">
-        <div class="filter"></div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
-                    <div class="card card-register" *ngIf="!name; else forminfo">
+                    <div class="card card-register">
                         <h3 class="title">Register</h3>
-                        <form [formGroup]="rForm" (ngSubmit)="registerUser(rForm); onSubmit(rForm)" class="register-form">
+                        <form [formGroup]="rForm" (ngSubmit)="registerUser(rForm)" class="register-form">
                             <label>
                                 <i class="fa fa-user-o"></i> Name</label>
                             <input formControlName="name" type="text" class="form-control" placeholder="Name" required>
@@ -32,7 +31,7 @@
                 </div>
             </div>
             <div class="footer register-footer text-center">
-                <h6>&copy;{{test | date: 'yyyy'}}, made with
+                <h6>&copy;{{date | date: 'yyyy'}}, made with
                     <i class="fa fa-heart heart"></i> by Tele-Ticket Team</h6>
             </div>
         </div>

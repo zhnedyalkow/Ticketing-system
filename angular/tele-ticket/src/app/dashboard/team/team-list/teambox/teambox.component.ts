@@ -14,5 +14,4 @@ export class TeamboxComponent implements OnInit {
 
     ngOnInit() {
     }
-
 }

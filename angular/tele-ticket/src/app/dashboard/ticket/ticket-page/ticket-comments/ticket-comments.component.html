@@ -1,48 +1,49 @@
 <div class="row">
-	<div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
-		<a href="">
-		<img  class="mx-auto rounded-circle img-fluid" 
-				src="../../assets/img/{{userInfo?.avatar}}" alt="avatar">
-		</a>
-	</div>
-	<div class="col-md-9">
-		<form [formGroup]="addCommentForm" (ngSubmit)="addComment()">
-			<div class="form-group">
-				<label for="comment" class="font-bold"><i class="fa fa-comment-o"></i>  Comment:</label>
-				<textarea formControlName="description" class="form-control" rows="3" id="comment" 
-						  placeholder="Type your comment here.." required> </textarea>
-				<div class="alert" *ngIf="!addCommentForm.controls['description'].valid && addCommentForm.controls['description'].touched">
-					<span *ngIf="addCommentForm.controls['description'].hasError('required') ">{{ genMinLengthMsg }} </span>
-					<span *ngIf="addCommentForm.controls['description'].hasError('minlength') "> {{ genMaxLengthMsg }} </span>
-				</div>
-			</div>
-			<span class="btn-group pull-right">
-				<button type="submit" class="btn btn-primary btn-round"><i class="fa fa-plus"></i> Add comment</button>
-			</span>
-		</form>
-	</div>
+    <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
+        <a href="">
+            <img class="mx-auto rounded-circle img-fluid" 
+                src="../../assets/img/{{userInfo?.avatar}}" alt="avatar">
+        </a>
+    </div>
+    <div class="col-md-9">
+        <form [formGroup]="addCommentForm" (ngSubmit)="addComment()">
+            <div class="form-group">
+                <label for="comment" class="font-bold">
+                    <i class="fa fa-comment-o"></i> Comment:</label>
+                <textarea formControlName="description" class="form-control" rows="3" id="comment" placeholder="Type your comment here.."
+                    required> </textarea>
+                <div class="alert" *ngIf="!addCommentForm.controls['description'].valid && addCommentForm.controls['description'].touched">
+                    <span *ngIf="addCommentForm.controls['description'].hasError('required') ">{{ genErr }} </span>
+                    <span *ngIf="addCommentForm.controls['description'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
+                </div>
+            </div>
+            <span class="btn-group pull-right">
+                <button type="submit" class="btn btn-primary btn-round">
+                    <i class="fa fa-plus"></i> Add comment</button>
+            </span>
+        </form>
+    </div>
 </div>
 
 <div class="row">
-	<div class="col-md-12">
-		<h3 class="mb-2">Comments</h3>
-	</div>
-	<div *ngFor="let comment of comments" class="comments-box col-md-9 row">
-		<div class="comment col-md-2">
-			<div class="comment-avatar col-md-1text-center pr-1">
-		        <img class="mx-auto rounded-circle img-fluid" 
-                 src="../../assets/img/{{comment?.User.avatar}}" alt="avatar">
-			</div>
-		</div>
+    <div class="col-md-12">
+        <h3 class="mb-2">Comments</h3>
+    </div>
+    <div *ngFor="let comment of comments" class="comments-box col-md-9 row">
+        <div class="comment col-md-2">
+            <div class="comment-avatar col-md-1text-center pr-1">
+                <img class="mx-auto rounded-circle img-fluid" src="../../assets/img/{{comment?.User.avatar}}" alt="avatar">
+            </div>
+        </div>
         <p>{{ comment?.User.role }}</p>
-		<div class="comment-content col-md-10">
-			<h6 class="small comment-meta">
-				<a href="#">
-					<b>{{comment?.User.name}}</b>
-				</a> {{comment?.createdAt | date}}</h6>
-			<div class="comment-body">
-				<p> {{comment?.description}} </p>
-			</div>
-		</div>
-	</div>
+        <div class="comment-content col-md-10">
+            <h6 class="small comment-meta">
+                <a href="#">
+                    <b>{{comment?.User.name}}</b>
+                </a> {{comment?.createdAt | date}}</h6>
+            <div class="comment-body">
+                <p> {{comment?.description}} </p>
+            </div>
+        </div>
+    </div>
 </div>

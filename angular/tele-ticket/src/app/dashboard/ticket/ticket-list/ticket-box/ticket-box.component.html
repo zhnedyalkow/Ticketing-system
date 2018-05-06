@@ -4,32 +4,31 @@
             <img src="../../assets/img/ticket.jpg" alt="" width="100" height="100" class="avatar">
         </div>
         <div class="my-tickets-info col-md-12 col-xl-8">
-            <div *ngIf="ticket">
-                <h5 class="text-center">
-                    <i class="fa fa-ticket"></i> {{ ticket?.title }}</h5>
-                <ul>
-                    <li>
-                        <span>
-                            <i class="fa fa-check"></i> Status:
-                                 {{ ticket?.Status.name }}
-                        </span>
-                    </li>
-                    <li>
-                        <i class="fa fa-plus"></i>Assignee: <span >
-                             <span class="warning-color" > {{ ticket?.AssignedUser?.name }} </span>
-                        </span>
-                    </li>
-                    <li>
-                        <i class="fa fa-user"></i> Raised by: 
-                        <span>
-                            {{ ticket?.Creator?.name }}
-                        </span>
-                    </li>
-
-                    <li>
-                        <i class="fa fa-refresh"></i>  Updated: 
+            <h5 class="text-center">
+                <i class="fa fa-ticket"></i> {{ ticket?.title }}</h5>
+            <ul>
+                <li>
                     <span>
-                       {{ ticket?.updatedAt | date: 'dd/MM/yyyy'}} {{ ticket?.updatedAt | date: 'HH:mm'}}
+                        <i class="fa fa-check"></i> Status: {{ ticket?.Status.name }}
+                    </span>
+                </li>
+                <li>
+                    <i class="fa fa-plus"></i>Assignee:
+                    <span>
+                        <span class="warning-color"> {{ ticket?.AssignedUser?.name }} </span>
+                    </span>
+                </li>
+                <li>
+                    <i class="fa fa-user"></i> Raised by:
+                    <span>
+                        {{ ticket?.Creator?.name }}
+                    </span>
+                </li>
+
+                <li>
+                    <i class="fa fa-refresh"></i> Updated:
+                    <span>
+                        {{ ticket?.updatedAt | date: 'dd/MM/yyyy'}} {{ ticket?.updatedAt | date: 'HH:mm'}}
                     </span>
                 </li>
                 <li>
@@ -38,8 +37,7 @@
                         {{ ticket?.dueDate | date: 'dd/MM/yyyy'}} {{ ticket?.dueDate | date: 'HH:mm'}}
                     </span>
                 </li>
-                </ul>
-            </div>
+            </ul>
         </div>
     </div>
 </div>

@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Ticket } from '../../../../models/tickets/ticket';
 import { User } from '../../../../models/users/user';
+import { PlayLoad } from '../../../../models/users/playLoad';
+import { UserInfo } from '../../../../models/users/user.info';
 
 @Component({
     selector: 'app-btns',
@@ -17,39 +19,24 @@ import { User } from '../../../../models/users/user';
 export class BtnsComponent implements OnInit {
 
     @Input() teamName: string;
-
-    public usersOfTeam: User[];
-    public myTickets: Ticket[];
-    public amIGM: boolean = false;
-    public amIAU: boolean = false;
-    public playLoad: { id: number, role: string };
-    public snapshot: ActivatedRouteSnapshot;
+    @Input() usersOfTeam: UserInfo[];
 
     constructor(
         private router: Router,
         private auth: AuthService,
         public teamService: TeamService,
-        private activatedRoute: ActivatedRoute,
         private toastr: ToastrService,
         private modalService: NgbModal,
-    ) {
-        this.snapshot = this.activatedRoute.snapshot;
-    }
+    ) { }
 
     ngOnInit() {
-        this.playLoad = this.auth.tokenData();
-
-        if (this.playLoad.role == 'admin') {
-            this.amIGM = true;
-        }
     }
-
 
     public openAddTeammember(): void {
         const popup = this.modalService.open(AddTeammemberComponent);
         popup.componentInstance.teamName = this.teamName;
-        popup.result.then((data) => {
-            data.forEach((newUser) => {
+        popup.result.then((data: UserInfo[]) => {
+            data.forEach((newUser: UserInfo) => {
                 this.usersOfTeam.push(newUser);
             });
         });
@@ -68,9 +55,7 @@ export class BtnsComponent implements OnInit {
                 this.router.navigate(['./team']);
 
             }, (err: HttpErrorResponse) => {
-                if (err.status === 302) {
-                    this.toastr.error(err.error.err)
-                }
+                this.toastr.error(err.error.err)
             })
     }
 }

@@ -1,17 +1,3 @@
-<!-- <div>
-    <app-reusable-modal [teamName]='teamName'></app-reusable-modal>
-    <div class="modal-footer">
-        <div class="left-side">
-            <button type="button" (click)="addUnit()" class="btn btn-default btn-link">Add member</button>
-        </div>
-        <div class="divider"></div>
-        <div class="right-side">
-            <button type="button" class="optional-color btn btn-default btn-link" (click)="activeModal.close()">Never mind</button>
-        </div>
-    </div>
-</div> -->
-
-
 <div>
     <form [formGroup]="addTeamMemberForm" (ngSubmit)="addUsersToTeam()" class="add-member">
         <div class="modal-body">

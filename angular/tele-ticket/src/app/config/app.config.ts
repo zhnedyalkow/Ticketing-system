@@ -4,6 +4,6 @@ export class AppConfig {
 
     constructor() {
         this.apiUrl = 'http://localhost:3001';
-        this.jwt_issuer = 'tasmanianDevil';
+        this.jwt_issuer = 'teleTicket';
     }
 }

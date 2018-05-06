@@ -15,10 +15,9 @@ import { Team } from '../../../models/teams/team';
 	styleUrls: ['./add-teammember.component.scss']
 })
 export class AddTeammemberComponent implements OnInit {
-
 	@Input() teamName: string;
 
-	public usersOfTeam: Team[];
+	public usersOfTeam: UserInfo[];
 
 	public email: AbstractControl;
 	public addTeamMemberForm: FormGroup;
@@ -57,19 +56,17 @@ export class AddTeammemberComponent implements OnInit {
 			),
 		});
     }
-    
 
 	public addUsersToTeam(): void {
 		const newMembers = {
 			teamName: this.teamName,
 			users: this.addTeamMemberForm.value.users,
-		}
-        this.teamService.addUsersToTeam(newMembers).subscribe((data: Team[]) => {
-		
+        }
+
+        this.teamService.addUsersToTeam(newMembers).subscribe((data: UserInfo[]) => {
 			this.toastr.success(`User was successfully added!`);
 			this.usersOfTeam = data;
 			this.activeModal.close(this.usersOfTeam);
-            this.toastr.success(`User successfully added!`);
         }, (err: HttpErrorResponse) => {
             this.toastr.error(err.error.err);
         });

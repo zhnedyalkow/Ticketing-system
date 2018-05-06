@@ -9,16 +9,14 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./ticket-list.component.scss']
 })
 export class TicketListComponent implements OnInit {
-
-    myTicketInfo: Ticket[];
+    public myTicketInfo: Ticket[];
 
     constructor(
-        public ticketService: TicketService,
+        private ticketService: TicketService,
         private toastr: ToastrService,
     ) { }
 
     ngOnInit() {
-
         this.getMyTickets();
     }
 
@@ -27,7 +25,6 @@ export class TicketListComponent implements OnInit {
             this.myTicketInfo = data;
         }, (err) => {
             this.toastr.error(err.error.err);
-            console.log(err);
         })
     }
 

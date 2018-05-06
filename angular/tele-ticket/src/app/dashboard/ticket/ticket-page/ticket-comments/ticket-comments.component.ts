@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../../core/authentication/auth.service';
 import { TicketService } from '../../../shared/services/ticket.service';
 
-import { Comments } from '../../../../models/comments/comments';
+import { Comment } from '../../../../models/comments/comment';
 import { DashboardService } from '../../../shared/services/dashboard.service';
 import { UserInfo } from '../../../../models/users/user.info';
 
@@ -23,20 +23,18 @@ import { UserInfo } from '../../../../models/users/user.info';
 export class TicketCommentsComponent implements OnInit {
 
     public ticketId: number;
-    public comments: Comments[];
+    public comments: Comment[];
     public userInfo: UserInfo;
 
     public addCommentForm: FormGroup;
     public snapshot: ActivatedRouteSnapshot;
     public genMinLengthMsg: string = "Min length should be more than 2 chars!";
-    public genMaxLengthMsg: string = "Max length should be more than 50 chars!";
+    public genErr: string = "This field is required";
 
     constructor(
-        private router: Router,
         private fb: FormBuilder,
         private activatedRoute: ActivatedRoute,
 
-        private auth: AuthService,
         private toastr: ToastrService,
         private ticketService: TicketService,
         private dashService: DashboardService,
@@ -44,9 +42,21 @@ export class TicketCommentsComponent implements OnInit {
         this.snapshot = this.activatedRoute.snapshot;
     }
 
-    public ngOnInit(): void {
+    ngOnInit(): void {
         this.ticketId = this.snapshot.params.ticketId;
 
+        this.getUserInfo();
+        this.buildAddCommentForm();
+        this.getComments();
+    }
+
+    public getUserInfo(): void {
+        this.dashService.getUserInfo().subscribe((user) => {
+            this.userInfo = user;
+        });
+    }
+
+    public buildAddCommentForm(): void {
         this.addCommentForm = this.fb.group({
             'description': [null,
                 Validators.compose([
@@ -54,16 +64,10 @@ export class TicketCommentsComponent implements OnInit {
                     Validators.maxLength(100),
                 ])],
         });
-
-        this.getComments();
-
-        this.dashService.getUserInfo().subscribe((user) => {
-            this.userInfo = user;
-        });
     }
 
     public getComments(): void {
-        this.ticketService.getComments(this.ticketId).subscribe((data: Comments[]) => {
+        this.ticketService.getComments(this.ticketId).subscribe((data: Comment[]) => {
             this.comments = data;
         });
     }
@@ -73,7 +77,7 @@ export class TicketCommentsComponent implements OnInit {
             ticketId: this.ticketId,
         }
 
-        this.ticketService.addComment(newComment).subscribe((data: Comments) => {
+        this.ticketService.addComment(newComment).subscribe((data: Comment) => {
             this.toastr.success(`New comment added!`);
             this.comments.unshift(data);
         }, (err: HttpErrorResponse) => {
@@ -82,5 +86,4 @@ export class TicketCommentsComponent implements OnInit {
 
         this.addCommentForm.reset();
     }
-
 }

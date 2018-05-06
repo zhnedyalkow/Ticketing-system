@@ -14,10 +14,14 @@ export class TeamListComponent implements OnInit {
     constructor(
         private dashService: DashboardService,
         private toastr: ToastrService
-    ) { }
+    ) {}
 
     ngOnInit() {
-        this.dashService.getMyTeams().subscribe((data) => {
+        this.getMyTeams();
+    }
+
+    public getMyTeams(): void {
+        this.dashService.getMyTeams().subscribe((data: Team[]) => {
             this.myTeamInfo = data;
         }, (error) => {
             this.toastr.error(error.error.err);

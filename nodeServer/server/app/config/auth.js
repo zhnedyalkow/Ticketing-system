@@ -7,7 +7,7 @@ const ExtractJwt = passportJWT.ExtractJwt;
 
 const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
-jwtOptions.secretOrKey = 'tasmanianDevil';
+jwtOptions.secretOrKey = 'teleTicket';
 
 const init = (app, data) => {
     const ensureToken = (req, res, next) => {

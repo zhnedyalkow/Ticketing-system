@@ -1,15 +1,9 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { ActivatedRouteSnapshot, ActivatedRoute, Router } from '@angular/router';
-import { TicketService } from '../../shared/services/ticket.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Comments } from '../../../models/comments/comments';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observer } from 'rxjs/Observer';
-import { Observable } from "rxjs/Rx";
-import { AuthService } from '../../../core/authentication/auth.service';
-import { Ticket } from '../../../models/tickets/ticket';
-import { Status } from '../../../models/tickets/status';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRouteSnapshot, ActivatedRoute } from "@angular/router";
+
+import { Ticket } from "../../../models/tickets/ticket";
+import { PlayLoad } from "../../../models/users/playLoad";
+import { AuthService } from "../../../core/authentication/auth.service";
 
 @Component({
     selector: 'app-ticket-page',
@@ -20,7 +14,7 @@ export class TicketPageComponent implements OnInit {
     public ticketInfo: Ticket;
     public ticketId: number;
     public snapshot: ActivatedRouteSnapshot;
-    public playLoad: { id: number, role: string };
+    public playLoad: PlayLoad;
     public amIGM: boolean = false;
     public amIAU: boolean = false;
 
@@ -31,7 +25,7 @@ export class TicketPageComponent implements OnInit {
         this.snapshot = this.activatedRoute.snapshot;
     }
 
-    public ngOnInit(): void {
+    ngOnInit(): void {
         this.ticketId = this.snapshot.params.ticketId;
         this.playLoad = this.auth.tokenData();
 

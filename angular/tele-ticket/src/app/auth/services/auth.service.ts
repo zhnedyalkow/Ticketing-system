@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs/Observable';
 
 import { User } from '../../models/users/user';
@@ -12,8 +11,7 @@ export class AuthHomeService {
 
     constructor(
         private appConfig: AppConfig,
-        private http: HttpClient,
-        private jwtService: JwtHelperService
+        private http: HttpClient
     ) { }
 
     public register(user: User, options?: HttpOptions): Observable<Object> {

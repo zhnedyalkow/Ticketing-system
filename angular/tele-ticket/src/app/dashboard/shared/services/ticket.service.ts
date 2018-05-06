@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 import { AppConfig } from "../../../config/app.config";
-import { Comments } from "../../../models/comments/comments";
+import { Comment } from "../../../models/comments/comment";
 import { Status } from "../../../models/tickets/status";
 import { Ticket } from "../../../models/tickets/ticket";
 
@@ -30,16 +30,16 @@ export class TicketService {
         return this.http.get<Array<Ticket>>(`${this.appConfig.apiUrl}/ticket/getMyTickets`);
     }
 
-    getComments(ticketId): Observable<Array<Comments>> {
-        return this.http.get<Array<Comments>>
+    getComments(ticketId): Observable<Array<Comment>> {
+        return this.http.get<Array<Comment>>
             (`${this.appConfig.apiUrl}/comments/getAllComments?ticketId=${ticketId}`);
     }
 
-    addComment(formsValue: Object) {
-        return this.http.post<Comments>(`${this.appConfig.apiUrl}/comments/createComment`, formsValue);
+    addComment(formsValue: Object): Observable<Comment>{
+        return this.http.post<Comment>(`${this.appConfig.apiUrl}/comments/createComment`, formsValue);
     }
 
-    changeStatus(statusData: Status) {
+    changeStatus(statusData: Status): Observable<Status> {
         return this.http.post<Status>(`${this.appConfig.apiUrl}/ticket/changeTicketStatus`, statusData);
     }
 }

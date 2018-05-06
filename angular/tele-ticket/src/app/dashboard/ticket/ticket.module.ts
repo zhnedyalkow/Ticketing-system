@@ -30,8 +30,6 @@ import { TicketBoxComponent } from './ticket-list/ticket-box/ticket-box.componen
     TicketListComponent,
     TicketBoxComponent,
   ],
-  providers: [
-    TicketService,
-  ],
+  providers: [],
 })
 export class TicketModule { }

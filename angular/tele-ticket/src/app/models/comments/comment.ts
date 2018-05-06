@@ -1,4 +1,4 @@
-export class Comments {
+export class Comment {
     description: string;
     createdAt: string;
     User: [

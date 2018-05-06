@@ -7,64 +7,62 @@ import { ToastrService } from 'ngx-toastr';
 import { Ticket } from '../../../../models/tickets/ticket';
 import { Status } from '../../../../models/tickets/status';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PlayLoad } from '../../../../models/users/playLoad';
 
 @Component({
-	selector: 'app-ticket-status-btns',
-	templateUrl: './ticket-status-btns.component.html',
-	styleUrls: ['./ticket-status-btns.component.scss']
+    selector: 'app-ticket-status-btns',
+    templateUrl: './ticket-status-btns.component.html',
+    styleUrls: ['./ticket-status-btns.component.scss']
 })
 export class TicketStatusBtnsComponent implements OnInit {
 
-	@Input() ticketInfo: Ticket;
-	@Input() amIGM: boolean;
-	@Input() amIAU: boolean;
-	public ticketId: number;
-	public snapshot: ActivatedRouteSnapshot;
-	public playLoad: { id: number, role: string };
+    @Input() ticketInfo: Ticket;
+    @Input() amIGM: boolean;
+    @Input() amIAU: boolean;
 
-	constructor(
-		private router: Router,
-		private toastr: ToastrService,
-		public ticketService: TicketService,
-		private activatedRoute: ActivatedRoute,
-	) {
-		this.snapshot = this.activatedRoute.snapshot;
-	}
+    public ticketId: number;
+    public snapshot: ActivatedRouteSnapshot;
 
-	public ngOnInit(): void {
-		this.ticketId = this.snapshot.params.ticketId;
-	}
+    constructor(
+        private router: Router,
+        private toastr: ToastrService,
+        public ticketService: TicketService,
+        private activatedRoute: ActivatedRoute,
+    ) {
+        this.snapshot = this.activatedRoute.snapshot;
+    }
 
-	public changeStatus(status: string): void {
-		const statusData: Status = {
-			name: status,
-			tickedId: this.ticketId,
-		}
+    public ngOnInit(): void {
+        this.ticketId = this.snapshot.params.ticketId;
+    }
 
-		this.ticketService.changeStatus(statusData).subscribe((x: Status) => {
-			this.ticketInfo.Status = x;
-			this.toastr.success(`Changed status: ${x.name}!`);
-		}, (err: HttpErrorResponse) => {
-			this.toastr.error(err.error.er);
-		});
-	}
+    public changeStatus(status: string): void {
+        const statusData: Status = {
+            name: status,
+            tickedId: this.ticketId,
+        }
 
-	public deleteTicket(): void {
-		const ticketForDelete = {
-			ticketId: this.ticketId,
-		};
+        this.ticketService.changeStatus(statusData).subscribe((data: Status) => {
+            this.ticketInfo.Status = data;
+            this.toastr.success(`Changed status: ${data.name}!`);
+        }, (err: HttpErrorResponse) => {
+            this.toastr.error(err.error.er);
+        });
+    }
 
-		this.ticketService.deleteTicket(ticketForDelete)
-			.subscribe((data: {
-				success: string,
-			}) => {
-				this.toastr.success(`Successfully deleted ticket!`);
-				this.router.navigate(['./ticket']);
-			}, (err: HttpErrorResponse) => {
-				if (err.status === 302) {
-					this.toastr.error(err.error.err)
-				}
-			})
-	}
+    public deleteTicket(): void {
+        const ticketForDelete = {
+            ticketId: this.ticketId,
+        };
 
+        this.ticketService.deleteTicket(ticketForDelete)
+            .subscribe((data: {
+                success: string,
+            }) => {
+                this.toastr.success(`Successfully deleted ticket!`);
+                this.router.navigate(['./ticket']);
+            }, (err: HttpErrorResponse) => {
+                this.toastr.error(err.error.err);
+            })
+    }
 }

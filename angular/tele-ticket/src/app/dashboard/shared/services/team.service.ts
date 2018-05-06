@@ -25,16 +25,10 @@ export class TeamService {
         return this.http.post<Observable<Object>>
             (`${this.appConfig.apiUrl}/team/deleteTeam`, teamInfo);
     }
-    
+
     createTeam(formsValue: Object): Observable<Object> {
         return this.http.post<Observable<Object>>(
             `${this.appConfig.apiUrl}/team/createTeam`, formsValue
-        );
-    }
-    
-    addUnit(formsValue: Object): Observable<Object> {
-        return this.http.post<Observable<Object>>(
-            `${this.appConfig.apiUrl}/user/addUsersToTeam`, formsValue
         );
     }
 
@@ -44,7 +38,7 @@ export class TeamService {
         );
     }
 
-    getTeamManager(teamName: string) {
+    getTeamManager(teamName: string): Observable<UserInfo> {
         return this.http.get<UserInfo>(
             `${this.appConfig.apiUrl}/team/getTeamManager?teamName=${teamName}`
         );

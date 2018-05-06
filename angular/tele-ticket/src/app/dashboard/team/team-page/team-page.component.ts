@@ -12,6 +12,7 @@ import { AbstractControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddTeammemberComponent } from '../../components/add-teammember/add-teammember.component';
 import { UserInfo } from '../../../models/users/user.info';
+import { PlayLoad } from '../../../models/users/playLoad';
 
 @Component({
     selector: 'app-team-page',
@@ -19,11 +20,12 @@ import { UserInfo } from '../../../models/users/user.info';
     styleUrls: ['./team-page.component.scss']
 })
 export class TeamPageComponent implements OnInit {
+    public usersOfTeam: UserInfo[];
+
     public teamName: string;
-    public usersOfTeam: User[];
     public myTickets: Ticket[];
     public amIGM: boolean = false;
-    public playLoad: { id: number, role: string };
+    public playLoad: PlayLoad;
     public snapshot: ActivatedRouteSnapshot;
 
     constructor(
@@ -34,15 +36,11 @@ export class TeamPageComponent implements OnInit {
         this.snapshot = this.activatedRoute.snapshot;
     }
 
-    public ngOnInit(): void {
+    ngOnInit(): void {
         this.playLoad = this.auth.tokenData();
         this.teamName = this.snapshot.params.teamName;
 
-        this.teamService.getTeamManager(this.teamName).subscribe((user: UserInfo) => {
-            if (this.playLoad.id == user.id) {
-                this.amIGM = true;
-            }
-        });
+        this.getTeamManager();
 
         if (this.playLoad.role == 'admin') {
             this.amIGM = true;
@@ -51,6 +49,14 @@ export class TeamPageComponent implements OnInit {
         this.activatedRoute.data.subscribe((data) => {
             this.myTickets = data.allTickets;
             this.usersOfTeam = data.allMembers;
+        });
+    }
+
+    public getTeamManager(): void {
+        this.teamService.getTeamManager(this.teamName).subscribe((user: UserInfo) => {
+            if (this.playLoad.id == user.id) {
+                this.amIGM = true;
+            }
         });
     }
 }

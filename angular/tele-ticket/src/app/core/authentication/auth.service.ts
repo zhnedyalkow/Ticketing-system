@@ -3,15 +3,11 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 
 import { Observable } from 'rxjs/Observable';
 import * as jwt_decode from 'jwt-decode';
-import { AppConfig } from "../../config/app.config";
-import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class AuthService {
   constructor(
-    private router: Router,
-    private appConfig: AppConfig,
     private jwtService: JwtHelperService,
     private toastr: ToastrService,
   ) { }
