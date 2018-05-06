@@ -51,6 +51,7 @@ class TeamData extends Data {
             where: {
                 $or: [{ StatusId: 4 }, { StatusId: 5 }],
             },
+            order: [['id', 'DESC']],
             include: this.fullTicketInfo,
         });
 

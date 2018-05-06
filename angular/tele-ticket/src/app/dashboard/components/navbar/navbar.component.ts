@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { DashboardService } from '../../shared/services/dashboard.service';
-import { AuthService } from '../../../core/authentication/auth.service';
-import { Observable } from 'rxjs/Observable';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { CreateTeamComponent } from './../create-team/create-team.component';
-import { CreateTicketComponent } from '../create-ticket/create-ticket.component';
+import { OnInit, Component, Input } from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import { Router } from "@angular/router";
+import { DashboardService } from "../../shared/services/dashboard.service";
+import { AuthService } from "../../../core/authentication/auth.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { CreateTeamComponent } from "../create-team/create-team.component";
+import { CreateTicketComponent } from "../create-ticket/create-ticket.component";
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +14,7 @@ import { CreateTicketComponent } from '../create-ticket/create-ticket.component'
 })
 export class NavbarComponent implements OnInit {
   @Input() userInfo$: Observable<Object>
-
+  public isMenuOpen: boolean = false;
   public closeResult: string;
 
   constructor(
@@ -27,6 +27,10 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+  }
+
+  public openMenu():void {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   public logoutUser(): void {

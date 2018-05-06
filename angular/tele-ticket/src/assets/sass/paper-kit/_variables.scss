@@ -224,7 +224,8 @@ $orange-navbar:             rgba(#FF9500, .98);
 $red-navbar:                rgba(#FF4C40, .98);
 
 $bg-nude:               #FFFCF5 !default;
-$bg-primary:            #51bcda;
+// $bg-primary:            #51bcda;
+$bg-primary: #263238;
 $bg-info:               lighten($info-color, 7%) !default;
 $bg-success:            lighten($success-color, 7%) !default;
 $bg-warning:            lighten($warning-color, 7%) !default;

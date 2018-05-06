@@ -22,13 +22,13 @@ const init = (app, data) => {
             return res.json(newNotification);
         })
         .get('/getAllMyNotifications', async (req, res) => {
-            if (typeof req.userId === 'undefined') {
-                return res.sendStatus(403);
-            }
+            let notifications;
 
-            const userId = req.userId;
-            const notifications = await controller
-                .getAllNotificationByUserId(userId);
+            try {
+                notifications = await controller.getAllNotification(req.user);
+            } catch (error) {
+                return res.status(301).json({ err: error.message });
+            }
 
             return res.json(notifications);
         });

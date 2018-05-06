@@ -5,11 +5,16 @@ import { DashboardComponent } from './dashboard.component';
 
 import { AuthGuardService as AuthGuard } from '../core/authentication/auth-guard.service';
 import { RoleGuardService as RoleGuard} from '../core/authentication/role-guard.service';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
     {
         path: '', component: DashboardComponent, children: [
-            { 
+            {
+                path: '',
+                component: HomeComponent,
+            },
+            {
                 path: 'team', 
                 loadChildren: './team/team.module#TeamModule',
                 canActivate: [AuthGuard]

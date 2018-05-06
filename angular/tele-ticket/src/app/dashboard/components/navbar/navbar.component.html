@@ -1,35 +1,46 @@
-<nav class="navigation navbar navbar-expand-md bg-primary">
-  <button class="navbar-toggler navbar-toggler-right" type="button"
-	data-toggle="collapse" data-target="#navbar-menu" 
-	aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    <span class="navbar-toggler-icon"></span>
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="#">Menu</a>
-  <div class="collapse navbar-collapse" id="navbar-menu">
-    <ul class="navbar-nav ml-auto">
-      <li class="create-tm-btn nav-item">
-        <a class="nav-link" (click)="openCreateTeam()">
-          <i class="fa fa-users"></i> Create Team </a>
-      </li>
-      <li class="create-ticket-btn nav-item">
-        <a class="nav-link" (click)="openCreateIssue()">
-          <i class="fa fa-bug"></i> Create issue </a>
-      </li>
-      <li class="nav-item ">
-        <div ngbDropdown class="d-inline-block dropdown">
-          <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
-            <i class="fa fa-check"></i> Welcome, {{(userInfo$ | async)?.name}}</a>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-primary">
-            <a [routerLink]="['/']" class="dropdown-item">
-              <i  class="fa fa-list"></i> My panel</a>
-            <a class="dropdown-item" (click)="logoutUser()">
-              <i class="fa fa-sign-out"></i> Log out</a>
-          </div>
+<header class="bg-primary" data-color-on-scroll="100">
+    <div class="">
+        <div class="header-left-box" [ngClass]="{'mobile-menu-open': isMenuOpen}">
+            <a class="logo-a" href="index.php">
+                <img src="../../../../assets/img/logo.svg" width="35px" height="auto" />
+                <span class="font-bold">TeleTicket</span>
+            </a>
+            <div id="mobile-menu-icon-div" class="mobile-menu-icon" [ngClass]="{'open': isMenuOpen}" (click)="openMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-      </li>
-    </ul>
-  </div>
-</nav>
+        <div class="header-right-box" [ngClass]="{'active': isMenuOpen}">
+            <ul class="header-navbar">
+                <li class="nav-item">
+                    <a class="nav-link" (click)="openCreateTeam()">
+                        <i class="fa fa-users"></i> Create Team
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="openCreateIssue()">
+                        <i class="fa fa-bug"></i> Create issue
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <div ngbDropdown class="d-inline-block dropdown">
+                        <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
+                            <i class="fa fa-check"></i> Welcome, {{(userInfo$ | async)?.name}}</a>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-primary">
+                            <a class="dropdown-item" [routerLink]="['/team/teamlist']">
+                                <i class="fa fa-paper-plane"></i> My Teams
+                            </a>
+                            <a class="dropdown-item" [routerLink]="['/ticket/ticketlist']">
+                                <i class="fa fa-ticket"></i> My Tickets
+                            </a>
+                            <a class="dropdown-item" (click)="logoutUser()">
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>

@@ -9,9 +9,9 @@ class NotificationController {
         return result;
     }
 
-    getAllNotificationByUserId(userId) {
-        const result = this.data.notifications.getAllByCriteria({
-            UserId: userId,
+    getAllNotification(user) {
+        const result = user.getNotifications({
+            order: [['id', 'DESC']],
         });
 
         return result;
