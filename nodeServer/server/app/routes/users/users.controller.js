@@ -214,10 +214,6 @@ class UserController {
                 throw new Error('Please, add a team!');
             }
 
-            if (!requester) {
-                throw new Error('Something went wrong!');
-            }
-
             const team = await this.data.teams.getOneByCriteria({
                 name: teamName,
                 CompanyId: requester.CompanyId,
