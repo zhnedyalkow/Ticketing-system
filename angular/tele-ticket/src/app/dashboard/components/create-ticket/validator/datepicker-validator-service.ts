@@ -6,7 +6,6 @@ export class DatepickerValidationService {
 
     constructor() { }
     public isDate(c: AbstractControl): { [key: string]: boolean } | null {
-        console.log(`object`);
 
         if (c.pristine) {
             return null;
