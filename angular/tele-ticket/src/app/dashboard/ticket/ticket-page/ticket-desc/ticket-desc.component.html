@@ -6,6 +6,7 @@
       <p class="font-bold">"{{ ticketInfo?.description }}"
       </p>
     </div>
-    <app-ticket-status-btns *ngIf="amIGM || amIAU" [ticketInfo]="ticketInfo" [amIGM]="amIGM" [amIAU]="amIAU"></app-ticket-status-btns>
   </div>
 </div>
+
+<app-ticket-status-btns *ngIf="amIGM || amIAU" [ticketInfo]="ticketInfo" [amIGM]="amIGM" [amIAU]="amIAU"></app-ticket-status-btns>

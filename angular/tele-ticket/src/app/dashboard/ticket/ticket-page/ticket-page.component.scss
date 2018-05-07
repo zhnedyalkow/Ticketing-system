@@ -1,3 +1,5 @@
+@import "../../../../assets/sass/mixins/_breaking.point.scss";
+
 .panel-default>.panel-heading {
   background-color: #51bcda;
   border-radius: 5px 5px 0px 0px;
@@ -31,3 +33,20 @@ span button {
   }
 }
 
+.ticket-info-box {
+    display: inline-block;
+    vertical-align: top;
+
+    @include tablet {
+        margin-top: 16px;
+    }
+
+    p {
+        display: inline-block;
+    }
+
+    .ticket-content {
+        font-weight: bold;
+        margin: 20px 10px;
+    }
+}

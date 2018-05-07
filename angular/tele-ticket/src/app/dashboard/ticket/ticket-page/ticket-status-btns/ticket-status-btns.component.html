@@ -1,21 +1,23 @@
 <div class="btn-box">
-  <span *ngIf="ticketInfo?.Status.name == 'in-progress' && amIAU ||
+    <span *ngIf="ticketInfo?.Status.name == 'in-progress' && amIAU ||
         ticketInfo?.Status.name == 'reopened' && amIAU " class="btn-group">
-    <button type="button" class="btn btn-success btn-round" (click)="changeStatus('completed')">
-      <i class="fa fa-check-circle"></i> Completed</button>
-  </span>
+        <button type="button" class="btn btn-success btn-round" (click)="changeStatus('completed')">
+            <i class="fa fa-check-circle"></i> Completed</button>
+    </span>
 
-  <span *ngIf="amIGM == true" class="btn-group">
-    <button type="button" class="btn btn-danger btn-round" (click)="deleteTicket()">
-      <i class="fa fa-trash"></i> Delete</button>
-  </span>
+    <div class="righ-button">
+        <span *ngIf="amIGM == true" class="btn-group">
+            <button type="button" class="btn btn-danger btn-round" (click)="deleteTicket()">
+                <i class="fa fa-trash"></i> Delete</button>
+        </span>
 
-  <span *ngIf="ticketInfo?.Status.name == 'completed' && amIGM" class="btn-group ">
-    <button (click)="changeStatus('reopened')" type="button" class="btn btn-warning btn-round">
-      <i class="fa fa-folder-open"></i> Re-open</button>
-  </span>
-  <span *ngIf="ticketInfo?.Status.name !== 'closed' && amIGM" class="btn-group">
-    <button (click)="changeStatus('closed')" type="button" class="btn btn-info btn-round">
-      <i class="fa fa-window-close"></i> Close</button>
-  </span>
+        <span *ngIf="ticketInfo?.Status.name == 'completed' && amIGM" class="btn-group ">
+            <button (click)="changeStatus('reopened')" type="button" class="btn btn-warning btn-round">
+                <i class="fa fa-folder-open"></i> Re-open</button>
+        </span>
+        <span *ngIf="ticketInfo?.Status.name !== 'closed' && amIGM" class="btn-group">
+            <button (click)="changeStatus('closed')" type="button" class="btn btn-info btn-round">
+                <i class="fa fa-window-close"></i> Close</button>
+        </span>
+    </div>
 </div>

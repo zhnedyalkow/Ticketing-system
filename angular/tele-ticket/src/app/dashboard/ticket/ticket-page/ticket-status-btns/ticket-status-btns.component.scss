@@ -1,7 +1,17 @@
+@import "../../../../../assets/sass/mixins/_breaking.point.scss";
+
 .btn-box {
     margin-top: 10px;
 }
 
 span button {
     margin: 8px;
+}
+
+.righ-button {
+    float: right;
+
+    @include tablet {
+        float: none;
+    }
 }

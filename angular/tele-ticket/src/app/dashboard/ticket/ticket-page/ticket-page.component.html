@@ -1,17 +1,17 @@
 <div class="ticket-header">
-  <h3 class="font-bold text-center">{{ ticketInfo?.title }}</h3>
+    <h3 class="font-bold text-center">{{ ticketInfo?.title }}</h3>
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-8">
-      <app-ticket-desc [ticketInfo]="ticketInfo" [amIGM]="amIGM" [amIAU]="amIAU"></app-ticket-desc>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8">
+            <app-ticket-desc [ticketInfo]="ticketInfo" [amIGM]="amIGM" [amIAU]="amIAU"></app-ticket-desc>
+        </div>
+
+        <div class="ticket-info-box col-sm-12 col-md-12 col-lg-4">
+            <app-ticket-info [ticketInfo]="ticketInfo"></app-ticket-info>
+        </div>
     </div>
 
-    <div class="ticket-info-box col-sm-12 col-md-12 col-lg-4">
-      <app-ticket-info [ticketInfo]="ticketInfo"></app-ticket-info>
-    </div>
-  </div>
-
-  <app-ticket-comments></app-ticket-comments>
+    <app-ticket-comments></app-ticket-comments>
 </div>
