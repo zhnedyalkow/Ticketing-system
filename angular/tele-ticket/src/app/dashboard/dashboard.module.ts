@@ -21,7 +21,6 @@ import { CreateTicketComponent } from './components/create-ticket/create-ticket.
 import { TeamTicketsResolver } from './shared/resolvers/team-tickets.resolver';
 import { DatepickerValidationService } from './components/create-ticket/validator/datepicker-validator-service';
 import { AddTeammemberComponent } from './components/add-teammember/add-teammember.component';
-import { ReusableModalComponent } from '../components/reusable-modal/reusable-modal.component';
 import { UserService } from './shared/services/user.service';
 import { TeamMembersResolver } from './shared/resolvers/team-members.resolver';
 import { HomeComponent } from './components/home/home.component';

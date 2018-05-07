@@ -9,16 +9,16 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <i class="fa fa-user"></i> Name
+                                    <i class="fa fa-user main-color"></i> Name
                                 </th>
                                 <th>
-                                    <i class="fa fa-envelope"></i> Email
+                                    <i class="fa fa-envelope main-color"></i> Email
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let user of usersOfTeam">
-                                <td class="font-bold">{{ user.name }}</td>
+                                <td class="font-bold">{{ user.name | capitalizeFirst }}</td>
                                 <td class="font-bold">{{ user.email }}</td>
                             </tr>
                         </tbody>

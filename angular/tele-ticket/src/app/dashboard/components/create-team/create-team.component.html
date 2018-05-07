@@ -35,11 +35,13 @@
     </div>
     <div class="modal-footer">
       <div class="left-side">
-        <button type="button" (click)="createTeam()" [disabled]="!createTeamForm.valid" class="create-team-confirm btn btn-default btn-link">Create Team</button>
+        <button type="button" (click)="createTeam()" [disabled]="!createTeamForm.valid"
+                class="create-team-confirm btn btn-default btn-link"> <i class="fa fa-users main-color"></i> Create Team</button>
       </div>
       <div class="divider"></div>
       <div class="right-side">
-        <button type="button" class="optional-color btn btn-default btn-link" (click)="activeModal.close()">Never mind</button>
+        <button type="button" class="optional-color btn btn-default btn-link" 
+                (click)="activeModal.close()"><span class="danger-color">Never mind</span></button>
       </div>
     </div>
   </form>

@@ -45,7 +45,8 @@ export class CreateTicketComponent implements OnInit {
     public emailErrMsg: string = 'Invalid email! Eg. john.doe@gmail.com!';
     public labelMinLenErrMsg: string = "Min length should be more than 3 chars!";
     public genMinLengthMsg: string = "Min length should be more than 8 chars!";
-    public genMaxLengthMsg: string = "Max length should be more than 50 chars!";
+    public genMaxLengthMsg: string = "Max length should be less than 50 chars!";
+    public genMaxDescLengthMsg: string = "Max length should be less than than 50 chars!";
     public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
     constructor(
@@ -79,7 +80,7 @@ export class CreateTicketComponent implements OnInit {
                 Validators.compose([
                     Validators.required,
                     Validators.minLength(8),
-                    Validators.maxLength(50),
+                    Validators.maxLength(100),
                 ])],
             'label': [null, Validators.compose([
                 Validators.required,

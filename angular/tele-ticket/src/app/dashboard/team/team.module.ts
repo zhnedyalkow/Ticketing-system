@@ -10,6 +10,7 @@ import { TeamboxComponent } from './team-list/teambox/teambox.component';
 import { TeamInfoComponent } from './team-page/team-info/team-info.component';
 import { BtnsComponent } from './team-page/btns/btns.component';
 import { TeamMembersComponent } from './team-page/team-members/team-members.component';
+import { CapitalizePipeModule } from '../../shared/tools/capitalize-pipe/capitalize-pipe.module';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { TeamMembersComponent } from './team-page/team-members/team-members.comp
     ],
     imports: [
         CommonModule,
-        TeamRoutingModule
+        TeamRoutingModule,
+        CapitalizePipeModule
     ],
     providers: [],
 })

@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Notification = sequelize.define('Notification', {
         name: DataTypes.STRING,
-        description: DataTypes.STRING,
+        description: DataTypes.TEXT,
     }, {
         paranoid: true,
     });

@@ -10,7 +10,7 @@
                     "seqType": "Sequelize.INTEGER"
                 },
                 "description": {
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.TEXT"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -154,7 +154,7 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "description": {
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.TEXT"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -265,7 +265,7 @@
                     "seqType": "Sequelize.STRING"
                 },
                 "description": {
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.TEXT"
                 },
                 "dueDate": {
                     "seqType": "Sequelize.DATE"
@@ -301,20 +301,20 @@
                 "deletedAt": {
                     "seqType": "Sequelize.DATE"
                 },
-                "LabelId": {
+                "TeamId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Labels",
+                        "model": "Teams",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "TeamId": {
+                "LabelId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Teams",
+                        "model": "Labels",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",

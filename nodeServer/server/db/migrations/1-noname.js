@@ -12,7 +12,7 @@ var Sequelize = require('sequelize');
  * createTable "Teams", deps: [Companies, Users]
  * createTable "Notifications", deps: [Users]
  * createTable "NewNotifications", deps: [Users, Notifications]
- * createTable "Tickets", deps: [Users, Users, Labels, Teams, Statuses]
+ * createTable "Tickets", deps: [Users, Users, Teams, Labels, Statuses]
  * createTable "Comments", deps: [Users, Tickets]
  * createTable "TeamMembers", deps: [Users, Teams]
  *
@@ -21,7 +21,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2018-05-04T09:19:36.131Z",
+    "created": "2018-05-07T11:23:47.878Z",
     "comment": ""
 };
 
@@ -227,7 +227,7 @@ var migrationCommands = [{
                     "type": Sequelize.STRING
                 },
                 "description": {
-                    "type": Sequelize.STRING
+                    "type": Sequelize.TEXT
                 },
                 "createdAt": {
                     "type": Sequelize.DATE,
@@ -315,7 +315,7 @@ var migrationCommands = [{
                     "type": Sequelize.STRING
                 },
                 "description": {
-                    "type": Sequelize.STRING
+                    "type": Sequelize.TEXT
                 },
                 "dueDate": {
                     "type": Sequelize.DATE
@@ -351,22 +351,22 @@ var migrationCommands = [{
                 "deletedAt": {
                     "type": Sequelize.DATE
                 },
-                "LabelId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "SET NULL",
-                    "references": {
-                        "model": "Labels",
-                        "key": "id"
-                    },
-                    "allowNull": true
-                },
                 "TeamId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
                     "onDelete": "SET NULL",
                     "references": {
                         "model": "Teams",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                },
+                "LabelId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Labels",
                         "key": "id"
                     },
                     "allowNull": true
@@ -397,7 +397,7 @@ var migrationCommands = [{
                     "allowNull": false
                 },
                 "description": {
-                    "type": Sequelize.STRING
+                    "type": Sequelize.TEXT
                 },
                 "createdAt": {
                     "type": Sequelize.DATE,

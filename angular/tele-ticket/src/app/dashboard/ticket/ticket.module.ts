@@ -14,12 +14,14 @@ import { TicketCommentsComponent } from './ticket-page/ticket-comments/ticket-co
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketBoxComponent } from './ticket-list/ticket-box/ticket-box.component';
 import { TicketCommentsInfoComponent } from './ticket-page/ticket-comments-info/ticket-comments-info.component';
+import { CapitalizePipeModule } from '../../shared/tools/capitalize-pipe/capitalize-pipe.module';
 
 @NgModule({
   imports: [
     CommonModule,
     TicketRoutingModule,
     ReactiveFormsModule,
+    CapitalizePipeModule
   ],
   declarations: [
     TicketPageComponent,

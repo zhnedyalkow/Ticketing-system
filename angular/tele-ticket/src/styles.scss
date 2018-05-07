@@ -16,15 +16,27 @@ ul {
 }
 
 .warning-color {
-    color: orange;
+    color: #FFA500;
+}
+
+.neutral-color {
+    color: #10b1b6dc;
+}
+
+.label-color {
+    color: #8B7D6B
+}
+
+.icon-color {
+    color: #828282;
 }
 
 .optional-color {
-    color: green;
+    color: #66CD00;
 }
 
 .danger-color {
-    color: red;
+    color: #FF3030;
 }
 
 .font-bold {
@@ -34,22 +46,6 @@ ul {
 .main-color {
     color: #6dd3d6;
 }
-
-// i {
-//     color: #0abfc5;
-// }
-
-// i.fa-user {
-//     color: #0abfc5;
-// }
-
-// i.fa-calendar {
-//     color: #6dd3d6;
-// }
-
-// i.fa-check {
-//     color: green;
-// }
 
 .alert {
     background: red;

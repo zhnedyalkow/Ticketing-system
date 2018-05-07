@@ -19,7 +19,7 @@
       <div class="alert" *ngIf="!createTicketForm.controls['description'].valid && createTicketForm.controls['description'].touched">
         <span *ngIf="createTicketForm.controls['description'].hasError('required') ">{{ genericErrorMsg }} </span>
         <span *ngIf="createTicketForm.controls['description'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
-        <span *ngIf="createTicketForm.controls['description'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+        <span *ngIf="createTicketForm.controls['description'].hasError('maxlength') "> {{ genMaxDescLengthMsg }} </span>
       </div>
 
       <div class="ticket-label">
@@ -76,11 +76,12 @@
     <div class="modal-footer">
       <div class="left-side">
         <button type="submit" [disabled]="!selected && !createTicketForm.valid"
-                class="btn btn-default btn-link">Create issue</button>
+                class="btn btn-default btn-link"><i class="fa fa-bug danger-color"></i> Create issue</button>
       </div>
       <div class="divider"></div>
       <div class="right-side">
-        <button type="button" class="btn btn-default btn-link" (click)="activeModal.close()">Never mind</button>
+        <button type="button" class="btn btn-default btn-link" (click)="activeModal.close()">
+                <span class="danger-color">Never mind</span></button>
       </div>
     </div>
   </form>

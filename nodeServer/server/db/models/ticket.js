@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Ticket = sequelize.define('Ticket', {
         title: DataTypes.STRING,
-        description: DataTypes.STRING,
+        description: DataTypes.TEXT,
         dueDate: DataTypes.DATE,
         AssignedUserId: DataTypes.INTEGER,
         CreatorId: DataTypes.INTEGER,

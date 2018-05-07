@@ -4,8 +4,9 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('Tickets', [{
                 id: 1,
-                title: 'Ticket1',
-                description: 'Ticket Description 1',
+                title: 'Cannot open my account',
+                description: `Hello, I cannot access my account since yesterday(john.doe@gmail.com).
+                Even though I type my username and password correctly it says: 'No such user found'.`,
                 dueDate: '2018-03-20 08:19:42',
                 CreatorId: 1,
                 AssignedUserId: 1,
@@ -18,8 +19,9 @@ module.exports = {
             },
             {
                 id: 2,
-                title: 'Ticket2',
-                description: 'Ticket Description 2',
+                title: `My comment in the comment's section cannot appear`,
+                description: `Hello, when I try to answer some ticket #2 in the ticket system
+                I cannot see my comment at the end of comment section.`,
                 dueDate: '2018-03-20 08:19:42',
                 CreatorId: 2,
                 AssignedUserId: 2,
@@ -32,8 +34,9 @@ module.exports = {
             },
             {
                 id: 3,
-                title: 'Ticket3',
-                description: 'Ticket Description 3',
+                title: 'After mark the ticket as complete cannot see close button',
+                description: `Hello, I have already market ticket #3 as completed but
+                 I am not able to see where is 'CLOSE' button. Could you please double check?`,
                 dueDate: '2018-03-20 08:19:42',
                 CreatorId: 3,
                 AssignedUserId: 3,

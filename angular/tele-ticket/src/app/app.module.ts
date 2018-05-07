@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './auth/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CapitalizePipeModule } from './shared/tools/capitalize-pipe/capitalize-pipe.module';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -29,6 +30,7 @@ export function tokenGetter() {
         BrowserModule,
         NgbModule.forRoot(),
         ToastrModule.forRoot(),
+        CapitalizePipeModule,
         BrowserAnimationsModule,
 
         HttpClientModule,

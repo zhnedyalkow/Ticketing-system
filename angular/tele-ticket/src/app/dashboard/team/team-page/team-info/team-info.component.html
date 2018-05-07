@@ -7,18 +7,18 @@
                 <div class="panel-container">
                     <h6 [routerLink]="['/ticket/', ticket.id]" class="ticket-header">{{ ticket.title}}</h6>
                     <p>
-                        <i class="fa fa-user"></i> Attached Member:
-                        <span class="panel-font-bold">{{ ticket.AssignedUser.name}}</span>
+                        <i class="fa fa-user icon-color"></i> Attached Member:
+                        <span class="panel-font-bold warning-color">{{ ticket.AssignedUser.name | capitalizeFirst}}</span>
                     </p>
                     <div class="ticket-info-box">
                         <p>
-                            <i class="fa fa-check"></i> Status:
+                            <i class="fa fa-check icon-color"></i> Status:
                             <span class="ticket-content">{{ ticket.Status.name}}</span>
                         </p>
                     </div>
                     <div class="ticket-info-box">
                         <p>
-                            <i class="fa fa-tags"></i> Label:
+                            <i class="fa fa-tags icon-color"></i> Label:
                             <span class="ticket-content">{{ ticket.Label?.title }}</span>
                         </p>
                     </div>
