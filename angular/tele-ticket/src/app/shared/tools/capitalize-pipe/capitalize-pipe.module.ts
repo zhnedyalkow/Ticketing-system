@@ -8,10 +8,5 @@ import { CapitalizeFirstPipe } from '../../../dashboard/shared/pipes/capitalizef
   exports: [CapitalizeFirstPipe]
 })
 export class CapitalizePipeModule {
-    // static forRoot() {
-    //     return {
-    //         NgModule: CapitalizePipeModule,
-    //         providers: [CapitalizePipeModule]
-    //     }
-    // }
+
  }

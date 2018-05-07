@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         paranoid: true,
     });
-    Label.associate = function (models) {
+    Label.associate = (models) => {
         // associations can be defined here
     };
     return Label;

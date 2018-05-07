@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         paranoid: true,
     });
-    Company.associate = function (models) {
+    Company.associate = (models) => {
         // associations can be defined here
     };
     return Company;

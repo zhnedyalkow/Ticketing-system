@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         paranoid: true,
     });
-    Comments.associate = function (models) {
+    Comments.associate = (models) => {
         const {
             User,
             Ticket,

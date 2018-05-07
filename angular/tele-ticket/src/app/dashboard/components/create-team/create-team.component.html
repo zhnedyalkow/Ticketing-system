@@ -1,29 +1,39 @@
 <div>
-  <form [formGroup]="createTeamForm" (ngSubmit)="createTeam()" class="create-team">
-    <div class="modal-body">
-      <div class="teams">
-        <label for="name" class="font-bold">Name</label>
-		<input formControlName="name" type="text" class="form-control" placeholder="Name..." required>
-        <div class="alert" *ngIf="!createTeamForm.controls['name'].valid && createTeamForm.controls['name'].touched">
-            <span *ngIf="createTeamForm.controls['name'].hasError('required') ">{{ genericErrorMsg }} </span>
-            <span *ngIf="createTeamForm.controls['name'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
-            <span *ngIf="createTeamForm.controls['name'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+    <form [formGroup]="createTeamForm" (ngSubmit)="createTeam()" class="create-team">
+        <div class="modal-body">
+            <div class="teams form-group">
+                <label for="name" class="font-bold">Name</label>
+                <input formControlName="name" type="text" class="form-control" placeholder="Name..." required>
+                <div class="alert" *ngIf="!createTeamForm.controls['name'].valid && createTeamForm.controls['name'].touched">
+                    <span *ngIf="createTeamForm.controls['name'].hasError('required') ">{{ genericErrorMsg }} </span>
+                    <span *ngIf="createTeamForm.controls['name'].hasError('minlength') "> {{ genMinLengthMsg }} </span>
+                    <span *ngIf="createTeamForm.controls['name'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+                </div>
+            </div>
+            <div class="user-nam form-group">
+                <fieldset formArrayName="users">
+                    <div class="form-group row" *ngFor="let user of createTeamForm.get('users').controls; let i = index;" [formGroup]="user" required>
+                        <div class="col-sm-10">
+                            <label [attr.for]="'email'+i" class="font-bold">*Assign user's email</label>
+                            <input formControlName="email" [attr.id]="'email'+i" type="text" class="form-control" placeholder="User's email..." required>
+                            <div class="alert" *ngIf="!createTeamForm.get('users').at(i).get('email').valid && createTeamForm.get('users').at(i).get('email').touched">
+                                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('required') "> {{ genericErrorMsg }} </span>
+                                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('minlength') "> {{ genMinLengthMsg }} </span>
+                                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
+                                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('pattern') "> {{ emailErrMsg }} </span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <button type="button" class="btn icon-btn btn-success btn-round " (click)="createTeamForm.get('users').push(buildItem(''))">
+                    <i class="fa fa-plus"></i> Add </button>
+                <button type="button" class="btn icon-btn btn-danger btn-round " (click)="createTeamForm.get('users').removeAt(i)">
+                    <i class="fa fa-trash"></i> Del </button>
+            </div>
         </div>
-      </div>
-      <p class="danger-color font-bold">*Assign user's email - * = required </p>
-      <div class="user-name">
-        <fieldset formArrayName="users">
-          <div class="form-group row" *ngFor="let user of createTeamForm.get('users').controls; let i = index;" [formGroup]="user"
-            required>
-            <div class="col-sm-10">
-              <label [attr.for]="'email'+i" class="font-bold">Email</label>
-              <input formControlName="email" [attr.id]="'email'+i" type="text" class="form-control" placeholder="User's email..." required>
-              <div class="alert" *ngIf="!createTeamForm.get('users').at(i).get('email').valid && createTeamForm.get('users').at(i).get('email').touched">
-                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('required') "> {{ genericErrorMsg }} </span>
-                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('minlength') "> {{ genMinLengthMsg }} </span>
-                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
-                <span *ngIf="createTeamForm.get('users').at(i).get('email').hasError('pattern') "> {{ emailErrMsg }} </span>
-              </div>
+        <div class="modal-footer">
+            <div class="left-side">
+                <button type="button" (click)="createTeam()" [disabled]="!createTeamForm.valid" class="create-team-confirm btn btn-default btn-link">Create Team</button>
             </div>
           </div>
         </fieldset>

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         paranoid: true,
     });
-    Notification.associate = function (models) {
+    Notification.associate = (models) => {
         const {
             User,
         } = models;

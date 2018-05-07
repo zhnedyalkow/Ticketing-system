@@ -6,6 +6,7 @@ import { AuthService } from "../../../core/authentication/auth.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CreateTeamComponent } from "../create-team/create-team.component";
 import { CreateTicketComponent } from "../create-ticket/create-ticket.component";
+import { UserInfo } from "../../../models/users/user.info";
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ import { CreateTicketComponent } from "../create-ticket/create-ticket.component"
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  @Input() userInfo$: Observable<Object>
+  @Input() userInfo$: Observable<UserInfo>
   public isMenuOpen: boolean = false;
 
   constructor(

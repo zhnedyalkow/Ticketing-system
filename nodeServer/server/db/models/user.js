@@ -20,11 +20,14 @@ module.exports = (sequelize, DataTypes) => {
         User.hasMany(Notification);
         User.hasMany(Ticket, { foreignKey: 'AssignedUserId' });
         User.belongsTo(Company);
+
         User.belongsToMany(Team, {
             through: 'TeamMembers',
+            onDelete: 'cascade',
         });
         Team.belongsToMany(User, {
             through: 'TeamMembers',
+            onDelete: 'cascade',
         });
     };
     return User;

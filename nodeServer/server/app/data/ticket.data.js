@@ -5,6 +5,7 @@ const {
     Label,
     Status,
     Team,
+    Op,
 } = require('../../db/models');
 
 class TeamData extends Data {

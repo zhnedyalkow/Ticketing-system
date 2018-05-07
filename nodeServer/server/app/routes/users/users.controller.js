@@ -35,6 +35,7 @@ class UserController {
             }
 
             registerInfo.role = 'User';
+            registerInfo.avatar = '/faces/user.svg';
 
             await this.data.users.create(registerInfo);
         } catch (error) {
@@ -56,6 +57,10 @@ class UserController {
 
             if (!user) {
                 throw new Error('No such user found');
+            }
+
+            if (user.CompanyId === null) {
+                throw new Error('You have not a company, yet!');
             }
 
             if (user.password === obj.password) {

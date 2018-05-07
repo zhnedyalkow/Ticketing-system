@@ -33,6 +33,9 @@
                         <a class="dropdown-item" [routerLink]="['/ticket/ticketlist']">
                             <i class="fa fa-ticket"></i> My Tickets
                         </a>
+                        <a *ngIf="(userInfo$ | async)?.role === 'admin'" class="dropdown-item" [routerLink]="['/admin']">
+                            <i class="fa fa-address-card"></i> Admin Panel
+                        </a>
                         <a class="dropdown-item" (click)="logoutUser()">
                             <i class="fa fa-sign-out"></i> Log out
                         </a>
