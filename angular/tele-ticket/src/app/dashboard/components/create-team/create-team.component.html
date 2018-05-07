@@ -1,4 +1,4 @@
-<!-- <div>
+<div>
     <form [formGroup]="createTeamForm" (ngSubmit)="createTeam()" class="create-team">
         <div class="modal-body">
             <div class="teams form-group">
@@ -34,26 +34,15 @@
         </div>
         <div class="modal-footer">
             <div class="left-side">
-                <button type="button" (click)="createTeam()" [disabled]="!createTeamForm.valid" class="create-team-confirm btn btn-default btn-link">Create Team</button>
+                <button type="button" (click)="createTeam()" [disabled]="!createTeamForm.valid" class="create-team-confirm btn btn-default btn-link">
+                    <i class="fa fa-users main-color"></i>Create Team</button>
+            </div>
+            <div class="divider"></div>
+            <div class="right-side">
+                <button type="button" class="optional-color btn btn-default btn-link" (click)="activeModal.close()">
+                    <span class="danger-color">Never mind</span>
+                </button>
             </div>
         </div>
-        <button type="button" class="btn icon-btn btn-success btn-round " (click)="createTeamForm.get('users').push(buildItem(''))">
-            <i class="fa fa-plus"></i> Add </button>
-        <button type="button" class="btn icon-btn btn-danger btn-round " (click)="createTeamForm.get('users').removeAt(i)">
-            <i class="fa fa-trash"></i> Del </button>
+    </form>
 </div>
-</div>
-<div class="modal-footer">
-    <div class="left-side">
-        <button type="button" (click)="createTeam()" [disabled]="!createTeamForm.valid" class="create-team-confirm btn btn-default btn-link">
-            <i class="fa fa-users main-color"></i> Create Team</button>
-    </div>
-    <div class="divider"></div>
-    <div class="right-side">
-        <button type="button" class="optional-color btn btn-default btn-link" (click)="activeModal.close()">
-            <span class="danger-color">Never mind</span>
-        </button>
-    </div>
-</div>
-</form>
-</div> -->
