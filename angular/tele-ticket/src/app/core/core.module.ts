@@ -10,7 +10,6 @@ import { TokenInterceptor } from "./authentication/token.interceptor";
 import { AuthHomeService } from "../auth/services/auth.service";
 import { RoleGuardService } from "./authentication/role-guard.service";
 
-
 @NgModule({
     providers: [
       AppConfig,

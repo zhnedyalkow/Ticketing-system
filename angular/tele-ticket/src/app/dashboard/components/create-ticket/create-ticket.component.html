@@ -12,7 +12,7 @@
                 <span *ngIf="createTicketForm.controls['title'].hasError('maxlength') "> {{ genMaxLengthMsg }} </span>
             </div>
 
-            <div class="ticket-description">
+            <div class="ticket-description form-group">
                 <label for="description" class="font-bold">Description</label>
                 <textarea formControlName="description" id="description" class="form-control" rows="4" placeholder="Description..."></textarea>
             </div>

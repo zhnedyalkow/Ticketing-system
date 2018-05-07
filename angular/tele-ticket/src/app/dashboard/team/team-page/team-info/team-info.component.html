@@ -1,11 +1,15 @@
-<div *ngFor="let ticket of myTickets" class="panel panel-default ticket-container">
+<div class="col-md-12 my-ticket-list" *ngIf="teamsTickets?.length === 0">
+    <h4 class="text-center text-bold">The team do not have any tickets :)</h4>
+</div>
+
+<div *ngFor="let ticket of teamsTickets" class="panel panel-default ticket-container">
     <div class="panel-heading font-bold">
         <i class="fa fa-ticket"></i> Ticket</div>
     <div class="panel-body">
         <ul class="list-group">
             <li class="list-group-item">
                 <div class="panel-container">
-                    <h6 [routerLink]="['/ticket/', ticket.id]" class="ticket-header">{{ ticket.title}}</h6>
+                    <h6 [routerLink]="['/ticket/', ticket.id]" class="ticket-header">{{ ticket.title }}</h6>
                     <p>
                         <i class="fa fa-user icon-color"></i> Attached Member:
                         <span class="panel-font-bold warning-color">{{ ticket.AssignedUser.name | capitalizeFirst}}</span>

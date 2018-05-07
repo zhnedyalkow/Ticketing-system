@@ -107,6 +107,7 @@ class TeamsController {
             success: true,
         };
     }
+
     async getMyTeams(user) {
         let teamList;
 

@@ -21,7 +21,6 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     CommonModule,
-    // FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
     NgbModule,

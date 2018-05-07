@@ -34,7 +34,7 @@ class UserController {
                 throw new Error('The email is alredy used');
             }
 
-            registerInfo.role = 'User';
+            registerInfo.role = 'user';
             registerInfo.avatar = '/faces/user.svg';
 
             await this.data.users.create(registerInfo);
