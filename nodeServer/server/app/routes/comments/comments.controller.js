@@ -4,6 +4,7 @@ class CommentsController {
     }
 
     /* TODO */
+    
     async getAllCommentsByTicketId(ticketId) {
         const allComments = await this.data.comments.getComments(ticketId);
 

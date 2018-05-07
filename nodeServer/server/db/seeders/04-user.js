@@ -5,7 +5,7 @@ module.exports = {
         return queryInterface.bulkInsert('Users', [{
                 id: 1,
                 avatar: '/faces//ayo-ogunseinde-2.jpg',
-                email: 'zh.nedyalkow@gmail.com',
+                email: 'admin@gmail.com',
                 name: 'admin',
                 password: '12345678',
                 role: 'admin',
@@ -20,7 +20,7 @@ module.exports = {
                 email: 'yavorsstoychev@gmail.com',
                 name: 'Yavor Stoychev',
                 password: '12345678',
-                role: 'admin',
+                role: 'user',
                 CompanyId: 1,
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
@@ -32,7 +32,7 @@ module.exports = {
                 email: 'babapenka@gmail.com',
                 name: 'Penka Dobreva',
                 password: '12345678',
-                role: 'admin',
+                role: 'user',
                 CompanyId: 1,
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
@@ -54,18 +54,30 @@ module.exports = {
                 id: 5,
                 avatar: '/faces/erik-lucatero-2.jpg',
                 email: 'zhi@gmail.com',
-                name: 'Zhitomir Oreshenski',
+                name: 'Georgi Emilov',
                 password: '12345678',
                 role: 'user',
-                CompanyId: 1,
+                CompanyId: null,
                 createdAt: '2018-03-18 08:19:42',
                 updatedAt: '2018-03-18 08:20:50',
                 deletedAt: null,
-            }
+            },
+            {
+                id: 6,
+                avatar: '/faces/erik-lucatero-2.jpg',
+                email: 'admin2@gmail.com',
+                name: 'admin2',
+                password: '12345678',
+                role: 'admin',
+                CompanyId: 2,
+                createdAt: '2018-03-18 08:19:42',
+                updatedAt: '2018-03-18 08:20:50',
+                deletedAt: null,
+            },
         ], {});
     },
 
     down: (queryInterface, Sequelize) => {
         return queryInterface.bulkDelete('Users', null, {});
-    }
+    },
 };

@@ -65,7 +65,6 @@ describe('LoginComponent', () => {
         expect(email.valid).toBeFalsy();
 
         // Email field is required
-
         errors = email.errors || {};
         expect(errors['required']).toBeTruthy();
 
@@ -91,7 +90,6 @@ describe('LoginComponent', () => {
         expect(password.valid).toBeFalsy();
 
         // Password field is required
-
         errors = password.errors || {};
         expect(errors['required']).toBeTruthy();
 
@@ -108,29 +106,4 @@ describe('LoginComponent', () => {
         expect(errors['minlength']).toBeFalsy();
         expect(errors['maxlength']).toBeFalsy();
     })
-
-    // it('Submitting a form emits a user', () => {
-    //     expect(component.rForm.valid).toBeFalsy();
-    //     component.rForm.controls['email'].setValue('zhi@gmail.com');
-    //     component.rForm.controls['password'].setValue('12345678');
-    //     expect(component.rForm.valid).toBeTruthy();
-
-    //     let user: any;
-
-    //     // Subscribe to the Observable and store the user in a local variable
-    //     // component.loginUser.subscribe((value) => user = value);
-
-    //     component.auth.login(user).subscribe((value) => {
-    //         value === 'ok'
-    //     });
-
-    //     // Trigger the login function
-    //     component.loginUser();
-
-    //     // Now we can check to make sure the emitted value is correct
-    //     expect(user.email).toBe('zhi@gmail.com');
-    //     expect(user.password).toBe('12345678');
-
-
-    // })
 });

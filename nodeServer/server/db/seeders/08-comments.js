@@ -31,7 +31,7 @@ module.exports = {
             },
             {
                 id: 3,
-                description: `Hello Penka,
+                description: `Hello Natalia,
                 We are currently working on this request and we found that everything seems to be correct.
                 You are not able to see close button, because you do not have permissions to close it.
                 Only admin and GM can close tracking issue.
