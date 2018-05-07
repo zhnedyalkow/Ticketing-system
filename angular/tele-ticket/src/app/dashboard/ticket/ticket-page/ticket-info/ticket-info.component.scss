@@ -11,9 +11,13 @@
 }
 
 .ticket-information {
-    margin: 10px 5px;
+    padding: 8px 8px;
     .due-date {
         color: red;
+    }
+    
+    p {
+        padding: 8px;
     }
 }
 

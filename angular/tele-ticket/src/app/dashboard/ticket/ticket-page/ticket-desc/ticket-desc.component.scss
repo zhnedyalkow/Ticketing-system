@@ -3,27 +3,26 @@
     border-radius: 5px 5px 0px 0px;
     color: #fff;
     text-align: center;
-  }
-  
-  .panel-default {
-    background-color: #fff;
-  }
-  
-  .form-group {
-    margin: 0px;
-  } 
-  
-  span button {
-      margin: 16px 8px;
-  }
-  
-  .ticket-header {
-    h3 {
-      margin: 0px 0px 32px;
-    }
-  }
+}
 
-  .description p {
-    margin: 15px 15px;
-  }
-  
+.panel-default {
+    background-color: #fff;
+}
+
+.form-group {
+    margin: 0px;
+}
+
+span button {
+    margin: 16px 8px;
+}
+
+.ticket-header {
+    h3 {
+        margin: 0px 0px 32px;
+    }
+}
+
+.description p {
+    padding: 15px;
+}

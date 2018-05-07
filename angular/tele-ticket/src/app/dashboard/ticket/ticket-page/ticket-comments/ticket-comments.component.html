@@ -1,11 +1,8 @@
 <div class="row">
-    <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
-        <a href="">
-            <img class="mx-auto rounded-circle img-fluid" 
-                src="../../assets/img/{{userInfo?.avatar}}" alt="avatar">
-        </a>
+    <div class="comment-avatar col-md-1 col-sm-12 text-center">
+        <img class="" src="../../assets/img/{{userInfo?.avatar}}" alt="avatar">
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
         <form [formGroup]="addCommentForm" (ngSubmit)="addComment()">
             <div class="form-group">
                 <label for="comment" class="font-bold">
@@ -27,11 +24,11 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3 class="mb-2">Comments</h3>
+        <h3>Comments</h3>
     </div>
-
-    <div *ngFor="let comment of comments" class="comments-box col-md-9 row">
-        <app-ticket-comments-info [comment]="comment"></app-ticket-comments-info>
+</div>
+<div class="row">
+    <div class="col-md-9 col-sm-12">
+        <app-ticket-comments-info *ngFor="let comment of comments" [comment]="comment"></app-ticket-comments-info>
     </div>
-    
 </div>

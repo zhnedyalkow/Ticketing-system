@@ -1,18 +1,27 @@
+@import "../../../../../assets/sass/mixins/_breaking.point.scss";
+
 .comments-box {
-    margin-top: 32px;
+    margin-bottom: 32px;
+
     .comment-content {
         box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
         background-color: white;
         border-radius: 6px;
         padding: 12px;
     }
-    &:first-child {
-        margin-top: 0px;
-    }
+
     .comment-avatar {
         img {
             width: 80px;
             height: auto;
+            max-width: 100%;
+            border-radius: 50%;
+            margin: 10px auto;
+
+            @include mobile {
+                display: block;
+                margin: 10px auto;
+            }
         }
     }
 }
@@ -22,6 +31,6 @@
     margin: 10px 5px;
     border-radius: 5px 5px; 
     p {
-        margin: 30px 10px;
+        margin: 16px 10px;
     }
 }

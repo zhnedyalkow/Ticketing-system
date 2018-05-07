@@ -1,16 +1,17 @@
-<div class="comment col-md-2">
-    <div class="comment-avatar col-md-1text-center pr-1">
-        <img class="mx-auto rounded-circle img-fluid" src="../../assets/img/{{comment?.User.avatar}}" alt="avatar">
+<div class="comments-box row">
+    <div class="comment col-md-2 col-sm-12">
+        <div class="comment-avatar col-md-1text-center pr-1">
+            <img src="../../assets/img/{{comment?.User.avatar}}" alt="avatar">
+        </div>
+    </div>
+    <div class="comment-content col-md-10 col-sm-12">
+        <h6 class="small comment-meta">
+            <p>{{ comment?.User.role }}</p>
+            <a href="#">
+                <b>{{comment?.User.name}}</b>
+            </a> {{comment?.createdAt | date}}</h6>
+        <div class="comment-body">
+            <p> {{comment?.description}} </p>
+        </div>
     </div>
 </div>
-<p>{{ comment?.User.role }}</p>
-<div class="comment-content col-md-10">
-    <h6 class="small comment-meta">
-        <a href="#">
-            <b>{{comment?.User.name}}</b>
-        </a> {{comment?.createdAt | date}}</h6>
-    <div class="comment-body">
-        <p> {{comment?.description}} </p>
-    </div>
-</div>
-

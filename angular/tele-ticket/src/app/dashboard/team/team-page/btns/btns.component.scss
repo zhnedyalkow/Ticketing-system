@@ -1,7 +1,12 @@
+@import "../../../../../assets/sass/mixins/_breaking.point.scss";
 
 .btn-box {
     margin-right: 10px;
     text-align: right;
+
+    @include mobile {
+        text-align: center;
+    }
 
     .btn-del {
         margin-left: 15px;
