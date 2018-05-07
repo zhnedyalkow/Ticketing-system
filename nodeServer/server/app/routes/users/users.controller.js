@@ -59,6 +59,10 @@ class UserController {
                 throw new Error('No such user found');
             }
 
+            if (user.CompanyId === null) {
+                throw new Error('You have not a company, yet!');
+            }
+
             if (user.password === obj.password) {
                 const payload = {
                     id: user.id,
