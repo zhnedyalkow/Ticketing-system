@@ -13,7 +13,7 @@ export const routes: Routes = [
     {
         path: '', component: TeamComponent, children: [
             {
-                path: '', redirectTo: 'teamlist',
+                path: '', redirectTo: 'teamlist', pathMatch: "full",
             },
             {
                 path: 'teamlist',

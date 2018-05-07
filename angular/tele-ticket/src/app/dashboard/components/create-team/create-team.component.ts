@@ -12,7 +12,6 @@ import { Team } from '../../../models/teams/team';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ICreateTeam } from '../../shared/interfaces/create-team.interface';
-import { ValidateInputFormFields } from '../../shared/validators/create-team-validator';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

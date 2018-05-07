@@ -23,7 +23,7 @@ export class TeamPageComponent implements OnInit {
     public usersOfTeam: UserInfo[];
 
     public teamName: string;
-    public myTickets: Ticket[];
+    public teamsTickets: Ticket[];
     public amIGM: boolean = false;
     public playLoad: PlayLoad;
     public snapshot: ActivatedRouteSnapshot;
@@ -47,7 +47,7 @@ export class TeamPageComponent implements OnInit {
         }
 
         this.activatedRoute.data.subscribe((data) => {
-            this.myTickets = data.allTickets;
+            this.teamsTickets = data.allTickets;
             this.usersOfTeam = data.allMembers;
         });
     }

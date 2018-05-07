@@ -1,4 +1,8 @@
-<div *ngFor="let ticket of myTickets" class="panel panel-default ticket-container">
+<div class="col-md-12 my-ticket-list" *ngIf="teamsTickets?.length === 0">
+    <h4 class="text-center text-bold">There are no tickets in this team :)</h4>
+</div>
+
+<div *ngFor="let ticket of teamsTickets" class="panel panel-default ticket-container">
     <div class="panel-heading font-bold">
         <i class="fa fa-ticket"></i> Ticket</div>
     <div class="panel-body">

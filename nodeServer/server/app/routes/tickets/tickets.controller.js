@@ -12,6 +12,10 @@ class TicketsController {
 
         try {
             tickets = await this.data.tickets.getMyTickets(user);
+
+            tickets = tickets.filter((el) => {
+                return el.dataValues.Team !== null;
+            });
         } catch (error) {
             throw error;
         }
@@ -227,7 +231,7 @@ class TicketsController {
         let status;
 
         try {
-            // Chech weather status is valid
+            // Chech whether status is valid
             if (!(statusName === 'closed' || statusName === 'completed' ||
                 statusName === 'reopened')) {
                 throw new Error('Something went wrong!');
@@ -241,23 +245,23 @@ class TicketsController {
 
             const team = await ticket.getTeam();
 
-            // Check weather the user is in company
+            // Check whether the user is in company
             if (team.CompanyId !== requester.CompanyId) {
                 throw new Error('Something went wrong!');
             }
 
-            // Check weather the user is in team
+            // Check whether the user is in team
             const hasUser = await team.hasUser(requester);
             if (!hasUser && requester.role !== 'admin') {
                 throw new Error('Something went wrong!');
             }
 
-            // Check wather the task is already closed
+            // Check whether the task is already closed
             if (ticket.StatusId === '2') {
                 throw new Error('The task is already closed!');
             }
 
-            // Check weather you are TeamManager or Admin
+            // Check whether you are TeamManager or Admin
             if ((statusName === 'closed' || statusName === 'reopened')) {
                 if (team.TeamManagerId !== requester.id &&
                     requester.role !== 'admin'
@@ -266,7 +270,7 @@ class TicketsController {
                 }
             }
 
-            // Check weather you are Assigned User
+            // Check whether you are Assigned User
             if (statusName === 'complated') {
                 if (ticket.AssignedUserId !== requester.id) {
                     throw new Error('You have not permission to do that!');
@@ -284,6 +288,28 @@ class TicketsController {
 
             ticket.StatusId = status.id;
             await ticket.save();
+
+            const newNotifications = (id) => {
+                return {
+                    name: 'Status change!',
+                    UserId: id,
+                    description: `The status of
+                    the ticket "${ticket.title}" from
+                    team "${team.name}" has been changed to "${status.name}"`,
+                };
+            };
+
+            // Send Notification
+            if (statusName === 'complated') {
+                await this.data
+                    .notifications.create(
+                        newNotifications(team.TeamManagerId)
+                    );
+            } else {
+                await this.data.notifications.create(
+                    newNotifications(ticket.AssignedUserId)
+                );
+            }
         } catch (error) {
             throw error;
         }

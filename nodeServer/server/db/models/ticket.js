@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
         AssignedUserId: DataTypes.INTEGER,
         CreatorId: DataTypes.INTEGER,
     }, {
-        paranoid: true,
-    });
+            paranoid: true,
+        });
     Ticket.associate = (models) => {
         const {
             Status,
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
             as: 'Creator',
             foreignKey: 'CreatorId',
         });
-        Ticket.belongsTo(Team);
+        Ticket.belongsTo(Team, { onDelete: 'CASCADE' });
         Ticket.belongsTo(Status);
     };
     return Ticket;

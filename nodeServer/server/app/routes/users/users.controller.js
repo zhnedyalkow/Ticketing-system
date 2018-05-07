@@ -35,6 +35,7 @@ class UserController {
             }
 
             registerInfo.role = 'User';
+            registerInfo.avatar = '/faces/user.svg';
 
             await this.data.users.create(registerInfo);
         } catch (error) {

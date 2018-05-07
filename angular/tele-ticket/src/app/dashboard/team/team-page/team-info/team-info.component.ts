@@ -8,7 +8,7 @@ import { Ticket } from '../../../../models/tickets/ticket';
 	styleUrls: ['./team-info.component.scss']
 })
 export class TeamInfoComponent implements OnInit {
-	@Input() myTickets: Ticket[];
+	@Input() teamsTickets: Ticket[];
 
 	constructor() { }
 

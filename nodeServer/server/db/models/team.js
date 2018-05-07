@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     const Team = sequelize.define('Team', {
         name: DataTypes.STRING,
     }, {
-        paranoid: true,
-    });
+            paranoid: true,
+        });
     Team.associate = (models) => {
         const {
             Company,
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
             as: 'TeamManager',
             foreignKey: 'TeamManagerId',
         });
-        Team.hasMany(Ticket);
+        Team.hasMany(Ticket, { onDelete: 'CASCADE' });
     };
     return Team;
 };

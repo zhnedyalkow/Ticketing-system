@@ -4,14 +4,14 @@ module.exports = (sequelize, DataTypes) => {
         name: DataTypes.STRING,
         description: DataTypes.STRING,
     }, {
-        paranoid: true,
-    });
-    Notification.associate = function (models) {
+            paranoid: true,
+        });
+    Notification.associate = (models) => {
         const {
             User,
         } = models;
 
-        Notification.belongsTo(User);
+        Notification.belongsTo(User, { onDelete: 'cascade' });
     };
     return Notification;
 };
