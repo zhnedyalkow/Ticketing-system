@@ -1,9 +1,9 @@
-    /* eslint-disable */
-    
-    const port = process.env.PORT || 3001;
+/* eslint-disable */
 
-    /* eslint-enable */
+const port = process.env.PORT || 3001;
 
-    module.exports = {
-        port,
-    };
+/* eslint-enable */
+
+module.exports = {
+    port,
+};

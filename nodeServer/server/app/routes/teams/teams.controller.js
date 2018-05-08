@@ -33,7 +33,6 @@ class TeamsController {
         allUsers = [...allUsers];
 
         // Get all user by following email
-        // *TODO => CHECK WEATHER EMAIL IS INVALID
         allUsers = await Promise.all(allUsers.map(async (user) => {
             const res = await this.data.users.getOneByCriteria({
                 email: user,

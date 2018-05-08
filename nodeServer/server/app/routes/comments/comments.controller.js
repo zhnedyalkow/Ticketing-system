@@ -3,10 +3,28 @@ class CommentsController {
         this.data = data;
     }
 
-    /* TODO */
-    
-    async getAllCommentsByTicketId(ticketId) {
-        const allComments = await this.data.comments.getComments(ticketId);
+    async getAllCommentsByTicketId(ticketId, requester) {
+        let allComments;
+
+        try {
+            const ticket = await this.data.tickets.getOneByCriteria({
+                id: ticketId,
+            });
+
+            if (!ticket) {
+                throw new Error('Something went wrong!');
+            }
+
+            const team = await ticket.getTeam();
+            const hasUser = await team.hasUser(requester);
+            if (!hasUser && requester.role !== 'admin') {
+                throw new Error('Something went wrong!');
+            }
+
+            allComments = await this.data.comments.getComments(ticketId);
+        } catch (error) {
+            throw error;
+        }
 
         return allComments;
     }
@@ -26,7 +44,7 @@ class CommentsController {
                 throw new Error('The ticketId is missing!');
             }
 
-            // Check wheater the cretor has permission
+            // Check whether the cretor has permission
             // to create comment for this ticket
             const ticket = await this.data.tickets.getOneByCriteria({
                 id: obj.ticketId,

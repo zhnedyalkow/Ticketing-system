@@ -79,7 +79,7 @@ export class TicketCommentsComponent implements OnInit {
 
         this.ticketService.addComment(newComment).subscribe((data: Comment) => {
             this.toastr.success(`New comment added!`);
-            this.comments.unshift(data);
+            this.comments.push(data);
         }, (err: HttpErrorResponse) => {
             this.toastr.error(err.error.er);
         });

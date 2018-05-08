@@ -57,7 +57,7 @@ class TicketsController {
                 throw new Error('The following date is invalid!');
             }
 
-            // Check weather the user is in the following team
+            // Check whether the user is in the following team
             const team = await this.data.teams.getOneByCriteria({
                 name: obj.teamName,
                 CompanyId: creator.CompanyId,
@@ -81,7 +81,7 @@ class TicketsController {
                 throw new Error('The user is not belong the following team!');
             }
 
-            // Check weather the creator is in the following team
+            // Check whether the creator is in the following team
             const teamHasCreator = await team.hasUser(creator);
             if (!teamHasCreator && creator.role !== 'admin') {
                 throw new Error('You cannnot create ticket for this team!');
