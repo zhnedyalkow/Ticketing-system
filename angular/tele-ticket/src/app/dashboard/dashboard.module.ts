@@ -43,7 +43,6 @@ import { NotificationBoxComponent } from './components/notification-box/notifica
     NgbModule,
     DashboardRoutingModule,
     ReactiveFormsModule,
-    // FormsModule
   ],
   providers: [
     DashboardService,
