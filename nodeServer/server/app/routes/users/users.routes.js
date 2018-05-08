@@ -46,6 +46,8 @@ const init = (app, data) => {
                 return res.sendStatus(403);
             }
 
+            req.user.password = null;
+
             return res.json(req.user);
         })
         .post('/addUserToCompany', async (req, res) => {
