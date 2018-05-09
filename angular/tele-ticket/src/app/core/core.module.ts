@@ -25,3 +25,4 @@ import { RoleGuardService } from "./authentication/role-guard.service";
     ]
   })
   export class CoreModule { }
+  
