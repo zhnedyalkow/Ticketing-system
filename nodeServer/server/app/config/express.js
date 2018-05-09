@@ -5,10 +5,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-<<<<<<< HEAD
-const passport = require('passport');
-=======
->>>>>>> e7c3695fcf75da7ee199b83eabac5b5340496a19
 
 const init = (app) => {
     // defensive programming
